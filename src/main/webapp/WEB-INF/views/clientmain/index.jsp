@@ -14,7 +14,7 @@
 #slideouter{
  	width:100%;
  	magin:auto;
- 	background:pink;
+ 	/*background:pink;*/
  	overflow:hidden;
 }
 
