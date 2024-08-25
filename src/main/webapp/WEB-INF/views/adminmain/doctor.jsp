@@ -10,7 +10,7 @@
 <body>
 <c:forEach var="doctor" items="${doctorList}">
 
-jiho
+jiho jiho jiho jiho jiho jiho jiho jiho jiho jiho jiho jiho jiho jiho 
 
 </c:forEach>
 </body>
