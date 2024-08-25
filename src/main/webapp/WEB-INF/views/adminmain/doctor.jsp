@@ -10,8 +10,8 @@
 <body>
 <c:forEach var="doctor" items="${doctorList}">
 
-jiho jiho jiho jiho jiho jiho jiho jiho jiho jiho jiho jiho jiho jiho 
-
+jiho jiho jiho jiho jㅌiho jiho jiho jiho jiho jiho jiho jiho jiho jiho 
+지인테스트
 </c:forEach>
 </body>
 </html>
