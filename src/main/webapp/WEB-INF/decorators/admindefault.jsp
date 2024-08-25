@@ -113,7 +113,7 @@
             </li>
             <li><span class="maincate">진료과 소개</span>
                 <ul>
-                    <li><a href="#">정신과</a></li>
+                    <li><a href="../admin/doctor?doc_part=정신과">정신과</a></li>
                     <li><a href="#">내분비과</a></li>
                     <li><a href="#">치과</a></li>
                     <li><a href="#">이비인후과</a></li>
