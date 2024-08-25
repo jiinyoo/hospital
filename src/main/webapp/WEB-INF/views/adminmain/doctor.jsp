@@ -9,7 +9,12 @@
 </head>
 <body>
 <c:forEach var="doctor" items="${doctorList}">
+
 asdfasfd
+
+
+${doctor.doc_name } aaaa
+
 </c:forEach>
 </body>
 </html>
