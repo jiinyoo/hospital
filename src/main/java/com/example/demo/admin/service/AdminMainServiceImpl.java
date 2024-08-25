@@ -1,6 +1,7 @@
 package com.example.demo.admin.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,14 +24,24 @@ public class AdminMainServiceImpl implements AdminMainService {
 	@Override
 	public String adminmain() {
 
-		return "/adminmain/index";
+		return "/admin/index";
 	}
 
 	@Override
 	public String doctor(HttpServletRequest request,Model model) {
 		String doc_part = request.getParameter("doc_part");
 		model.addAttribute("doctorList",mapper.doctor(doc_part));
-		return "/adminmain/doctor";
+		return "/admin/doctor";
+	}
+
+	@Override
+	public String view(HttpServletRequest request, Model model) {
+		String doc_id=request.getParameter("doc_id");
+		DoctorDto ddto=mapper.view(doc_id);
+		String[] history=ddto.getDoc_history().split("/");
+		model.addAttribute("doctor", ddto);
+		model.addAttribute("history",history);
+		return "/admin/view";
 	}
 	
 	
