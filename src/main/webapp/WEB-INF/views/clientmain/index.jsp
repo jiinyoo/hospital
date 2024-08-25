@@ -62,8 +62,7 @@
 	</div>
 </section>
 
-
-안녕하세요ggggggggg
-
+지인이의 깃연습asdfasdfasdfasf
+asdgasdgg
 </body>
 </html>
