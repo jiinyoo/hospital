@@ -1,4 +1,4 @@
-package com.example.demo.client.service;
+package kr.co.hospital.client.service;
 
 import java.util.ArrayList;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.admin.dto.AdminTestDto;
-import com.example.demo.client.dto.ClientTestDto;
-import com.example.demo.client.mapper.ClientMainMapper;
+import kr.co.hospital.admin.dto.AdminTestDto;
+import kr.co.hospital.client.dto.ClientTestDto;
+import kr.co.hospital.client.mapper.ClientMainMapper;
 
 @Service
 @Qualifier("clm")
