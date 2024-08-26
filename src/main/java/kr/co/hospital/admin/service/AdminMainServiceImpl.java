@@ -23,14 +23,14 @@ public class AdminMainServiceImpl implements AdminMainService {
 	@Override
 	public String adminmain() {
 
-		return "/admin/index";
+		return "/admin/main/index";
 	}
 
 	@Override
 	public String doctor(HttpServletRequest request,Model model) {
 		String doc_part = request.getParameter("doc_part");
 		model.addAttribute("doctorList",mapper.doctor(doc_part));
-		return "/admin/doctor";
+		return "/admin/doctor/doctor";
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class AdminMainServiceImpl implements AdminMainService {
 		String[] history=ddto.getDoc_history().split("/");
 		model.addAttribute("doctor", ddto);
 		model.addAttribute("history",history);
-		return "/admin/view";
+		return "/admin/doctor/view";
 	}
 	
 	

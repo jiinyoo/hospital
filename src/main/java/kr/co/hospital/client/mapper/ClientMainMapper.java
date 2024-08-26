@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.hospital.admin.dto.DoctorDto;
-import kr.co.hospital.client.dto.ClientTestDto;
+
 
 @Mapper
 public interface ClientMainMapper {
 
-	public ArrayList<ClientTestDto> clienttest();
+	
 	
 }
