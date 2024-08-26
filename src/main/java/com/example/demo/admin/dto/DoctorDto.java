@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class DoctorDto {
+	
 	private String doc_name, doc_part, doc_img, doc_history, doc_phone, writeday;
 	private int doc_id;
+	
 	public String getDoc_name() {
 		return doc_name;
 	}
