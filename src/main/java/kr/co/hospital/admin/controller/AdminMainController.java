@@ -27,4 +27,6 @@ public class AdminMainController {
 	public String index() {
 		return "/admin/main/index";
 	}
+
+	
 }

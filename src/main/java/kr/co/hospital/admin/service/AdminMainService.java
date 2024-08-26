@@ -10,5 +10,6 @@ import kr.co.hospital.admin.dto.DoctorDto;
 public interface AdminMainService {
 
 	public String adminmain();
+	
 
 }

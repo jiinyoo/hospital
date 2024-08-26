@@ -22,9 +22,9 @@ public class AdminMainServiceImpl implements AdminMainService {
 	
 	@Override
 	public String adminmain() {
-
-		return "redirect:/admin/main/index";
+		return "/admin/main/index";
 	}
+
 
 
 	
