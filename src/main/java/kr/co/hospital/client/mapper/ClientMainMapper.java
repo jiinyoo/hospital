@@ -1,15 +1,15 @@
-package com.example.demo.client.mapper;
+package kr.co.hospital.client.mapper;
 
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.demo.client.dto.ClientTestDto;
+import kr.co.hospital.admin.dto.DoctorDto;
+import kr.co.hospital.client.dto.ClientTestDto;
 
 @Mapper
 public interface ClientMainMapper {
 
 	public ArrayList<ClientTestDto> clienttest();
-
-
+	
 }

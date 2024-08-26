@@ -1,4 +1,4 @@
-package com.example.demo;
+package kr.co.hospital;
 
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;

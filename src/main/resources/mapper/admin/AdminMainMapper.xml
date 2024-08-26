@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.admin.mapper.AdminMainMapper">
-  <select id="test" resultType="com.example.demo.admin.dto.AdminTestDto">
-    select * from test
-  </select>
+<mapper namespace="kr.co.hospital.admin.mapper.AdminMainMapper">
+	<select id="doctor" resultType="kr.co.hospital.admin.dto.DoctorDto">
+		select * from doctor where doc_part like concat(#{doc_part},'%') order by writeday asc
+	</select>
+	<select id="view" resultType="kr.co.hospital.admin.dto.DoctorDto">
+		select * from doctor where doc_id=#{doc_id}
+	</select>
 </mapper>

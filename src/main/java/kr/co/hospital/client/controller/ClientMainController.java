@@ -1,24 +1,22 @@
-package com.example.demo.admin.controller;
+package kr.co.hospital.client.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.admin.service.AdminMainService;
+import kr.co.hospital.client.service.ClientMainService;
 
 @Controller
-public class AdminMainController {
-
+public class ClientMainController {
 	@Autowired
-	@Qualifier("adm")
-	AdminMainService service;
+	@Qualifier("clm")
+	ClientMainService service;
 	
-	@RequestMapping("/admin/")
+	@RequestMapping("/")
 	public String home()
 	{
-		return service.adminmain();
-		
+		return service.clientmain();
 	}
 	
 }
