@@ -1,12 +1,11 @@
-package com.example.demo.admin.service;
+package kr.co.hospital.admin.service;
 
 import java.util.ArrayList;
 
 import org.springframework.ui.Model;
 
-import com.example.demo.admin.dto.DoctorDto;
-
 import jakarta.servlet.http.HttpServletRequest;
+import kr.co.hospital.admin.dto.DoctorDto;
 
 public interface AdminMainService {
 

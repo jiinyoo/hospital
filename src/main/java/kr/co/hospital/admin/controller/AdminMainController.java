@@ -1,4 +1,4 @@
-package com.example.demo.admin.controller;
+package kr.co.hospital.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -7,10 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.admin.dto.DoctorDto;
-import com.example.demo.admin.service.AdminMainService;
-
 import jakarta.servlet.http.HttpServletRequest;
+import kr.co.hospital.admin.dto.DoctorDto;
+import kr.co.hospital.admin.service.AdminMainService;
 
 @Controller
 public class AdminMainController {

@@ -1,4 +1,4 @@
-package com.example.demo.admin.service;
+package kr.co.hospital.admin.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.example.demo.admin.dto.AdminTestDto;
-import com.example.demo.admin.dto.DoctorDto;
-import com.example.demo.admin.mapper.AdminMainMapper;
-
 import jakarta.servlet.http.HttpServletRequest;
+import kr.co.hospital.admin.dto.AdminTestDto;
+import kr.co.hospital.admin.dto.DoctorDto;
+import kr.co.hospital.admin.mapper.AdminMainMapper;
 @Service
 @Qualifier("adm")
 
