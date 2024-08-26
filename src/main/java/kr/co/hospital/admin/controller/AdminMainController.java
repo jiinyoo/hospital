@@ -19,8 +19,7 @@ public class AdminMainController {
 	AdminMainService service;
 	
 	@RequestMapping("/admin/")
-	public String home()
-	{
+	public String home() {
 		return service.adminmain();
 	}
 	
