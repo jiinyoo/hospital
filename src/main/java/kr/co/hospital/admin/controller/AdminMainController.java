@@ -23,16 +23,16 @@ public class AdminMainController {
 		return service.adminmain();
 	}
 	
-	@RequestMapping("/admin/index")
+	@RequestMapping("/admin/main/index")
 	public String index() {
-		return "/admin/index";
+		return "/admin/main/index";
 	}
-	@RequestMapping("/admin/doctor")
+	@RequestMapping("/admin/doctor/doctor")
 	public String doctor(HttpServletRequest request,Model model) {
 		return service.doctor(request,model);
 	}
 	
-	@RequestMapping("/admin/view")
+	@RequestMapping("/admin/doctor/view")
 	public String view(HttpServletRequest request, Model model) {
 		return service.view(request,model);
 	}
