@@ -1,4 +1,4 @@
-package com.example.demo.admin.dto;
+package kr.co.hospital.admin.dto;
 
 import lombok.Data;
 

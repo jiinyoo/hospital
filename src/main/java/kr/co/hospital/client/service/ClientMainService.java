@@ -1,4 +1,4 @@
-package com.example.demo.client.service;
+package kr.co.hospital.client.service;
 
 public interface ClientMainService {
 
