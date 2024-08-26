@@ -31,7 +31,6 @@ public class AdminMainController {
 	@RequestMapping("/admin/doctor")
 	public String doctor(HttpServletRequest request,Model model) {
 		return service.doctor(request,model);
-		//지인 테스트 입니다. 
 	}
 	
 }
