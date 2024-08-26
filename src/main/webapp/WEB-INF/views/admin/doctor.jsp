@@ -27,7 +27,7 @@
 			<td> <a href="view?doc_id=${doctor.doc_id}">${doctor.doc_name }</a> </td>
 			<td> ${doctor.doc_part } </td>
 			<td> ${doctor.doc_phone } </td>
-			<td> ${doctor.writeday } </td>
+			<td> ${doctor.writeday } </td>asdfasdfasd
 		</tr>	
 		</c:forEach>
 	</table>
