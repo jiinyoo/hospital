@@ -108,7 +108,7 @@
                 <ul>
                     <li><a href="#">의사 정보 등록</a></li>
                     <li><a href="#">환자진료</a></li>
-                    <li><a href="#">진료 기록 조회</a></li>
+                    <li><a href="/admin/medical/afterMedi">진료 기록 조회</a></li>
                 </ul>
             </li>
             <li><span class="maincate"><a href="/admin/doctor/doctor?doc_part=">진료과 소개</a></span>
