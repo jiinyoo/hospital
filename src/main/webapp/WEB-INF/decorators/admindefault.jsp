@@ -128,7 +128,7 @@
             </li>
             <li><span class="maincate">프로그램 관리</span>
                 <ul>
-                    <li><a href="#">프로그램 등록</a></li>
+                    <li><a href="/admin/program/program">프로그램 등록</a></li>
                     <li><a href="#">프로그램 예약 관리</a></li>
                 </ul>
             </li>
