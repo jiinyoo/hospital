@@ -27,14 +27,6 @@ public class AdminMainController {
 	public String index() {
 		return "/admin/main/index";
 	}
-	@RequestMapping("/admin/doctor/doctor")
-	public String doctor(HttpServletRequest request,Model model) {
-		return service.doctor(request,model);
-	}
-	
-	@RequestMapping("/admin/doctor/view")
-	public String view(HttpServletRequest request, Model model) {
-		return service.view(request,model);
-	}
+
 	
 }
