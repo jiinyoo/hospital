@@ -24,10 +24,4 @@ public class AdminMainServiceImpl implements AdminMainService {
 	public String adminmain() {
 		return "/admin/main/index";
 	}
-
-
-
-	
-	
-
 }
