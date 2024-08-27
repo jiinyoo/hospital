@@ -28,9 +28,16 @@ public class MedicalServiceImpl implements MedicalService {
 		int pstart=p*10+1;
 		int pend=pstart+9;
 		int chong=mapper.getChong(stype, sword);
+		if(chong<pend) {
+			pend=chong;
+		}
 		
 		ArrayList<MedicalDto> mdto=mapper.mlist(index,stype,sword);
-		System.out.println(mdto.get(0).getMedi_id()); 
+		for(int i=0;i<mdto.size();i++) {
+			mdto.get(i).setUser_jumin(mapper.getJumin(mdto.get(i).getUser_id()));
+			System.out.println(mdto.get(i).getUser_jumin());
+		}
+		 
 		model.addAttribute("page",page);
 		model.addAttribute("pstart",pstart);
 		model.addAttribute("pend",pend);

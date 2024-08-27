@@ -14,4 +14,5 @@ public interface MedicalMapper {
 
 	public ArrayList<MedicalDto> mlist(int index, String stype, String sword);
 	public int getChong(String stype, String sword);
+	public String getJumin(String userid);
 }

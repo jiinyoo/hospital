@@ -10,4 +10,7 @@
 		select ceil(count(*)/10) from medical
 		where ${stype} like concat('%',#{sword},'%')
 	</select>
+	<select id="getJumin" resultType="string">
+		select user_jumin from user where user_id=#{userid}
+	</select>
 </mapper>
