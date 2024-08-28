@@ -32,10 +32,10 @@ function content(num)
 <section>
 
 
-<button onclick="content(0)" type="button" name="firstp" value="0">토요일 첫째주 프로그램 등록</button>
-<button onclick="content(1)" type="button" name="secondp" value="0">토요일 둘째주 프로그램 등록</button>
-<button onclick="content(2)" type="button" name="thirdp" value="0">토요일 셋째주 프로그램 등록</button>
-<button onclick="content(3)" type="button" name="fourthp" value="0">토요일 넷째주 프로그램 등록</button>
+<button onclick="content(0)" type="button" name="firstp" value="0">토요일 첫째주 프로그램 업데이트</button>
+<button onclick="content(1)" type="button" name="secondp" value="0">토요일 둘째주 프로그램 업데이트</button>
+<button onclick="content(2)" type="button" name="thirdp" value="0">토요일 셋째주 프로그램 업데이트</button>
+<button onclick="content(3)" type="button" name="fourthp" value="0">토요일 넷째주 프로그램 업데이트</button>
 
 <c:forEach items="${plist}" var="pdto">
 	<table>
