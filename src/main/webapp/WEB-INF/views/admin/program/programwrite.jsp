@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,7 @@ $(function(){
 <body>
 <section>
 <form method="post" action="programwriteOk" enctype="multipart/form-data">
-
+<input type="hidden" name="pro_ju" value="${pro_ju}">
 <table align="center" width="500px" height="500px";>
 	<tr>
 		<td width="200px";>프로그램 명  </td>
@@ -55,11 +55,15 @@ $(function(){
 	</tr>
 	<tr>
 		<td>대표 이미지</td>
-		<td><input type="file" name="pro_img"></td>
+		<td><input type="file" name="file"></td>
 	</tr>
-	
+	<tr>
+		<td></td>
+		<td><input type="submit" value="업데이트하기"></td>
+	</tr>
 
 </table>
+
 </form>
 
 </section>

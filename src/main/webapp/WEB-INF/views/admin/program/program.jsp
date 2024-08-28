@@ -25,7 +25,6 @@ function content(num)
 {
 	location.href="/admin/program/programwrite?pro_ju="+num;
 }
-
 </script>
 </head>
 <body>
