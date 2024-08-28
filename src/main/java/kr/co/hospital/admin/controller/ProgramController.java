@@ -25,6 +25,14 @@ public class ProgramController {
 	}
 	
 	
+	@RequestMapping("/admin/program/programwrite")
+	public String programwrite(HttpServletRequest request, Model model, HttpSession session)
+	{
+		return service.programwrite(request,model,session);
+		
+	}
+	
+	
 	
 
 }

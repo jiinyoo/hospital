@@ -9,4 +9,6 @@ public interface ProgramService {
 
 	public String program(HttpServletRequest request, Model model, HttpSession session);
 
+	public String programwrite(HttpServletRequest request, Model model, HttpSession session);
+
 }

@@ -25,6 +25,12 @@ public class ProgramServiceImpl implements ProgramService {
 		model.addAttribute("plist",plist);
 		return "/admin/program/program";
 	}
+
+	@Override
+	public String programwrite(HttpServletRequest request, Model model, HttpSession session) {
+		// TODO Auto-generated method stub
+		return "/admin/program/programwrite";
+	}
 	
 
 }
