@@ -10,4 +10,7 @@ public interface ProgramMapper {
 
 	public ArrayList<ProgramDto> programs();
 
+	public void programupdate(ProgramDto pdto);
+
+
 }
