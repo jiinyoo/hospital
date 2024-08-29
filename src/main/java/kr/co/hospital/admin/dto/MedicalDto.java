@@ -5,6 +5,14 @@ public class MedicalDto {
 	private String user_id, user_name, doc_name, medi_visit, medi_content, medi_type, medi_part;
 	private int medi_id;
 	
+	private String user_jumin;
+	
+	public String getUser_jumin() {
+		return user_jumin;
+	}
+	public void setUser_jumin(String user_jumin) {
+		this.user_jumin = user_jumin;
+	}
 	public String getUser_id() {
 		return user_id;
 	}
