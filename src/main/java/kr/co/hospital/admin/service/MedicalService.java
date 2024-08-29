@@ -9,4 +9,5 @@ public interface MedicalService {
 
 	public String mlist(Model model,HttpServletRequest request);
 	public String patient(HttpSession session,Model model,HttpServletRequest request);
+	public String patientView(HttpServletRequest request, HttpSession session, Model model);
 }

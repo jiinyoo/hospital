@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-
+	section {}
 </style>
 </head>
 <body>
@@ -26,7 +26,7 @@
 			<c:forEach var="pdto" items="${pdto}">
 			<tr>
 				<td> ${pdto.res_id } </td>
-				<td> ${pdto.user_name } </td>
+				<td> <a href="patientVeiw?user_name=${pdto.res_id}">${pdto.user_name }</a> </td>
 				<c:if test="${admin=='admin'}">
 				<td> ${pdto.doc_name } </td>
 				</c:if>

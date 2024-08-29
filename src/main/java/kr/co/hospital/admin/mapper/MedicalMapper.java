@@ -17,7 +17,8 @@ public interface MedicalMapper {
 	public ArrayList<HashMap> mlist(int index, String stype, String sword);
 	public int getChong(String stype, String sword);
 	public String getDocid(String userid);
-	public ArrayList<ReserveDto> getPatient(String doc_id);
+	public ArrayList<ReserveDto> getPatients(String doc_id);
 	public String getName(String userid);
 	public String getDocName(int doc_id);
+	public ReserveDto getPatient(String res_id);
 }

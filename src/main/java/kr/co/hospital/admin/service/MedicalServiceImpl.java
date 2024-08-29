@@ -53,7 +53,7 @@ public class MedicalServiceImpl implements MedicalService {
 		if(session.getAttribute("admin")!=null) {
 			String userid=session.getAttribute("admin").toString();
 			if(userid.equals("admin")) {
-				pdto=mapper.getPatient("");
+				pdto=mapper.getPatients("");
 				for(int i=0;i<pdto.size();i++) {
 					String user_name=mapper.getName(pdto.get(i).getUser_id());
 					pdto.get(i).setUser_name(user_name);
@@ -61,7 +61,7 @@ public class MedicalServiceImpl implements MedicalService {
 				}
 			} else {
 				String doc_id=mapper.getDocid(userid);
-				pdto=mapper.getPatient(doc_id);
+				pdto=mapper.getPatients(doc_id);
 				for(int i=0;i<pdto.size();i++) {
 					String user_name=mapper.getName(pdto.get(i).getUser_id());
 					pdto.get(i).setUser_name(user_name);
@@ -90,5 +90,19 @@ public class MedicalServiceImpl implements MedicalService {
 		model.addAttribute("chong",chong);
 		
 		return "/admin/medical/patient";
+	}
+
+	@Override
+	public String patientView(HttpServletRequest request, HttpSession session, Model model) {
+		String res_id=request.getParameter("res_id");
+		ReserveDto rdto=mapper.getPatient(res_id);
+		session.setAttribute("admin", "asdf");
+		if(session.getAttribute("admin")!=null) {
+			String docName=session.getAttribute("admin").toString();
+			if(docName.equals("admin") || docName.equals(rdto.getDoc_name())) {
+				
+			}
+		}
+		return null;
 	}
 }

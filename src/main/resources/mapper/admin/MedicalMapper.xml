@@ -14,7 +14,7 @@
 	<select id="getDocid" resultType="String">
 		select doc_id from doctor where doc_userid=#{userid}
 	</select>
-	<select id="getPatient" resultType="kr.co.hospital.admin.dto.ReserveDto">
+	<select id="getPatients" resultType="kr.co.hospital.admin.dto.ReserveDto">
 		SELECT * FROM reserve 
     WHERE 
     <if test="doc_id != null and doc_id != ''">
@@ -28,5 +28,9 @@
 	<select id="getDocName" resultType="string">
 		select doc_name from doctor
 		where doc_id=#{doc_id}
+	</select>
+	<select id="getPatient" resultType="kr.co.hospital.admin.dto.ReserveDto">
+		select * from reserve 
+		where res_id=#{res_id}
 	</select>
 </mapper>
