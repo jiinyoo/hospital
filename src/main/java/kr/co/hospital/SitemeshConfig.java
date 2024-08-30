@@ -9,8 +9,7 @@ public class SitemeshConfig extends ConfigurableSiteMeshFilter{
 	protected void applyCustomConfiguration(SiteMeshFilterBuilder builder)
 	{
 	 
-        builder.addDecoratorPath("/", "/default.jsp");
-		
+		builder.addDecoratorPath("*", "/default.jsp");		
 		builder.addDecoratorPath("/admin/*", "/admindefault.jsp");
 		
 		// 제외할 폴더와 문서

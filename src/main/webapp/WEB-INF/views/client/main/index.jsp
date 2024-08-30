@@ -55,9 +55,9 @@
 <section>
 	<div id="slideouter">
 		<div id="inner">
-			<div class="slide_item"><img class="slideimgs" src="../static/client/main/1.jpg"></div>
-			<div class="slide_item"><img class="slideimgs" src="../static/client/main/2.jpg"></div>
-			<div class="slide_item"><img class="slideimgs" src="../static/client/main/3.jpg"></div>
+			<div class="slide_item"><img class="slideimgs" src="/static/client/main/1.jpg"></div>
+			<div class="slide_item"><img class="slideimgs" src="/static/client/main/2.jpg"></div>
+			<div class="slide_item"><img class="slideimgs" src="/static/client/main/3.jpg"></div>
 		</div>
 	</div>
 </section>

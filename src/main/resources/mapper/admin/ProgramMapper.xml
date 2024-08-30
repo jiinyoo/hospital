@@ -5,5 +5,17 @@
 		select * from program
 		order by pro_ju asc
 	</select>
+	<update id="programupdate">
+    update program
+    set 
+        pro_name=#{pro_name},
+        pro_info=#{pro_info},
+        teach_name=#{teach_name},
+        pro_time=#{pro_time},
+        pro_inwon=#{pro_inwon},
+        pro_part=#{pro_part},
+        pro_img=#{pro_img}
+    where pro_ju=#{pro_ju}
+</update>
 
 </mapper>
