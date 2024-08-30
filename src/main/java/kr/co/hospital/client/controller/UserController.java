@@ -1,12 +1,12 @@
-package kr.co.hospital.admin.controller;
+package kr.co.hospital.client.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.co.hospital.admin.dto.UserDto;
-import kr.co.hospital.admin.service.UserService;
+import kr.co.hospital.client.dto.UserDto;
+import kr.co.hospital.client.service.UserService;
 
 @Controller
 public class UserController {
@@ -14,12 +14,12 @@ public class UserController {
 	@Qualifier("use")
 	private UserService service;
 	
-	@RequestMapping("/admin/user")
+	@RequestMapping("main/user")
 	public String user()
 	{
 		return service.user();
 	}
-	@RequestMapping("/admin/userOk")
+	@RequestMapping("/main/userOk")
 	public String userOk(UserDto udto)
 	{
 		return service.userOk(udto);

@@ -1,11 +1,11 @@
-package kr.co.hospital.admin.service;
+package kr.co.hospital.client.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import kr.co.hospital.admin.dto.UserDto;
-import kr.co.hospital.admin.mapper.UserMapper;
+import kr.co.hospital.client.dto.UserDto;
+import kr.co.hospital.client.mapper.UserMapper;
 
 @Service
 @Qualifier("use")
@@ -15,14 +15,14 @@ public class UserServicelmpl implements UserService {
 	@Override
 	public String user()
 	{
-		return "/admin/user/user";
+		return "/client/user/user";
 	}
 	
 	@Override
 	public String userOk(UserDto udto)
 	{
 		mapper.userOk(udto);
-		return "redirect:/admin/login";
+		return "redirect:/main/login";
 	}
 
 }

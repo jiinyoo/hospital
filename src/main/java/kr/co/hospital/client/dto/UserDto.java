@@ -1,4 +1,4 @@
-package kr.co.hospital.admin.dto;
+package kr.co.hospital.client.dto;
 
 import lombok.Data;
 

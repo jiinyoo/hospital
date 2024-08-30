@@ -13,7 +13,7 @@
 </script>
 </head>
 <body>
-<main>
+<main align="right">
   <form name="mform" method="post" action="userOk">
     <h3 align="center"> 회원 가입 </h3>
     <div>

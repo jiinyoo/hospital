@@ -1,9 +1,9 @@
-package kr.co.hospital.admin.service;
+package kr.co.hospital.client.service;
 import org.springframework.ui.Model;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import kr.co.hospital.admin.dto.UserDto;
+import kr.co.hospital.client.dto.UserDto;
 
 public interface LoginService {
 	public String login(HttpServletRequest request,Model model);

@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#submenus {
+	display:flex;
+	flex-wrap:wrap;
+    overflow:hidden;
+}
+</style>
 <script>
     function check(my)
     {
@@ -25,18 +32,19 @@
 </script>
 </head>
 <body>
- <section>
+
+ <section align="right">
   <form method="post" action="loginOk" onsubmit="return check(this)">
-  <h3> 로그인 </h3>
+  <h3> 로그인 ${user_name }</h3>
   <div>
    <div> 아이디 </div>
-   <input type="text" name="userid" value="admin" id="txt">
+   <input type="text" name="user_id" value="admin" id="txt">
   </div>
   <div>
    <div> 비밀번호 </div>
-   <input type="password" name="pwd" value="1234" id="pwd">
+   <input type="password" name="user_pwd" value="1234" id="pwd">
   </div>
-  <p align="center">
+  <p>
    <input type="submit" value="로그인" id="submit">
   </p>
   <c:if test="${err==1}">

@@ -166,13 +166,16 @@ nav #mainmenu #maincate
 	</div>
 </div>
 <header>
-		<div id="loginbar"> 로그인 | 회원 가입 </div>
+		<div id="loginbar"> 
+		  <a href="/main/login"> 로그인 </a>| 
+		  <a href="/main/user"> 회원 가입 </a>
+		</div>
 </header>
 <hr>
 <nav>
 <div id="mainmenu">
 	<ul id="maincate">
-		<li>로 고</li>
+		<li><img src="../static/client/main/병원 로고.jpg" width="30"></li>
 		<li>병원 소개</li>
 		<li>의료진 안내</li>
 		<li>상담/예약</li>
