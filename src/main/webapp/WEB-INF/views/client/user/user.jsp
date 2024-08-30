@@ -13,7 +13,8 @@
 </script>
 </head>
 <body>
-<main align="right">
+<section style="margin:auto;">
+<main>
   <form name="mform" method="post" action="userOk">
     <h3 align="center"> 회원 가입 </h3>
     <div>
@@ -55,6 +56,6 @@
     
   </form>
 </main>
-
+</section>
 </body>
 </html>
