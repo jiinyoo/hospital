@@ -166,7 +166,7 @@ nav #mainmenu #maincate
 	</div>
 </div>
 <header>
-		<div id="loginbar">로그인 | 회원 가입</div>
+		<div id="loginbar"> 로그인 | 회원 가입 </div>
 </header>
 <hr>
 <nav>
