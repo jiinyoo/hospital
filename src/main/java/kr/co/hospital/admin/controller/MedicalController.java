@@ -27,4 +27,16 @@ public class MedicalController {
 	public String patient(HttpSession session,Model model,HttpServletRequest request) {
 		return service.patient(session,model,request);
 	}
+	
+	@RequestMapping("/admin/medical/patientView")
+	public String patientView(HttpServletRequest request,
+			HttpSession session, Model model) {
+		return service.patientView(request,session,model);
+	}
+	
+	@RequestMapping("/admin/medical/medicalOk")
+	public String medicalOk(HttpServletRequest request,MedicalDto mdto,
+			HttpSession session) {
+		return service.medicalOk(request,mdto,session);
+	}
 }

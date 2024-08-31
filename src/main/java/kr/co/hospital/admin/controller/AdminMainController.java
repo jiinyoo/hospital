@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.dto.DoctorDto;
 import kr.co.hospital.admin.service.AdminMainService;
 
@@ -19,13 +20,13 @@ public class AdminMainController {
 	AdminMainService service;
 	
 	@RequestMapping("/admin/")
-	public String home() {
-		return service.adminmain();
+	public String home(HttpSession session) {
+		return "redirect:/admin/main/index";
 	}
 	
 	@RequestMapping("/admin/main/index")
-	public String index() {
-		return "/admin/main/index";
+	public String index(HttpSession session) {
+		return service.adminmain(session);
 	}
 
 	

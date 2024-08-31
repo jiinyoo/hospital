@@ -35,7 +35,7 @@ public class LoginServicelmpl implements LoginService {
 			System.out.println("로그인 성공");
 			session.setAttribute("user_id",udto.getUser_id());
 			session.setAttribute("user_name",user_name);
-			return "redirect:/main";
+			return "redirect:/main/index";
 		}
 		else
 		{
