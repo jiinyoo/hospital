@@ -17,7 +17,7 @@ public class LoginController {
 	@Qualifier("log")
 	private LoginService service;
 	
-	@RequestMapping("main/login")
+	@RequestMapping("/main/login")
 	public String login(HttpServletRequest request,
 			Model model)
 	{

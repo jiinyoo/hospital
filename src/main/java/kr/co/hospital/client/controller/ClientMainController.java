@@ -19,7 +19,7 @@ public class ClientMainController {
 		return service.clientmain();
 	}
 	
-	@RequestMapping("/main/index")
+	@RequestMapping("/main")
 	public String index() {
 		return service.clientmain();
 	}

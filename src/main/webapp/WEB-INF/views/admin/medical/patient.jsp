@@ -16,7 +16,7 @@
 			<tr>
 				<th> 번호 </th>
 				<th> 성함 </th>
-				<c:if test="${admin=='admin'}">
+				<c:if test="${user_id=='admin'}">
 				<th> 담당의사 </th>
 				</c:if>
 				<th> 생년월일 </th>
@@ -26,8 +26,8 @@
 			<c:forEach var="pdto" items="${pdto}">
 			<tr>
 				<td> ${pdto.res_id } </td>
-				<td> <a href="patientVeiw?user_name=${pdto.res_id}">${pdto.user_name }</a> </td>
-				<c:if test="${admin=='admin'}">
+				<td> <a href="patientView?res_id=${pdto.res_id}">${pdto.user_name }</a> </td>
+				<c:if test="${user_id=='admin'}">
 				<td> ${pdto.doc_name } </td>
 				</c:if>
 				<td> ${pdto.user_jumin }</td>
@@ -35,28 +35,6 @@
 				<td> ${pdto.res_date } ${pdto.res_time } </td>
 			</tr>
 			</c:forEach>
-			<tr>
-				<td colspan="${admin=='admin'?6:5}" align="center">
-				<c:forEach var="i" begin="${pstart}" end="${pend}">
-				<a href="afterMedi?page=${i}">${i}</a>
-				</c:forEach>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="6" align="center">
-					<form method="get" action="afterMedi">
-						<select name="stype">
-							<option value="m.user_name">성함</option>
-							<c:if test="${admin=='admin'}">
-							<option value="m.doc_name">담당의사</option>
-							</c:if>
-							<option value="m.medi_part">분야</option>
-						</select>
-						<input type="text" name="sword">
-						<input type="submit" value="검색">
-					</form>
-				</td>
-			</tr>
 		</table>
 	</section>
 </body>

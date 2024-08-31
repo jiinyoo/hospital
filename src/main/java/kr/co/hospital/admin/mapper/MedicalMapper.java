@@ -21,4 +21,9 @@ public interface MedicalMapper {
 	public String getName(String userid);
 	public String getDocName(int doc_id);
 	public ReserveDto getPatient(String res_id);
+	public int getState(String userid);
+	public void medicalOk(MedicalDto mdto);
+	public String getDocUserid(int doc_id);
+	public void upState(String res_code);
+	
 }

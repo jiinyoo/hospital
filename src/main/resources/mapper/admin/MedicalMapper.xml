@@ -15,12 +15,11 @@
 		select doc_id from doctor where doc_userid=#{userid}
 	</select>
 	<select id="getPatients" resultType="kr.co.hospital.admin.dto.ReserveDto">
-		SELECT * FROM reserve 
-    WHERE 
+		select r.*,u.user_name from reserve r inner join user u on
     <if test="doc_id != null and doc_id != ''">
-        doc_id = #{doc_id} AND 
+        doc_id = #{doc_id} and 
     </if>
-    res_date > CURDATE();
+    res_date > CURDATE() and r.user_id=u.user_id
 	</select>
 	<select id="getName" resultType="String">
 		select user_name from user where user_id=#{userid}
@@ -33,4 +32,22 @@
 		select * from reserve 
 		where res_id=#{res_id}
 	</select>
+	<select id="getState" resultType="int">
+		select state from user where user_id=#{userid}
+	</select>
+	
+	<!-- patient Write -->
+	<insert id="medicalOk">
+		insert into medical
+		(user_id, user_name, doc_name, medi_content, medi_type, medi_part, medi_visit)
+		values (#{user_id},#{user_name},#{doc_name},#{medi_content},#{medi_type},#{medi_part},now())
+	</insert>
+	<select id="getDocUserid" resultType="string">
+		select doc_userid from doctor
+		where doc_id=#{doc_id}
+	</select>
+	<update id="upState">
+		update reserve set state=1 where res_code=#{res_code}
+	</update>
+
 </mapper>

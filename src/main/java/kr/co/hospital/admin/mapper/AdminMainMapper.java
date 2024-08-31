@@ -9,7 +9,7 @@ import kr.co.hospital.admin.dto.DoctorDto;
 
 @Mapper
 public interface AdminMainMapper {
-
+	public int getState(String userid);
 
 	
 
