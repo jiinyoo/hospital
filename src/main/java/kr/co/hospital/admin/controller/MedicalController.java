@@ -23,6 +23,11 @@ public class MedicalController {
 		return service.mlist(model, request);
 	}
 	
+	@RequestMapping("/admin/medical/afterMediView")
+	public String mediView(HttpServletRequest request,Model model) {
+		return service.mediView(request,model);
+	}
+	
 	@RequestMapping("/admin/medical/patient")
 	public String patient(HttpSession session,Model model,HttpServletRequest request) {
 		return service.patient(session,model,request);

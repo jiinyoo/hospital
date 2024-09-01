@@ -12,4 +12,6 @@ public interface MedicalService {
 	public String patient(HttpSession session,Model model,HttpServletRequest request);
 	public String patientView(HttpServletRequest request, HttpSession session, Model model);
 	public String medicalOk(HttpServletRequest request, MedicalDto mdto, HttpSession session);
+	public String mediView(HttpServletRequest request,Model model);
+	
 }

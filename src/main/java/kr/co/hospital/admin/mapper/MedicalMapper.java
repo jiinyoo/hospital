@@ -25,5 +25,5 @@ public interface MedicalMapper {
 	public void medicalOk(MedicalDto mdto);
 	public String getDocUserid(int doc_id);
 	public void upState(String res_code);
-	
+	public MedicalDto mediView(String medi_id);
 }
