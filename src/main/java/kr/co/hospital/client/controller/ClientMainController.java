@@ -16,18 +16,18 @@ public class ClientMainController {
 	@RequestMapping("/")
 	public String home()
 	{
-		return "redirect:/main/index";
+		return service.clientmain();
 	}
+	
 	@RequestMapping("/main")
-	public String main()
-	{
-		return "redirect:/main/index";
+	public String main() {
+		return "/client/main/index";
 	}
 	
 	@RequestMapping("/main/index")
-	public String index() 
-	{
-		return service.clientmain();
+	public String index() {
+		return "/client/main/index";
 	}
+	
 	
 }
