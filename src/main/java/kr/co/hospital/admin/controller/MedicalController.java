@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.dto.MedicalDto;
 import kr.co.hospital.admin.service.MedicalService;
 
@@ -20,5 +21,27 @@ public class MedicalController {
 	@RequestMapping("/admin/medical/afterMedi")
 	public String afterMedi(Model model,HttpServletRequest request) {
 		return service.mlist(model, request);
+	}
+	
+	@RequestMapping("/admin/medical/afterMediView")
+	public String mediView(HttpServletRequest request,Model model) {
+		return service.mediView(request,model);
+	}
+	
+	@RequestMapping("/admin/medical/patient")
+	public String patient(HttpSession session,Model model,HttpServletRequest request) {
+		return service.patient(session,model,request);
+	}
+	
+	@RequestMapping("/admin/medical/patientView")
+	public String patientView(HttpServletRequest request,
+			HttpSession session, Model model) {
+		return service.patientView(request,session,model);
+	}
+	
+	@RequestMapping("/admin/medical/medicalOk")
+	public String medicalOk(HttpServletRequest request,MedicalDto mdto,
+			HttpSession session) {
+		return service.medicalOk(request,mdto,session);
 	}
 }

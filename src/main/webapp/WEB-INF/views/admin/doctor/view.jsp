@@ -7,33 +7,53 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	section {margin: 30px; width: 600px; border: 1px solid black;}
-	.doctor {display: flex;}
-	.doc_photo {width:30%; height: 100px; border:1px solid black;}
-	.info {
-		display: grid; 
-		width:100%;
-		grid-template-columns:0.3fr 1fr;
-		border:1px solid black;
-		align-items: center;
-	}
+	section {margin: 30px; width: 600px;}
+	section > table  {width: 100%;}
+	table tr {height: 30px;}
+	.doc-img {width:20%;}
+	th {background: #ccc;}
+	.inner-table {width:100%;}
+	.inner-table th {width:30%;}
 </style>
 </head>
 <body>
 	<section>
-		<div class="doctor">
-			<div class="doc_photo"> <img src="" alt="사진"> </div>
-			<div class="info">
-				<div>이름</div><div>${doctor.doc_name}</div>
-				<div>번호</div><div>${doctor.doc_phone}</div>
-				<div>분야</div><div>${doctor.doc_part}</div>
-			</div>
-		</div>
-			<ul> 약력
-				<c:forEach var="his" items="${history}">
-				<li>${his}</li>
-				</c:forEach>
-			</ul>
+		<table>
+			<tr>	
+				<th colspan="2">의사정보</th>
+			</tr>
+			<tr>
+				<td class="doc-img"> <img src="" alt="사진"> </td>
+				<td>
+					<table class="inner-table">
+						<tr>
+							<th>이름</th>
+							<td>${doctor.doc_name}</td>
+						</tr>
+						<tr>
+							<th>번호</th>
+							<td>${doctor.doc_phone}</td>
+						</tr>
+						<tr>
+							<th>분야</th>
+							<td>${doctor.doc_part}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2"> 약력 </th>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<ul>
+						<c:forEach var="his" items="${history}">
+						<li>${his}</li>
+						</c:forEach>
+					</ul>
+				</td>
+			</tr>
+		</table>
 	</section>
 </body>
 </html>

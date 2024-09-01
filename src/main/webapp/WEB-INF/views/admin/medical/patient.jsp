@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,27 +53,33 @@
     }
 </style>
 </head>
-<body>	
-<section>
-	<table>
-		<h2>의료진</h2>
-		<tr>
-			<th> 번호 </th>
-			<th> 이름 </th>
-			<th> 진료과 </th>
-			<th> 전화번호 </th>
-			<th> 근무시작일 </th>
-		</tr>
-		<c:forEach var="doctor" items="${doctorList}">
-		<tr>
-			<td> ${doctor.doc_id } </td>
-			<td> <a href="view?doc_id=${doctor.doc_id}">${doctor.doc_name }</a> </td>
-			<td> ${doctor.doc_part } </td>
-			<td> ${doctor.doc_phone } </td>
-			<td> ${doctor.writeday } </td>
-		</tr>	
-		</c:forEach>
-	</table>
-</section>
+<body>
+	<section>
+	<h2>환자 진료 - ${user_id }</h2>
+		<table width="700">
+			<tr>
+				<th> 번호 </th>
+				<th> 성함 </th>
+				<c:if test="${user_id=='admin'}">
+				<th> 담당의사 </th>
+				</c:if>
+				<th> 생년월일 </th>
+				<th> 분야 </th>
+				<th> 진료시간 </th>
+			</tr>
+			<c:forEach var="pdto" items="${pdto}">
+			<tr>
+				<td> ${pdto.res_id } </td>
+				<td> <a href="patientView?res_id=${pdto.res_id}">${pdto.user_name }</a> </td>
+				<c:if test="${user_id=='admin'}">
+				<td> ${pdto.doc_name } </td>
+				</c:if>
+				<td> ${pdto.user_jumin }</td>
+				<td> ${pdto.doc_part } </td>
+				<td> ${pdto.res_date } ${pdto.res_time } </td>
+			</tr>
+			</c:forEach>
+		</table>
+	</section>
 </body>
 </html>

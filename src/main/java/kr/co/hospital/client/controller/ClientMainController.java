@@ -19,4 +19,9 @@ public class ClientMainController {
 		return service.clientmain();
 	}
 	
+	@RequestMapping("/main")
+	public String index() {
+		return service.clientmain();
+	}
+	
 }

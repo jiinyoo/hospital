@@ -16,13 +16,8 @@ public class ClientMainServiceImpl implements ClientMainService{
 	@Autowired
 	ClientMainMapper mapper;
 	
-	
 	@Override
-	public String clientmain() {
-		// TODO Auto-generated method stub
-	
-		
-			
+	public String clientmain() {			
 		return "/client/main/index";
 	}
 	
