@@ -20,8 +20,14 @@ public class ClientMainController {
 	}
 	
 	@RequestMapping("/main")
-	public String index() {
-		return service.clientmain();
+	public String main() {
+		return "/client/main/index";
 	}
+	
+	@RequestMapping("/main/index")
+	public String index() {
+		return "/client/main/index";
+	}
+	
 	
 }

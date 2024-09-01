@@ -88,6 +88,8 @@ nav #mainmenu #maincate
 #submenus {
 	display:flex;
 	flex-wrap:wrap;
+	visibility:hidden;
+	text-align:center;
 
 }
 
@@ -98,25 +100,64 @@ nav #mainmenu #maincate
 	display:flex;
 	flex-direction:column;
 	padding-left:0px;
-	width:180px;
+	width:183px;
 	left:0px;
 	top:90px;
 	background:white;
-	border:1px solid green;
+	border:0.5px solid grey;
 
 }
+
+
+#submenus .submenu:last-child
+{
+
+	width:200px;
+
+}
+
+
+
+
 
 #submenus .submenu > li
 {
 	list-style-type:none;
+	justify-content: center;
 	display:flex;
-	width:180px;
+	width:183px;
 	height:30px;
 	line-height: 30px; /* 중앙 정렬 */
     margin: 0; /* 기본 마진 제거 */
     padding: 0; /* 기본 패딩 제거 */
 	font-size: 14px;
 }
+
+#submenus .submenu > li:first-child
+
+{
+	border-top:5px solid #00cccc;
+
+}
+
+#submenus .submenu > li:last-child
+
+{
+	border-bottom:5px solid #00cccc;
+
+}
+
+
+
+
+
+#submenus .submenu:last-child > li
+{
+
+	width:200px;
+	
+}
+
 
 
 </style>
@@ -130,12 +171,18 @@ nav #mainmenu #maincate
 			{
 				submenu.style.visibility="visible";
 			}
+		
 	}
 	
 	
 	function hideSub()
 	{
 		//div영역을 생성하고 해야하나?
+		var submenus=document.getElementsByClassName("submenu");
+		for(submenu of submenus)
+			{
+				submenu.style.visibility="hidden";
+			}
 		
 	}
 	
@@ -172,68 +219,81 @@ nav #mainmenu #maincate
 		</div>
 </header>
 <hr>
-<nav>
-<div id="mainmenu">
-	<ul id="maincate">
-		<li><img src="../static/client/main/병원 로고.jpg" width="30"></li>
-		<li>병원 소개</li>
-		<li>의료진 안내</li>
-		<li>상담/예약</li>
-		<li>프로그램 예약</li>
-		<li>커뮤니티</li>
-		<li>건강 용품 샵</li>
-	</ul>
-</div>
-
-<div id="submenus">
-	<ul class="submenu">
-	</ul>
+<span id="total" onmouseout="hideSub()">
+	<nav>
+	<span id="mainsub" onmouseover="viewSub()">
+	<div id="mainmenu" >
+		<ul id="maincate">
+			<li><img src="../static/client/main/병원 로고.jpg" width="50"></li>
+			<li>병원 소개</li>
+			<li>의료진 안내</li>
+			<li>상담/예약</li>
+			<li>프로그램 예약</li>
+			<li>커뮤니티</li>
+			<li>건강 용품 샵</li>
+		</ul>
+	</div>
 	
-	<ul class="submenu">
-		<li>병원 인삿말</li>
-		<li>미션과 비전</li>
-		<li>조직도</li>
-		<li>오시는 길</li>
-	</ul>
+	<div id="submenus">
+		<ul class="submenu">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		
+		<ul class="submenu">
+			<li>병원 인삿말</li>
+			<li>미션과 비전</li>
+			<li>조직도</li>
+			<li>오시는 길</li>
+		</ul>
+		
+		<ul class="submenu">
+			<li>정신과</li>
+			<li>내분비과</li>
+		    <li>치과</li>
+		    <li>이비인후과</li>
+		</ul>
+		
+		<ul class="submenu">
+			<li>1:1문의</li>
+			<li>온라인 진료 예약</li>
+			<li>예약 조회</li>
+			<li></li>
+		</ul>
+		
+		<ul class="submenu">
+		
+			<li>프로그램 예약</li>
+			<li></li>
+			<li></li>
+			<li></li>
+		
+		</ul>
+		
+		
+		<ul class="submenu">
+				<li>공지사항</li>
+				<li>진료과별 질문</li>
+				<li><a href="../../boardwrite">진료 후기</a></li>
+				<li>고객의 소리</li>
+		</ul>
+		
+		
+		<ul class="submenu">
+			<li>미정</li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		
 	
-	<ul class="submenu">
-		<li>정신과</li>
-		<li>내분비과</li>
-	    <li>치과</li>
-	    <li>이비인후과</li>
-	</ul>
-	
-	<ul class="submenu">
-		<li>1:1문의</li>
-		<li>온라인 진료 예약</li>
-		<li>예약 조회</li>
-	</ul>
-	
-	<ul class="submenu">
-	
-		<li>프로그램 예약</li>
-	
-	</ul>
-	
-	
-	<ul class="submenu">
-			<li>공지사항</li>
-			<li>진료과별 질문</li>
-			<li>진료 후기</li>
-			<li>고객의 소리</li>
-	</ul>
-	
-	
-	<ul class="submenu">
-	
-	</ul>
-	
-
-</div>
-
-
-</nav>
-<hr>
+	</div>
+	</span>
+	</nav>
+	<hr>
+<span>
 
 <sitemesh:write property="body"/>
 
