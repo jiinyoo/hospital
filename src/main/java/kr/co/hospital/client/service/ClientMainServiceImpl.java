@@ -16,6 +16,6 @@ public class ClientMainServiceImpl implements ClientMainService{
 	ClientMainMapper mapper;
 	@Override
 	public String clientmain() {			
-		return "/client/main/index";
+		return "client/main/index";
 	}
 }
