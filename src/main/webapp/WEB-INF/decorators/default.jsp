@@ -118,8 +118,6 @@ nav #mainmenu #maincate
 
 
 
-
-
 #submenus .submenu > li
 {
 	list-style-type:none;
