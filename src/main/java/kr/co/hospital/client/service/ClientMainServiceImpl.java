@@ -18,7 +18,7 @@ public class ClientMainServiceImpl implements ClientMainService{
 	
 	@Override
 	public String clientmain() {			
-		return "/client/main/index";
+		return "client/main/index";
 	}
 	
 
