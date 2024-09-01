@@ -15,7 +15,7 @@ public class UserServicelmpl implements UserService {
 	@Override
 	public String user()
 	{
-		return "/client/user/user";
+		return "client/user/user";
 	}
 	
 	@Override
@@ -23,6 +23,13 @@ public class UserServicelmpl implements UserService {
 	{
 		mapper.userOk(udto);
 		return "redirect:/main/login";
+	}
+
+	@Override
+	public String useridCheck(String user_id) 
+	{
+		System.out.println(mapper.useridCheck(user_id));
+		return mapper.useridCheck(user_id);
 	}
 
 }

@@ -5,4 +5,9 @@
     select user_name from user
     where user_id=#{user_id} and user_pwd=#{user_pwd}
   </select>
+  <select id="getState" resultType="Integer">
+    select state from user
+    where user_id=#{user_id}
+</select>
+  
 </mapper>
