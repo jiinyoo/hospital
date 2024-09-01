@@ -12,14 +12,10 @@ import kr.co.hospital.client.mapper.ClientMainMapper;
 @Service
 @Qualifier("clm")
 public class ClientMainServiceImpl implements ClientMainService{
-
 	@Autowired
 	ClientMainMapper mapper;
-	
 	@Override
 	public String clientmain() {			
 		return "client/main/index";
 	}
-	
-
 }
