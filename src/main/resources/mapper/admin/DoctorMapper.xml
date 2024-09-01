@@ -7,4 +7,7 @@
 	<select id="view" resultType="kr.co.hospital.admin.dto.DoctorDto">
 		select * from doctor where doc_id=#{doc_id}
 	</select>
+	<select id="getState" resultType="int">
+		select state from user where user_id=#{user_id}
+	</select>
 </mapper>

@@ -11,4 +11,5 @@ public interface DoctorMapper {
 
 	public ArrayList<DoctorDto> doctor(String doc_part);
 	public DoctorDto view(String doc_id);
+	public int getState(String user_id);
 }
