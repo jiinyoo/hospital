@@ -47,11 +47,15 @@ public class LoginServicelmpl implements LoginService {
 			{
 				//게시판을 보려다가 로그인했으면 진료 후기 게시판으로 바로 로그인 되게 하는 것
 				if(menu.equals("board")){
-					System.out.println("일로 빠지는 거 맞아?");
-					return "/client/board/list";
+					return  "/boardlist";
+					//로그인 페이지확인해야할걸
+					//Cookie cookie =WebUtils.getCookie
+					//쿠키가 비어있지 않다면 
+					//String url=cookie.getValue();
+					//쿠키 초기화
+					//retturn redirect:+url
 					
 				}else {
-					System.out.println("아니면 else문으로 빠져?");
 					return "redirect:/main/index";				
 					
 				}
