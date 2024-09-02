@@ -6,6 +6,7 @@ import lombok.Data;
 public class DoctorDto {
 	
 	private String doc_name, doc_part, doc_img, doc_history, doc_phone, writeday;
+	private String doc_userid;
 	private int doc_id;
 	
 	public String getDoc_name() {

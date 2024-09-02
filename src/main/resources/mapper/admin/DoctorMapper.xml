@@ -10,4 +10,16 @@
 	<select id="getState" resultType="int">
 		select state from user where user_id=#{user_id}
 	</select>
+	<select id="isDoctor" resultType="boolean">
+		select count(*) from doctor
+		where doc_userid=#{userid}
+	</select>
+	<select id="getName" resultType="Hashmap">
+		select * from user 
+		where user_id=#{userid}
+	</select>
+	<insert id="addDoctorOk">
+		insert into doctor (doc_name,doc_part,doc_img,doc_history,doc_phone,doc_userid,writeday)
+		values (#{doc_name},#{doc_part},#{doc_img},#{doc_history},#{doc_phone},#{doc_userid},now())
+	</insert>
 </mapper>
