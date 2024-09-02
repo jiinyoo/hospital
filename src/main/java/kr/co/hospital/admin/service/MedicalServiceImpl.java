@@ -95,7 +95,7 @@ public class MedicalServiceImpl implements MedicalService {
 	public String patientView(HttpServletRequest request, HttpSession session, Model model) {
 		String res_id=request.getParameter("res_id");
 		ReserveDto rdto=mapper.getPatient(res_id);
-		System.out.println(res_id);
+	//	System.out.println(res_id);
 		if(session.getAttribute("user_id")!=null) {
 			String docName=session.getAttribute("user_id").toString();
 			if(docName.equals("admin") || docName.equals(rdto.getDoc_name())) {
