@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -212,8 +213,14 @@ nav #mainmenu #maincate
 </div>
 <header>
 		<div id="loginbar"> 
+		 <c:if test="${user_id == null }">
 		  <a href="/main/login"> 로그인 </a>| 
 		  <a href="/main/user"> 회원 가입 </a>
+		 </c:if>
+		 <c:if test="${user_id != null }">
+		   ${user_name}님 | 
+           <a href="/login/logout"> 로그아웃 </a> | 
+         </c:if>
 		</div>
 </header>
 <hr>
@@ -222,7 +229,11 @@ nav #mainmenu #maincate
 	<span id="mainsub" onmouseover="viewSub()">
 	<div id="mainmenu" >
 		<ul id="maincate">
-			<li><img src="../static/client/main/병원 로고.jpg" width="50"></li>
+			<li>
+			 <a href="/main/index">
+			  <img src="../static/client/main/병원 로고.jpg" width="50">
+			 </a>
+			</li>
 			<li>병원 소개</li>
 			<li>의료진 안내</li>
 			<li>상담/예약</li>

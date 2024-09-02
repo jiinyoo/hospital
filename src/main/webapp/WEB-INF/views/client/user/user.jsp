@@ -12,7 +12,7 @@
   
   function adServer(server)
   {
-  	document.mform.email2.value=server;
+  	document.mform.e2.value=server;
   }
   
   var uchk=0;

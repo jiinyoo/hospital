@@ -68,7 +68,7 @@ public class LoginServicelmpl implements LoginService {
     public String logout(HttpSession session)
    {
 	    session.invalidate();
-        return "redirect:/client/main/index";
+        return "redirect:/main/index";
    }
 
 }
