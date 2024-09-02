@@ -27,7 +27,7 @@ public class BoardServiceImpl implements BoardService {
 			
 		}else {
 			
-			return "redirect:main/login";
+			return "redirect:main/login?menu=board";
 		}
 		
 	}
