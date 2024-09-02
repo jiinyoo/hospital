@@ -7,7 +7,7 @@ import kr.co.hospital.client.dto.UserDto;
 
 public interface LoginService {
 	public String login(HttpServletRequest request,Model model);
-	public String loginOk(UserDto udto,HttpSession session);
+	public String loginOk(UserDto udto,HttpSession session,HttpServletRequest request);
 	public String logout(HttpSession session);
 
 }

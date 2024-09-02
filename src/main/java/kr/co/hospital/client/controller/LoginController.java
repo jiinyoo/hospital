@@ -26,9 +26,9 @@ public class LoginController {
 	
 	@RequestMapping("/main/loginOk")
 	public String loginOk(UserDto udto,
-			HttpSession session)
+			HttpSession session, HttpServletRequest request)
 	{
-		return service.loginOk(udto,session);
+		return service.loginOk(udto,session,request);
 	}
 	
 	@RequestMapping("/login/logout")

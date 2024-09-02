@@ -8,9 +8,9 @@
 </head>
 <body>
 <section>
-	<table>
+	<table align="center" width="700">
 		<tr>
-			<td>제목</td>
+			<td width="100">제목</td>
 			<td><input type="text" name="board_title"></td>
 		</tr>
 		<tr>
@@ -22,7 +22,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-			<textarea name="postContent" id="summernote" width="200"></textarea>		
+			<textarea name="postContent" id="summernote" width="600" height="600"></textarea>		
 			</td>
 		</tr>
 		<tr>

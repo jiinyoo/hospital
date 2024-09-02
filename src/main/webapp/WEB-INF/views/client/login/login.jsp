@@ -34,7 +34,9 @@
 <body>
 
  <section align="right">
+
   <form method="post" action="loginOk" onsubmit="return check(this)">
+  <input type="hidden" name="menu" value="${menu}">
   <h3> 로그인 ${user_name }</h3>
   <div>
    <div> 아이디 </div>
