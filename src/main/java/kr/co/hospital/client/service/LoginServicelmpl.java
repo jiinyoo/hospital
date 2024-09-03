@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.util.WebUtils;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.UserDto;
 import kr.co.hospital.client.mapper.LoginMapper;
@@ -28,7 +31,7 @@ public class LoginServicelmpl implements LoginService {
 	}
 	
 	@Override
-	public String loginOk(UserDto udto,HttpSession session,HttpServletRequest request)
+	public String loginOk(UserDto udto,HttpSession session,HttpServletRequest request, HttpServletResponse response)
 	{
 		String user_name=mapper.loginOk(udto);
 		String menu=request.getParameter("menu");
@@ -37,7 +40,6 @@ public class LoginServicelmpl implements LoginService {
 		{
 			System.out.println("로그인 성공");
 			session.setAttribute("user_id",udto.getUser_id());
-			session.setAttribute("user_name",user_name);
 			String userid = udto.getUser_id();
 			if(mapper.getState(userid)==2) 
 			{
@@ -46,19 +48,18 @@ public class LoginServicelmpl implements LoginService {
 			else 
 			{
 				//게시판을 보려다가 로그인했으면 진료 후기 게시판으로 바로 로그인 되게 하는 것
-				if(menu.equals("board")){
-					return  "/boardlist";
-					//로그인 페이지확인해야할걸
-					//Cookie cookie =WebUtils.getCookie
-					//쿠키가 비어있지 않다면 
-					//String url=cookie.getValue();
-					//쿠키 초기화
-					//retturn redirect:+url
-					
+				Cookie cookie=WebUtils.getCookie(request, "url");
+				String url=null;
+				if(cookie!=null)
+				{
+					url=cookie.getValue();
+					cookie.setMaxAge(0); // 쿠키 유효 기간 (초 단위) - 여기서는 1일
+					cookie.setPath("/");
+					response.addCookie(cookie);
+					return "redirect:"+url;
 				}else {
 					return "redirect:/main/index";				
-					
-				}
+				}				
 			}
 			
 		}

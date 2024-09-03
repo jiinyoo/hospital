@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>Insert title here</title>
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -18,6 +19,8 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script>
+
+
 $(document).ready(function() {
     $('#summernote').summernote({
         // 에디터 크기 설정
@@ -114,7 +117,7 @@ function imageUploader(file, el) {
 </script>
 
 <style>
-* {margin:0; padding:0; box-sizing: border-box;}
+
       /* 페이지 전체에서 가운데 정렬 */
     section {
         display: flex;
@@ -126,7 +129,7 @@ function imageUploader(file, el) {
     table {
         width:1000px;
     	margin:0 auto;
-    	margin-top:100px;
+    	margin-top:5px;
     	border-collapse: collapse;
     }
 
@@ -143,7 +146,7 @@ function imageUploader(file, el) {
     }
 	#board_title{
 		 outline: none;
-		 width:500px;
+		 width:900px;
 		 height:30px;
 	}
 	
@@ -151,6 +154,7 @@ function imageUploader(file, el) {
 		outline: none;
 		width:100px;
 		height:30px;
+		border:none;
 	
 	}
 	
@@ -159,6 +163,12 @@ function imageUploader(file, el) {
 		height:30px;
 	}
 	
+	hr {
+	 margin-bottom:0px;
+	 margin-top:0px;
+     border:0.1px solid #ccc;
+	}
+
 	
 	#summernote {
     display: block; /* 블록 요소로 설정 */
@@ -171,7 +181,7 @@ function imageUploader(file, el) {
 	<table>
 		<caption style="text-align: center;"><h2>진료후기 게시판 글쓰기</h2></caption>
 		<tr>
-			<td width="400">제목</td>
+			<td width="100">제목</td>
 			<td><input type="text" name="board_title"  id="board_title"></td>
 		</tr>
 		<tr>

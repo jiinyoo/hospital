@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 
@@ -48,8 +49,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardlist")
-	public String boardlist(HttpSession session,Model model) {
-		return service.boardlist(session,model);
+	public String boardlist(HttpSession session,Model model,HttpServletResponse response) {
+		return service.boardlist(session,model,response);
 	}
 	
 	
