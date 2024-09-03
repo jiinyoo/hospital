@@ -116,24 +116,25 @@ public class DoctorServiceImpl implements DoctorService {
 	@Override
 	public String upDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
 		MultipartFile file=request.getFile("file");
-		
-		String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+ddto.getDoc_img();
-		Path path=Paths.get(str);
-		if(Files.exists(path)) {
-			Files.delete(path);
-		}
-		
-		
+
 		if(!file.isEmpty()) {
 			String fname=file.getOriginalFilename();
-			str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
+			String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
 			str=FileUtils.getFileName(fname, str);
 			String saveFname=str.substring(str.lastIndexOf("/")+1);
 			
-			path=Paths.get(str);
+			Path path=Paths.get(str);
 			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 			
+			str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+mapper.getDocimg(ddto.getDoc_userid());
+			path=Paths.get(str);
+			if(Files.exists(path)) {
+				Files.delete(path);
+			}
+			
 			ddto.setDoc_img(saveFname);
+		} else {
+			ddto.setDoc_img(mapper.getDocimg(ddto.getDoc_userid())); 
 		}
 		mapper.upDoctorOk(ddto);
 		return null;

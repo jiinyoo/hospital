@@ -19,4 +19,5 @@ public interface DoctorMapper {
 	public void addDoctorOk(DoctorDto dto);
 	public DoctorDto upDoctor(String userid);
 	public void upDoctorOk(DoctorDto ddto);
+	public String getDocimg(String userid);
 }

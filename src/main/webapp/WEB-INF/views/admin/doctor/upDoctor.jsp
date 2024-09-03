@@ -32,12 +32,7 @@
 	}
 	
 	function subchk() {
-		var file=document.getElementById("file");
 		
-		if(file.value=="") {
-			alert("사진을 첨부해주세요.");
-			return false;
-		}
 		
 		var his=document.getElementsByClassName("history");
 		var history="";
@@ -133,7 +128,7 @@
 		<td colspan="3"> <input type="file" name="file" id="file"> </td>
 	</tr>
 	<tr>
-		<td colspan="4" style="text-align: center;"> <input type="submit" value="수정"></td>
+		<td colspan="4" style="text-align: center;"> <input type="submit" value="수정"> </td>
 	</tr>
 </table>
 </form>
