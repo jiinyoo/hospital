@@ -164,14 +164,16 @@ nav #mainmenu #maincate
 	
 }
 
-.haha {
-  margin-bottom:40px;
- }
+
+
+hr{
+ border:0.1px solid #ccc;
+}
+
 
 </style>
 <script>
 	
-
 	function viewSub()
 	{
 		var submenus=document.getElementsByClassName("submenu");
@@ -294,7 +296,7 @@ nav #mainmenu #maincate
 		<ul class="submenu">
 				<li>공지사항</li>
 				<li>진료과별 질문</li>
-				<li><a href="../../boardwrite">진료 후기</a></li>
+				<li><a href="../../boardlist">진료 후기</a></li>
 				<li>고객의 소리</li>
 		</ul>
 		

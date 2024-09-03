@@ -14,7 +14,7 @@ import kr.co.hospital.admin.service.MedicalService;
 @Mapper
 public interface MedicalMapper {
 
-	public ArrayList<HashMap> mlist(int index, String stype, String sword);
+	public ArrayList<HashMap> afterMedi(int index, String stype, String sword);
 	public int getChong(String stype, String sword);
 	public String getDocid(String userid);
 	public ArrayList<ReserveDto> getPatients(String doc_id);

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.UserDto;
 import kr.co.hospital.client.service.LoginService;
@@ -26,9 +27,9 @@ public class LoginController {
 	
 	@RequestMapping("/main/loginOk")
 	public String loginOk(UserDto udto,
-			HttpSession session, HttpServletRequest request)
+			HttpSession session, HttpServletRequest request, HttpServletResponse response)
 	{
-		return service.loginOk(udto,session,request);
+		return service.loginOk(udto,session,request,response);
 	}
 	
 	@RequestMapping("/login/logout")

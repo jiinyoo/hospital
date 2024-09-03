@@ -8,7 +8,7 @@ import kr.co.hospital.admin.dto.MedicalDto;
 
 public interface MedicalService {
 
-	public String mlist(Model model,HttpServletRequest request);
+	public String afterMedi(Model model,HttpServletRequest request);
 	public String patient(HttpSession session,Model model,HttpServletRequest request);
 	public String patientView(HttpServletRequest request, HttpSession session, Model model);
 	public String medicalOk(HttpServletRequest request, MedicalDto mdto, HttpSession session);

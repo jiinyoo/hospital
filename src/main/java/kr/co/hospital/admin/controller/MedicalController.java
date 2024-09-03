@@ -20,7 +20,7 @@ public class MedicalController {
 	
 	@RequestMapping("/admin/medical/afterMedi")
 	public String afterMedi(Model model,HttpServletRequest request) {
-		return service.mlist(model, request);
+		return service.afterMedi(model, request);
 	}
 	
 	@RequestMapping("/admin/medical/afterMediView")

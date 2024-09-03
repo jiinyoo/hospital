@@ -22,7 +22,7 @@ public class MedicalServiceImpl implements MedicalService {
 	private MedicalMapper mapper;
 
 	@Override
-	public String mlist(Model model,HttpServletRequest request) {
+	public String afterMedi(Model model,HttpServletRequest request) {
 		
 		String stype=request.getParameter("stype")==null?"m.user_name":request.getParameter("stype");
 		String sword=request.getParameter("sword")==null?"":request.getParameter("sword");
@@ -35,7 +35,7 @@ public class MedicalServiceImpl implements MedicalService {
 		if(chong<pend) {
 			pend=chong;
 		}
-		ArrayList<HashMap> mdto=mapper.mlist(index, stype, sword);
+		ArrayList<HashMap> mdto=mapper.afterMedi(index, stype, sword);
 		for(HashMap member : mdto) {
 			String jumin=member.get("user_jumin").toString();
 			String birth=jumin.substring(0,8);
@@ -95,7 +95,7 @@ public class MedicalServiceImpl implements MedicalService {
 	public String patientView(HttpServletRequest request, HttpSession session, Model model) {
 		String res_id=request.getParameter("res_id");
 		ReserveDto rdto=mapper.getPatient(res_id);
-		System.out.println(res_id);
+	//	System.out.println(res_id);
 		if(session.getAttribute("user_id")!=null) {
 			String docName=session.getAttribute("user_id").toString();
 			if(docName.equals("admin") || docName.equals(rdto.getDoc_name())) {
