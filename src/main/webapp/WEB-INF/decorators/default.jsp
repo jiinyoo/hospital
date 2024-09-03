@@ -157,7 +157,9 @@ nav #mainmenu #maincate
 	
 }
 
-
+hr{
+ border:0.1px solid #ccc;
+}
 
 </style>
 <script>
