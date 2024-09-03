@@ -10,6 +10,13 @@
 
 * {margin:0; padding:0; box-sizing: border-box;}
 
+ section {
+      font-family: 'GmarketSansMedium';
+      width:1200px;
+      height:600px;
+      margin:auto;
+   
+   }
 
 #slideouter{
  	width:100%;
@@ -62,7 +69,10 @@
 	</div>
 </section>
 
-지인이의 깃연습asdfasdfasdfasf
-asdgasdgg
+지인쓰 바보
+<hr>
+dd
+<hr>
+dd
 </body>
 </html>

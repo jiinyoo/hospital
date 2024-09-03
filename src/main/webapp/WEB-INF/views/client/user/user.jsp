@@ -6,7 +6,97 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+  body {
+    font-family: 'goorm-sans-bold';
+    background-color: #f2f4f9;
+    margin: 0;
+    padding: 0;
+  }
+
+  section {
+    width: 80%;
+    max-width: 550px;
+    margin: 50px auto;
+    padding: 60px;
+    background-color: #ffffff;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h3 {
+    text-align: center;
+    color: #FF8224;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="password"],
+  .form-group input[type="submit"],
+  .form-group select {
+    font-family: 'goorm-sans-bold';
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  .form-group input[type="submit"] {
+    background-color: #FF8224;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .form-group input[type="submit"]:hover {
+    background-color: #FF5E00;
+  }
+
+  .form-group span {
+    display: block;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .form-group span.green {
+    color: #28a745;
+  }
+
+  .form-group span.red {
+    color: #dc3545;
+  }
   
+  .form-jumin input[type="text"] {
+  	width: calc(50% - 20px);
+    padding: 10px;
+    padding-right: 10px;
+    margin: 5px 0;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    box-sizing: border-box;
+    outline: none;
+    font-family: 'goorm-sans-bold';
+  }
+
+  .email-group { 
+    align-items: center;
+  }
+
+  .email-group input[type="text"] {
+    width: calc(41% - 30px);
+    margin-right: 5px;
+  }
+
+  .email-group select {
+    width: auto;
+    margin-left: 5px;
+  }
 </style>
 <script>
   
@@ -130,25 +220,25 @@
 <main>
   <form name="mform" method="post" action="userOk" onsubmit="return check()">
    <input type="hidden" name="user_email">
-    <h3 align="center"> 회원 가입 </h3>
-    <div>
+    <h3> 회원 가입 </h3>
+    <div class="form-group">
       <input type="text" name="user_id" id="txt" placeholder="아이디" onblur="useridCheck(this.value)">
       <span id="uId"></span>
     </div>
-    <div>
+    <div class="form-group">
       <input type="text" name="user_name" id="txt" placeholder="이름">
     </div>
-    <div>
+    <div class="form-group">
       <input type="password" name="user_pwd" id="txt" onkeyup="pwdCheck(0)" placeholder="비밀번호">
     </div>
-    <div>
+    <div class="form-group">
       <input type="password" name="pwd2" id="txt" onkeyup="pwdCheck(1)" placeholder="비밀번호 확인">
       <span id="pId"></span>
     </div>
-    <div> 
+    <div class="form-group"> 
       <input type="text" name="user_phone" id="txt" placeholder="전화번호">
     </div>
-    <div>
+    <div class="form-group email-group">
       <input type="text" name="e1" id="txt" placeholder="이메일 아이디">@
       <input type="text" name="e2" id="txt" placeholder="이메일 주소">
       <select onchange="adServer(this.value)">
@@ -159,13 +249,13 @@
        <option value="google.com"> 구글 </option>
       </select>
     </div>
-    <div>
+    <div class="form-jumin">
       <input type="text" name="user_jumin" id="txt" placeholder="주민번호 앞자리"> - ******
     </div>
-    <div>
+    <div class="form-group">
       <input type="text" name="user_addr" id="txt" placeholder="주소">
     </div>
-    <div>
+    <div class="form-group">
       <input type="submit" value="회원 등록" id="submit">
     </div> 
   </form>
