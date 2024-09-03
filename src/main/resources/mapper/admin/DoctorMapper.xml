@@ -22,4 +22,11 @@
 		insert into doctor (doc_name,doc_part,doc_img,doc_history,doc_phone,doc_userid,writeday)
 		values (#{doc_name},#{doc_part},#{doc_img},#{doc_history},#{doc_phone},#{doc_userid},now())
 	</insert>
+	<select id="upDoctor" resultType="kr.co.hospital.admin.dto.DoctorDto">
+		select * from doctor where doc_userid=#{userid}
+	</select>
+	<update id="upDoctorOk">
+		update doctor set doc_part=#{doc_part}, doc_phone=#{doc_phone}, doc_history=#{doc_history}, doc_img=#{doc_img}
+		where doc_userid=#{doc_userid}
+	</update>
 </mapper>

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +14,9 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.dto.DoctorDto;
 import kr.co.hospital.admin.mapper.DoctorMapper;
@@ -72,19 +75,66 @@ public class DoctorServiceImpl implements DoctorService {
 	@Override
 	public String addDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
 		MultipartFile file=request.getFile("file");
-		String fname=file.getOriginalFilename();
-		String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
-		
-		str=FileUtils.getFileName(fname, str);
-		String saveFname=str.substring(str.lastIndexOf("/")+1);
-		
-		Path path=Paths.get(str);
-		ddto.setDoc_img(saveFname);
-		
+		if(!file.isEmpty()) {
+			String fname=file.getOriginalFilename();
+			String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
+			
+			str=FileUtils.getFileName(fname, str);
+			String saveFname=str.substring(str.lastIndexOf("/")+1);
+			
+			Path path=Paths.get(str);
+			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+			
+			ddto.setDoc_img(saveFname);
+			
+		}
 		mapper.addDoctorOk(ddto);
 		
 		return "redirect:/admin/";
 	}
-	
-	
+
+	@Override
+	public String upDoctor(Model model, HttpSession session,HttpServletResponse response) {
+		if(session.getAttribute("user_id")==null) {
+			Cookie url=new Cookie("url", "admin/doctor/upDoctor");
+			url.setMaxAge(500);
+			url.setPath("/");
+			response.addCookie(url);
+			return "redirect:/main/login";
+		} else {
+			String userid=session.getAttribute("user_id").toString();
+			if(mapper.isDoctor(userid)) {
+				DoctorDto ddto=mapper.upDoctor(userid);
+				ddto.setHistorys(ddto.getDoc_history().split("/"));
+				model.addAttribute("ddto",ddto);
+				return "/admin/doctor/upDoctor";
+			}
+			return "redirect:/admin/doctor/addDoctor";
+		}
+	}
+
+	@Override
+	public String upDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
+		MultipartFile file=request.getFile("file");
+		
+		String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+ddto.getDoc_img();
+		Path path=Paths.get(str);
+		if(Files.exists(path)) {
+			Files.delete(path);
+		}
+		
+		if(!file.isEmpty()) {
+			String fname=file.getOriginalFilename();
+			str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
+			str=FileUtils.getFileName(fname, str);
+			String saveFname=str.substring(str.lastIndexOf("/")+1);
+			
+			path=Paths.get(str);
+			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+			
+			ddto.setDoc_img(saveFname);
+		}
+		mapper.upDoctorOk(ddto);
+		return null;
+	}
 }

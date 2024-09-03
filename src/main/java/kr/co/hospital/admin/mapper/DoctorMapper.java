@@ -17,4 +17,6 @@ public interface DoctorMapper {
 	public boolean isDoctor(String userid);
 	public HashMap getName(String userid);
 	public void addDoctorOk(DoctorDto dto);
+	public DoctorDto upDoctor(String userid);
+	public void upDoctorOk(DoctorDto ddto);
 }
