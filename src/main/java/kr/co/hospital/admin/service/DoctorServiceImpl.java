@@ -123,6 +123,7 @@ public class DoctorServiceImpl implements DoctorService {
 			Files.delete(path);
 		}
 		
+		
 		if(!file.isEmpty()) {
 			String fname=file.getOriginalFilename();
 			str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
