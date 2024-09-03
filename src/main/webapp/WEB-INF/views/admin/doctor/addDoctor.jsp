@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <script>
 	function chk() {
+		 
 		var his=document.getElementsByClassName("history");
 		if(his[his.length-1]==document.activeElement) {
 			if(his.length<10 && his[his.length-1].value!=="") {
@@ -19,8 +20,14 @@
 				addInput.onkeyup=chk;
 				addDiv.appendChild(addInput);
 				document.getElementById("his").appendChild(addDiv);
-			}
+			}  
 		}
+		
+		for(i=0;i<his.length-1;i++) {
+			if(his[i].value.length==0) {
+				his[i].remove();				
+			}
+		}	
 	}
 	
 	function subchk() {
@@ -34,6 +41,11 @@
 			return true;
 
 	}
+	
+	function viewSrc() {
+	    document.getElementById("aa").innerText = document.getElementsByTagName('body')[0].innerHTML;
+	}
+
 </script>
 <style>
 	section {
@@ -92,6 +104,8 @@
 </head>
 <body>
 <section>
+<div id="aa"></div>
+<input type="button" onclick="veiwSrc()">
 <form method="post" action="addDoctorOk" enctype="multipart/form-data" onsubmit="return subchk()">
 <input type="hidden" name="doc_history" id="doc_history">
 <input type="hidden" name="doc_userid" value="${user.user_id}">
