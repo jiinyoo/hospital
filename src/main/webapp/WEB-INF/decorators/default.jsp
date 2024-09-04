@@ -48,11 +48,10 @@ body {
     right:0;
     text-align:right;
     top: 15px;
-    color: purple;
+    color: black;
     cursor:pointer;
 
 }
-
 
 #loginbar{
 	
@@ -68,16 +67,14 @@ body {
 nav{
  position :relative;
  width:1300px;
- height:80px;
- background:#DAD9FF;
+ height:100px;
  margin:auto;
+ font-size:20px;
 }
 
 nav #mainmenu{
 	width:1300px;
 }
-
-
 
 nav #mainmenu #maincate
 {
@@ -90,16 +87,32 @@ nav #mainmenu #maincate
 	list-style-type:none;
 	width:180px;
 	text-align:center;
-	height:80px;
-	line-height:80px;
+	height:100px;
+	line-height:100px;
 	margin: 0; /* 기본 마진 제거 */
 	padding: 0; /* 기본 패딩 제거 */
 	position:relative;
+	cursor: pointer;
+
 }
 
-#mainmenu #maincate > .logo img {
-	width:180px;
+#maincate .logo img {
+
+	width:90px;
 	transition: all 0.3s ease;
+}
+
+#maincate .logo img:hover {
+	transform: scale(1.1);
+	background-color: none;
+}
+
+#maincate .hov {
+    transition: all 0.7s ease;
+}
+
+#maincate .hov:hover {
+    background-color: #B5B2FF;
 }
 
 
@@ -107,10 +120,7 @@ nav #mainmenu #maincate
 	display:flex;
 	flex-wrap:wrap;
 	text-align:center;
-
 }
-
-
 
 #submenus .submenu
 {
@@ -121,7 +131,7 @@ nav #mainmenu #maincate
 	top:90px;
 	background:white;
 	border:0.5px solid grey;
-
+    
 }
 
 
@@ -131,8 +141,6 @@ nav #mainmenu #maincate
 	width:200px;
 
 }
-
-
 
 #submenus .submenu > li
 {
@@ -145,13 +153,23 @@ nav #mainmenu #maincate
     margin: 0; /* 기본 마진 제거 */
     padding: 0; /* 기본 패딩 제거 */
 	font-size: 14px;
+	cursor: pointer;
+    transition: all 0.3s ease;
 }
 
+#submenus .submenu > li > a {
+    padding:0px 63px;
+}
+
+#submenus .submenu > li:hover {
+	background-color: #B5B2FF;
+	
+}
 #submenus .submenu > li:first-child
 
 {
 	border-top:5px solid #DAD9FF;
-
+	
 }
 
 #submenus .submenu > li:last-child
@@ -161,10 +179,6 @@ nav #mainmenu #maincate
 
 }
 
-
-
-
-
 #submenus .submenu:last-child > li
 {
 
@@ -172,14 +186,11 @@ nav #mainmenu #maincate
 	
 }
 
-.haha {
-  margin-bottom: 40px;
-}
+
 
 hr{
  border:0.1px solid #ccc;
 }
-
 
 </style>
 <script>
@@ -210,10 +221,10 @@ hr{
 		
 		var h=0;
 		function move(){
-			if(h<=150)
+			if(h<=50)
 				document.getElementById("ad").style.marginTop=-h+"px";
 			h++;
-			setTimeout(move,5);
+			setTimeout(move,15);
 		}
 		move();
 	}
@@ -238,8 +249,8 @@ hr{
 		  <a href="/main/user"> 회원 가입 </a>
 		 </c:if>
 		 <c:if test="${user_id != null }">
-		   ${user_name}님 | 
-           <a href="/login/logout"> 로그아웃 </a> | 
+		   ${user_id}님 | 
+           <a href="/login/logout"> 로그아웃 </a> | 문의하기
          </c:if>
 		</div>
 </header>
@@ -250,17 +261,17 @@ hr{
 	<span id="mainsub">
 	<div id="mainmenu"  onmouseover="viewSub()">
 		<ul id="maincate">
-			<li id="logo">
+			<li class="logo">
 			 <a href="/main/index">
-			  <img src="../static/client/main/병원 로고.jpg" width="80" valign="middle">
+			  <img src="../static/client/main/병원 로꼬.png" width="100" valign="middle">
 			 </a>
 			</li>
-			<li>병원 소개</li>
-			<li>의료진 안내</li>
-			<li>상담/예약</li>
-			<li>프로그램 예약</li>
-			<li>커뮤니티</li>
-			<li>건강 용품 샵</li>
+			<li class="hov">병원 소개</li>
+			<li class="hov">의료진 안내</li>
+			<li class="hov">상담/예약</li>
+			<li class="hov">프로그램 예약</li>
+			<li class="hov">커뮤니티</li>
+			<li class="hov">건강 정보</li>
 		</ul>
 	</div>
 	
