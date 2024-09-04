@@ -87,27 +87,32 @@ nav #mainmenu #maincate
 	list-style-type:none;
 	width:180px;
 	text-align:center;
-	height:89px;
-	line-height:80px;
+	height:100px;
+	line-height:100px;
 	margin: 0; /* 기본 마진 제거 */
-	margin-top: 5px;
 	padding: 0; /* 기본 패딩 제거 */
 	position:relative;
 	cursor: pointer;
-    transition: all 0.7s ease;
-}
 
-#mainmenu #maincate > li:hover {
-    background-color: #B5B2FF;
 }
 
 #maincate .logo img {
+
 	width:90px;
 	transition: all 0.3s ease;
 }
 
 #maincate .logo img:hover {
 	transform: scale(1.1);
+	background-color: none;
+}
+
+#maincate .hov {
+    transition: all 0.7s ease;
+}
+
+#maincate .hov:hover {
+    background-color: #B5B2FF;
 }
 
 
@@ -115,7 +120,6 @@ nav #mainmenu #maincate
 	display:flex;
 	flex-wrap:wrap;
 	text-align:center;
-	transition: all 0.7s ease;
 }
 
 #submenus .submenu
@@ -127,7 +131,7 @@ nav #mainmenu #maincate
 	top:90px;
 	background:white;
 	border:0.5px solid grey;
-    transition: all 0.7s ease;
+    
 }
 
 
@@ -151,6 +155,10 @@ nav #mainmenu #maincate
 	font-size: 14px;
 	cursor: pointer;
     transition: all 0.3s ease;
+}
+
+#submenus .submenu > li > a {
+    padding:0px 63px;
 }
 
 #submenus .submenu > li:hover {
@@ -178,9 +186,7 @@ nav #mainmenu #maincate
 	
 }
 
-.haha {
-  margin-bottom: 40px;
-}
+
 
 hr{
  border:0.1px solid #ccc;
@@ -260,12 +266,12 @@ hr{
 			  <img src="../static/client/main/병원 로꼬.png" width="100" valign="middle">
 			 </a>
 			</li>
-			<li>병원 소개</li>
-			<li>의료진 안내</li>
-			<li>상담/예약</li>
-			<li>프로그램 예약</li>
-			<li>커뮤니티</li>
-			<li>건강 용품 샵</li>
+			<li class="hov">병원 소개</li>
+			<li class="hov">의료진 안내</li>
+			<li class="hov">상담/예약</li>
+			<li class="hov">프로그램 예약</li>
+			<li class="hov">커뮤니티</li>
+			<li class="hov">건강 정보</li>
 		</ul>
 	</div>
 	
