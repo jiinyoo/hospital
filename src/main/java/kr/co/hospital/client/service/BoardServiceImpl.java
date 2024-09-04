@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.BoardDto;
@@ -39,33 +40,54 @@ public class BoardServiceImpl implements BoardService {
 	public String boardlist(HttpSession session, Model model, HttpServletResponse response) {
 		if(session.getAttribute("user_id")!=null)
 		{
-	
 			String user_id=session.getAttribute("user_id").toString();
-			
-			
 			ArrayList<HashMap> map=mapper.boardlist();    
 			model.addAttribute("bmapAll",map);
-			
-			
 			return "/client/board/list";
-	
-			
 		}else {
-			
 			Cookie cookie = new Cookie("url", "/boardlist");
 			cookie.setMaxAge(60 * 60 * 24); // 쿠키 유효 기간 (초 단위) - 여기서는 1일
 			cookie.setPath("/");
 			response.addCookie(cookie);
-			
 			return "redirect:main/login";
 		}
-		
 	}
-
 	@Override
 	public void boardinsert(BoardDto bdto) {
 		mapper.boardinsert(bdto);
-		
 	}
 
+	@Override
+	public String boardreadnum(HttpServletRequest request) {
+		String board_id=request.getParameter("board_id");
+		mapper.boardReadnum(board_id);
+		return "redirect:/boardcontent?board_id="+board_id;
+	}
+
+	@Override
+	public String boardcontent(HttpServletRequest request, Model model, HttpSession session) {
+		String user_id=session.getAttribute("user_id").toString();
+		String board_id=request.getParameter("board_id");
+		BoardDto bdto=mapper.boardcontent(board_id);
+		model.addAttribute("bdto",bdto);
+		model.addAttribute("user_id",user_id);
+		return "/client/board/content";
+	}
+
+	@Override
+	public String boarddelete(HttpServletRequest request) {
+		String board_id=request.getParameter("board_id");
+		String user_id=request.getParameter("user_id");
+		mapper.boarddelete(board_id,user_id);
+		return "redirect:/boardlist";
+	}
+
+	@Override
+	public String boardupdate(HttpServletRequest request, Model model) {
+		String board_id=request.getParameter("board_id");
+		String user_id=request.getParameter("user_id");
+		BoardDto bdto=mapper.boardcontent(board_id);
+		model.addAttribute("bdto",bdto);
+		return "/client/board/update";
+	}
 }
