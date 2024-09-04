@@ -23,9 +23,9 @@
 			}  
 		}
 		
-		for(i=0;i<his.length-1;i++) {
-			if(his[i].value.length==0) {
-				his[i].parentElement.remove();				
+		for(i=0;i<his.length;i++) {
+			if(his[i].value.trim().length!=0) {
+				history+=his[i].value+"/";
 			}
 		}	
 	}
