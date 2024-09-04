@@ -8,15 +8,22 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-
-
+@font-face {
+    font-family: 'goorm-sans-bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+body {
+	font-family: 'goorm-sans-bold';
+}
 * {margin:0; padding:0; box-sizing: border-box;}
 
 #ads{
 	position:relative;
 	width:100%;
 	height:150px;
-	background:blue;
+	background:#DAD9FF;
 	margin:auto;
 }
 
@@ -157,13 +164,17 @@ nav #mainmenu #maincate
 	
 }
 
+.haha {
+  margin-bottom: 40px;
+}
+
 hr{
  border:0.1px solid #ccc;
 }
 
+
 </style>
 <script>
-	
 	
 	function viewSub()
 	{
@@ -186,7 +197,6 @@ hr{
 			}
 		
 	}
-	
 
 	function adx(){
 		
@@ -226,10 +236,11 @@ hr{
 		</div>
 </header>
 <hr>
-<span id="total" onmouseout="hideSub()">
+
 	<nav>
-	<span id="mainsub" onmouseover="viewSub()">
-	<div id="mainmenu" >
+	<span id="total" onmouseout="hideSub()">
+	<span id="mainsub">
+	<div id="mainmenu"  onmouseover="viewSub()">
 		<ul id="maincate">
 			<li>
 			 <a href="/main/index">
@@ -245,7 +256,7 @@ hr{
 		</ul>
 	</div>
 	
-	<div id="submenus">
+	<div id="submenus"  onmouseover="viewSub()">
 		<ul class="submenu">
 			<li></li>
 			<li></li>
@@ -293,18 +304,23 @@ hr{
 		
 		
 		<ul class="submenu">
-			<li>미정</li>
+			<li>건강정보</li>
 			<li></li>
 			<li></li>
 			<li></li>
 		</ul>
 		
+		
 	
 	</div>
 	</span>
+	</span>
 	</nav>
 	<hr>
-<span>
+	<div class="haha">
+	  
+	</div>
+
 
 <sitemesh:write property="body"/>
 
