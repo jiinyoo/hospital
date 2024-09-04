@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,21 +8,32 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-
-
+@font-face {
+    font-family: 'goorm-sans-bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+body {
+	font-family: 'goorm-sans-bold';
+    background-color: #f2f4f9;
+    margin: 0;
+    padding: 0;
+}
 * {margin:0; padding:0; box-sizing: border-box;}
 
 #ads{
 	position:relative;
 	width:100%;
-	height:150px;
-	background:blue;
+	height:50px;
+	background:#8C8C8C;
 	margin:auto;
 }
 
 #ad{
 	margin:auto;
 	width:100%;
+
 }
 #container
 {
@@ -34,19 +46,20 @@
 #xx {
     position:absolute;
     right:0;
-    width: 1300px;
     text-align:right;
-    top: 130px;
-    color: white;
+    top: 15px;
+    color: purple;
     cursor:pointer;
+
 }
 
 
 #loginbar{
 	
 	margin:auto;
+	margin-top: 15px;
 	width:1300px;
-	height:50px;
+	height:30px;
 	text-align:right;
 	align-items:center;
 
@@ -56,7 +69,7 @@ nav{
  position :relative;
  width:1300px;
  height:80px;
- background:pink;
+ background:#DAD9FF;
  margin:auto;
 }
 
@@ -84,10 +97,16 @@ nav #mainmenu #maincate
 	position:relative;
 }
 
+#mainmenu #maincate > .logo img {
+	width:180px;
+	transition: all 0.3s ease;
+}
+
 
 #submenus {
 	display:flex;
 	flex-wrap:wrap;
+	text-align:center;
 
 }
 
@@ -95,22 +114,32 @@ nav #mainmenu #maincate
 
 #submenus .submenu
 {
-	display:flex;
-	flex-direction:column;
+	display:none;
 	padding-left:0px;
-	width:180px;
+	width:183px;
 	left:0px;
 	top:90px;
 	background:white;
-	border:1px solid green;
+	border:0.5px solid grey;
 
 }
+
+
+#submenus .submenu:last-child
+{
+
+	width:200px;
+
+}
+
+
 
 #submenus .submenu > li
 {
 	list-style-type:none;
+	justify-content: center;
 	display:flex;
-	width:180px;
+	width:183px;
 	height:30px;
 	line-height: 30px; /* 중앙 정렬 */
     margin: 0; /* 기본 마진 제거 */
@@ -118,27 +147,64 @@ nav #mainmenu #maincate
 	font-size: 14px;
 }
 
+#submenus .submenu > li:first-child
+
+{
+	border-top:5px solid #DAD9FF;
+
+}
+
+#submenus .submenu > li:last-child
+
+{
+	border-bottom:5px solid #DAD9FF;
+
+}
+
+
+
+
+
+#submenus .submenu:last-child > li
+{
+
+	width:200px;
+	
+}
+
+.haha {
+  margin-bottom: 40px;
+}
+
+hr{
+ border:0.1px solid #ccc;
+}
+
 
 </style>
 <script>
-	
 	
 	function viewSub()
 	{
 		var submenus=document.getElementsByClassName("submenu");
 		for(submenu of submenus)
 			{
-				submenu.style.visibility="visible";
+				submenu.style.display="block";
 			}
+		
 	}
 	
 	
 	function hideSub()
 	{
 		//div영역을 생성하고 해야하나?
+		var submenus=document.getElementsByClassName("submenu");
+		for(submenu of submenus)
+			{
+				submenu.style.display="none";
+			}
 		
 	}
-	
 
 	function adx(){
 		
@@ -166,71 +232,103 @@ nav #mainmenu #maincate
 	</div>
 </div>
 <header>
-		<div id="loginbar">로그인 | 회원 가입</div>
+		<div id="loginbar"> 
+		 <c:if test="${user_id == null }">
+		  <a href="/main/login"> 로그인 </a>| 
+		  <a href="/main/user"> 회원 가입 </a>
+		 </c:if>
+		 <c:if test="${user_id != null }">
+		   ${user_name}님 | 
+           <a href="/login/logout"> 로그아웃 </a> | 
+         </c:if>
+		</div>
 </header>
 <hr>
-<nav>
-<div id="mainmenu">
-	<ul id="maincate">
-		<li>로 고</li>
-		<li>병원 소개</li>
-		<li>의료진 안내</li>
-		<li>상담/예약</li>
-		<li>프로그램 예약</li>
-		<li>커뮤니티</li>
-		<li>건강 용품 샵</li>
-	</ul>
-</div>
 
-<div id="submenus">
-	<ul class="submenu">
-	</ul>
+	<nav>
+	<span id="total" onmouseout="hideSub()">
+	<span id="mainsub">
+	<div id="mainmenu"  onmouseover="viewSub()">
+		<ul id="maincate">
+			<li id="logo">
+			 <a href="/main/index">
+			  <img src="../static/client/main/병원 로고.jpg" width="80" valign="middle">
+			 </a>
+			</li>
+			<li>병원 소개</li>
+			<li>의료진 안내</li>
+			<li>상담/예약</li>
+			<li>프로그램 예약</li>
+			<li>커뮤니티</li>
+			<li>건강 용품 샵</li>
+		</ul>
+	</div>
 	
-	<ul class="submenu">
-		<li>병원 인삿말</li>
-		<li>미션과 비전</li>
-		<li>조직도</li>
-		<li>오시는 길</li>
-	</ul>
+	<div id="submenus"  onmouseover="viewSub()">
+		<ul class="submenu">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		
+		<ul class="submenu">
+			<li>병원 인삿말</li>
+			<li>미션과 비전</li>
+			<li>조직도</li>
+			<li>오시는 길</li>
+		</ul>
+		
+		<ul class="submenu">
+			<li>정신과</li>
+			<li>내분비과</li>
+		    <li>치과</li>
+		    <li>이비인후과</li>
+		</ul>
+		
+		<ul class="submenu">
+			<li>1:1문의</li>
+			<li>온라인 진료 예약</li>
+			<li>예약 조회</li>
+			<li></li>
+		</ul>
+		
+		<ul class="submenu">
+		
+			<li>프로그램 예약</li>
+			<li></li>
+			<li></li>
+			<li></li>
+		
+		</ul>
+		
+		
+		<ul class="submenu">
+				<li>공지사항</li>
+				<li>진료과별 질문</li>
+				<li><a href="../../boardlist">진료 후기</a></li>
+				<li>고객의 소리</li>
+		</ul>
+		
+		
+		<ul class="submenu">
+			<li>건강정보</li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		
+		
 	
-	<ul class="submenu">
-		<li>정신과</li>
-		<li>내분비과</li>
-	    <li>치과</li>
-	    <li>이비인후과</li>
-	</ul>
-	
-	<ul class="submenu">
-		<li>1:1문의</li>
-		<li>온라인 진료 예약</li>
-		<li>예약 조회</li>
-	</ul>
-	
-	<ul class="submenu">
-	
-		<li>프로그램 예약</li>
-	
-	</ul>
-	
-	
-	<ul class="submenu">
-			<li>공지사항</li>
-			<li>진료과별 질문</li>
-			<li>진료 후기</li>
-			<li>고객의 소리</li>
-	</ul>
-	
-	
-	<ul class="submenu">
-	
-	</ul>
-	
+	</div>
+	</span>
+	</span>
+	</nav>
+	<hr>
+	<div class="haha">
+	  
+	</div>
 
-</div>
-
-
-</nav>
-<hr>
 
 <sitemesh:write property="body"/>
 

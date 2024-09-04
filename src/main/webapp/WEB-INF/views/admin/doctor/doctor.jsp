@@ -7,7 +7,50 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	section {width: 600px; border: 1px solid black; padding-left: 20px;}
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+    section {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 12px;
+        text-align: center;
+    }
+    th {
+        background-color: #00cccc;
+        font-weight: bold;
+        color: white;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+    a {
+        color: #3498db;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
 </style>
 </head>
 <body>	
@@ -15,11 +58,11 @@
 	<table>
 		<h2>의료진</h2>
 		<tr>
-			<td> 번호 </td>
-			<td> 이름 </td>
-			<td> 진료과 </td>
-			<td> 전화번호 </td>
-			<td> 근무시작일 </td>
+			<th> 번호 </th>
+			<th> 이름 </th>
+			<th> 진료과 </th>
+			<th> 전화번호 </th>
+			<th> 근무시작일 </th>
 		</tr>
 		<c:forEach var="doctor" items="${doctorList}">
 		<tr>

@@ -92,8 +92,8 @@
 
 <div class="sub-header">
     <a href="#">관리자 페이지 메인</a>
-    <a href="#">운영 홈페이지 가기</a>
-    <a href="#">관리자 로그아웃</a>
+    <a href="/main/index">운영 홈페이지 가기</a>
+    <a href="/login/logout">관리자 로그아웃</a>
 </div>
 
 <div class="container">
@@ -106,8 +106,8 @@
             </li>
             <li><span class="maincate">의사 전용탭</span>
                 <ul>
-                    <li><a href="#">의사 정보 등록</a></li>
-                    <li><a href="#">환자진료</a></li>
+                    <li><a href="/admin/doctor/addDoctor">의사 정보 등록</a></li>
+                    <li><a href="/admin/medical/patient">환자진료</a></li>
                     <li><a href="/admin/medical/afterMedi">진료 기록 조회</a></li>
                 </ul>
             </li>
