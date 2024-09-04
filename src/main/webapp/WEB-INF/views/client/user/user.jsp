@@ -25,7 +25,7 @@
 
   h3 {
     text-align: center;
-    color: #FF8224;
+    color: #B5B2FF;
    /* margin-bottom: 20px;*/
   }
 
@@ -47,14 +47,14 @@
   }
 
   .form-group input[type="submit"] {
-    background-color: #FF8224;
+    background-color: #B5B2FF;
     color: white;
     border: none;
     cursor: pointer;
   }
 
   .form-group input[type="submit"]:hover {
-    background-color: #FF5E00;
+    background-color: #7D78FF;
   }
 
   .form-group span {
