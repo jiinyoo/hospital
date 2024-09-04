@@ -10,7 +10,7 @@
 	section {margin: 30px; width: 600px;}
 	section > table  {width: 100%;}
 	table tr {height: 30px;}
-	.doc-img {width:20%;}
+	.doc-img {width:20%; text-align: center;}
 	th {background: #ccc;}
 	.inner-table {width:100%;}
 	.inner-table th {width:30%;}
@@ -23,7 +23,7 @@
 				<th colspan="2">의사정보</th>
 			</tr>
 			<tr>
-				<td class="doc-img"> <img src="" alt="사진"> </td>
+				<td class="doc-img"> <img src="/static/admin/programfile/${doctor.doc_img }" width="100" alt="사진"> </td>
 				<td>
 					<table class="inner-table">
 						<tr>

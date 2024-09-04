@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +38,7 @@
 			alert("사진을 첨부해주세요.");
 			return false;
 		}
+		
 		var his=document.getElementsByClassName("history");
 		var history="";
 		for(i=0;i<his.length-1;i++) {
@@ -46,7 +48,6 @@
 		return true;
 
 	}
-
 </script>
 <style>
 	section {
@@ -105,34 +106,34 @@
 </head>
 <body>
 <section>
-<form method="post" action="addDoctorOk" enctype="multipart/form-data" onsubmit="return subchk()">
+<form method="post" action="upDoctorOk" enctype="multipart/form-data" onsubmit="return subchk()">
 <input type="hidden" name="doc_history" id="doc_history">
-<input type="hidden" name="doc_userid" value="${user.user_id}">
+<input type="hidden" name="doc_userid" value="${ddto.doc_userid}">
 <table>
 	<tr>	
 		<th>성함 </th>
-		<td><input type="text" name="doc_name" value="${user.user_name}" readonly style="pointer-events: none;border:none;"></td>
+		<td><input type="text" name="doc_name" value="${ddto.doc_name}" readonly style="pointer-events: none;border:none;"></td>
 		<th>분야</th>
-		<td><input type="text" name="doc_part"></td>
+		<td><input type="text" name="doc_part" value="${ddto.doc_part }"></td>
 	</tr>
 	<tr>
 		<th>연락처</th>
-		<td><input type="text" name="doc_phone"></td>
-		<th>이메일 </th>
-		<td><input type="text" name="user_email" value="${user.user_email }"  readonly style="pointer-events: none;border:none;"></td>
+		<td colspan="3"><input type="text" name="doc_phone" value="${ddto.doc_phone }"></td>
 	</tr>
 	<tr>
 		<th>약력</th>
 		<td id="his" colspan="3">
-			<div><input type="text" class="history" name="doc_his" onkeyup="chk()" placeholder="약력을 입력하세요"></div>
+			<c:forEach var="history" items="${ddto.historys}">
+			<div><input type="text" class="history" name="doc_his" value="${history}"onkeyup="chk()" placeholder="약력을 입력하세요"></div>
+			</c:forEach>
 		</td>
 	</tr>
 	<tr>
 		<th> 프로필 사진 추가 </th>
-		<td colspan="3"> <input type="file" id="file" name="file"> </td>
+		<td colspan="3"> <input type="file" name="file" id="file"> </td>
 	</tr>
 	<tr>
-		<td colspan="4" style="text-align: center;"> <input type="submit" value="등록"></td>
+		<td colspan="4" style="text-align: center;"> <input type="submit" value="수정"></td>
 	</tr>
 </table>
 </form>

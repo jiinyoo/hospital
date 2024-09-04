@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.dto.DoctorDto;
 import kr.co.hospital.admin.service.DoctorService;
@@ -37,5 +38,15 @@ public class DoctorController {
 	@RequestMapping("/admin/doctor/addDoctorOk")
 	public String addDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
 		return service.addDoctorOk(ddto,request);
+	}
+	
+	@RequestMapping("/admin/doctor/upDoctor")
+	public String upDoctor(Model model, HttpSession session,HttpServletResponse response) {
+		return service.upDoctor(model,session,response);
+	}
+	
+	@RequestMapping("/admin/doctor/upDoctorOk")
+	public String upDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
+		return service.upDoctorOk(ddto,request);
 	}
 }
