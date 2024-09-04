@@ -137,6 +137,6 @@ public class DoctorServiceImpl implements DoctorService {
 			ddto.setDoc_img(mapper.getDocimg(ddto.getDoc_userid())); 
 		}
 		mapper.upDoctorOk(ddto);
-		return null;
+		return "redirect:/admin/";
 	}
 }
