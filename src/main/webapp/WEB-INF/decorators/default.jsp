@@ -158,8 +158,13 @@ nav #mainmenu #maincate
 }
 
 #submenus .submenu > li > a {
-    padding:0px 50px;
+    
     text-decoration: none;
+    width: 100%;
+    text-align: center;
+    display: block;
+    color: black;
+    
 }
 
 #submenus .submenu > li:hover {

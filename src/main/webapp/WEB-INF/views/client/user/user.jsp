@@ -17,6 +17,7 @@
     width: 80%;
     max-width: 550px;
     margin: 50px auto;
+    margin-top: 40px;
     padding: 60px;
     background-color: #ffffff;
     border-radius: 40px;
@@ -26,7 +27,7 @@
   h3 {
     text-align: center;
     color: #B5B2FF;
-   /* margin-bottom: 20px;*/
+    margin-bottom: 20px;
   }
 
   .form-group {
@@ -216,7 +217,7 @@
 </script>
 </head>
 <body>
-<section style="margin:auto;">
+<section>
 <main>
   <form name="mform" method="post" action="userOk" onsubmit="return check()">
    <input type="hidden" name="user_email">
