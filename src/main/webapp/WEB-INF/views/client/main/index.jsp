@@ -10,6 +10,16 @@
 
 * {margin:0; padding:0; box-sizing: border-box;}
 
+ section {
+      font-family: 'GmarketSansMedium';
+      width:100%;
+      height:360px;
+      margin:auto;
+      
+      margin-bottom: 150px;
+      border-radius: 30px;
+      /*box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);*/
+   }
 
 #slideouter{
  	width:100%;
@@ -42,7 +52,7 @@
 				$(".slide_item").eq(0).insertAfter($(".slide_item").eq(2))
 				$("#inner").css("margin-left","0px");
 			});
-		},3000);
+		},4000);
 	});
 	
 
@@ -62,7 +72,10 @@
 	</div>
 </section>
 
-지인이의 깃연습asdfasdfasdfasf
-asdgasdgg
+지인쓰 바보
+<hr>
+dd
+<hr>
+dd
 </body>
 </html>

@@ -8,21 +8,32 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-
-
+@font-face {
+    font-family: 'goorm-sans-bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+body {
+	font-family: 'goorm-sans-bold';
+    background-color: #f2f4f9;
+    margin: 0;
+    padding: 0;
+}
 * {margin:0; padding:0; box-sizing: border-box;}
 
 #ads{
 	position:relative;
 	width:100%;
-	height:150px;
-	background:blue;
+	height:50px;
+	background:#8C8C8C;
 	margin:auto;
 }
 
 #ad{
 	margin:auto;
 	width:100%;
+
 }
 #container
 {
@@ -35,19 +46,19 @@
 #xx {
     position:absolute;
     right:0;
-    width: 1300px;
     text-align:right;
-    top: 130px;
-    color: white;
+    top: 15px;
+    color: black;
     cursor:pointer;
-}
 
+}
 
 #loginbar{
 	
 	margin:auto;
+	margin-top: 15px;
 	width:1300px;
-	height:50px;
+	height:30px;
 	text-align:right;
 	align-items:center;
 
@@ -56,16 +67,14 @@
 nav{
  position :relative;
  width:1300px;
- height:80px;
- background:pink;
+ height:100px;
  margin:auto;
+ font-size:20px;
 }
 
 nav #mainmenu{
 	width:1300px;
 }
-
-
 
 nav #mainmenu #maincate
 {
@@ -78,35 +87,51 @@ nav #mainmenu #maincate
 	list-style-type:none;
 	width:180px;
 	text-align:center;
-	height:80px;
-	line-height:80px;
+	height:100px;
+	line-height:100px;
 	margin: 0; /* 기본 마진 제거 */
 	padding: 0; /* 기본 패딩 제거 */
 	position:relative;
+	cursor: pointer;
+
+}
+
+#maincate .logo img {
+
+	width:90px;
+	transition: all 0.3s ease;
+}
+
+#maincate .logo img:hover {
+	transform: scale(1.1);
+	background-color: none;
+}
+
+#maincate .hov {
+    transition: all 0.7s ease;
+}
+
+#maincate .hov:hover {
+    background-color: #B5B2FF;
 }
 
 
 #submenus {
 	display:flex;
 	flex-wrap:wrap;
-	visibility:hidden;
 	text-align:center;
-
 }
-
-
 
 #submenus .submenu
 {
-	display:flex;
-	flex-direction:column;
+	display:none;
 	padding-left:0px;
 	width:183px;
 	left:0px;
 	top:90px;
 	background:white;
 	border:0.5px solid grey;
-
+    
 }
 
 
@@ -116,8 +141,6 @@ nav #mainmenu #maincate
 	width:200px;
 
 }
-
-
 
 #submenus .submenu > li
 {
@@ -130,25 +153,31 @@ nav #mainmenu #maincate
     margin: 0; /* 기본 마진 제거 */
     padding: 0; /* 기본 패딩 제거 */
 	font-size: 14px;
+	cursor: pointer;
+    transition: all 0.3s ease;
 }
 
+#submenus .submenu > li > a {
+    padding:0px 63px;
+}
+
+#submenus .submenu > li:hover {
+	background-color: #B5B2FF;
+	
+}
 #submenus .submenu > li:first-child
 
 {
-	border-top:5px solid #00cccc;
-
+	border-top:5px solid #DAD9FF;
+	
 }
 
 #submenus .submenu > li:last-child
 
 {
-	border-bottom:5px solid #00cccc;
+	border-bottom:5px solid #DAD9FF;
 
 }
-
-
-
-
 
 #submenus .submenu:last-child > li
 {
@@ -157,6 +186,8 @@ nav #mainmenu #maincate
 	
 }
 
+
+
 hr{
  border:0.1px solid #ccc;
 }
@@ -164,13 +195,12 @@ hr{
 </style>
 <script>
 	
-	
 	function viewSub()
 	{
 		var submenus=document.getElementsByClassName("submenu");
 		for(submenu of submenus)
 			{
-				submenu.style.visibility="visible";
+				submenu.style.display="block";
 			}
 		
 	}
@@ -182,20 +212,19 @@ hr{
 		var submenus=document.getElementsByClassName("submenu");
 		for(submenu of submenus)
 			{
-				submenu.style.visibility="hidden";
+				submenu.style.display="none";
 			}
 		
 	}
-	
 
 	function adx(){
 		
 		var h=0;
 		function move(){
-			if(h<=150)
+			if(h<=50)
 				document.getElementById("ad").style.marginTop=-h+"px";
 			h++;
-			setTimeout(move,5);
+			setTimeout(move,15);
 		}
 		move();
 	}
@@ -220,32 +249,33 @@ hr{
 		  <a href="/main/user"> 회원 가입 </a>
 		 </c:if>
 		 <c:if test="${user_id != null }">
-		   ${user_name}님 | 
-           <a href="/login/logout"> 로그아웃 </a> | 
+		   ${user_id}님 | 
+           <a href="/login/logout"> 로그아웃 </a> | 문의하기
          </c:if>
 		</div>
 </header>
 <hr>
-<span id="total" onmouseout="hideSub()">
+
 	<nav>
-	<span id="mainsub" onmouseover="viewSub()">
-	<div id="mainmenu" >
+	<span id="total" onmouseout="hideSub()">
+	<span id="mainsub">
+	<div id="mainmenu"  onmouseover="viewSub()">
 		<ul id="maincate">
-			<li>
+			<li class="logo">
 			 <a href="/main/index">
-			  <img src="../static/client/main/병원 로고.jpg" width="50">
+			  <img src="../static/client/main/병원 로꼬.png" width="100" valign="middle">
 			 </a>
 			</li>
-			<li>병원 소개</li>
-			<li>의료진 안내</li>
-			<li>상담/예약</li>
-			<li>프로그램 예약</li>
-			<li>커뮤니티</li>
-			<li>건강 용품 샵</li>
+			<li class="hov">병원 소개</li>
+			<li class="hov">의료진 안내</li>
+			<li class="hov">상담/예약</li>
+			<li class="hov">프로그램 예약</li>
+			<li class="hov">커뮤니티</li>
+			<li class="hov">건강 정보</li>
 		</ul>
 	</div>
 	
-	<div id="submenus">
+	<div id="submenus"  onmouseover="viewSub()">
 		<ul class="submenu">
 			<li></li>
 			<li></li>
@@ -293,18 +323,23 @@ hr{
 		
 		
 		<ul class="submenu">
-			<li>미정</li>
+			<li>건강정보</li>
 			<li></li>
 			<li></li>
 			<li></li>
 		</ul>
 		
+		
 	
 	</div>
 	</span>
+	</span>
 	</nav>
 	<hr>
-<span>
+	<div class="haha">
+	  
+	</div>
+
 
 <sitemesh:write property="body"/>
 
