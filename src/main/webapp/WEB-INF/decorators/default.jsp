@@ -16,20 +16,24 @@
 }
 body {
 	font-family: 'goorm-sans-bold';
+    background-color: #f2f4f9;
+    margin: 0;
+    padding: 0;
 }
 * {margin:0; padding:0; box-sizing: border-box;}
 
 #ads{
 	position:relative;
 	width:100%;
-	height:150px;
-	background:#DAD9FF;
+	height:50px;
+	background:#8C8C8C;
 	margin:auto;
 }
 
 #ad{
 	margin:auto;
 	width:100%;
+
 }
 #container
 {
@@ -42,19 +46,20 @@ body {
 #xx {
     position:absolute;
     right:0;
-    width: 1300px;
     text-align:right;
-    top: 130px;
-    color: white;
+    top: 15px;
+    color: purple;
     cursor:pointer;
+
 }
 
 
 #loginbar{
 	
 	margin:auto;
+	margin-top: 15px;
 	width:1300px;
-	height:50px;
+	height:30px;
 	text-align:right;
 	align-items:center;
 
@@ -64,7 +69,7 @@ nav{
  position :relative;
  width:1300px;
  height:80px;
- background:pink;
+ background:#DAD9FF;
  margin:auto;
 }
 
@@ -92,11 +97,15 @@ nav #mainmenu #maincate
 	position:relative;
 }
 
+#mainmenu #maincate > .logo img {
+	width:180px;
+	transition: all 0.3s ease;
+}
+
 
 #submenus {
 	display:flex;
 	flex-wrap:wrap;
-	visibility:hidden;
 	text-align:center;
 
 }
@@ -105,8 +114,7 @@ nav #mainmenu #maincate
 
 #submenus .submenu
 {
-	display:flex;
-	flex-direction:column;
+	display:none;
 	padding-left:0px;
 	width:183px;
 	left:0px;
@@ -142,14 +150,14 @@ nav #mainmenu #maincate
 #submenus .submenu > li:first-child
 
 {
-	border-top:5px solid #00cccc;
+	border-top:5px solid #DAD9FF;
 
 }
 
 #submenus .submenu > li:last-child
 
 {
-	border-bottom:5px solid #00cccc;
+	border-bottom:5px solid #DAD9FF;
 
 }
 
@@ -181,7 +189,7 @@ hr{
 		var submenus=document.getElementsByClassName("submenu");
 		for(submenu of submenus)
 			{
-				submenu.style.visibility="visible";
+				submenu.style.display="block";
 			}
 		
 	}
@@ -193,7 +201,7 @@ hr{
 		var submenus=document.getElementsByClassName("submenu");
 		for(submenu of submenus)
 			{
-				submenu.style.visibility="hidden";
+				submenu.style.display="none";
 			}
 		
 	}
@@ -242,9 +250,9 @@ hr{
 	<span id="mainsub">
 	<div id="mainmenu"  onmouseover="viewSub()">
 		<ul id="maincate">
-			<li>
+			<li id="logo">
 			 <a href="/main/index">
-			  <img src="../static/client/main/병원 로고.jpg" width="50">
+			  <img src="../static/client/main/병원 로고.jpg" width="80" valign="middle">
 			 </a>
 			</li>
 			<li>병원 소개</li>

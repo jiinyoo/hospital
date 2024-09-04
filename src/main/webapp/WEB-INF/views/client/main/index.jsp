@@ -13,15 +13,19 @@
  section {
       font-family: 'GmarketSansMedium';
       width:1200px;
-      height:600px;
+      height:360px;
       margin:auto;
-   
+      margin-top: 120px;
+      margin-bottom: 150px;
+      border-radius: 30px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
    }
 
 #slideouter{
  	width:100%;
  	magin:auto;
  	/*background:pink;*/
+ 	border-radius: 30px;
  	overflow:hidden;
 }
 

@@ -26,7 +26,7 @@
   h3 {
     text-align: center;
     color: #FF8224;
-    margin-bottom: 20px;
+   /* margin-bottom: 20px;*/
   }
 
   .form-group {
