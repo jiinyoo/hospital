@@ -49,6 +49,7 @@ public class BoardController {
 	
 	@RequestMapping("/boardlist")
 	public String boardlist(HttpSession session,Model model) {
+		System.out.println("boardlist");
 		return service.boardlist(session,model);
 	}
 	
