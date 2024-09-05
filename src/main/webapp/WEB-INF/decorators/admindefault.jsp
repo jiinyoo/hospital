@@ -106,7 +106,7 @@
             </li>
             <li><span class="maincate">의사 전용탭</span>
                 <ul>
-                    <li><a href="/admin/doctor/addDoctor">의사 정보 등록</a></li>
+                    <li><a href="/admin/doctor/addDoctor">의사 정보 등록 / 수정</a></li>
                     <li><a href="/admin/medical/patient">환자진료</a></li>
                     <li><a href="/admin/medical/afterMedi">진료 기록 조회</a></li>
                 </ul>
@@ -117,13 +117,6 @@
                     <li><a href="/admin/doctor/doctor?doc_part=내분비과">내분비과</a></li>
                     <li><a href="/admin/doctor/doctor?doc_part=치과">치과</a></li>
                     <li><a href="/admin/doctor/doctor?doc_part=이비인후과">이비인후과</a></li>
-                </ul>
-            </li>
-            <li><span class="maincate">상담/예약/진료</span>
-                <ul>
-                    <li><a href="#">1:1 문의 관리</a></li>
-                    <li><a href="#">진료 예약 관리</a></li>
-                 
                 </ul>
             </li>
             <li><span class="maincate">프로그램 관리</span>
@@ -140,14 +133,13 @@
                     <li><a href="#">고객의 소리 관리</a></li>
                 </ul>
             </li>
-            <li><a href="#"><span class="maincate">
-            
-            
-            			회원관리
-            
-            
-            
-            </span></a></li>
+            <li>
+            	<a href="#"><span class="maincate">회원관리</span></a>
+                <ul>
+                    <li><a href="#">1:1 문의 관리</a></li>
+                </ul>
+            </li>
+            </li>
         </ul>
     </div>
     

@@ -12,10 +12,13 @@
 
  section {
       font-family: 'GmarketSansMedium';
-      width:1200px;
-      height:600px;
+      width:100%;
+      height:360px;
       margin:auto;
-   
+      
+      margin-bottom: 150px;
+      border-radius: 30px;
+      /*box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);*/
    }
 
 #slideouter{
@@ -49,7 +52,7 @@
 				$(".slide_item").eq(0).insertAfter($(".slide_item").eq(2))
 				$("#inner").css("margin-left","0px");
 			});
-		},3000);
+		},4000);
 	});
 	
 
