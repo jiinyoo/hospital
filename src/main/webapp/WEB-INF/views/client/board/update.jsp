@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,18 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script>
 
+//문자열 태그를 받는다.
+function decodeHtml(html) {
+	//textarea 문서에 텍스트area영역을 생성한다.
+    var txt = document.createElement("textarea");
+	//그 영역에 innerHTML로 html을 넣는다.
+    txt.innerHTML = html;
+	//txt의 value를 출력한다.
+    return txt.value;
+}
 
+
+var content = "${fn:escapeXml(bdto.board_content)}";
 $(document).ready(function() {
     $('#summernote').summernote({
         // 에디터 크기 설정
@@ -47,39 +59,52 @@ $(document).ready(function() {
         fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
         fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72','96'],
         focus : true,
-        callbacks : {                                                    
-            onImageUpload : function(files, editor, welEditable) {   
+        callbacks: {                                                    
+            onImageUpload: function(files, editor, welEditable) {   
                 for (var i = 0; i < files.length; i++) {
                     imageUploader(files[i], this);
                 }
+            },onInit: function() {
+            	var content = "${fn:escapeXml(bdto.board_content)}";
+            	var decodedContent = decodeHtml(content); // HTML 엔티티를 디코딩
+            	$('#summernote').summernote('code', decodedContent);
             }
         }
     });
     
-    
-    $('#submit').click(function() {
+ 
+    $('#submit').click(function(event) {
         // Summernote에서 작성된 HTML 코드를 가져옵니다.
         if (!check()) {
             event.preventDefault(); // 폼 제출 막기
         } else {
+        	var board_id="${bdto.board_id}"
 	        var editorContent = $('#summernote').summernote('code');
 			var user_id=$('#user_id').val();
 			var board_title=$('#board_title').val();
 	        // FormData 객체에 에디터 내용을 추가합니다.
+	        
+	     	console.log("Editor Content: ", editorContent);
+			console.log("User ID: ", user_id);
+			console.log("Board Title: ", board_title);
+	        
+	        
+	        
 	        var formData = new FormData();
 	        formData.append("user_id",user_id);
 	        formData.append("board_title",board_title);
 	        formData.append("board_content", editorContent);
+	        formData.append("board_id",board_id);
 	
 	        // 서버로 AJAX 요청을 보냅니다.
 	        $.ajax({
 	            type: "POST",
-	            url: '/boardwriteOk',
+	            url: '/boardupdateOk',
 	            data: formData,
 	            processData: false,
 	            contentType: false,
-	            success: function(response) {
-	            	window.location.href = "/boardlist";
+	           	success: function(response) {
+	            	window.location.href = "/boardcontent?board_id="+board_id;
 	                // 서버 응답에 따라 추가 작업을 수행할 수 있습니다.
 	            },
 	            error: function(error) {
@@ -91,6 +116,7 @@ $(document).ready(function() {
     });
     
 });
+
 
 
 function imageUploader(file, el) {
@@ -214,11 +240,11 @@ function check()
 		<caption style="text-align: center;"><h2>진료후기 게시판 글쓰기</h2></caption>
 		<tr>
 			<td width="100">제목</td>
-			<td><input type="text" name="board_title"  id="board_title" ></td>
+			<td><input type="text" name="board_title"  id="board_title" value="${bdto.board_title}"></td>
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td><input type="text" name="user_id" id="user_id" value="${user_id}" readonly></td>
+			<td><input type="text" name="user_id" id="user_id" value="${bdto.user_id}" readonly></td>
 		</tr>
 		<tr>
 			<td colspan="2">작성내용</td>

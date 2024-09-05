@@ -48,12 +48,38 @@ public class BoardController {
 		return service.boardwrite(session,model);
 	}
 	
-	@RequestMapping("/boardlist")
-	public String boardlist(HttpSession session,Model model,HttpServletResponse response) {
-		return service.boardlist(session,model,response);
+	@RequestMapping("/boardreadnum")
+	public String boardreadnum(HttpServletRequest request) {
+		return service.boardreadnum(request);
+	}
+	
+	@RequestMapping("/boardcontent")
+	public String boardcontent(HttpServletRequest request, Model model, HttpSession session) {
+		return service.boardcontent(request, model, session);
 	}
 	
 	
+	@RequestMapping("/boarddelete")
+	public String boarddelete(HttpServletRequest request) {
+		return service.boarddelete(request);
+	}
+	
+	@RequestMapping("/boardupdate")
+	public String boardupdate(HttpServletRequest request, Model model) {
+		return service.boardupdate(request,model);
+	}
+	
+	
+
+	
+	
+	
+	@RequestMapping("/boardlist")
+
+	public String boardlist(HttpSession session,Model model,HttpServletResponse response) {
+		return service.boardlist(session,model,response);
+
+	}
 	 @PostMapping(value = "/boardimageupload")
 	 @ResponseBody
 	    // @RequestParam은 자바스크립트에서 설정한 이름과 반드시 같아야합니다.
@@ -90,17 +116,28 @@ public class BoardController {
 	 
 	 @PostMapping("/boardwriteOk")
 	 @ResponseBody
-	    public void addPost(BoardDto bdto) {
+	    public void boardwriteOk(BoardDto bdto) {
 	        // postContent는 Summernote에서 작성된 HTML 코드입니다.
 		 	
 		 	service.boardinsert(bdto);
 
 	        // 데이터베이스에 저장하거나, 추가 로직을 수행
 	        // 예: postService.savePost(postContent);
-
-	        
 	    }
 	
+	 
+	 @PostMapping("/boardupdateOk")
+	 @ResponseBody
+	    public void boardupdateOk(BoardDto bdto, HttpServletRequest request) {
+	        // postContent는 Summernote에서 작성된 HTML 코드입니다.
+		 	service.boardupdateOk(bdto,request);
+	        // 데이터베이스에 저장하거나, 추가 로직을 수행
+	        // 예: postService.savePost(postContent);
+	    }
+	
+	 
+	 
+	 
 	
 	
 }

@@ -158,13 +158,11 @@ nav #mainmenu #maincate
 }
 
 #submenus .submenu > li > a {
-
     text-decoration: none;
     width: 100%;
     text-align: center;
     display: block;
     color:black;
-
 }
 
 #submenus .submenu > li:hover {
@@ -269,7 +267,8 @@ hr{
 		<ul id="maincate">
 			<li class="logo">
 			 <a href="/main/index">
-			  <img src="/static/client/main/병원 로꼬.png" width="100" valign="middle">
+			  <img src="/static/client/main/logo.png" width="100" valign="middle">
+
 			 </a>
 			</li>
 			<li class="hov">병원 소개</li>

@@ -10,5 +10,22 @@
 		select * from board
 		order by board_id desc 
 	</select>
-  
+	<update id="boardReadnum">
+		update board
+		set board_readnum=board_readnum+1
+		where board_id=#{board_id}
+	</update>
+	<select id="boardcontent" resultType="kr.co.hospital.client.dto.BoardDto">
+		select * from board
+		where board_id=#{board_id}
+	</select>
+	<delete id="boarddelete">
+		delete from board
+		where board_id=#{board_id} and user_id=#{user_id}
+	</delete>
+	<update id="boardupdateOk">
+		update board
+		set board_title=#{board_title}, board_content=#{board_content}
+		where board_id=#{board_id}
+	</update>
 </mapper>
