@@ -48,12 +48,32 @@ public class BoardController {
 		return service.boardwrite(session,model);
 	}
 	
+	@RequestMapping("/boardreadnum")
+	public String boardreadnum(HttpServletRequest request) {
+		return service.boardreadnum(request);
+	}
+	
+	@RequestMapping("/boardcontent")
+	public String boardcontent(HttpServletRequest request, Model model, HttpSession session) {
+		return service.boardcontent(request, model, session);
+	}
+	
+	
+	@RequestMapping("/boarddelete")
+	public String boarddelete(HttpServletRequest request) {
+		return service.boarddelete(request);
+	}
+	
+	@RequestMapping("/boardupdate")
+	public String boardupdate(HttpServletRequest request, Model model) {
+		return service.boardupdate(request,model);
+	}
+	
+	
 	@RequestMapping("/boardlist")
 	public String boardlist(HttpSession session,Model model,HttpServletResponse response) {
 		return service.boardlist(session,model,response);
 	}
-	
-	
 	 @PostMapping(value = "/boardimageupload")
 	 @ResponseBody
 	    // @RequestParam은 자바스크립트에서 설정한 이름과 반드시 같아야합니다.
@@ -97,8 +117,6 @@ public class BoardController {
 
 	        // 데이터베이스에 저장하거나, 추가 로직을 수행
 	        // 예: postService.savePost(postContent);
-
-	        
 	    }
 	
 	

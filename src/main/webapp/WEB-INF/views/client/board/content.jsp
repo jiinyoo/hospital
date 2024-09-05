@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
 	section {
         margin:auto;
         width: 1300px;
@@ -27,32 +28,41 @@
 	    padding: 10px; /* 셀 내부 여백 조정 */
 	    height: 30px;  /* 셀 높이 명확히 설정 */
 	}
-
-
 </style>
+<script>
+function deletecheck() {
+	return confirm("정말로 삭제하시겠습니까?")	
+}
 
 
+</script>
 </head>
 <body>
-<table>
-	<caption><h2>진료 후기 게시판</h2></caption>
-	<tr>
-		<td>작성자</td>
-		<td>제목</td>
-		<td>작성일</td>
-		<td>조회수</td>
-	</tr>
-	<c:forEach items="${bmapAll}" var="bdto">
-	<tr>
-		<td width="100">${bdto.user_id}</td>
-		<td width="600"><a href="../../boardreadnum?board_id=${bdto.board_id}">${bdto.board_title}</a></td>
-		<td width="200">${bdto.writeday}</a></td>
-		<td width="100">${bdto.board_readnum}</td>
-	</tr>
-	</c:forEach>
-<tr align="right">
-	<td colspan="4"><a href="../../boardwrite"><input type="button" value="글쓰기"></a></td>
-</tr>
-</table>
+<section>
+	<table>
+		<tr>
+			<td>제목</td>
+			<td>${bdto.board_title}</td>
+		</tr>
+		<tr>
+			<td>작성자</td>
+			<td>${bdto.user_id}</td>
+		</tr>
+		<tr>
+			<td colspan="2">내용</td>
+		</tr>
+		<tr>
+			<td colspan="2">${bdto.board_content}</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+			<c:if test="${user_id==bdto.user_id}">
+			<a href="/boardupdate?board_id=${bdto.board_id}&user_id=${bdto.user_id}"><input type="button" value="수정"></a>
+			<a href="/boarddelete?board_id=${bdto.board_id}&user_id=${bdto.user_id}"><input type="button" value="삭제" onclick="return deletecheck()"></a>
+			</c:if>
+			</td>
+		</tr>
+	</table>
+</section>
 </body>
 </html>
