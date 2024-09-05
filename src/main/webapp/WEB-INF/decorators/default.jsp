@@ -158,8 +158,13 @@ nav #mainmenu #maincate
 }
 
 #submenus .submenu > li > a {
-    padding:0px 50px;
+
     text-decoration: none;
+    width: 100%;
+    text-align: center;
+    display: block;
+    color:black;
+
 }
 
 #submenus .submenu > li:hover {
@@ -268,7 +273,7 @@ hr{
 			 </a>
 			</li>
 			<li class="hov">병원 소개</li>
-			<li class="hov">의료진 안내</li>
+			<li class="hov"><a href="/main/info/part?part=">의료진 안내</a></li>
 			<li class="hov">상담/예약</li>
 			<li class="hov">프로그램 예약</li>
 			<li class="hov">커뮤니티</li>

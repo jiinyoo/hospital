@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.hospital.admin.dto.DoctorDto;
+import kr.co.hospital.admin.dto.WorkdayDto;
 import kr.co.hospital.client.dto.UserDto;
 
 @Mapper
@@ -20,4 +21,6 @@ public interface DoctorMapper {
 	public DoctorDto upDoctor(String userid);
 	public void upDoctorOk(DoctorDto ddto);
 	public String getDocimg(String userid);
+	public int getDocid(String doc_userid);
+	public void addWorkday(WorkdayDto wdto);
 }
