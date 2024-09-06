@@ -26,10 +26,12 @@
 		width: 180px;
 		height: 280px;
 	}
+	
 </style>
 </head>
 <body>
 	<section>
+	<h2>의료진 소개</h2><hr>
 		<c:forEach var="doc" items="${dlist}">
 		<table>
 			<tr>
