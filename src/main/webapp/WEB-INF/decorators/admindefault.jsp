@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>장인호 청소년병원 관리자 페이지</title>
 <style>
+	* {margin:0; padding:0; box-sizing: border-box;}
     body {
         font-family: Arial, sans-serif;
         margin: 0;

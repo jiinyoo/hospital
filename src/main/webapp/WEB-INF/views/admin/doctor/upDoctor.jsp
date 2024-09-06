@@ -73,21 +73,58 @@
         }
     }
 	
-	
-	window.onload=function() {
+	function restchk(my,n) {
+		n=parseInt(n);
+		var dayofweek=document.getElementsByClassName("dayofweeks");
 		var start=document.getElementsByClassName("Schk_rest");
 		var end=document.getElementsByClassName("Echk_rest");
 		
-		<c:forEach var="day" items="${wdto}" varStatus="status">
-        // 각 셀렉트 박스에 값 설정
-        start[${status.index}].value = "${day.start_time.hour}";
-        end[${status.index}].value = "${day.end_time.hour}";
-		</c:forEach>
+		if(my.checked) {
+			dayofweek[n].disabled=true;
+			start[n].disabled=true;
+			end[n].disabled=true;
+		} else {
+			dayofweek[n].disabled=false;
+			start[n].disabled=false;
+			end[n].disabled=false;
+		}
+	}
+	
+	window.onload = function() {
+		var start = document.getElementsByClassName("Schk_rest");
+		var end = document.getElementsByClassName("Echk_rest");
+		var dayofweek = document.getElementsByClassName("dayofweeks");
+		var rest = document.getElementsByClassName("rest");
+
+		// workdays, start_time, end_time 배열을 서버에서 자바스크립트로 전달
+		var workdays = [<c:forEach var="day" items="${wdto}">${day.dayofweek},</c:forEach>];
+		var startTimes = [<c:forEach var="day" items="${wdto}">${day.start_time.hour},</c:forEach>];
+		var endTimes = [<c:forEach var="day" items="${wdto}">${day.end_time.hour},</c:forEach>];
+
+		for (i = 0; i < dayofweek.length; i++) {
+			if (!workdays.includes(i)) {
+				end[i].disabled = true;
+				start[i].disabled = true;
+				dayofweek[i].disabled = true;
+				rest[i].checked = true;
+			} else {
+				end[i].disabled = false;
+				start[i].disabled = false;
+				dayofweek[i].disabled = false;
+				rest[i].checked = false;
+				
+				// start와 end 시간 설정
+				start[i].value = startTimes[workdays.indexOf(i)];
+				end[i].value = endTimes[workdays.indexOf(i)];
+			}
+		}
 	}
 </script>
 <style>
+	body {user-select: none;}
 	section {
-		width:800px;
+		width:600px;
+		margin:auto;
 	}
 	
 	table {
@@ -97,25 +134,32 @@
 	
 	.main-table {
 		margin:20px;
+		border: 1px solid black;
 	}
 	
+	.main-table td {padding-right:10px;}
 	td,th {
 		padding-left: 10px;
 		text-align: left;
 	}
 	
-	th {
+	.main-table th {
 		background: #f5f5f5;
 		color: #333;
 		font-weight: bold;
-		width: 100px;
 		height:40px;
 	}
+	
 	
 	input[type="text"] {
 		width:100%;
 		height: 25px;
+		border:none;
+		border-bottom: 1px solid black;
+		outline: none;
 	}
+	
+	.history {margin:5px 0;}
 	
 	.img {
 		position: relative;
@@ -155,16 +199,25 @@
 	}
 	
 	.workday {
-		width:700px;
 		margin: auto;
-		margin-top: 30px;
+		margin: 20px;
+		border:1px solid black;
 	}
 	
-	.workday td {
+	.workday td, .workday th {
 		text-align: center;
 		height: 40px;
 	}
 	
+	.workday th {
+		background: #f5f5f5;
+		color: #333;
+		font-weight: bold;
+	}
+	
+	.workday td {
+		border-bottom: 1px solid black;
+	}
 	.workday select {
 		width:100px;
 		height: 30px;
@@ -174,6 +227,18 @@
 	#workday div select {
 		width: 80px;
 	}
+	
+	#btn-con {text-align: center;}
+	.btn {
+		border:none;
+		width:100px;
+		height: 30px;
+		text-align: center;
+		background: #7D78FF;
+		color:white;
+	}
+	
+	.btn:hover { background: #5C1DB5;}
 </style>
 </head>
 <body>
@@ -184,31 +249,29 @@
 <input type="file" id="fileInput" name="file" style="display:none;" onchange="preview(event)">
 <table class="main-table">
 	<tr>
-		<td>
+		<td rowspan="4" width="20%">
 			<div class="img">
 			    <img id="docImg" src="/static/admin/programfile/${ddto.doc_img}" height="120">
 			    <div class="img-change" onclick="chgimg()">사진을 변경하려면 클릭하세요</div>
 			</div>
 		</td>
-		<td>
-			<table class="sub-table">
-				<tr>
-					<th>성함 </th>
-					<td><input type="text" name="doc_name" value="${ddto.doc_name}" readonly style="pointer-events: none;border:none;"></td>
-				</tr>
-				<tr>
-					<th>분야</th>
-					<td><input type="text" name="doc_part" value="${ddto.doc_part }"></td>
-				</tr>
-				<tr>
-					<th>연락처</th>
-					<td colspan="3"><input type="text" name="doc_phone" value="${ddto.doc_phone }"></td>
-				</tr>
-			</table>
-		</td>
 	</tr>
 	<tr>
-		<th>약력</th>
+		<th>성함 </th>
+		<td><input type="text" name="doc_name" value="${ddto.doc_name}" readonly style="pointer-events: none;border:none;"></td>
+	</tr>
+	<tr>
+		<th>분야</th>
+		<td><input type="text" name="doc_part" value="${ddto.doc_part }" placeholder="분야"></td>
+	</tr>
+	<tr>
+		<th>연락처</th>
+		<td colspan="3"><input type="text" name="doc_phone" value="${ddto.doc_phone }" placeholder="연락처"></td>
+	</tr>
+	<tr>
+		<th colspan="3" style="text-align:center;">약력</th>
+	</tr>
+	<tr>
 		<td id="his" colspan="3">
 			<c:forEach var="history" items="${ddto.historys}">
 			<div><input type="text" class="history" name="doc_his" value="${history}"onkeyup="chk()" placeholder="약력을 입력하세요"></div>
@@ -216,13 +279,8 @@
 		</td>
 	</tr>
 </table>
-<input type="hidden" name="dayofweeks" value="mon">
-<input type="hidden" name="dayofweeks" value="tue">
-<input type="hidden" name="dayofweeks" value="wed">
-<input type="hidden" name="dayofweeks" value="thu">
-<input type="hidden" name="dayofweeks" value="fri">
-<input type="hidden" name="dayofweeks" value="sat">
-<input type="hidden" name="dayofweeks" value="sun">
+
+
 <table class="workday">
 	<tr>
 		<th>요일</th>
@@ -230,8 +288,9 @@
 		<th width="20%">쉬는날</th>
 	</tr>
 	<c:forEach begin="0" end="6" var="index">
+	<input type="hidden" class="dayofweeks"name="dayofweeks" value="${index }">
 	<tr>
-		<td>
+		<td width="10%">
 			<c:if test="${index==0 }"> 월 </c:if>
 			<c:if test="${index==1 }"> 화 </c:if>
 			<c:if test="${index==2 }"> 수 </c:if>
@@ -245,7 +304,7 @@
 				<c:forEach begin="9" end="18" var="times">
 					<option value="${times}">${times<10?'0':''}${times}:00</option>
 				</c:forEach>
-			</select> TO
+			</select>~
 			<select name="end_times" class="Echk_rest">
 				<c:forEach begin="10" end="18" var="times">
 					<option value="${times}">${times<10?'0':''}${times}:00</option>
@@ -253,12 +312,14 @@
 			</select>
 		</td>
 		<td>
-			<label>쉬는 날 <input type="checkbox" onchange="restchk(this)" class="rest"></label>
+			<label>쉬는 날 <input type="checkbox" onchange="restchk(this,'${index }')" class="rest"></label>
 		</td>
 	</tr>
 	</c:forEach>
 </table>
-<input type="submit" value="등록">
+<div id="btn-con">
+	<input type="submit" value="등록" class="btn">
+</div>
 </form>
 </section>
 </body>

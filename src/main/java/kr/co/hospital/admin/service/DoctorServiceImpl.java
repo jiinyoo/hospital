@@ -135,7 +135,7 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	@Override
-	public String upDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
+	public String upDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request,WorkdayDto wdto) throws Exception {
 		MultipartFile file=request.getFile("file");
 
 		if(!file.isEmpty()) {
@@ -155,9 +155,27 @@ public class DoctorServiceImpl implements DoctorService {
 			
 			ddto.setDoc_img(saveFname);
 		} else {
-			ddto.setDoc_img(mapper.getDocimg(ddto.getDoc_userid())); 
+			ddto.setDoc_img(mapper.getDocimg(ddto.getDoc_userid()));
+			
 		}
 		mapper.upDoctorOk(ddto);
+		int doc_id=mapper.getDocid(ddto.getDoc_userid());
+		mapper.delWorkday(doc_id);
+		int[] start=wdto.getStart_times();
+		int[] end=wdto.getEnd_times();
+		String[] dayofweek=wdto.getDayofweeks();
+		wdto.setDoc_id(doc_id);
+		for(int i=0;i<start.length;i++) {
+			String stime=String.format("%02d", start[i]);
+			String etime=String.format("%02d", end[i]);
+			LocalTime starttime=LocalTime.parse(stime+":00");
+			LocalTime endtime=LocalTime.parse(etime+":00");
+			wdto.setStart_time(starttime);
+			wdto.setEnd_time(endtime);
+			wdto.setDayofweek(dayofweek[i]);
+			mapper.addWorkday(wdto);
+		}
+		
 	
 		return "redirect:/admin/";
 	}

@@ -43,4 +43,7 @@
 	<select id="getWorkday" resultType="kr.co.hospital.admin.dto.WorkdayDto">
 		select * from workday where doc_id=#{doc_id}
 	</select>
+	<delete id="delWorkday">
+		delete from workday where doc_id=#{doc_id}
+	</delete>
 </mapper>

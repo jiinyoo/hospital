@@ -395,7 +395,7 @@ hr
 		
 		<ul class="submenu">
 			<li>1:1문의</li>
-			<li><a href="">온라인 진료 예약</a></li>
+			<li><a href="/main/reserve">온라인 진료 예약</a></li>
 			<li>예약 조회</li>
 			
 		</ul>

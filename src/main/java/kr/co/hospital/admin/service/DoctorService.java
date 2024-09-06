@@ -16,5 +16,5 @@ public interface DoctorService {
 	public String addDoctor(HttpSession session,Model model);
 	public String addDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request, WorkdayDto wdto) throws Exception;
 	public String upDoctor(Model model, HttpSession session,HttpServletResponse response);
-	public String upDoctorOk(DoctorDto ddto, MultipartHttpServletRequest request) throws Exception;
+	public String upDoctorOk(DoctorDto ddto, MultipartHttpServletRequest request, WorkdayDto wdto) throws Exception;
 }
