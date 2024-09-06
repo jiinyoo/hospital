@@ -48,21 +48,20 @@
 
 	}
 
-	function restchk(my) {
+	function restchk(my,n) {
+		n=parseInt(n);
+		var dayofweek=document.getElementsByClassName("dayofweeks");
 		var start=document.getElementsByClassName("Schk_rest");
 		var end=document.getElementsByClassName("Echk_rest");
-		var chk=document.getElementsByClassName("rest");
 		
-		for(i=0;i<chk.length;i++) {
-			if(chk[i]===my) {
-				if(my.checked) {
-					start[i].disabled=true;
-					end[i].disabled=true;
-				} else {
-					start[i].disabled=false;
-					end[i].disabled=false;
-				}
-			}
+		if(my.checked) {
+			dayofweek[n].disabled=true;
+			start[n].disabled=true;
+			end[n].disabled=true;
+		} else {
+			dayofweek[n].disabled=false;
+			start[n].disabled=false;
+			end[n].disabled=false;
 		}
 	}
 	
@@ -188,13 +187,6 @@
 		<td colspan="3"> <input type="file" id="file" name="file"> </td>
 	</tr>
 </table>
-<input type="hidden" name="dayofweeks" value="0">
-<input type="hidden" name="dayofweeks" value="1">
-<input type="hidden" name="dayofweeks" value="2">
-<input type="hidden" name="dayofweeks" value="3">
-<input type="hidden" name="dayofweeks" value="4">
-<input type="hidden" name="dayofweeks" value="5">
-<input type="hidden" name="dayofweeks" value="6">
 <table class="workday">
 	<tr>
 		<th>요일</th>
@@ -202,7 +194,7 @@
 		<th width="20%">쉬는날</th>
 	</tr>
 	<c:forEach begin="0" end="6" var="index">
-	<input type="hidden" name="dayofweeks" value="index">
+	<input type="hidden" class="dayofweeks" name="dayofweeks" value="${index }">
 	<tr>
 		<td>
 			<c:if test="${index==0 }"> 월 </c:if>
@@ -226,7 +218,7 @@
 			</select>
 		</td>
 		<td>
-			<label>쉬는 날 <input type="checkbox" onchange="restchk(this)" class="rest"></label>
+			<label>쉬는 날 <input type="checkbox" onchange="restchk(this,'${index}')" class="rest"></label>
 		</td>
 	</tr>
 	</c:forEach>
