@@ -243,7 +243,7 @@ hr{
 <body>
 <div id="ads">
 	<div id="ad">
-		<div id="container">
+		<div id="container"> 한번 입원하면 3박이 무료!
 		<div id="xx" onclick="adx()">닫기</div>
 		</div>
 	</div>
@@ -269,7 +269,7 @@ hr{
 		<ul id="maincate">
 			<li class="logo">
 			 <a href="/main/index">
-			  <img src="/static/client/main/logo.png" width="100" valign="middle">
+			  <img src="/static/client/main/병원 로고.png" width="100" valign="middle">
 
 			 </a>
 			</li>

@@ -12,7 +12,7 @@
 
  section {
       font-family: 'GmarketSansMedium';
-      width:100%;
+      width:70%;
       height:360px;
       margin:auto;
       
