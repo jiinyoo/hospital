@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,6 +48,23 @@
 
 	}
 
+	function restchk(my) {
+		var start=document.getElementsByClassName("Schk_rest");
+		var end=document.getElementsByClassName("Echk_rest");
+		var chk=document.getElementsByClassName("rest");
+		
+		for(i=0;i<chk.length;i++) {
+			if(chk[i]===my) {
+				if(my.checked) {
+					start[i].disabled=true;
+					end[i].disabled=true;
+				} else {
+					start[i].disabled=false;
+					end[i].disabled=false;
+				}
+			}
+		}
+	}
 </script>
 <style>
 	section {
@@ -80,10 +98,7 @@
 		height: 100px;
 	}
 
-	select {
-		width: 100%;
-		height: 150px;
-	}
+
 
 	select#medi_type {
 		margin-left: 10px;
@@ -101,6 +116,22 @@
 	input[type="submit"]:hover {
 		background-color: #45a049;
 	}
+	  #workday {
+    display: flex;
+    flex-wrap: wrap; /* 여러 줄로 나뉠 경우 줄바꿈 허용 */
+    gap: 20px; /* 각 요소 간의 간격 */
+  }
+
+  #workday > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+  }
+
+  #workday div select {
+    width: 80px;
+  }
 </style>
 </head>
 <body>
@@ -131,10 +162,164 @@
 		<th> 프로필 사진 추가 </th>
 		<td colspan="3"> <input type="file" id="file" name="file"> </td>
 	</tr>
-	<tr>
-		<td colspan="4" style="text-align: center;"> <input type="submit" value="등록"></td>
-	</tr>
 </table>
+<div id="workday">
+	<div class="day-container">
+	<input type="hidden" name="dayofweeks" value="mon">
+	<div>월</div>
+	<div>시작시간
+		<select name="start_times" class="Schk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>종료시간
+		<select name="end_times" class="Echk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>
+      쉬는 날 <input type="checkbox" onchange="restchk(this)" class="rest">
+    </div>
+	</div>
+	
+	<div class="day-container">
+	<input type="hidden" name="dayofweeks" value="tue">
+	<div>화</div>
+	<div>시작시간
+		<select name="start_times" class="Schk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>종료시간
+		<select name="end_times" class="Echk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>
+      쉬는 날 <input type="checkbox" onchange="restchk(this)" class="rest">
+    </div>
+	</div>
+	
+	<div class="day-container">
+	<input type="hidden" name="dayofweeks" value="wed">
+	<div>수</div>
+	<div>시작시간
+		<select name="start_times" class="Schk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>종료시간
+		<select name="end_times" class="Echk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>
+      쉬는 날 <input type="checkbox" onchange="restchk(this)" class="rest">
+    </div>
+	</div>
+	
+	<div class="day-container">
+	<input type="hidden" name="dayofweeks" value="thu">
+	<div>목</div>
+	<div>시작시간
+		<select name="start_times" class="Schk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>종료시간
+		<select name="end_times" class="Echk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>
+      쉬는 날 <input type="checkbox" onchange="restchk(this)" class="rest">
+    </div>
+	</div>
+	
+	<div class="day-container">
+	<input type="hidden" name="dayofweeks" value="fri">
+	<div>금</div>
+	<div>시작시간
+		<select name="start_times" class="Schk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>종료시간
+		<select name="end_times" class="Echk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>
+      쉬는 날 <input type="checkbox" onchange="restchk(this)" class="rest">
+    </div>
+	</div>
+	
+	<div class="day-container">
+	<input type="hidden" name="dayofweeks" value="sat">
+	<div>토</div>
+	<div>시작시간
+		<select name="start_times" class="Schk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>종료시간
+		<select name="end_times" class="Echk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>
+      쉬는 날 <input type="checkbox" onchange="restchk(this)" class="rest">
+    </div>
+	</div>
+	
+	<div class="day-container">
+	<input type="hidden" name="dayofweeks" value="sun">
+	<div>일</div>
+	<div>시작시간
+		<select name="start_times" class="Schk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>종료시간
+		<select name="end_times" class="Echk_rest">
+			<c:forEach begin="9" end="18" var="times">
+				<option>${times<10?'0':''}${times}:00</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div>
+      쉬는 날 <input type="checkbox" onchange="restchk(this)" class="rest">
+    </div>
+	</div>
+	
+</div>
+<input type="submit" value="등록">
 </form>
 </section>
 </body>

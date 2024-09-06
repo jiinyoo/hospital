@@ -15,5 +15,6 @@ public interface BoardService {
 	String boardcontent(HttpServletRequest request, Model model, HttpSession session);
 	String boarddelete(HttpServletRequest request);
 	String boardupdate(HttpServletRequest request, Model model);
+	void boardupdateOk(BoardDto bdto, HttpServletRequest request);
 	
 }

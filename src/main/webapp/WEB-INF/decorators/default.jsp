@@ -158,18 +158,12 @@ nav #mainmenu #maincate
 }
 
 #submenus .submenu > li > a {
-    
     text-decoration: none;
     width: 100%;
     text-align: center;
     display: block;
-    color: black;
-}
+    color:black;
 
-.hov > a {
-	text-decoration: none;
-	width:100%;
-	color:black;
 }
 
 #submenus .submenu > li:hover {

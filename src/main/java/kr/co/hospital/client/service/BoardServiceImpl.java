@@ -90,4 +90,10 @@ public class BoardServiceImpl implements BoardService {
 		model.addAttribute("bdto",bdto);
 		return "/client/board/update";
 	}
+
+	@Override
+	public void boardupdateOk(BoardDto bdto, HttpServletRequest request) {
+			String board_id=request.getParameter("board_id");
+			mapper.boardupdateOk(bdto);
+	}
 }
