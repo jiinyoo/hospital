@@ -23,4 +23,9 @@
 		delete from board
 		where board_id=#{board_id} and user_id=#{user_id}
 	</delete>
+	<update id="boardupdateOk">
+		update board
+		set board_title=#{board_title}, board_content=#{board_content}
+		where board_id=#{board_id}
+	</update>
 </mapper>

@@ -70,9 +70,15 @@ public class BoardController {
 	}
 	
 	
+
+	
+	
+	
 	@RequestMapping("/boardlist")
+
 	public String boardlist(HttpSession session,Model model,HttpServletResponse response) {
 		return service.boardlist(session,model,response);
+
 	}
 	 @PostMapping(value = "/boardimageupload")
 	 @ResponseBody
@@ -110,7 +116,7 @@ public class BoardController {
 	 
 	 @PostMapping("/boardwriteOk")
 	 @ResponseBody
-	    public void addPost(BoardDto bdto) {
+	    public void boardwriteOk(BoardDto bdto) {
 	        // postContent는 Summernote에서 작성된 HTML 코드입니다.
 		 	
 		 	service.boardinsert(bdto);
@@ -119,6 +125,19 @@ public class BoardController {
 	        // 예: postService.savePost(postContent);
 	    }
 	
+	 
+	 @PostMapping("/boardupdateOk")
+	 @ResponseBody
+	    public void boardupdateOk(BoardDto bdto, HttpServletRequest request) {
+	        // postContent는 Summernote에서 작성된 HTML 코드입니다.
+		 	service.boardupdateOk(bdto,request);
+	        // 데이터베이스에 저장하거나, 추가 로직을 수행
+	        // 예: postService.savePost(postContent);
+	    }
+	
+	 
+	 
+	 
 	
 	
 }
