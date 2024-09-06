@@ -158,7 +158,13 @@ nav #mainmenu #maincate
 }
 
 #submenus .submenu > li > a {
-    padding:0px 63px;
+    
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    display: block;
+    color: black;
+    
 }
 
 #submenus .submenu > li:hover {
@@ -237,7 +243,7 @@ hr{
 <body>
 <div id="ads">
 	<div id="ad">
-		<div id="container">
+		<div id="container"> 한번 입원하면 3박이 무료!
 		<div id="xx" onclick="adx()">닫기</div>
 		</div>
 	</div>
@@ -263,7 +269,8 @@ hr{
 		<ul id="maincate">
 			<li class="logo">
 			 <a href="/main/index">
-			  <img src="../static/client/main/병원 로꼬.png" width="100" valign="middle">
+			  <img src="/static/client/main/병원 로고.png" width="100" valign="middle">
+
 			 </a>
 			</li>
 			<li class="hov">병원 소개</li>
@@ -291,15 +298,15 @@ hr{
 		</ul>
 		
 		<ul class="submenu">
-			<li>정신과</li>
-			<li>내분비과</li>
-		    <li>치과</li>
-		    <li>이비인후과</li>
+			<li><a href="/main/info/part?part=정신과">정신과</a></li>
+			<li><a href="/main/info/part?part=내분비과">내분비과</a></li>
+		    <li><a href="/main/info/part?part=치과">치과</a></li>
+		    <li><a href="/main/info/part?part=이비인후과">이비인후과</a></li>
 		</ul>
 		
 		<ul class="submenu">
 			<li>1:1문의</li>
-			<li>온라인 진료 예약</li>
+			<li><a href="">온라인 진료 예약</a></li>
 			<li>예약 조회</li>
 			<li></li>
 		</ul>

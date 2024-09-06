@@ -29,4 +29,7 @@
 		update doctor set doc_part=#{doc_part}, doc_phone=#{doc_phone}, doc_history=#{doc_history}, doc_img=#{doc_img}
 		where doc_userid=#{doc_userid}
 	</update>
+	<select id="getDocimg" resultType="string">
+		select doc_img from doctor where doc_userid=#{userid}
+	</select>
 </mapper>

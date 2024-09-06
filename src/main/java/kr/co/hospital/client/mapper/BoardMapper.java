@@ -14,4 +14,10 @@ public interface BoardMapper {
 
 	ArrayList<HashMap> boardlist();
 
+	void boardReadnum(String board_id);
+
+	BoardDto boardcontent(String board_id);
+
+	void boarddelete(String board_id, String user_id);
+
 }
