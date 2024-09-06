@@ -32,4 +32,15 @@
 	<select id="getDocimg" resultType="string">
 		select doc_img from doctor where doc_userid=#{userid}
 	</select>
+	<select id="getDocid" resultType="int">
+		select doc_id from doctor
+		where doc_userid=#{doc_userid} order by doc_id desc
+	</select>
+	<insert id="addWorkday">
+		insert into workday (doc_id,dayofweek,start_time,end_time)
+		values (#{doc_id},#{dayofweek},#{start_time},#{end_time})
+	</insert>
+	<select id="getWorkday" resultType="kr.co.hospital.admin.dto.WorkdayDto">
+		select * from workday where doc_id=#{doc_id}
+	</select>
 </mapper>

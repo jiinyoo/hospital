@@ -8,21 +8,26 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-@font-face {
+@font-face 
+{
     font-family: 'goorm-sans-bold';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
 }
-body {
+
+body 
+{
 	font-family: 'goorm-sans-bold';
     background-color: #f2f4f9;
     margin: 0;
     padding: 0;
 }
+
 * {margin:0; padding:0; box-sizing: border-box;}
 
-#ads{
+#ads
+{
 	position:relative;
 	width:100%;
 	height:50px;
@@ -35,6 +40,7 @@ body {
 	width:100%;
 
 }
+
 #container
 {
 	position:relative;
@@ -43,7 +49,17 @@ body {
 
 }
 
-#xx {
+#event
+{
+	position:absolute;
+    text-align:center;
+    right:580px;
+    top: 15px;
+    color: black;
+}
+
+#xx 
+{
     position:absolute;
     right:0;
     text-align:right;
@@ -53,26 +69,36 @@ body {
 
 }
 
-#loginbar{
-	
+#loginbar
+{	
 	margin:auto;
 	margin-top: 15px;
 	width:1300px;
 	height:30px;
 	text-align:right;
 	align-items:center;
+	text-decoration: none;
+	color: black;
 
 }
 
-nav{
- position :relative;
- width:1300px;
- height:100px;
- margin:auto;
- font-size:20px;
+#loginbar > a 
+{
+	text-decoration: none;
+	color: black;
+}
+	
+nav
+{
+ 	position :relative;
+ 	width:1300px;
+ 	height:100px;
+ 	margin:auto;
+ 	font-size:20px;
 }
 
-nav #mainmenu{
+nav #mainmenu
+{
 	width:1300px;
 }
 
@@ -82,10 +108,12 @@ nav #mainmenu #maincate
 	
 }
 
-#mainmenu #maincate > li {
+#mainmenu #maincate > li 
+{
 	display:inline-block;
 	list-style-type:none;
 	width:180px;
+	color:#626262;
 	text-align:center;
 	height:100px;
 	line-height:100px;
@@ -96,27 +124,54 @@ nav #mainmenu #maincate
 
 }
 
-#maincate .logo img {
+#mainmenu #maincate > li >a
+{
+	width: 100%;
+	text-decoration: none;
+	color:#626262;
+	display: block;
+}
+
+#mainmenu #maincate > li:hover
+{
+	color:#5C1DB5;
+}
+
+#mainmenu #maincate > li > a:hover
+{
+	color:#5C1DB5;
+}
+
+#maincate .logo img 
+{
 
 	width:90px;
 	transition: all 0.3s ease;
 }
 
-#maincate .logo img:hover {
+#maincate .logo img:hover 
+{
 	transform: scale(1.1);
 	background-color: none;
 }
 
-#maincate .hov {
-    transition: all 0.7s ease;
+#maincate .hov 
+{
+    transition: all 0.5s ease;
+    
+    
 }
 
-#maincate .hov:hover {
-    background-color: #B5B2FF;
+#maincate .hov:hover 
+{
+	border-left: 10px solid #8041D9;
+	border-right: 10px solid #8041D9;
+    //background-color: #B5B2FF;
 }
 
 
-#submenus {
+#submenus 
+{
 	display:flex;
 	flex-wrap:wrap;
 	text-align:center;
@@ -130,14 +185,60 @@ nav #mainmenu #maincate
 	left:0px;
 	top:90px;
 	background:white;
-	border:0.5px solid grey;
-    
+	border-left:0.5px solid #DAD9FF;
+	border-right:0.5px solid #DAD9FF;
+	border-bottom:5px solid #C8C7ED;
+	opacity: 0;  
+	
 }
 
+#submenus .submenu:nth-child(1) 
+{
+    animation: slideDown 0.3s ease forwards;
+    animation-delay: 0s;
+}
+
+#submenus .submenu:nth-child(2) 
+{
+    animation: slideDown 0.3s ease forwards;
+    animation-delay: 0.1s;
+}
+
+#submenus .submenu:nth-child(3) 
+{
+    animation: slideDown 0.3s ease forwards;
+    animation-delay: 0.2s;
+}
+
+#submenus .submenu:nth-child(4) 
+{
+    animation: slideDown 0.3s ease forwards;
+    animation-delay: 0.3s;
+}
+#submenus .submenu:nth-child(5) 
+{
+    animation: slideDown 0.3s ease forwards;
+    animation-delay: 0.4s; 
+}
+#submenus .submenu:nth-child(6) 
+{
+    animation: slideDown 0.3s ease forwards;
+    animation-delay: 0.5s; 
+}
+#submenus .submenu:nth-child(7) 
+{
+    animation: slideDown 0.3s ease forwards;
+    animation-delay: 0.6s;
+}
+
+#submenus .submenu:first-child
+{
+	border-top:5px solid #C8C7ED;
+	
+}
 
 #submenus .submenu:last-child
 {
-
 	width:200px;
 
 }
@@ -152,14 +253,14 @@ nav #mainmenu #maincate
 	line-height: 30px; /* 중앙 정렬 */
     margin: 0; /* 기본 마진 제거 */
     padding: 0; /* 기본 패딩 제거 */
-	font-size: 14px;
+	font-size: 15px;
 	cursor: pointer;
     transition: all 0.3s ease;
+
 }
 
 #submenus .submenu > li > a {
-
-    
+  
     text-decoration: none;
     width: 100%;
     text-align: center;
@@ -168,35 +269,54 @@ nav #mainmenu #maincate
 
 }
 
-#submenus .submenu > li:hover {
+
+#submenus .submenu > li:hover 
+{
 	background-color: #B5B2FF;
 	
 }
+
 #submenus .submenu > li:first-child
-
 {
-	border-top:5px solid #DAD9FF;
+	border-top:5px solid #C8C7ED;
 	
-}
-
-#submenus .submenu > li:last-child
-
-{
-	border-bottom:5px solid #DAD9FF;
-
 }
 
 #submenus .submenu:last-child > li
 {
-
 	width:200px;
 	
 }
 
+#submenus .submenu > li > a {
 
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    display: block;
+    color:black;
 
-hr{
+}
+
+hr
+{
  border:0.1px solid #ccc;
+ 
+}
+
+/* 계단형으로 서서히 내려오는 애니메이션 정의 */
+@keyframes slideDown 
+{
+    from 
+    {
+        opacity: 0;
+        transform: translateY(-15px); /* 메뉴가 위에서부터 내려오는 느낌 */
+    }
+    to 
+    {
+        opacity: 1;
+        transform: translateY(0); /* 제자리로 이동 */
+    }
 }
 
 </style>
@@ -211,8 +331,7 @@ hr{
 			}
 		
 	}
-	
-	
+
 	function hideSub()
 	{
 		//div영역을 생성하고 해야하나?
@@ -244,11 +363,14 @@ hr{
 <body>
 <div id="ads">
 	<div id="ad">
-		<div id="container">
+		<div id="container"> 
+			<div id="event"> 한번 입원하면 3박이 무료! </div>
 		<div id="xx" onclick="adx()">닫기</div>
 		</div>
 	</div>
 </div>
+
+
 <header>
 		<div id="loginbar"> 
 		 <c:if test="${user_id == null }">
@@ -270,12 +392,16 @@ hr{
 		<ul id="maincate">
 			<li class="logo">
 			 <a href="/main/index">
+<<<<<<< HEAD
 			  <img src="/static/client/main/병원 로꼬.png" width="100" valign="middle">
+=======
+			  <img src="/static/client/main/병원 로고.png" width="100" valign="middle">
+>>>>>>> origin/develop
 
 			 </a>
 			</li>
 			<li class="hov">병원 소개</li>
-			<li class="hov">의료진 안내</li>
+			<li class="hov"><a href="/main/info/part?part=">의료진 안내</a></li>
 			<li class="hov">상담/예약</li>
 			<li class="hov">프로그램 예약</li>
 			<li class="hov">커뮤니티</li>
@@ -285,10 +411,7 @@ hr{
 	
 	<div id="submenus"  onmouseover="viewSub()">
 		<ul class="submenu">
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			
 		</ul>
 		
 		<ul class="submenu">
@@ -309,21 +432,19 @@ hr{
 			<li>1:1문의</li>
 			<li><a href="">온라인 진료 예약</a></li>
 			<li>예약 조회</li>
-			<li></li>
+			
 		</ul>
 		
 		<ul class="submenu">
 		
 			<li>프로그램 예약</li>
-			<li></li>
-			<li></li>
-			<li></li>
+			
 		
 		</ul>
 		
 		
 		<ul class="submenu">
-				<li>공지사항</li>
+				<li><a href="/client/notice/notice_write">공지사항</a></li>
 				<li>진료과별 질문</li>
 				<li><a href="../../boardlist">진료 후기</a></li>
 				<li>고객의 소리</li>
@@ -332,9 +453,7 @@ hr{
 		
 		<ul class="submenu">
 			<li>건강정보</li>
-			<li></li>
-			<li></li>
-			<li></li>
+			
 		</ul>
 		
 		

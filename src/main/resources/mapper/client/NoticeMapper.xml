@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.hospital.client.mapper.NoticeMapper">
-  <insert id="writeOk" parameterType="kr.co.hospital.client.dto.NoticeDto">
+  <insert id="notice_writeOk" parameterType="kr.co.hospital.client.dto.NoticeDto">
     insert into notice(title,content,img,writeday)
     values(#{title},#{content},#{img},now())
   </insert>
