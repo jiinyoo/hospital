@@ -47,7 +47,7 @@ public class DoctorController {
 	}
 	
 	@RequestMapping("/admin/doctor/upDoctorOk")
-	public String upDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
-		return service.upDoctorOk(ddto,request);
+	public String upDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request,WorkdayDto wdto) throws Exception {
+		return service.upDoctorOk(ddto,request,wdto);
 	}
 }

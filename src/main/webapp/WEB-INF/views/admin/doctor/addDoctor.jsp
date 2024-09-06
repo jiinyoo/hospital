@@ -83,79 +83,124 @@
 	
 </script>
 <style>
+	body {user-select: none;}
 	section {
-		width: 800px;
+		width:600px;
+		margin:auto;
 	}
-
+	
 	table {
-		width: 100%;
+		width:100%;
 		border-collapse: collapse;
 	}
-
-	th, td {
-		padding: 10px;
+	
+	.main-table {
+		margin:20px;
+		border: 1px solid black;
+	}
+	
+	.main-table td {padding-right:10px;}
+	td,th {
+		padding-left: 10px;
 		text-align: left;
 	}
-
-	th {
-		background-color: #f0f0f0;
-		text-align: center;
+	
+	.main-table th {
+		background: #f5f5f5;
+		color: #333;
 		font-weight: bold;
+		height:40px;
 	}
-
-	td input[type="text"], td input[type="file"], td textarea {
-		width: 100%;
-		padding: 5px;
-		box-sizing: border-box;
+	
+	
+	input[type="text"] {
+		width:100%;
+		height: 25px;
+		border:none;
+		border-bottom: 1px solid black;
+		outline: none;
 	}
-
-	textarea {
-		width: 100%;
-		height: 100px;
+	
+	.history {margin:5px 0;}
+	
+	.img {
+		position: relative;
 	}
-
-
-
-	select#medi_type {
-		margin-left: 10px;
+	.img img {
+  		width: 100%;
+	    height: 100%;
+	    display: block;
+	    transition: opacity 0.3s ease; /* 불투명도 전환에 애니메이션 적용 */
 	}
-
-	input[type="submit"] {
-		background-color: #4CAF50;
-		color: white;
-		padding: 10px 20px;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
+	
+	.img .img-change {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: rgba(0, 0, 0, 0); /* 기본 상태는 투명 */
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    color: white;
+	    font-size: 14px;
+	    font-weight: bold;
+	    opacity: 0; /* 기본적으로 텍스트는 보이지 않음 */
+	    transition: background 0.3s ease, opacity 0.3s ease; /* 배경과 텍스트가 부드럽게 나타남 */
+	    text-align: center;
 	}
-
-	input[type="submit"]:hover {
-		background-color: #45a049;
+	
+	.img:hover img {
+	    opacity: 0.5; /* 마우스를 올리면 이미지가 불투명해짐 */
+	}
+	
+	.img:hover .img-change {
+	    background: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
+	    opacity: 1; /* 텍스트를 보이게 설정 */
 	}
 	
 	.workday {
-		width:700px;;
 		margin: auto;
-		margin-top: 30px;
+		margin: 20px;
+		border:1px solid black;
 	}
 	
-	.workday td {
+	.workday td, .workday th {
 		text-align: center;
 		height: 40px;
 	}
 	
+	.workday th {
+		background: #f5f5f5;
+		color: #333;
+		font-weight: bold;
+	}
+	
+	.workday td {
+		border-bottom: 1px solid black;
+	}
 	.workday select {
 		width:100px;
 		height: 30px;
 		margin: 0 20px;
 	}
+
+	#workday div select {
+		width: 80px;
+	}
 	
-
-  
-
-  #workday div select {
-    width: 80px;
-  }
+	#btn-con {text-align: center;}
+	.btn {
+		border:none;
+		width:100px;
+		height: 30px;
+		text-align: center;
+		background: #7D78FF;
+		color:white;
+	}
+	
+	.btn:hover { background: #5C1DB5;}
 </style>
 </head>
 <body>
@@ -163,16 +208,16 @@
 <form method="post" action="addDoctorOk" enctype="multipart/form-data" onsubmit="return subchk()">
 <input type="hidden" name="doc_history" id="doc_history">
 <input type="hidden" name="doc_userid" value="${user.user_id}">
-<table>
+<table class="main-table">
 	<tr>	
 		<th>성함 </th>
 		<td><input type="text" name="doc_name" value="${user.user_name}" readonly style="pointer-events: none;border:none;"></td>
 		<th>분야</th>
-		<td><input type="text" name="doc_part"></td>
+		<td><input type="text" name="doc_part" placeholder="분야"></td>
 	</tr>
 	<tr>
 		<th>연락처</th>
-		<td><input type="text" name="doc_phone"></td>
+		<td><input type="text" name="doc_phone" placeholder="연락처"></td>
 		<th>이메일 </th>
 		<td><input type="text" name="user_email" value="${user.user_email }"  readonly style="pointer-events: none;border:none;"></td>
 	</tr>
@@ -196,7 +241,7 @@
 	<c:forEach begin="0" end="6" var="index">
 	<input type="hidden" class="dayofweeks" name="dayofweeks" value="${index }">
 	<tr>
-		<td>
+		<td width="10%">
 			<c:if test="${index==0 }"> 월 </c:if>
 			<c:if test="${index==1 }"> 화 </c:if>
 			<c:if test="${index==2 }"> 수 </c:if>
@@ -210,7 +255,7 @@
 				<c:forEach begin="9" end="18" var="times">
 					<option value="${times}">${times<10?'0':''}${times}:00</option>
 				</c:forEach>
-			</select> TO
+			</select>~
 			<select name="end_times" class="Echk_rest">
 				<c:forEach begin="10" end="18" var="times">
 					<option value="${times}">${times<10?'0':''}${times}:00</option>
@@ -223,8 +268,9 @@
 	</tr>
 	</c:forEach>
 </table>
-
-<input type="submit" value="등록">
+<div id="btn-con">
+	<input type="submit" value="등록" class="btn">
+</div>
 </form>
 </section>
 </body>
