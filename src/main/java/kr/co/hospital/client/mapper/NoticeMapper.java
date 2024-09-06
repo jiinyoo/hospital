@@ -8,7 +8,7 @@ import kr.co.hospital.client.dto.NoticeDto;
 
 @Mapper
 public interface NoticeMapper {
-	public void writeOk(NoticeDto ndto);
+	public void notice_writeOk(NoticeDto ndto);
 	public ArrayList<NoticeDto> list();
 	public void readnum(String id);
 	public NoticeDto content(String id);

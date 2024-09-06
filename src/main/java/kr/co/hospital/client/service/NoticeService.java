@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.NoticeDto;
 
 public interface NoticeService {
-	// public String write();
-	// public String writeOf(NoticeDto ndto,HttpSession session);
+	public String notice_write(HttpServletRequest request, Model model);
+	public String notice_writeOk(NoticeDto ndto,HttpSession session);
 
 }
