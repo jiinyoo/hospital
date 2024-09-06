@@ -40,4 +40,7 @@
 		insert into workday (doc_id,dayofweek,start_time,end_time)
 		values (#{doc_id},#{dayofweek},#{start_time},#{end_time})
 	</insert>
+	<select id="getWorkday" resultType="kr.co.hospital.admin.dto.WorkdayDto">
+		select * from workday where doc_id=#{doc_id}
+	</select>
 </mapper>

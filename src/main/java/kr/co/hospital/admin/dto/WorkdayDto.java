@@ -12,5 +12,5 @@ public class WorkdayDto {
 	private LocalTime start_time,end_time;
 	
 	private String[] dayofweeks;
-	private LocalTime[] start_times,end_times;
+	private int[] start_times,end_times;
 }

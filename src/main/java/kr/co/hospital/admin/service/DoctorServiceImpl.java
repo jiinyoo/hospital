@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -94,13 +95,16 @@ public class DoctorServiceImpl implements DoctorService {
 		int doc_id=mapper.getDocid(ddto.getDoc_userid());
 		wdto.setDoc_id(doc_id);
 		String[] dayofweeks = wdto.getDayofweeks();
-        LocalTime[] startTimes = wdto.getStart_times();
-        LocalTime[] endTimes = wdto.getEnd_times();
+        int[] startTimes = wdto.getStart_times();
+        int[] endTimes = wdto.getEnd_times();
 		
 		for(int i=0;i<wdto.getStart_times().length;i++) {
 			wdto.setDayofweek(dayofweeks[i]);
-			wdto.setStart_time(startTimes[i]);
-			wdto.setEnd_time(endTimes[i]);
+			LocalTime starttime=LocalTime.parse(String.format("%02d", startTimes[i]) +":00");
+			LocalTime endtime=LocalTime.parse(String.format("%02d", endTimes[i])+":00");
+			
+			wdto.setStart_time(starttime);
+			wdto.setEnd_time(endtime);
 			mapper.addWorkday(wdto);
 		}
 		
@@ -121,6 +125,9 @@ public class DoctorServiceImpl implements DoctorService {
 				DoctorDto ddto=mapper.upDoctor(userid);
 				ddto.setHistorys(ddto.getDoc_history().split("/"));
 				model.addAttribute("ddto",ddto);
+				
+				ArrayList<WorkdayDto> wdto=mapper.getWorkday(ddto.getDoc_id());
+				model.addAttribute("wdto",wdto);
 				return "/admin/doctor/upDoctor";
 			}
 			return "redirect:/admin/doctor/addDoctor";
@@ -151,6 +158,7 @@ public class DoctorServiceImpl implements DoctorService {
 			ddto.setDoc_img(mapper.getDocimg(ddto.getDoc_userid())); 
 		}
 		mapper.upDoctorOk(ddto);
+	
 		return "redirect:/admin/";
 	}
 }

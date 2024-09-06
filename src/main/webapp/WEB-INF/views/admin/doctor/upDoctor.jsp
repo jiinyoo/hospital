@@ -57,10 +57,37 @@
 		}
 		reader.readAsDataURL(e.target.files[0]);
 	}
+	
+	function uptime(my) {
+        var parentRow = my.closest("tr"); // 현재 행을 찾음
+        var startTime = parseInt(my.value); // 선택된 시작 시간을 가져옴
+        var endSelect = parentRow.querySelector(".Echk_rest"); // 해당 행의 종료시간 셀렉트박스 찾기
+
+        // 종료시간 셀렉트박스의 옵션들을 초기화하고 시작시간보다 큰 옵션만 활성화
+        endSelect.innerHTML = ""; // 기존 옵션 초기화
+        for (var i = startTime + 1; i <= 18; i++) {
+            var option = document.createElement("option");
+            option.value = i;
+            option.text = (i < 10 ? "0" : "") + i + ":00";
+            endSelect.appendChild(option);
+        }
+    }
+	
+	
+	window.onload=function() {
+		var start=document.getElementsByClassName("Schk_rest");
+		var end=document.getElementsByClassName("Echk_rest");
+		
+		<c:forEach var="day" items="${wdto}" varStatus="status">
+        // 각 셀렉트 박스에 값 설정
+        start[${status.index}].value = "${day.start_time.hour}";
+        end[${status.index}].value = "${day.end_time.hour}";
+		</c:forEach>
+	}
 </script>
 <style>
 	section {
-		width:500px;
+		width:800px;
 	}
 	
 	table {
@@ -126,6 +153,27 @@
 	    background: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
 	    opacity: 1; /* 텍스트를 보이게 설정 */
 	}
+	
+	.workday {
+		width:700px;
+		margin: auto;
+		margin-top: 30px;
+	}
+	
+	.workday td {
+		text-align: center;
+		height: 40px;
+	}
+	
+	.workday select {
+		width:100px;
+		height: 30px;
+		margin: 0 20px;
+	}
+
+	#workday div select {
+		width: 80px;
+	}
 </style>
 </head>
 <body>
@@ -167,11 +215,50 @@
 			</c:forEach>
 		</td>
 	</tr>
-	<tr>
-		<td colspan="4" style="text-align: center;"> <input type="submit" value="수정"> </td>
-	</tr>
 </table>
-
+<input type="hidden" name="dayofweeks" value="mon">
+<input type="hidden" name="dayofweeks" value="tue">
+<input type="hidden" name="dayofweeks" value="wed">
+<input type="hidden" name="dayofweeks" value="thu">
+<input type="hidden" name="dayofweeks" value="fri">
+<input type="hidden" name="dayofweeks" value="sat">
+<input type="hidden" name="dayofweeks" value="sun">
+<table class="workday">
+	<tr>
+		<th>요일</th>
+		<th width="50%">시간</th>
+		<th width="20%">쉬는날</th>
+	</tr>
+	<c:forEach begin="0" end="6" var="index">
+	<tr>
+		<td>
+			<c:if test="${index==0 }"> 월 </c:if>
+			<c:if test="${index==1 }"> 화 </c:if>
+			<c:if test="${index==2 }"> 수 </c:if>
+			<c:if test="${index==3 }"> 목 </c:if>
+			<c:if test="${index==4 }"> 금 </c:if>
+			<c:if test="${index==5 }"> 토 </c:if>
+			<c:if test="${index==6 }"> 일 </c:if>
+		</td>
+		<td>
+			<select name="start_times" class="Schk_rest" onchange="uptime(this)">
+				<c:forEach begin="9" end="18" var="times">
+					<option value="${times}">${times<10?'0':''}${times}:00</option>
+				</c:forEach>
+			</select> TO
+			<select name="end_times" class="Echk_rest">
+				<c:forEach begin="10" end="18" var="times">
+					<option value="${times}">${times<10?'0':''}${times}:00</option>
+				</c:forEach>
+			</select>
+		</td>
+		<td>
+			<label>쉬는 날 <input type="checkbox" onchange="restchk(this)" class="rest"></label>
+		</td>
+	</tr>
+	</c:forEach>
+</table>
+<input type="submit" value="등록">
 </form>
 </section>
 </body>
