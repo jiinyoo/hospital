@@ -87,14 +87,14 @@ body
 	text-decoration: none;
 	color: black;
 }
-
+	
 nav
 {
- position :relative;
- width:1300px;
- height:100px;
- margin:auto;
- font-size:20px;
+ 	position :relative;
+ 	width:1300px;
+ 	height:100px;
+ 	margin:auto;
+ 	font-size:20px;
 }
 
 nav #mainmenu
@@ -124,7 +124,20 @@ nav #mainmenu #maincate
 
 }
 
+#mainmenu #maincate > li >a
+{
+	width: 100%;
+	text-decoration: none;
+	color:#626262;
+	display: block;
+}
+
 #mainmenu #maincate > li:hover
+{
+	color:#5C1DB5;
+}
+
+#mainmenu #maincate > li > a:hover
 {
 	color:#5C1DB5;
 }
