@@ -2,28 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.hospital.client.mapper.NoticeMapper">
   <insert id="notice_writeOk" parameterType="kr.co.hospital.client.dto.NoticeDto">
-    insert into notice(title,content,img,writeday)
-    values(#{title},#{content},#{img},now())
+    insert into notice(user_id,title,content,writeday)
+    values(#{user_id},#{title},#{content},now())
   </insert>
-  <select id="list" resultType="kr.co.hospital.client.dto.NoticeDto">
+  <select id="notice_list" resultType="HashMap">
     select * from notice
-    order by id desc
+    order by notice_id desc
   </select>
-  <update id="readnum">
+  <update id="notice_readnum">
     update notice set readnum=readnum+1
-    where id=#{id}
+    where notice_id=#{notice_id}
   </update>
-  <select id="content" resultType="kr.co.hospital.client.dto.NoticeDto">
+  <select id="notice_content" resultType="kr.co.hospital.client.dto.NoticeDto">
     select * from notice
-    where id=#{id}
+    where notice_id=#{notice_id}
   </select>
-  <update id="updateOk" parameterType="kr.co.hospital.client.dto.NoticeDto">
+  <update id="notice_updateOk" parameterType="kr.co.hospital.client.dto.NoticeDto">
     update notice
     set title=#{title} , content=#{content}, img=#{img}
-    where id=#{id}
+    where notice_id=#{notice_id}
   </update>
-  <delete id="delete">
+  <delete id="notice_delete">
     delete from notice
-    where id=#{id}
+    where notice_id=#{notice_id}
   </delete>
 </mapper>

@@ -65,6 +65,7 @@
     color: white;
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease;
   }
 
   input[type="submit"]:hover 

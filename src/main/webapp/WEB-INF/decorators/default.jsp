@@ -158,15 +158,13 @@ nav #mainmenu #maincate
 #maincate .hov 
 {
     transition: all 0.5s ease;
-    
-    
+       
 }
 
 #maincate .hov:hover 
 {
-	border-left: 10px solid #8041D9;
-	border-right: 10px solid #8041D9;
-    //background-color: #B5B2FF;
+	transform: scale(1.1);
+    // background-color: #B5B2FF;
 }
 
 
@@ -175,6 +173,7 @@ nav #mainmenu #maincate
 	display:flex;
 	flex-wrap:wrap;
 	text-align:center;
+	
 }
 
 #submenus .submenu
@@ -192,44 +191,13 @@ nav #mainmenu #maincate
 	
 }
 
-#submenus .submenu:nth-child(1) 
+#submenus .submenu:nth-child(n) 
 {
     animation: slideDown 0.3s ease forwards;
     animation-delay: 0s;
 }
 
-#submenus .submenu:nth-child(2) 
-{
-    animation: slideDown 0.3s ease forwards;
-    animation-delay: 0.1s;
-}
 
-#submenus .submenu:nth-child(3) 
-{
-    animation: slideDown 0.3s ease forwards;
-    animation-delay: 0.2s;
-}
-
-#submenus .submenu:nth-child(4) 
-{
-    animation: slideDown 0.3s ease forwards;
-    animation-delay: 0.3s;
-}
-#submenus .submenu:nth-child(5) 
-{
-    animation: slideDown 0.3s ease forwards;
-    animation-delay: 0.4s; 
-}
-#submenus .submenu:nth-child(6) 
-{
-    animation: slideDown 0.3s ease forwards;
-    animation-delay: 0.5s; 
-}
-#submenus .submenu:nth-child(7) 
-{
-    animation: slideDown 0.3s ease forwards;
-    animation-delay: 0.6s;
-}
 
 #submenus .submenu:first-child
 {
@@ -388,15 +356,12 @@ hr
 	<nav>
 	<span id="total" onmouseout="hideSub()">
 	<span id="mainsub">
-	<div id="mainmenu"  onmouseover="viewSub()">
+	<div id="mainmenu" onmouseover="viewSub()">
 		<ul id="maincate">
 			<li class="logo">
 			 <a href="/main/index">
-<<<<<<< HEAD
-			  <img src="/static/client/main/병원 로꼬.png" width="100" valign="middle">
-=======
+
 			  <img src="/static/client/main/병원 로고.png" width="100" valign="middle">
->>>>>>> origin/develop
 
 			 </a>
 			</li>
@@ -444,7 +409,7 @@ hr
 		
 		
 		<ul class="submenu">
-				<li><a href="/client/notice/notice_write">공지사항</a></li>
+				<li><a href="../../notice_list">공지사항</a></li>
 				<li>진료과별 질문</li>
 				<li><a href="../../boardlist">진료 후기</a></li>
 				<li>고객의 소리</li>
