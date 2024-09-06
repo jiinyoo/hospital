@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.dto.DoctorDto;
+import kr.co.hospital.admin.dto.WorkdayDto;
 import kr.co.hospital.admin.mapper.DoctorMapper;
 import kr.co.hospital.util.FileUtils;
 
@@ -73,7 +76,7 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	@Override
-	public String addDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
+	public String addDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request,WorkdayDto wdto) throws Exception {
 		MultipartFile file=request.getFile("file");
 		if(!file.isEmpty()) {
 			String fname=file.getOriginalFilename();
@@ -89,6 +92,21 @@ public class DoctorServiceImpl implements DoctorService {
 			
 		}
 		mapper.addDoctorOk(ddto);
+		int doc_id=mapper.getDocid(ddto.getDoc_userid());
+		wdto.setDoc_id(doc_id);
+		String[] dayofweeks = wdto.getDayofweeks();
+        int[] startTimes = wdto.getStart_times();
+        int[] endTimes = wdto.getEnd_times();
+		
+		for(int i=0;i<wdto.getStart_times().length;i++) {
+			wdto.setDayofweek(dayofweeks[i]);
+			LocalTime starttime=LocalTime.parse(String.format("%02d", startTimes[i]) +":00");
+			LocalTime endtime=LocalTime.parse(String.format("%02d", endTimes[i])+":00");
+			
+			wdto.setStart_time(starttime);
+			wdto.setEnd_time(endtime);
+			mapper.addWorkday(wdto);
+		}
 		
 		return "redirect:/admin/";
 	}
@@ -107,6 +125,9 @@ public class DoctorServiceImpl implements DoctorService {
 				DoctorDto ddto=mapper.upDoctor(userid);
 				ddto.setHistorys(ddto.getDoc_history().split("/"));
 				model.addAttribute("ddto",ddto);
+				
+				ArrayList<WorkdayDto> wdto=mapper.getWorkday(ddto.getDoc_id());
+				model.addAttribute("wdto",wdto);
 				return "/admin/doctor/upDoctor";
 			}
 			return "redirect:/admin/doctor/addDoctor";
@@ -137,6 +158,7 @@ public class DoctorServiceImpl implements DoctorService {
 			ddto.setDoc_img(mapper.getDocimg(ddto.getDoc_userid())); 
 		}
 		mapper.upDoctorOk(ddto);
+	
 		return "redirect:/admin/";
 	}
 }

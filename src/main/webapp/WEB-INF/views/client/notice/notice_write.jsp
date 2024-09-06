@@ -8,7 +8,7 @@
 </head>
 <body>
  <section>
-   <form method="post" action="writeOk">
+   <form method="post" action="notice_writeOk">
      <caption> <h3> 공지 글쓰기 </h3> </caption>
      <div> <input type="text" name="title"> </div>
      <div> <textarea name="content"> </textarea></div>

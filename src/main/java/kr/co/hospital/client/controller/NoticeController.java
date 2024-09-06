@@ -18,19 +18,20 @@ public class NoticeController {
 	@Qualifier("noti")
 	NoticeService service;
 	
-	/*@RequestMapping("/client/notice/write")
-	public String write(HttpServletRequest request,
+	@RequestMapping("/client/notice/notice_write")
+	public String notice_write(HttpServletRequest request,
 			Model model)
 	{
-		return service.write(request,model);
+		return service.notice_write(request,model);
 	}
 	
-	@RequestMapping("/client/notice/writeOk")
-	public String writeOk(NoticeDto ndto,HttpSession session)
+	@RequestMapping("/client/notice/notice_writeOk")
+	public String notice_writeOk(NoticeDto ndto,HttpSession session)
 	{
-		return service.writeOk(ndto,session);
+		return service.notice_writeOk(ndto,session);
 	}
 	
+	/*
 	@RequestMapping("/client/notice/list")
 	public String list()
 	{
