@@ -73,29 +73,38 @@ $(document).ready(function() {
     });
     
  
-    $('#submit').click(function() {
+    $('#submit').click(function(event) {
         // Summernote에서 작성된 HTML 코드를 가져옵니다.
         if (!check()) {
             event.preventDefault(); // 폼 제출 막기
         } else {
+        	var board_id="${bdto.board_id}"
 	        var editorContent = $('#summernote').summernote('code');
 			var user_id=$('#user_id').val();
 			var board_title=$('#board_title').val();
 	        // FormData 객체에 에디터 내용을 추가합니다.
+	        
+	     	console.log("Editor Content: ", editorContent);
+			console.log("User ID: ", user_id);
+			console.log("Board Title: ", board_title);
+	        
+	        
+	        
 	        var formData = new FormData();
 	        formData.append("user_id",user_id);
 	        formData.append("board_title",board_title);
 	        formData.append("board_content", editorContent);
+	        formData.append("board_id",board_id);
 	
 	        // 서버로 AJAX 요청을 보냅니다.
 	        $.ajax({
 	            type: "POST",
-	            url: '/boardwriteOk',
+	            url: '/boardupdateOk',
 	            data: formData,
 	            processData: false,
 	            contentType: false,
-	            success: function(response) {
-	            	window.location.href = "/boardlist";
+	           	success: function(response) {
+	            	window.location.href = "/boardcontent?board_id="+board_id;
 	                // 서버 응답에 따라 추가 작업을 수행할 수 있습니다.
 	            },
 	            error: function(error) {

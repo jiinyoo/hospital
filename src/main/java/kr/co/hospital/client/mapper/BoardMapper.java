@@ -20,4 +20,6 @@ public interface BoardMapper {
 
 	void boarddelete(String board_id, String user_id);
 
+	void boardupdateOk(BoardDto bdto);
+
 }
