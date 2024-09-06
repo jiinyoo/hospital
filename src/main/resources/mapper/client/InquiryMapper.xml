@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hospital.client.mapper.InquiryMapper">
+	<insert id="writeOk">
+		insert into inquiry
+		(user_id,title,content,part,state,img,bimil,writeday)
+		values (#{user_id},#{title},#{content},#{part},#{state},#{img},#{bimil},now())
+	</insert>
+</mapper>
