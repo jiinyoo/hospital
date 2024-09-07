@@ -101,7 +101,7 @@
     <c:forEach items="${nmapAll}" var="ndto">
     <tr align="center">
       <td align="left"> 
-       <a href="notice_readnum?id=${ndto.user_id}">${ndto.title}</a>
+       <a href="notice_readnum?notice_id=${ndto.notice_id}">${ndto.title}</a>
       </td>
       <td> 관리자 </td>
       <td> ${ndto.readnum} </td>

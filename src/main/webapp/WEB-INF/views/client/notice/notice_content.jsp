@@ -11,12 +11,23 @@
   <section>
     <caption> <h3> 공지사항 내용 </h3></caption>
     
+    <div>
+    	제 목
+    </div>
+    
     <div> 
     	${ndto.title} 
     </div>
     
     <div> 
-    	${ndto.readnum} 
+    	작성자 
+   	</div>
+   	<div>
+    	${ndto.user_id} 
+    </div>
+    
+    <div> 
+    	${ndto.readnum} <span id="rnum"> <조회수> </span>
     </div>
     
     <div> 
@@ -25,7 +36,7 @@
     
     <div>
        <c:forEach items="${ndto.imgs}" var="img" >
-         <img src="../resources/room/${ndto.img}" width="50" height="32" valign="middle">
+         <img src="../static/client/notice/${ndto.img}" width="50" height="32" valign="middle">
        </c:forEach>
      </div>
      
