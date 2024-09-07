@@ -28,5 +28,10 @@ public class InquiryController {
 	public String inquirywriteOk(InquiryDto idto, MultipartHttpServletRequest multi, HttpSession session) throws Exception {
 		return service.writeOk(idto,multi,session);
 	}
-
+	
+	
+	@RequestMapping("/inquiry/readnum") 
+	public String inquiryreadnum() {
+		return null; 
+	}
 }

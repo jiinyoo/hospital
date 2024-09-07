@@ -9,5 +9,6 @@ import kr.co.hospital.client.dto.InquiryDto;
 public interface InquiryService {
 
 	public String writeOk(InquiryDto idto, MultipartHttpServletRequest multi,HttpSession session) throws Exception;
-
+	
+	
 }
