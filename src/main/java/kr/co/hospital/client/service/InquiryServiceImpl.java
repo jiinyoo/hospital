@@ -1,5 +1,7 @@
 package kr.co.hospital.client.service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -110,13 +112,22 @@ public class InquiryServiceImpl implements InquiryService {
 	}
 
 	@Override
-	public String delete(HttpServletRequest request, HttpSession session) {
+	public String delete(HttpServletRequest request, HttpSession session) throws Exception {
 		String inq_id=request.getParameter("inq_id");
 		String session_user_id=null;
 		if(session.getAttribute("user_id")!=null) {
 			session_user_id=session.getAttribute("user_id").toString();
 			//삭제할 파일명들을 가져와서 스플릿한다.
+			InquiryDto idto=mapper.content(inq_id);
 			//포문을 돌면서
+			String[] imgs=idto.getImg().split("/");
+			String path=ResourceUtils.getFile("classpath:static/client/inquiryfile").toPath().toString();
+			for(int i=0; i<imgs.length; i++) {
+				File file=new File(path+"/"+imgs[i]);
+				if(file.exists()) {
+					file.delete();
+				}
+			}
 			//파일객체를 생성하여 패스에 파일이 있으면
 			//File file=new File(path+"/"+delimgs[i])
 			//파일을 지운다.

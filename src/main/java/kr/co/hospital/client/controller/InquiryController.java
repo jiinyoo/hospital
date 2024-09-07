@@ -45,7 +45,7 @@ public class InquiryController {
 	}
 	
 	@RequestMapping("/inquiry/delete") 
-	public String inquirydelte(HttpServletRequest request,HttpSession session) {
+	public String inquirydelte(HttpServletRequest request,HttpSession session) throws Exception{
 		return service.delete(request,session); 
 	}
 }

@@ -14,7 +14,7 @@ public interface InquiryService {
 	public String list(HttpSession session,Model model,HttpServletResponse response);
 	public String readnum(HttpServletRequest request);
 	public String content(HttpServletRequest request, Model model,HttpSession session);
-	public String delete(HttpServletRequest request, HttpSession session);
+	public String delete(HttpServletRequest request, HttpSession session) throws Exception;
 	
 	
 }
