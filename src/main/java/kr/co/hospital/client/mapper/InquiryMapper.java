@@ -13,5 +13,9 @@ public interface InquiryMapper {
 	public void writeOk(InquiryDto idto);
 	public ArrayList<HashMap> inquirylist();
 	public int getmaxgroupId();
+	public void readnum(String inq_id);
+	public InquiryDto content(String inq_id);
+	public int groupNumber();
+	public void delete(String inq_id);
 
 }

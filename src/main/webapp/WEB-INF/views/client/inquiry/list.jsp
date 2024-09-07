@@ -62,7 +62,7 @@ function logincheck() {
 <body><!--(inquiry)list -->
 <section>
 	<table>
-	<caption><h2>진료 후기 게시판</h2></caption>
+	<caption><h2>진료과별 질문 게시판</h2></caption>
 	<tr>
 		<td>작성자</td>
 		<td>제목</td>
@@ -77,7 +77,7 @@ function logincheck() {
 			<span id="bimil"><img src="../../static/client/inquiry/lock.png" width="20px"></span>
 		</c:if>
 			<span id="part">${imap.part}</span>
-			<span id="title" onclick="check('${imap.user_id}','${imap.bimil}','${imap.inq_id}')">${imap.title}</span>
+			<span id="title" onclick="check('${imap.user_id}','${imap.bimil}','${imap.inq_id}')"><a href="#">${imap.title}</a></span>
 		</a></td>
 		<td width="200">${imap.writeday}</a></td>
 		<td width="100">${imap.readnum}</td>

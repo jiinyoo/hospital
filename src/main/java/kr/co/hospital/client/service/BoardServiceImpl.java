@@ -38,19 +38,16 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public String boardlist(HttpSession session, Model model, HttpServletResponse response) {
+		
+		String user_id=null;
 		if(session.getAttribute("user_id")!=null)
 		{
-			String user_id=session.getAttribute("user_id").toString();
+			user_id=session.getAttribute("user_id").toString();
+		}
 			ArrayList<HashMap> map=mapper.boardlist();    
 			model.addAttribute("bmapAll",map);
 			return "/client/board/list";
-		}else {
-			Cookie cookie = new Cookie("url", "/boardlist");
-			cookie.setMaxAge(60 * 60 * 24); // 쿠키 유효 기간 (초 단위) - 여기서는 1일
-			cookie.setPath("/");
-			response.addCookie(cookie);
-			return "redirect:main/login";
-		}
+	
 	}
 	@Override
 	public void boardinsert(BoardDto bdto) {

@@ -1,5 +1,7 @@
 package kr.co.hospital.client.service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -58,6 +60,8 @@ public class InquiryServiceImpl implements InquiryService {
 				}
 			}
 			idto.setImg(fname);
+			int group_order=mapper.groupNumber();
+			idto.setGroup_order(group_order);
 			mapper.writeOk(idto);
 			return "redirect:/inquiry/list";
 		}else {
@@ -72,24 +76,67 @@ public class InquiryServiceImpl implements InquiryService {
 		String session_user_id=null;
 		if(session.getAttribute("user_id")!=null) {
 			session_user_id=session.getAttribute("user_id").toString();
-		}
 			ArrayList<HashMap> imapAll=mapper.inquirylist();
 			model.addAttribute("imapAll",imapAll);
 			model.addAttribute("session_user_id",session_user_id);
-			
+			return "/client/inquiry/list";
+		}else {
 			Cookie cookie=new Cookie("url","/inquiry/list");
 			cookie.setMaxAge(60*60*24);
 			cookie.setPath("/");
 			response.addCookie(cookie);
-			
-			return "/client/inquiry/list";
-		
+			return "redirect:/main/login";
+		}
 	}
 
 	@Override
 	public String readnum(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		String inq_id=request.getParameter("inq_id");
+		mapper.readnum(inq_id);
+		return "redirect:/inquiry/content?inq_id="+inq_id;
+	}
+
+	@Override
+	public String content(HttpServletRequest request, Model model, HttpSession session) {
+		String session_user_id=null;
+		if(session.getAttribute("user_id")!=null) {
+			session_user_id=session.getAttribute("user_id").toString();
+		}
+		String inq_id=request.getParameter("inq_id");
+		InquiryDto idto=mapper.content(inq_id);
+		String[] imgs=idto.getImg().split("/");
+		idto.setImgs(imgs);
+		model.addAttribute("idto",idto);
+		model.addAttribute("session_user_id",session_user_id);
+		return "client/inquiry/content";
+	}
+
+	@Override
+	public String delete(HttpServletRequest request, HttpSession session) throws Exception {
+		String inq_id=request.getParameter("inq_id");
+		String session_user_id=null;
+		if(session.getAttribute("user_id")!=null) {
+			session_user_id=session.getAttribute("user_id").toString();
+			//삭제할 파일명들을 가져와서 스플릿한다.
+			InquiryDto idto=mapper.content(inq_id);
+			//포문을 돌면서
+			String[] imgs=idto.getImg().split("/");
+			String path=ResourceUtils.getFile("classpath:static/client/inquiryfile").toPath().toString();
+			for(int i=0; i<imgs.length; i++) {
+				File file=new File(path+"/"+imgs[i]);
+				if(file.exists()) {
+					file.delete();
+				}
+			}
+			//파일객체를 생성하여 패스에 파일이 있으면
+			//File file=new File(path+"/"+delimgs[i])
+			//파일을 지운다.
+			mapper.delete(inq_id);
+			return "redirect:/inquiry/list";
+			
+		}else {
+			return "redirect:/main/login";
+		}
 	}
 
 }
