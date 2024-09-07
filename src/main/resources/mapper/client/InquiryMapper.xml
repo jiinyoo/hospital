@@ -6,4 +6,9 @@
 		(user_id,title,content,part,state,img,bimil,writeday)
 		values (#{user_id},#{title},#{content},#{part},#{state},#{img},#{bimil},now())
 	</insert>
+	<select id="inquirylist" resultType="HashMap">
+		select * from inquiry
+		order by group_order desc,
+		state asc
+	</select>
 </mapper>

@@ -397,32 +397,19 @@ hr
 			<li>1:1문의</li>
 			<li><a href="/main/reserve">온라인 진료 예약</a></li>
 			<li>예약 조회</li>
-			
 		</ul>
-		
 		<ul class="submenu">
-		
 			<li>프로그램 예약</li>
-			
-		
 		</ul>
-		
-		
 		<ul class="submenu">
 				<li><a href="../../notice_list">공지사항</a></li>
-				<li>진료과별 질문</li>
+				<li><a href="../../inquiry/list">진료과별 질문</a></li>
 				<li><a href="../../boardlist">진료 후기</a></li>
 				<li>고객의 소리</li>
 		</ul>
-		
-		
 		<ul class="submenu">
 			<li>건강정보</li>
-			
 		</ul>
-		
-		
-	
 	</div>
 	</span>
 	</span>

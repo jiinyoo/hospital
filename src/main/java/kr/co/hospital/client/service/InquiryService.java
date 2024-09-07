@@ -1,14 +1,18 @@
 package kr.co.hospital.client.service;
 
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.InquiryDto;
 
 public interface InquiryService {
 
 	public String writeOk(InquiryDto idto, MultipartHttpServletRequest multi,HttpSession session) throws Exception;
+	public String list(HttpSession session,Model model,HttpServletResponse response);
+	public String readnum(HttpServletRequest request);
 	
 	
 }

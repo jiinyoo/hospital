@@ -89,8 +89,7 @@
 	}
 
     #submit {
-        display: block;
-        margin: 20px auto; /* 자동으로 좌우 가운데 정렬 */
+        margin: auto; /* 자동으로 좌우 가운데 정렬 */
     }
 
 
@@ -145,10 +144,7 @@
 				</td>
 			</tr>
 			<tr align="center">
-				<td>
-				</td>
-				
-				<td>
+				<td colspan="2">
 					<input type="submit" value="문의 글 등록" >
 				</td>
 			</tr>

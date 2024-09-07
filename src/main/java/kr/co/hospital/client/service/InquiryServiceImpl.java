@@ -4,16 +4,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.InquiryDto;
 import kr.co.hospital.client.mapper.InquiryMapper;
@@ -52,16 +57,39 @@ public class InquiryServiceImpl implements InquiryService {
 					Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
 				}
 			}
-			System.out.println("fname"+fname);
 			idto.setImg(fname);
 			mapper.writeOk(idto);
-			return "/client/inquiry/list";
-			
-			
+			return "redirect:/inquiry/list";
 		}else {
 			return "redirect:/main/login";
 		}
 		
+	}
+
+	@Override
+	public String list(HttpSession session,Model model,HttpServletResponse response) {
+		
+		String session_user_id=null;
+		if(session.getAttribute("user_id")!=null) {
+			session_user_id=session.getAttribute("user_id").toString();
+		}
+			ArrayList<HashMap> imapAll=mapper.inquirylist();
+			model.addAttribute("imapAll",imapAll);
+			model.addAttribute("session_user_id",session_user_id);
+			
+			Cookie cookie=new Cookie("url","/inquiry/list");
+			cookie.setMaxAge(60*60*24);
+			cookie.setPath("/");
+			response.addCookie(cookie);
+			
+			return "/client/inquiry/list";
+		
+	}
+
+	@Override
+	public String readnum(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
