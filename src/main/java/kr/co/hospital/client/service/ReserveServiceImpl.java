@@ -148,7 +148,6 @@ public class ReserveServiceImpl implements ReserveService {
 
 	@Override
 	public String beforeReserve(ReserveDto rdto) {
-		
 		return "/client/reserve/beforeReserve";
 	}
 	
