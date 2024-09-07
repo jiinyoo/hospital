@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.NoticeDto;
 import kr.co.hospital.client.service.NoticeService;
@@ -18,54 +19,55 @@ public class NoticeController {
 	@Qualifier("noti")
 	NoticeService service;
 	
-	@RequestMapping("/client/notice/notice_write")
-	public String notice_write(HttpServletRequest request,
+	@RequestMapping("/notice_write")
+	public String notice_write(HttpSession session,
 			Model model)
 	{
-		return service.notice_write(request,model);
+		return service.notice_write(session,model);
 	}
 	
-	@RequestMapping("/client/notice/notice_writeOk")
-	public String notice_writeOk(NoticeDto ndto,HttpSession session)
+	@RequestMapping("/notice_writeOk")
+	public String notice_writeOk(NoticeDto ndto)
 	{
-		return service.notice_writeOk(ndto,session);
+		return service.notice_writeOk(ndto);
 	}
 	
+	
+	@RequestMapping("/notice_list")
+	public String notice_list(Model model,
+			HttpSession session, HttpServletResponse response)
+	{
+		return service.notice_list(model,session,response);
+	}
 	/*
-	@RequestMapping("/client/notice/list")
-	public String list()
+	@RequestMapping("/notice_readnum")
+	public String notice_readnum()
 	{
-		return service.list();
+		return service.notice_readnum();
 	}
 	
-	@RequestMapping("/client/notice/readnum")
-	public String readnum()
+	@RequestMapping("/notice_content")
+	public String notice_content()
 	{
-		return service.readnum();
+		return service.notice_content();
 	}
 	
-	@RequestMapping("/client/notice/content")
-	public String content()
+	@RequestMapping("/notice_update")
+	public String notice_update()
 	{
-		return service.content();
+		return service.notice_update();
 	}
 	
-	@RequestMapping("/client/notice/update")
-	public String update()
+	@RequestMapping("/notice_updateOk")
+	public String notice_updateOk()
 	{
-		return service.update();
+		return service.notice_updateOk();
 	}
 	
-	@RequestMapping("/client/notice/updateOk")
-	public String updateOk()
+	@RequestMapping(/notice_delete")
+	public String notice_delete()
 	{
-		return service.updateOk();
-	}
-	
-	@RequestMapping("/client/notice/delete")
-	public String delete()
-	{
-		return service.delete();
+		return service.notice_delete();
 	}
 */
 }

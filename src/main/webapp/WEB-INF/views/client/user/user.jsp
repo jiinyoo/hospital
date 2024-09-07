@@ -52,6 +52,7 @@
     color: white;
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease;
   }
 
   .form-group input[type="submit"]:hover {

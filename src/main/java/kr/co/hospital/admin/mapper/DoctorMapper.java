@@ -24,4 +24,6 @@ public interface DoctorMapper {
 	public int getDocid(String doc_userid);
 	public void addWorkday(WorkdayDto wdto);
 	public ArrayList<WorkdayDto> getWorkday(int doc_id);
+	public void delWorkday(int doc_id);
+	
 }

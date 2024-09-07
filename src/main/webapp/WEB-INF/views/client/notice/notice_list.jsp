@@ -17,18 +17,21 @@
       <td> 조회수 </td>
       <td> 작성일 </td>
     </tr>
+    <c:forEach items="${nmapAll}" var="ndto">
     <tr align="center">
       <td align="left"> 
-       <a href="readnum?id=${ndto.id}">${ndto.title}</a>
+       <a href="notice_readnum?id=${ndto.notice_id}">${ndto.title}</a>
       </td>
       <td> 관리자 </td>
       <td> ${ndto.readnum} </td>
       <td> ${ndto.writeday} </td>
     </tr>  
+    </c:forEach>
    </table>
-   <c:if test="${userid=='admin'}">
+   
+   <c:if test="${user_id=='admin'}">
      <div class="" align="center">
-       <a href="write"> 글 작성 </a>
+       <a href="notice_write"> 글 작성 </a>
      </div>
    </c:if>
  </section>

@@ -14,10 +14,10 @@
     <div> ${ndto.readnum} </div>
     <div> ${ndto.content} </div>
     <div>
-      <a href="list"> 목록 </a>
-     <c:if test="${userid=='admin'}">
-      <a href="update?id=${ndto.id}"> 수정 </a>
-      <a href="update?id=${ndto.id}"> 삭제 </a>
+      <a href="notice_list"> 목록 </a>
+     <c:if test="${user_id=='admin'}">
+      <a href="notice_update?id=${ndto.id}"> 수정 </a>
+      <a href="notice_update?id=${ndto.id}"> 삭제 </a>
      </c:if>
     </div>
   </section>
