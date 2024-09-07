@@ -1,12 +1,21 @@
 package kr.co.hospital.client.service;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +24,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.service.AdminMainService;
 import kr.co.hospital.client.dto.NoticeDto;
 import kr.co.hospital.client.mapper.NoticeMapper;
+import kr.co.hospital.util.FileUtils;
 
 @Service
 @Qualifier("noti")
@@ -24,7 +34,8 @@ public class NoticeServicelmpl  implements NoticeService {
 	private NoticeMapper mapper;
 	
 	@Override
-	public String notice_write(HttpSession session, Model model)
+	public String notice_write(HttpSession session, 
+			Model model)
 	{
 		if(session.getAttribute("user_id")!=null)
 		{
@@ -39,10 +50,34 @@ public class NoticeServicelmpl  implements NoticeService {
 	}
 	
 	@Override
-	public String notice_writeOk(NoticeDto ndto)
+	public String notice_writeOk(NoticeDto ndto,
+			HttpSession session,
+			MultipartHttpServletRequest multi) throws Exception
 	{
+		String user_id=session.getAttribute("user_id").toString();
+		ndto.setUser_id(user_id);
+		Iterator<String> imsi=multi.getFileNames();
+		
+		String fname="";
+		while(imsi.hasNext()) 
+		{
+			String name=imsi.next();
+			MultipartFile file=multi.getFile(name);
+			if(!file.isEmpty()) 
+			{
+				String preName=file.getOriginalFilename();
+				String str=ResourceUtils.getFile("classpath:static/client/notice").toPath().toString()+"/"+preName;			
+				str=FileUtils.getFileName(preName,str);
+				String saveFname=str.substring(str.lastIndexOf("/")+1);
+				fname=fname+saveFname+"/";
+				Path path=Paths.get(str);
+				Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
+			}
+		}
+		ndto.setImg(fname);
+		
 		mapper.notice_writeOk(ndto);
-		return "redirect:/notice/notice_list";
+		return "redirect:/notice_list";
 	}
 
 	@Override
@@ -67,6 +102,59 @@ public class NoticeServicelmpl  implements NoticeService {
 			response.addCookie(cookie);
 			return "redirect:/main/login";
 		}
+	}
+
+	@Override
+	public String notice_readnum(HttpServletRequest request) 
+	{
+		String notice_id=request.getParameter("notice_id");
+		mapper.notice_readnum(notice_id);
+		return "redirect:/notice_content?notice_id="+notice_id;
+	}
+
+	@Override
+	public String notice_content(HttpServletRequest request, 
+			HttpSession session,
+			Model model) 
+	{
+		String user_id=session.getAttribute("user_id").toString();
+		String notice_id=request.getParameter("notice_id");
+		
+		NoticeDto ndto=mapper.notice_content(notice_id);
+		model.addAttribute("ndto",ndto);
+		model.addAttribute("user_id",user_id);
+		return "/client/notice/notice_content";
+	}
+
+	@Override
+	public String notice_update(HttpServletRequest request, 
+			Model model)
+	{
+		String user_id=request.getParameter("user_id");
+		String notice_id=request.getParameter("notice_id");
+		
+		NoticeDto ndto=mapper.notice_content(notice_id);
+		model.addAttribute("ndto",ndto);
+		return "/client/notice/notice_update";
+	}
+
+	@Override
+	public String notice_updateOk(NoticeDto ndto, 
+			HttpServletRequest request) 
+	{
+		String notice_id=request.getParameter("notice_id");
+		mapper.notice_updateOk(ndto);
+		return "redirect:/notice/notice_content";
+	}
+
+	@Override
+	public String notice_delete(HttpServletRequest request) 
+	{
+		String user_id=request.getParameter("user_id");
+		String notice_id=request.getParameter("notice_id");
+			
+		mapper.notice_delete(user_id,notice_id);
+		return "redirect:/notice_list";
 	}
 
 }

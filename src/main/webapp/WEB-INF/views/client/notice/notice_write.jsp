@@ -186,16 +186,13 @@
 </head>
 <body>
  <section>
-   <form method="post" action="notice_writeOk">
+   <form method="post" action="notice_writeOk" enctype="multipart/form-data">
      <caption> <h3> 공지 글쓰기 </h3> </caption>
      <div> 
      	<input type="text" name="title" placeholder="제 목"> 
      </div>
      <div> 
      	<textarea name="content" placeholder="내 용"> </textarea>
-     </div>
-     <div> 
-     	
      </div>
      <div id="outer"> 
        <h4> 사진 등록 </h4>

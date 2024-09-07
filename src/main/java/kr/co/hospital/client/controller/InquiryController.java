@@ -33,7 +33,7 @@ public class InquiryController {
 	
 	@RequestMapping("/inquiry/list")
 	public String inquirylist(HttpSession session,Model model,HttpServletResponse response)  {
-		return service.list(session, model);
+		return service.list(session, model,response);
 	}
 	
 	

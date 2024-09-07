@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.hospital.client.mapper.NoticeMapper">
-  <insert id="notice_writeOk" parameterType="kr.co.hospital.client.dto.NoticeDto">
-    insert into notice(user_id,title,content,writeday)
-    values(#{user_id},#{title},#{content},now())
+  <insert id="notice_writeOk">
+    insert into notice(user_id,title,content,img,writeday)
+    values(#{user_id},#{title},#{content},#{img},now())
   </insert>
   <select id="notice_list" resultType="HashMap">
     select * from notice

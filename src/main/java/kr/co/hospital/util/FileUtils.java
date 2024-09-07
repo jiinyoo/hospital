@@ -34,7 +34,9 @@ public class FileUtils {
 			if(str.substring(0,str.lastIndexOf("/")).equals("C:\\springboot\\hospital\\target\\classes\\static\\admin\\programfile")) {
 				str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+newFname;
 			}else if(str.substring(0,str.lastIndexOf("/")).equals("C:\\springboot\\hospital\\target\\classes\\static\\client\\inquiryfile")) {
-				str=ResourceUtils.getFile("classpath:static/client/inquiryfile").toPath().toString()+"/"+newFname;
+				str=ResourceUtils.getFile("classpath:static/client/notice").toPath().toString()+"/"+newFname;
+			}else if(str.substring(0,str.lastIndexOf("/")).equals("C:\\springboot\\hospital\\target\\classes\\static\\client\\notice")) {
+				str=ResourceUtils.getFile("classpath:static/client/notice").toPath().toString()+"/"+newFname;
 			}
 			ff=new File(str);
 		}
