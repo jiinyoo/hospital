@@ -27,10 +27,9 @@
 	    padding: 10px; /* 셀 내부 여백 조정 */
 	    height: 30px;  /* 셀 높이 명확히 설정 */
 	}
-
-
 </style>
-
+<script>
+</script>
 
 </head>
 <body>
@@ -51,7 +50,7 @@
 	</tr>
 	</c:forEach>
 <tr align="right">
-	<td colspan="4"><a href="../../boardwrite"><input type="button" value="글쓰기"></a></td>
+	<td colspan="4"><a href="../../boardwrite"><input type="button" value="글쓰기" ></a></td>
 </tr>
 </table>
 </body>

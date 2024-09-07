@@ -33,12 +33,19 @@ public class InquiryController {
 	
 	@RequestMapping("/inquiry/list")
 	public String inquirylist(HttpSession session,Model model,HttpServletResponse response)  {
-		return service.list(session, model);
+		return service.list(session, model,response);
 	}
-	
-	
 	@RequestMapping("/inquiry/readnum") 
 	public String inquiryreadnum(HttpServletRequest request,HttpSession session) {
 		return service.readnum(request); 
+	}
+	@RequestMapping("/inquiry/content") 
+	public String inquirycontent(HttpServletRequest request,Model model,HttpSession session) {
+		return service.content(request, model,session); 
+	}
+	
+	@RequestMapping("/inquiry/delete") 
+	public String inquirydelte(HttpServletRequest request,HttpSession session) {
+		return service.delete(request,session); 
 	}
 }
