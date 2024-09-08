@@ -189,12 +189,33 @@
 		  }
 		  
 	}
+	
+	// 기존 이미지를 클릭하면 삭제하는 함수
+    function removeExistingImage(index, imgPath) {
+        // 사용자가 정말 삭제할지 물어보기
+        var confirmation = confirm("이 이미지를 삭제하시겠습니까?");
+        if (confirmation) {
+            // 클릭된 이미지 요소 가져오기
+            var imgElement = document.getElementById('img' + index);
+            
+            // 이미지 요소 숨기기 (또는 삭제)
+            imgElement.style.display = 'none';
+            
+            // 삭제된 이미지를 서버로 전달하는 로직 추가 (필요할 경우)
+            // 예: hidden input을 추가하여 삭제된 이미지를 서버로 전달
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'deletedImages';
+            input.value = imgPath; // 삭제할 이미지 경로를 서버로 전송
+            document.querySelector('form').appendChild(input);
+        }
+    }
 </script>
 </head>
 <body>
  <section>
    <form method="post" action="notice_updateOk" enctype="multipart/form-data">
-   <input type="hidden" id="user_id" value="${ndto.user_id}">
+   <input type="hidden" id="notice_id" value="${ndto.notice_id}">
      <caption> <h3> 공지사항 글 수정 </h3></caption>
      
      <div> 
@@ -206,7 +227,16 @@
      </div>
      
      <div id="outer"> 
-       <h4> 사진 등록 </h4>
+       <h4> 사진 수정 </h4>
+       <hr>
+       <div>
+      	 <c:forEach items="${ndto.img.split('/')}" var="img">
+         	<img src="/static/client/notice/${ndto.img}" 
+         	 onclick="removeExistingImage(${status.index}, '/static/client/notice/${img}')"
+         	 style="max-width: 20%; height: auto;">
+    	   </c:forEach>
+       </div>
+       <hr>
        <div> 
      		<input type="button" value="추가" onclick="add()"> 
      		<input type="button" value="삭제" onclick="del()"> 
@@ -216,7 +246,6 @@
            <input type="file" id="fileUp0" name="fname0" class="file" onchange="previewImage(event)"> 
         
            <span class="img"> 
-        
            </span>
        </div>
      </div>

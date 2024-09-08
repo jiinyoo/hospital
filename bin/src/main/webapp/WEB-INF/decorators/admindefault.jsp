@@ -92,8 +92,8 @@
 
 <div class="sub-header">
     <a href="#">관리자 페이지 메인</a>
-    <a href="#">운영 홈페이지 가기</a>
-    <a href="#">관리자 로그아웃</a>
+    <a href="/main/index">운영 홈페이지 가기</a>
+    <a href="/login/logout">관리자 로그아웃</a>
 </div>
 
 <div class="container">
@@ -106,17 +106,17 @@
             </li>
             <li><span class="maincate">의사 전용탭</span>
                 <ul>
-                    <li><a href="#">의사 정보 등록</a></li>
-                    <li><a href="#">환자진료</a></li>
-                    <li><a href="#">진료 기록 조회</a></li>
+                    <li><a href="/admin/doctor/addDoctor">의사 정보 등록</a></li>
+                    <li><a href="/admin/medical/patient">환자진료</a></li>
+                    <li><a href="/admin/medical/afterMedi">진료 기록 조회</a></li>
                 </ul>
             </li>
-            <li><span class="maincate"><a href="../admin/doctor?doc_part=">진료과 소개</a></span>
+            <li><span class="maincate"><a href="/admin/doctor/doctor?doc_part=">진료과 소개</a></span>
                 <ul>
-                    <li><a href="../admin/doctor?doc_part=정신과">정신과</a></li>
-                    <li><a href="../admin/doctor?doc_part=내분비과">내분비과</a></li>
-                    <li><a href="../admin/doctor?doc_part=치과">치과</a></li>
-                    <li><a href="../admin/doctor?doc_part=이비인후과">이비인후과</a></li>
+                    <li><a href="/admin/doctor/doctor?doc_part=정신과">정신과</a></li>
+                    <li><a href="/admin/doctor/doctor?doc_part=내분비과">내분비과</a></li>
+                    <li><a href="/admin/doctor/doctor?doc_part=치과">치과</a></li>
+                    <li><a href="/admin/doctor/doctor?doc_part=이비인후과">이비인후과</a></li>
                 </ul>
             </li>
             <li><span class="maincate">상담/예약/진료</span>
@@ -128,7 +128,7 @@
             </li>
             <li><span class="maincate">프로그램 관리</span>
                 <ul>
-                    <li><a href="#">프로그램 등록</a></li>
+                    <li><a href="/admin/program/program">프로그램 등록</a></li>
                     <li><a href="#">프로그램 예약 관리</a></li>
                 </ul>
             </li>

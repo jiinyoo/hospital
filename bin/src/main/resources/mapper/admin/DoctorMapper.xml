@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hospital.admin.mapper.DoctorMapper">
+	<select id="doctor" resultType="kr.co.hospital.admin.dto.DoctorDto">
+		select * from doctor where doc_part like concat(#{doc_part},'%') order by writeday asc
+	</select>
+	<select id="view" resultType="kr.co.hospital.admin.dto.DoctorDto">
+		select * from doctor where doc_id=#{doc_id}
+	</select>
+	<select id="getState" resultType="int">
+		select state from user where user_id=#{user_id}
+	</select>
+	<select id="isDoctor" resultType="boolean">
+		select count(*) from doctor
+		where doc_userid=#{userid}
+	</select>
+	<select id="getName" resultType="Hashmap">
+		select * from user 
+		where user_id=#{userid}
+	</select>
+	<insert id="addDoctorOk">
+		insert into doctor (doc_name,doc_part,doc_img,doc_history,doc_phone,doc_userid,writeday)
+		values (#{doc_name},#{doc_part},#{doc_img},#{doc_history},#{doc_phone},#{doc_userid},now())
+	</insert>
+	<select id="upDoctor" resultType="kr.co.hospital.admin.dto.DoctorDto">
+		select * from doctor where doc_userid=#{userid}
+	</select>
+	<update id="upDoctorOk">
+		update doctor set doc_part=#{doc_part}, doc_phone=#{doc_phone}, doc_history=#{doc_history}, doc_img=#{doc_img}
+		where doc_userid=#{doc_userid}
+	</update>
+</mapper>

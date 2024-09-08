@@ -44,8 +44,20 @@ public class InquiryController {
 		return service.content(request, model,session); 
 	}
 	
+	@RequestMapping("/inquiry/update") 
+	public String inquiryupdate(HttpServletRequest request,HttpSession session,Model model) throws Exception{
+		return service.update(request,session,model); 
+	}
+	
+
 	@RequestMapping("/inquiry/delete") 
-	public String inquirydelte(HttpServletRequest request,HttpSession session) throws Exception{
+	public String inquirydelte(HttpServletRequest request, HttpSession session) throws Exception{
 		return service.delete(request,session); 
+	}
+	
+	
+	@RequestMapping("/inquiry/updateOk") 
+	public String inquiryupdateOk(InquiryDto idto,HttpServletRequest request,HttpSession session,MultipartHttpServletRequest multi) throws Exception{
+		return service.updateOk(idto,request,session,multi); 
 	}
 }

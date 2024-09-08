@@ -61,16 +61,19 @@ public class NoticeController {
 	
 	@RequestMapping("/notice_update")
 	public String notice_update(HttpServletRequest request,
-			Model model)
+			Model model,HttpSession session)
 	{
-		return service.notice_update(request, model);
+		return service.notice_update(request, model,session);
 	}
 	
 	@RequestMapping("/notice_updateOk")
 	public String notice_updateOk(NoticeDto ndto,
-			HttpServletRequest request, MultipartHttpServletRequest multi) throws Exception 
+			HttpServletRequest request, 
+			MultipartHttpServletRequest multi) throws Exception 
 	{
-		return service.notice_updateOk(ndto,request,multi);
+		service.notice_updateOk(ndto,request,multi);
+		
+		return "redirect:/notice_content?notice_id=" + ndto.getNotice_id();
 	}
 	
 	@RequestMapping("/notice_delete")

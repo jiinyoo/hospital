@@ -19,8 +19,8 @@
   </select>
   <update id="notice_updateOk" parameterType="kr.co.hospital.client.dto.NoticeDto">
     update notice
-    set user_id=#{user_id}, title=#{title}, content=#{content}, img=#{img}
-    where notice_id=#{notice_id}
+    set title=#{title}, content=#{content}, img=#{img}
+    where user_id=#{user_id}
   </update>
   <delete id="notice_delete">
     delete from notice

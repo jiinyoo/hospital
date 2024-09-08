@@ -14,7 +14,7 @@ public interface NoticeService {
 	public String notice_list(Model model, HttpSession session, HttpServletResponse response);
 	public String notice_readnum(HttpServletRequest request);
 	public String notice_content(HttpServletRequest request, HttpSession session, Model model);
-	public String notice_update(HttpServletRequest request, Model model);
+	public String notice_update(HttpServletRequest request, Model model, HttpSession session);
 	public String notice_updateOk(NoticeDto ndto,HttpServletRequest request, MultipartHttpServletRequest multi)throws Exception ;
 	public String notice_delete(HttpServletRequest request);
 
