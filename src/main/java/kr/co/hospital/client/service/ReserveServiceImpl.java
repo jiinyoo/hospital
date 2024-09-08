@@ -30,12 +30,17 @@ public class ReserveServiceImpl implements ReserveService {
 	private ReserveMapper mapper;
 
 	@Override
-	public String reserve(HttpServletRequest request,Model model,HttpSession session) {
+	public String reserve(HttpServletRequest request,Model model,HttpSession session,
+			HttpServletResponse response) {
 		if(session.getAttribute("user_id")==null) {
 			String user_id=request.getParameter("user_id")==null?"":request.getParameter("user_id");
 			String user_phone=request.getParameter("user_phone")==null?"":request.getParameter("user_phone");
 			String user_jumin=request.getParameter("user_jumin")==null?"":request.getParameter("user_jumin");
 			if(user_id.isEmpty() || user_phone.isEmpty() || user_jumin.isEmpty()) {
+				Cookie url=new Cookie("url", "/main/reserve");
+				url.setMaxAge(500);
+				url.setPath("/");
+				response.addCookie(url);
 				return "redirect:/main/beforeReserve";				
 			} else {
 				
