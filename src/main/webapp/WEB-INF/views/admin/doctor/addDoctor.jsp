@@ -201,6 +201,17 @@
 	}
 	
 	.btn:hover { background: #5C1DB5;}
+	
+	#doc_part {
+		width:100px;
+		height: 30px;
+		border: 1px solid transparent;
+		outline: none;
+	}
+	
+	#doc_part:hover {
+		border:1px solid #ccc;
+	}
 </style>
 </head>
 <body>
@@ -213,7 +224,14 @@
 		<th>성함 </th>
 		<td><input type="text" name="doc_name" value="${user.user_name}" readonly style="pointer-events: none;border:none;"></td>
 		<th>분야</th>
-		<td><input type="text" name="doc_part" placeholder="분야"></td>
+		<td>
+			<select name="doc_part" id="doc_part">
+				<option>정신과</option>
+				<option>내분비과</option>
+				<option>치과</option>
+				<option>이비인후과</option>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<th>연락처</th>

@@ -14,7 +14,7 @@ import kr.co.hospital.client.dto.ReserveDto;
 
 public interface ReserveService {
 
-	public String reserve(HttpServletRequest request,Model model,HttpSession session);
+	public String reserve(HttpServletRequest request,Model model,HttpSession session, HttpServletResponse response);
 	public ArrayList<HashMap> chkpart(HttpServletRequest request);
 	public HashMap chkDoc(HttpServletRequest request);
 	public Map getCal(HttpServletRequest request);

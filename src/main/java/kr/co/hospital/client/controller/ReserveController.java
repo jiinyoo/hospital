@@ -26,8 +26,9 @@ public class ReserveController {
 	private ReserveService service;
 	
 	@RequestMapping("/main/reserve")
-	public String reserve(HttpServletRequest request,Model model,HttpSession session) {
-		return service.reserve(request,model,session);
+	public String reserve(HttpServletRequest request,Model model,HttpSession session,
+			HttpServletResponse response) {
+		return service.reserve(request,model,session,response);
 	}
 	
 	@RequestMapping("/main/beforeReserve")
