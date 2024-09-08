@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hospital.admin.mapper.ProgramMapper">
+	<select id="programs" resultType="kr.co.hospital.admin.dto.ProgramDto">
+		select * from program
+		order by pro_ju asc
+	</select>
+	<update id="programupdate">
+    update program
+    set 
+        pro_name=#{pro_name},
+        pro_info=#{pro_info},
+        teach_name=#{teach_name},
+        pro_time=#{pro_time},
+        pro_inwon=#{pro_inwon},
+        pro_part=#{pro_part},
+        pro_img=#{pro_img}
+    where pro_ju=#{pro_ju}
+</update>
+
+</mapper>

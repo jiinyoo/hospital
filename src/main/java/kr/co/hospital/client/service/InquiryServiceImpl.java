@@ -1,7 +1,6 @@
 package kr.co.hospital.client.service;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.InquiryDto;
 import kr.co.hospital.client.mapper.InquiryMapper;
 import kr.co.hospital.client.service.*;
-import kr.co.hospital.util.FileUtils;
+import kr.co.hospital.util.InquiryFileUtils;
 
 @Service
 @Qualifier("ISI")
@@ -51,8 +50,7 @@ public class InquiryServiceImpl implements InquiryService {
 					String preName=file.getOriginalFilename();
 					String str=ResourceUtils.getFile("classpath:static/client/inquiryfile").toPath().toString()+"/"+preName;
 					//System.out.println("되나"+str.substring(0,str.lastIndexOf("/")));
-					str=FileUtils.getFileName(preName,str);
-					System.out.println("str"+str);
+					str=InquiryFileUtils.getFileName(preName,str);
 					String saveFname=str.substring(str.lastIndexOf("/")+1);
 					fname=fname+saveFname+"/";
 					Path path=Paths.get(str);
@@ -61,6 +59,7 @@ public class InquiryServiceImpl implements InquiryService {
 			}
 			idto.setImg(fname);
 			int group_order=mapper.groupNumber();
+			System.out.println("group_order"+group_order);
 			idto.setGroup_order(group_order);
 			mapper.writeOk(idto);
 			return "redirect:/inquiry/list";
@@ -137,6 +136,68 @@ public class InquiryServiceImpl implements InquiryService {
 		}else {
 			return "redirect:/main/login";
 		}
+	}
+
+	@Override
+	public String update(HttpServletRequest request, HttpSession session, Model model) {
+		String inq_id=request.getParameter("inq_id");
+		String session_user_id=null;
+		if(session.getAttribute("user_id")!=null) {
+			session_user_id=session.getAttribute("user_id").toString();
+			InquiryDto idto=mapper.content(inq_id);
+			String img=idto.getImg();
+			String[] imgs=idto.getImg().split("/");
+			model.addAttribute("img",img);
+			model.addAttribute("imgs",imgs);
+			model.addAttribute("idto",idto);
+			return "/client/inquiry/update";
+		}else {
+			return "redirect:/main/login";
+		}
+	}
+
+	@Override
+	public String updateOk(InquiryDto idto,HttpServletRequest request, HttpSession session,MultipartHttpServletRequest multi) throws Exception {
+		String user_id=null;
+		String inq_id=request.getParameter("inq_id");
+		Iterator<String> imsi=multi.getFileNames();
+		if(session.getAttribute("user_id")!=null) {
+			user_id=session.getAttribute("user_id").toString();
+			String fname=""; //서버에 저장된 파일명
+			while(imsi.hasNext()) {
+				String name=imsi.next();
+				MultipartFile file=multi.getFile(name);
+				if(!file.isEmpty()) {
+					String preName=file.getOriginalFilename();
+					String str=ResourceUtils.getFile("classpath:static/client/inquiryfile").toPath().toString()+"/"+preName;
+					//System.out.println("되나"+str.substring(0,str.lastIndexOf("/")));
+					str=InquiryFileUtils.getFileName(preName,str);
+					String saveFname=str.substring(str.lastIndexOf("/")+1);
+					fname=fname+saveFname+"/";
+					Path path=Paths.get(str);
+					Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
+				}
+			}
+			String safeimgs=request.getParameter("safeimg");
+			fname=fname+safeimgs;
+			fname=fname.replace("null/","" );
+			idto.setImg(fname);
+			
+			String delimgs=request.getParameter("delimg");
+			String[] deleteimgs=delimgs.split("/");
+			String path=ResourceUtils.getFile("classpath:static/client/inquiryfile").toPath().toString();
+			for(int i=0; i<deleteimgs.length; i++) {
+				File file=new File(path+"/"+deleteimgs[i]);
+				if(file.exists()) {
+					file.delete();
+				}
+			}
+			mapper.updateOk(idto);
+			return "redirect:/inquiry/content?inq_id="+inq_id;
+		} else {
+			return "redirect:/main/login"; 
+		}
+		
 	}
 
 }

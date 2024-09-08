@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hospital.client.mapper.UserMapper">
+  <insert id="userOk" parameterType="kr.co.hospital.client.dto.UserDto">
+    insert into user(user_id,user_pwd,user_name,user_phone,user_email,user_jumin,user_addr,writeday)
+    values(#{user_id},#{user_pwd},#{user_name},#{user_phone},#{user_email},#{user_jumin},#{user_addr},now())
+  </insert>
+  
+  <select id="useridCheck" resultType="String">
+    select count(*) from user
+    where user_id=#{user_id}
+  </select>
+</mapper>

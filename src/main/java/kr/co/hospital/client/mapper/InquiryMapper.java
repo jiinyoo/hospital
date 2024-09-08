@@ -17,5 +17,6 @@ public interface InquiryMapper {
 	public InquiryDto content(String inq_id);
 	public int groupNumber();
 	public void delete(String inq_id);
+	public void updateOk(InquiryDto idto);
 
 }

@@ -15,6 +15,8 @@ public interface InquiryService {
 	public String readnum(HttpServletRequest request);
 	public String content(HttpServletRequest request, Model model,HttpSession session);
 	public String delete(HttpServletRequest request, HttpSession session) throws Exception;
+	public String update(HttpServletRequest request, HttpSession session, Model model);
+	public String updateOk(InquiryDto idto,HttpServletRequest request, HttpSession session,MultipartHttpServletRequest multi) throws Exception;
 	
 	
 }

@@ -28,4 +28,10 @@
 		delete from inquiry
 		where inq_id=#{inq_id}
 	</delete>
+	<update id="updateOk">
+		update inquiry
+		set title=#{title},content=#{content},
+		part=#{part},bimil=#{bimil},img=#{img}
+		where inq_id=#{inq_id}
+	</update>
 </mapper>
