@@ -190,32 +190,42 @@
 		  
 	}
 	
-	// 기존 이미지를 클릭하면 삭제하는 함수
-    function removeExistingImage(index, imgPath) {
-        // 사용자가 정말 삭제할지 물어보기
-        var confirmation = confirm("이 이미지를 삭제하시겠습니까?");
-        if (confirmation) {
-            // 클릭된 이미지 요소 가져오기
-            var imgElement = document.getElementById('img' + index);
-            
-            // 이미지 요소 숨기기 (또는 삭제)
-            imgElement.style.display = 'none';
-            
-            // 삭제된 이미지를 서버로 전달하는 로직 추가 (필요할 경우)
-            // 예: hidden input을 추가하여 삭제된 이미지를 서버로 전달
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'deletedImages';
-            input.value = imgPath; // 삭제할 이미지 경로를 서버로 전송
-            document.querySelector('form').appendChild(input);
-        }
-    }
+	function check()
+	  {
+		  var delimg="";  // 삭제할 이미지
+		  var safeimg=""; // 삭제하지 않는 이미지
+		  var imgList=document.getElementsByClassName("imgList");
+		  
+		  for(i=0;i<imgList.length;i++)
+		  {
+			  if(imgList[i].checked)
+			  {
+				  delimg=delimg+imgList[i].value+"/";
+			  }	  
+			  else
+			  {
+				  safeimg=safeimg+imgList[i].value+"/";
+			  }	  
+		  }
+	  
+		  // alert(delimg+"\n"+safeimg);
+		  
+		  // delimg, safeimg를 서버에 전송
+		  document.uform.delimg.value=delimg;
+		  document.uform.safeimg.value=safeimg;
+		  
+		  // 유효성검사를 넣어도 됩니다
+		  
+		  return true;
+	  }
 </script>
 </head>
 <body>
  <section>
-   <form method="post" action="notice_updateOk" enctype="multipart/form-data">
+   <form method="post" action="notice_updateOk" enctype="multipart/form-data" onsubmit="return check()">
    <input type="hidden" id="notice_id" value="${ndto.notice_id}">
+   <input type="hidden" name="delimg" >
+   <input type="hidden" name="safeimg" >
      <caption> <h3> 공지사항 글 수정 </h3></caption>
      
      <div> 
@@ -230,11 +240,12 @@
        <h4> 사진 수정 </h4>
        <hr>
        <div>
-      	 <c:forEach items="${imgs}" var="img">
-         	<img src="/static/client/notice/${ndto.img}" 
-         	 onclick="removeExistingImage(${status.index}, '/static/client/notice/${img}')"
-         	 style="max-width: 20%; height: auto;">
-    	   </c:forEach>
+      	 <c:forEach items="${nimgs}" var="img">
+      	 <c:if test="${nimg!=''}">
+         	<img src="/static/client/notice/${nimg}" style="max-width: 20%; height: auto;">
+         	<input type="checkbox" value="${nimg}">
+         </c:if>
+    	 </c:forEach>
        </div>
        <hr>
        <div> 

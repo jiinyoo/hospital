@@ -1,11 +1,13 @@
 package kr.co.hospital.client.service;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -25,6 +27,7 @@ import kr.co.hospital.admin.service.AdminMainService;
 import kr.co.hospital.client.dto.NoticeDto;
 import kr.co.hospital.client.mapper.NoticeMapper;
 import kr.co.hospital.util.FileUtils;
+import kr.co.hospital.util.NoticeUtils;
 
 @Service
 @Qualifier("noti")
@@ -70,7 +73,7 @@ public class NoticeServicelmpl  implements NoticeService {
 			{
 				String preName=file.getOriginalFilename();
 				String str=ResourceUtils.getFile("classpath:static/client/notice").toPath().toString()+"/"+preName;			
-				str=FileUtils.getFileName(preName,str);
+				str=NoticeUtils.getFileName(preName,str);
 				String saveFname=str.substring(str.lastIndexOf("/")+1);
 				fname=fname+saveFname+"/";
 				Path path=Paths.get(str);
@@ -126,15 +129,29 @@ public class NoticeServicelmpl  implements NoticeService {
 			HttpSession session,
 			Model model) 
 	{
+		
 		String notice_id=request.getParameter("notice_id");
 		
 		NoticeDto ndto=mapper.notice_content(notice_id);
-		
-		 String[] imgs=(ndto.getImg()!=null)?ndto.getImg().split("/"):new String[0];
-	    model.addAttribute("imgs",imgs);
+		if (ndto == null) {
+	        System.err.println("해당 notice_id에 대한 데이터를 찾을 수 없습니다: " + notice_id);
+	        return "redirect:/error_page";  // 에러 페이지로 리다이렉트
+	    }
+		System.out.println("공지사항 데이터: " + ndto);
+		 // 이미지가 null이 아니고 빈 값이 아닌 경우, '/'로 구분하여 imgs 배열에 저장
+	    if (ndto.getImg() != null && !ndto.getImg().isEmpty()) {
+	        String[] imgs = ndto.getImg().split("/");
+
+	        // imgs 배열이 올바르게 생성되었는지 디버깅 로그 출력
+	        System.out.println("imgs 배열: " + Arrays.toString(imgs));
+	        ndto.setImgs(imgs);  // NoticeDto 객체에 imgs 배열 설정
+	    } else {
+	        ndto.setImgs(new String[0]);  // 이미지가 없을 경우 빈 배열 설정
+	    }
+	    
 		model.addAttribute("ndto",ndto);
-		model.addAttribute("user_id",session.getAttribute("user_id").toString());
-		return "/client/notice/notice_content";
+		model.addAttribute("user_id", session.getAttribute("user_id").toString());
+		return "client/notice/notice_content";
 	}
 
 	@Override
@@ -142,36 +159,52 @@ public class NoticeServicelmpl  implements NoticeService {
 			Model model,
 			HttpSession session)
 	{
-		String user_id=request.getParameter("user_id");
+		
 		String notice_id=request.getParameter("notice_id");
+		String session_user_id=null;
+		if(session.getAttribute("user_id")!=null) 
+		{
+			session_user_id=session.getAttribute("user_id").toString();
 		
 		NoticeDto ndto=mapper.notice_content(notice_id);
-		
+		String img=ndto.getImg();
 		String[] imgs=ndto.getImg().split("/");
+		
+		model.addAttribute("img",img);
 		model.addAttribute("imgs",imgs);
 		model.addAttribute("ndto",ndto);
 		return "/client/notice/notice_update";
+	    }
+	    else
+	    {
+	    	return "redirect:/main/login";
+	    }
 	}
 
 	@Override
 	public String notice_updateOk(NoticeDto ndto, 
 			HttpServletRequest request, 
-			MultipartHttpServletRequest multi) throws Exception 
+			MultipartHttpServletRequest multi,
+			HttpSession session) throws Exception 
 	{
-		System.out.println(ndto);
+		//System.out.println(ndto);
+		String user_id=null;
 		String notice_id=request.getParameter("notice_id");
 	    Iterator<String> imsi = multi.getFileNames();  // 파일 이름 가져오기 위한 반복자
 	    
-	    String fname=(ndto.getImg()!=null)?ndto.getImg():"";  // 기본적으로 이전 파일 이름을 가져옴
-	    
-	    // 파일이 존재하는지 확인 후 처리
-	    while (imsi.hasNext()) {
+	    if(session.getAttribute("user_id")!=null) 
+	    {
+			user_id=session.getAttribute("user_id").toString();
+			String fname="";
+			while(imsi.hasNext()) 
+			{
 	        String name = imsi.next();  // 파일 이름 가져오기    
 	        MultipartFile file = multi.getFile(name);
-	        if (!file.isEmpty()) {
+	        if (!file.isEmpty()) 
+	        {
 	            String preName = file.getOriginalFilename();
 	            String str = ResourceUtils.getFile("classpath:static/client/notice").toPath().toString() + "/" + preName;            
-	            str = FileUtils.getFileName(preName, str);
+	            str = NoticeUtils.getFileName(preName, str);
 	            String saveFname = str.substring(str.lastIndexOf("/") + 1);
 	            fname+=saveFname+"/";  // 새로운 파일 이름으로 교체
 	            Path path = Paths.get(str);
@@ -179,9 +212,29 @@ public class NoticeServicelmpl  implements NoticeService {
 	        }
 	        
 	    }
+	    String safeimgs=request.getParameter("safeimg");
+	    fname=fname+safeimgs;
+		fname=fname.replace("null/","" );
+	    
 		ndto.setImg(fname);  
+		
+		String delimgs=request.getParameter("delimg");
+		String[] deleteimgs=delimgs.split("/");
+		String path=ResourceUtils.getFile("classpath:static/client/notice").toPath().toString();
+		for(int i=0; i<deleteimgs.length; i++) {
+			File file=new File(path+"/"+deleteimgs[i]);
+			if(file.exists()) {
+				file.delete();
+			}
+		}
+		
 		mapper.notice_updateOk(ndto);
 		return "redirect:/notice_content?notice_id="+notice_id;
+	    }
+	 else 
+	 {
+			return "redirect:/main/login"; 
+	 }
 	}
 
 	@Override

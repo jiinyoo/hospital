@@ -56,6 +56,17 @@ public class NoticeController {
 			HttpSession session, 
 			Model model)
 	{
+		String notice_id = request.getParameter("notice_id");
+
+	    // 디버깅 로그 추가: notice_id 값 확인
+	    System.out.println("notice_id: " + notice_id);
+
+	    // notice_id가 null이거나 비어있을 경우 처리
+	    if (notice_id == null || notice_id.isEmpty()) {
+	        System.err.println("notice_id가 null이거나 비어 있습니다.");
+	        return "redirect:/error_page";  // 에러 페이지로 리다이렉트
+	    }
+		
 		return service.notice_content(request,session,model);
 	}
 	
@@ -69,11 +80,11 @@ public class NoticeController {
 	@RequestMapping("/notice_updateOk")
 	public String notice_updateOk(NoticeDto ndto,
 			HttpServletRequest request, 
-			MultipartHttpServletRequest multi) throws Exception 
+			MultipartHttpServletRequest multi,
+			HttpSession session) throws Exception 
 	{
-		service.notice_updateOk(ndto,request,multi);
-		
-		return "redirect:/notice_content?notice_id=" + ndto.getNotice_id();
+		return service.notice_updateOk(ndto,request,multi,session);
+	
 	}
 	
 	@RequestMapping("/notice_delete")

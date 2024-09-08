@@ -128,16 +128,18 @@
 
       <div class="field-label">첨부된 이미지</div>
       <div class="img-container">
-         <c:forEach items="${imgs}" var="img">
+         <c:forEach items="${ndto.imgs}" var="img">
+          <c:if test="${img!=''}">
            <img src="/static/client/notice/${img}" alt="첨부 이미지">
+          </c:if>
          </c:forEach>
       </div>
 
       <div class="buttons" align="center">
         <a href="notice_list">목록</a>
         <c:if test="${user_id=='admin'}">
-          <a href="notice_update?notice_id=${ndto.notice_id}">수정</a>
-          <a href="notice_delete?notice_id=${ndto.notice_id}" class="delete">삭제</a>
+          <a href="../notice_update?notice_id=${ndto.notice_id}">수정</a>
+          <a href="../notice_delete?notice_id=${ndto.notice_id}" class="delete">삭제</a>
         </c:if>
       </div>
     </form>

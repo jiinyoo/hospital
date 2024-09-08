@@ -1,15 +1,10 @@
 package kr.co.hospital.util;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import org.springframework.util.ResourceUtils;
 
-// 자주 사용하는 메소드를 정의
-public class FileUtils {
-    
-	// 경로와 파일명이 전달되면 파일명 중복체크를 하여
-	// 중복되지 않는 파일명을 리턴해주는 메소드    파일명   ,  경로
+public class NoticeUtils {
 	public static String getFileName(String fname,String str) throws Exception
 	{
 		File ff=new File(str);
@@ -32,12 +27,13 @@ public class FileUtils {
 			String[] imsi=fname.split("[.]");   // a.jpg  =>  [a] [jpg]
 			String newFname=imsi[0]+code+"."+imsi[1];       // aabcd.jpg
 			
-			str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+newFname;
-
+			//str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+newFname;
+			str=ResourceUtils.getFile("classpath:static/client/notice").toPath().toString()+"/"+newFname;
 			
 			ff=new File(str);
 		}
 
 		return str;
 	}
+
 }
