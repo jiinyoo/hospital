@@ -2,24 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.hospital.admin.mapper.MedicalMapper">
 	<select id="afterMedi" resultType="Hashmap">
-		select m.*,u.user_jumin from medical m
-		inner join user u on m.user_id=u.user_id
+		select medical.*,reserve.user_jumin from medical
+		inner join reserve on medical.res_code=reserve.res_code
 		where ${stype} like concat('%',#{sword},'%') limit #{index},10
 	</select>
 	<select id="getChong" resultType="int">
-		select ceil(count(*)/10) from medical m
+		select ceil(count(*)/10)
+		from medical inner join reserve on medical.res_code=reserve.res_code
 		where ${stype} like concat('%',#{sword},'%')
 	</select>
-	
+	<select id="getDocidtoRes" resultType="String">
+		select doc_id from reserve where res_id=#{res_id}
+	</select>
 	<select id="getDocid" resultType="String">
 		select doc_id from doctor where doc_userid=#{userid}
 	</select>
 	<select id="getPatients" resultType="kr.co.hospital.admin.dto.ReserveDto">
-		select r.*,u.user_name from reserve r inner join user u on
-    <if test="doc_id != null and doc_id != ''">
-        doc_id = #{doc_id} and 
-    </if>
-    res_date >= CURDATE() and r.user_id=u.user_id
+	    select * from reserve where
+	    <if test="doc_id != null and doc_id != ''">
+	        doc_id=#{doc_id} and 
+	    </if>
+	    res_date >= CURDATE() and state=0 order by res_date asc, res_time asc
 	</select>
 	<select id="getName" resultType="String">
 		select user_name from user where user_id=#{userid}
@@ -39,8 +42,8 @@
 	<!-- patient Write -->
 	<insert id="medicalOk">
 		insert into medical
-		(user_id, user_name, doc_name, medi_content, medi_type, medi_part, medi_visit)
-		values (#{user_id},#{user_name},#{doc_name},#{medi_content},#{medi_type},#{medi_part},now())
+		(user_id, user_name, doc_name, medi_content, res_code, medi_type, medi_part, medi_visit)
+		values (#{user_id},#{user_name},#{doc_name},#{medi_content}, #{res_code}, #{medi_type},#{medi_part},now())
 	</insert>
 	<select id="getDocUserid" resultType="string">
 		select doc_userid from doctor
@@ -51,8 +54,8 @@
 	</update>
 	
 	<select id="mediView" resultType="kr.co.hospital.admin.dto.MedicalDto">
-		select m.*,u.user_jumin from medical m inner join
-		user u on m.user_id=u.user_id where m.medi_id=#{medi_id}
+		select m.*,r.user_jumin from medical m inner join
+		reserve r on m.res_code=r.res_code where m.medi_id=#{medi_id}
 	</select>
 
 </mapper>

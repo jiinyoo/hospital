@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.dto.MedicalDto;
 import kr.co.hospital.admin.dto.ReserveDto;
@@ -22,34 +24,71 @@ public class MedicalServiceImpl implements MedicalService {
 	private MedicalMapper mapper;
 
 	@Override
-	public String afterMedi(Model model,HttpServletRequest request) {
-		
-		String stype=request.getParameter("stype")==null?"m.user_name":request.getParameter("stype");
-		String sword=request.getParameter("sword")==null?"":request.getParameter("sword");
-		int page=request.getParameter("page")==null?1:Integer.parseInt(request.getParameter("page"));
-		int index=(page-1)*10;
-		int p=(page-1)/10;
-		int pstart=p*10+1;
-		int pend=pstart+9;
-		int chong=mapper.getChong(stype, sword);
-		if(chong<pend) {
-			pend=chong;
+	public String afterMedi(Model model,HttpServletRequest request,HttpSession session,
+			HttpServletResponse response) {
+		if(session.getAttribute("user_id")==null) {
+			Cookie url=new Cookie("url", "/admin/medical/afterMedi");
+			url.setMaxAge(500);
+			url.setPath("/");
+			response.addCookie(url);
+			return "redirect:/main/login";
+		} else {
+			String userid=session.getAttribute("user_id").toString();
+			if(mapper.getState(userid)!=0) {
+				String stype=request.getParameter("stype")==null?"user_name":request.getParameter("stype");
+				String sword=request.getParameter("sword")==null?"":request.getParameter("sword");
+				int page=request.getParameter("page")==null?1:Integer.parseInt(request.getParameter("page"));
+				int index=(page-1)*10;
+				int p=(page-1)/10;
+				int pstart=p*10+1;
+				int pend=pstart+9;
+				int chong=mapper.getChong(stype, sword);
+				if(chong<pend) {
+					pend=chong;
+				}
+				ArrayList<HashMap> mdto=mapper.afterMedi(index, stype, sword);
+				for(HashMap member : mdto) {
+					String jumin=member.get("user_jumin").toString();
+					String birth=jumin.substring(0,8);
+					jumin=birth+"******";
+					member.put("user_jumin", jumin);
+				}
+				 
+				model.addAttribute("page",page);
+				model.addAttribute("pstart",pstart);
+				model.addAttribute("pend",pend);
+				model.addAttribute("chong",chong);
+				model.addAttribute("mdto",mdto);
+				
+				return "/admin/medical/afterMedi";
+			} else {
+				return "redirect:/main/index";
+			}
 		}
-		ArrayList<HashMap> mdto=mapper.afterMedi(index, stype, sword);
-		for(HashMap member : mdto) {
-			String jumin=member.get("user_jumin").toString();
-			String birth=jumin.substring(0,8);
-			jumin=birth+"******";
-			member.put("user_jumin", jumin);
-		}
-		 
-		model.addAttribute("page",page);
-		model.addAttribute("pstart",pstart);
-		model.addAttribute("pend",pend);
-		model.addAttribute("chong",chong);
-		model.addAttribute("mdto",mdto);
+	}
+	
+	@Override
+	public String afterMediView(HttpServletRequest request,Model model,HttpSession session,
+			HttpServletResponse response) {
+		String medi_id=request.getParameter("medi_id");
+		MedicalDto mdto=mapper.mediView(medi_id);
 		
-		return "/admin/medical/afterMedi";
+		if(session.getAttribute("user_id")==null) {
+			Cookie url=new Cookie("url", "/admin/medical/afterMedi");
+			url.setMaxAge(500);
+			url.setPath("/");
+			response.addCookie(url);
+			return "redirect:/main/login";
+		} else {
+			String userid=session.getAttribute("user_id").toString();
+			if(mapper.getState(userid)!=0) {
+				mdto.setMedi_types(mdto.getMedi_type().split("/"));
+				model.addAttribute("mdto",mdto);
+				return "/admin/medical/afterMediView";				
+			} else {
+				return "redirect:/main/index";
+			}
+		}
 	}
 
 	@Override
@@ -57,11 +96,17 @@ public class MedicalServiceImpl implements MedicalService {
 		ArrayList<ReserveDto> pdto=null;
 		if(session.getAttribute("user_id")!=null) {
 			String userid=session.getAttribute("user_id").toString();
+			int state=mapper.getState(userid);
+			model.addAttribute("state",state);
 			if(mapper.getState(userid)==2) {	// 관리자
 				pdto=mapper.getPatients("");
 				for(int i=0;i<pdto.size();i++) {
 					String user_name=mapper.getName(pdto.get(i).getUser_id());
-					pdto.get(i).setUser_name(user_name);
+					if(user_name==null) {
+						pdto.get(i).setUser_name(pdto.get(i).getUser_id()+"/<span style='font-size: smaller;'>비회원</span>");
+					} else {
+						pdto.get(i).setUser_name(user_name);						
+					}
 					String doc_name=mapper.getDocName(pdto.get(i).getDoc_id());
 					pdto.get(i).setDoc_name(doc_name);
 					String jumin=pdto.get(i).getUser_jumin();
@@ -74,14 +119,18 @@ public class MedicalServiceImpl implements MedicalService {
 				pdto=mapper.getPatients(doc_id);
 				for(int i=0;i<pdto.size();i++) {
 					String user_name=mapper.getName(pdto.get(i).getUser_id());
-					pdto.get(i).setUser_name(user_name);
+					if(user_name==null) {
+						pdto.get(i).setUser_name(pdto.get(i).getUser_id()+"/<span style='font-size: smaller;'>비회원</span>");
+					} else {
+						pdto.get(i).setUser_name(user_name);						
+					}
 					String jumin=pdto.get(i).getUser_jumin();
 					String birth=jumin.substring(0,8);
 					jumin=birth+"******";
 					pdto.get(i).setUser_jumin(jumin);
 				}
 			} else {
-				return "redirect/main";
+				return "redirect:/main/index";
 			}
 		} else {
 			return "redirect:/main/login";
@@ -97,16 +146,22 @@ public class MedicalServiceImpl implements MedicalService {
 		ReserveDto rdto=mapper.getPatient(res_id);
 	//	System.out.println(res_id);
 		if(session.getAttribute("user_id")!=null) {
-			String docName=session.getAttribute("user_id").toString();
-			if(docName.equals("admin") || docName.equals(rdto.getDoc_name())) {
+			String userid=session.getAttribute("user_id").toString();
+			if(mapper.getState(userid)!=0 && mapper.getDocid(userid).equals(mapper.getDocidtoRes(res_id))) {
 				String username=mapper.getName(rdto.getUser_id());
-				rdto.setUser_name(username);
+				if(username==null) {
+					rdto.setUser_name(rdto.getUser_id());
+				} else {
+					rdto.setUser_name(username);					
+				}
 				String userjumin=rdto.getUser_jumin();
 				String birth=userjumin.substring(0,8);
 				userjumin=birth+"*******";
 				rdto.setUser_jumin(userjumin);
 				
 				model.addAttribute("rdto",rdto);
+			} else {
+				return "redirect:/main/index";
 			}
 		} else {
 			return "redirect:/admin/medical/patient";
@@ -123,7 +178,9 @@ public class MedicalServiceImpl implements MedicalService {
 		} else {
 			String userid=session.getAttribute("user_id").toString();
 			if(userid.equals(mapper.getDocUserid(doc_id))) {
-				mdto.setDoc_name(mapper.getDocName(doc_id));				
+				mdto.setDoc_name(mapper.getDocName(doc_id));		
+				
+				System.out.println(mdto);
 				mapper.medicalOk(mdto);
 				mapper.upState(res_code);
 			} else {
@@ -133,14 +190,5 @@ public class MedicalServiceImpl implements MedicalService {
 		return "redirect:/admin/medical/patient";
 	}
 
-	@Override
-	public String mediView(HttpServletRequest request,Model model) {
-		String medi_id=request.getParameter("medi_id");
-		MedicalDto mdto=mapper.mediView(medi_id);
-		mdto.setMedi_types(mdto.getMedi_type().split("/"));
-		
-		model.addAttribute("mdto",mdto);
-		
-		return "/admin/medical/afterMediView";
-	}
+	
 }

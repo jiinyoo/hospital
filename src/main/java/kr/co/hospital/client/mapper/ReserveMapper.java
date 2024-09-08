@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.hospital.admin.dto.WorkdayDto;
 import kr.co.hospital.client.dto.ReserveDto;
+import kr.co.hospital.client.dto.UserDto;
 
 @Mapper
 public interface ReserveMapper {
@@ -19,4 +20,7 @@ public interface ReserveMapper {
 	public WorkdayDto getTime(String doc_id,int dayValue);
 	public ArrayList<ReserveDto> isReserve(String doc_id, LocalDate date);
 	public List<Integer> getWorkingday(String doc_id);
+	public int getResnum(String res_code);
+	public void reserveOk(ReserveDto rdto);
+	public UserDto getUserinfo(String userid);
 }

@@ -299,7 +299,7 @@
 		var chk4=document.getElementById("res_time");
 		chk4.value=time;
 		if(!chk1 || !chk2 || !chk3 || !chk4.value) {
-			alert("비상");
+			alert("잘못된 경로");
 		} else {
 			document.getElementById("reserveForm").submit();
 		}
@@ -307,12 +307,19 @@
 	
 	// window.onload시에 현재날짜 전역변수에 저장, getCal함수에 보내서 달력 생성
 	window.onload = function() {
+		var docParam=${param.doc_id==null?"-1":param.doc_id};
 	    var today = new Date();
 	    currentYear = today.getFullYear(); // 전역 변수에 저장
 	    currentMonth = today.getMonth() + 1; // 전역 변수에 저장
-	    
 	    // 페이지 로드 시 현재 월의 달력 로드
 	    getCal(currentYear, currentMonth);
+	    
+	    if (docParam !== "-1") {
+	        var doctorButton = document.querySelector('input[data-docid="' + docParam + '"]');
+	        if (doctorButton) {
+	            chkDoc(docParam, doctorButton);  // 해당 버튼을 선택하여 의사 선택 함수 호출
+	        }
+	    }
 	}
 
 </script>
@@ -334,7 +341,7 @@
         <div id="doc_list">
 	        <c:forEach var="doc" items="${doctor }">
 	        	<div>
-	        		<input type="button" class="doc_name" value="${doc.doc_name }" onclick="chkDoc(${doc.doc_id},this)">
+	        		<input type="button" class="doc_name" value="${doc.doc_name }" data-docid="${doc.doc_id}" onclick="chkDoc(${doc.doc_id},this)">
 	        		<span>${doc.doc_part }</span>
 	        	</div>
 	        </c:forEach>

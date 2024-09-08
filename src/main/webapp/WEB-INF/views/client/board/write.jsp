@@ -173,7 +173,7 @@ function imageUploader(file, el) {
      border:0.1px solid #ccc;
 	}
 
-	
+	ul {margin:0;}
 	#summernote {
     display: block; /* 블록 요소로 설정 */
     margin: 0 auto; /* 블록 요소의 가로 중앙 정렬 */

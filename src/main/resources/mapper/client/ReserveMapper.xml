@@ -6,11 +6,11 @@
 		group by doc_part
 	</select>
 	<select id="getDoctor" resultType="hashmap">
-		select * from doctor
+		select * from doctor order by doc_part asc
 	</select>
 	<select id="chkpart" resultType="Hashmap">
 		select doc_name,doc_id,doc_part from doctor
-		where doc_part like concat ('%',#{doc_part},'%')
+		where doc_part like concat ('%',#{doc_part},'%') order by doc_part asc
 	</select>
 	<select id="chkDoc" resultType="string">
 		select doc_part from doctor
@@ -27,5 +27,16 @@
 	<select id="getWorkingday" resultType="int">
 		select dayofweek from workday
 		where doc_id=#{doc_id}
+	</select>
+	<select id="getResnum" resultType="int">
+		select ifnull(max(right(res_code,3)),0)+1 from reserve
+		where res_code like concat(#{res_code},'%')
+	</select>
+	<insert id="reserveOk">
+		insert into reserve (doc_id, doc_part, user_id, user_phone, res_code, user_jumin, res_date, res_time, writeday)
+		values (#{doc_id},#{doc_part},#{user_id},#{user_phone},#{res_code},#{user_jumin},#{res_date},#{res_time},now())
+	</insert>
+	<select id="getUserinfo" resultType="kr.co.hospital.client.dto.UserDto">
+		select * from user where user_id=#{userid}
 	</select>
 </mapper>

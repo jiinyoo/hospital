@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.dto.MedicalDto;
 import kr.co.hospital.admin.service.MedicalService;
@@ -19,13 +20,15 @@ public class MedicalController {
 	private MedicalService service;
 	
 	@RequestMapping("/admin/medical/afterMedi")
-	public String afterMedi(Model model,HttpServletRequest request) {
-		return service.afterMedi(model, request);
+	public String afterMedi(Model model,HttpServletRequest request,HttpSession session,
+			HttpServletResponse response) {
+		return service.afterMedi(model, request, session,response);
 	}
 	
 	@RequestMapping("/admin/medical/afterMediView")
-	public String mediView(HttpServletRequest request,Model model) {
-		return service.mediView(request,model);
+	public String mediView(HttpServletRequest request,Model model,HttpSession session,
+			HttpServletResponse response) {
+		return service.afterMediView(request,model,session,response);
 	}
 	
 	@RequestMapping("/admin/medical/patient")
