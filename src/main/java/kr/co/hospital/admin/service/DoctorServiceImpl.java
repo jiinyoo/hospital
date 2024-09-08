@@ -71,6 +71,9 @@ public class DoctorServiceImpl implements DoctorService {
 			if(mapper.getState(userid)==0) {
 				return "redirect:/main/index";
 			} else {
+				if(mapper.isDoctor(userid)) {
+					return "redirect:/admin/doctor/upDoctor";
+				}
 				model.addAttribute("user",mapper.getName(userid));
 				return "admin/doctor/addDoctor";
 			}
