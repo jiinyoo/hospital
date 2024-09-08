@@ -14,7 +14,6 @@
     <div>
     	제 목
     </div>
-    
     <div> 
     	${ndto.title} 
     </div>
@@ -35,8 +34,8 @@
     </div>
     
     <div>
-       <c:forEach items="${ndto.imgs}" var="img" >
-         <img src="../static/client/notice/${ndto.img}" width="50" height="32" valign="middle">
+       <c:forEach items="${imgs}" var="img">
+         <img src="/static/client/notice/${img}" style="max-width: 100%; height: auto;">
        </c:forEach>
      </div>
      

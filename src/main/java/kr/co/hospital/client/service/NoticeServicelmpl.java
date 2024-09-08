@@ -121,6 +121,9 @@ public class NoticeServicelmpl  implements NoticeService {
 		String notice_id=request.getParameter("notice_id");
 		
 		NoticeDto ndto=mapper.notice_content(notice_id);
+		
+		String[] imgs=ndto.getImg().split("/");
+	    model.addAttribute("imgs",imgs);
 		model.addAttribute("ndto",ndto);
 		model.addAttribute("user_id",user_id);
 		return "/client/notice/notice_content";
@@ -142,9 +145,10 @@ public class NoticeServicelmpl  implements NoticeService {
 	public String notice_updateOk(NoticeDto ndto, 
 			HttpServletRequest request) 
 	{
+		System.out.println(ndto);
 		String notice_id=request.getParameter("notice_id");
 		mapper.notice_updateOk(ndto);
-		return "redirect:/notice/notice_content";
+		return "redirect:/notice_content?notice_id="+notice_id;
 	}
 
 	@Override

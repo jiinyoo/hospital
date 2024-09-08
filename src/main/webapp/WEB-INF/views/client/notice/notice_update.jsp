@@ -134,6 +134,12 @@
     .one label {
         margin-right: 10px;
     }
+    
+    textarea {
+    	resize:none;
+    	padding:9px;
+    	
+    }
 
 </style>
 <script>
@@ -186,14 +192,17 @@
 </head>
 <body>
  <section>
-   <form method="post" action="update">
+   <form method="post" action="notice_updateOk">
      <caption> <h3> 공지사항 글 수정 </h3></caption>
      
      <div> 
-     	<input type="text" name="title" value="${ndto.title}">
+     	<input type="text" name="title" value="${ndto.title}" placeholder="제 목">
+     </div>
+     <div>
+     	<input type="text" name="user_id" value="${user_id}">
      </div>
      <div> 
-     	<textarea name="content"> ${ndto.content} </textarea>
+     	<textarea name="content" placeholder="내 용"> ${ndto.content} </textarea>
      </div>
      
      <div id="outer"> 

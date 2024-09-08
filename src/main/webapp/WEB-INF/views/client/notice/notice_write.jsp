@@ -134,6 +134,11 @@
     .one label {
         margin-right: 10px;
     }
+    
+    textarea {
+    	resize:none;
+    	padding:9px;
+    }
 
 </style>
 <script>
@@ -167,18 +172,18 @@
 	
 	function previewImage(event) 
 	{
-		  var input=event.target; // 파일 입력 요소
+		  var input=event.target;
 		  var reader=new FileReader();
 
 		  reader.onload = function() 
 		  {
-			  var imgElement=input.nextElementSibling; // .img 요소 (span)
+			  var imgElement=input.nextElementSibling;
 			  imgElement.innerHTML="<img src='"+reader.result+" 'alt='이미지 미리보기' width='100px' height='100px'>";
 		  }
 
 		  if(input.files && input.files[0]) 
 		  {
-			  reader.readAsDataURL(input.files[0]); // 파일을 읽어서 Data URL로 변환
+			  reader.readAsDataURL(input.files[0]);
 		  }
 		  
 	}
@@ -192,7 +197,7 @@
      	<input type="text" name="title" placeholder="제 목"> 
      </div>
      <div> 
-     	<textarea name="content" placeholder="내 용"> </textarea>
+     	<textarea name="content" placeholder="내 용"></textarea>
      </div>
      <div id="outer"> 
        <h4> 사진 등록 </h4>
