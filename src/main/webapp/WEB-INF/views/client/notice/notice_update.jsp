@@ -230,7 +230,7 @@
        <h4> 사진 수정 </h4>
        <hr>
        <div>
-      	 <c:forEach items="${ndto.img.split('/')}" var="img">
+      	 <c:forEach items="${imgs}" var="img">
          	<img src="/static/client/notice/${ndto.img}" 
          	 onclick="removeExistingImage(${status.index}, '/static/client/notice/${img}')"
          	 style="max-width: 20%; height: auto;">
