@@ -1,4 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.hospital.client.mapper.ReserveMapper">
+	<select id="getPart" resultType="string">
+		select doc_part from doctor
+		group by doc_part
+	</select>
+	<select id="getDoctor" resultType="hashmap">
+		select * from doctor order by doc_part asc
+	</select>
+	<select id="chkpart" resultType="Hashmap">
+		select doc_name,doc_id,doc_part from doctor
+		where doc_part like concat ('%',#{doc_part},'%') order by doc_part asc
+	</select>
+	<select id="chkDoc" resultType="string">
+		select doc_part from doctor
+		where doc_id=#{doc_id}
+	</select>
+	<select id="getTime" resultType="kr.co.hospital.admin.dto.WorkdayDto">
+		select start_time,end_time from workday
+		where doc_id=#{doc_id} and dayofweek=#{dayValue}
+	</select>
+	<select id="isReserve" resultType="kr.co.hospital.client.dto.ReserveDto">
+		select res_time from reserve
+		where res_date=#{date} and doc_id=#{doc_id}
+	</select>
+	<select id="getWorkingday" resultType="int">
+		select dayofweek from workday
+		where doc_id=#{doc_id}
+	</select>
+	<select id="getResnum" resultType="int">
+		select ifnull(max(right(res_code,3)),0)+1 from reserve
+		where res_code like concat(#{res_code},'%')
+	</select>
+	<insert id="reserveOk">
+		insert into reserve (doc_id, doc_part, user_id, user_phone, res_code, user_jumin, res_date, res_time, writeday)
+		values (#{doc_id},#{doc_part},#{user_id},#{user_phone},#{res_code},#{user_jumin},#{res_date},#{res_time},now())
+	</insert>
+	<select id="getUserinfo" resultType="kr.co.hospital.client.dto.UserDto">
+		select * from user where user_id=#{userid}
+	</select>
 </mapper>

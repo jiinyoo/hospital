@@ -64,14 +64,19 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public String addDoctor(HttpSession session,Model model) {
-		String userid=session.getAttribute("user_id").toString();
-		if(session.getAttribute("user_id")==null || mapper.getState(userid)==0) {
+		if(session.getAttribute("user_id")==null) {
 			return "redirect:/main/index";
-		} else if(mapper.getState(userid)!=0 && !mapper.isDoctor(userid)) {
-			model.addAttribute("user", mapper.getName(userid));
-			return "admin/doctor/addDoctor";
 		} else {
-			return "redirect:/admin/doctor/upDoctor";
+			String userid=session.getAttribute("user_id").toString();
+			if(mapper.getState(userid)==0) {
+				return "redirect:/main/index";
+			} else {
+				if(mapper.isDoctor(userid)) {
+					return "redirect:/admin/doctor/upDoctor";
+				}
+				model.addAttribute("user",mapper.getName(userid));
+				return "admin/doctor/addDoctor";
+			}
 		}
 	}
 

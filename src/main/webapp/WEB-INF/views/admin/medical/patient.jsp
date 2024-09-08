@@ -59,7 +59,7 @@
 			<tr>
 				<th> 번호 </th>
 				<th> 성함 </th>
-				<c:if test="${user_id=='admin'}">
+				<c:if test="${state==2}">
 				<th> 담당의사 </th>
 				</c:if>
 				<th> 생년월일 </th>
@@ -70,7 +70,7 @@
 			<tr>
 				<td> ${pdto.res_id } </td>
 				<td> <a href="patientView?res_id=${pdto.res_id}">${pdto.user_name }</a> </td>
-				<c:if test="${user_id=='admin'}">
+				<c:if test="${state==2}">
 				<td> ${pdto.doc_name } </td>
 				</c:if>
 				<td> ${pdto.user_jumin }</td>
