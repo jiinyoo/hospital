@@ -68,9 +68,9 @@ public class NoticeController {
 	
 	@RequestMapping("/notice_updateOk")
 	public String notice_updateOk(NoticeDto ndto,
-			HttpServletRequest request)
+			HttpServletRequest request, MultipartHttpServletRequest multi) throws Exception 
 	{
-		return service.notice_updateOk(ndto,request);
+		return service.notice_updateOk(ndto,request,multi);
 	}
 	
 	@RequestMapping("/notice_delete")

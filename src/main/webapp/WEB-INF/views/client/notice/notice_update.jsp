@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -192,15 +193,14 @@
 </head>
 <body>
  <section>
-   <form method="post" action="notice_updateOk">
+   <form method="post" action="notice_updateOk" enctype="multipart/form-data">
+   <input type="hidden" id="user_id" value="${ndto.user_id}">
      <caption> <h3> 공지사항 글 수정 </h3></caption>
      
      <div> 
      	<input type="text" name="title" value="${ndto.title}" placeholder="제 목">
      </div>
-     <div>
-     	<input type="text" name="user_id" value="${user_id}">
-     </div>
+     	
      <div> 
      	<textarea name="content" placeholder="내 용"> ${ndto.content} </textarea>
      </div>
@@ -214,7 +214,10 @@
      	<div id="one" class="one">
            <label for="fileUp0" class="label"> </label>
            <input type="file" id="fileUp0" name="fname0" class="file" onchange="previewImage(event)"> 
-           <span class="img"> ${ndto.img} </span>
+        
+           <span class="img"> 
+        
+           </span>
        </div>
      </div>
      <div> <input type="submit" value="공지사항 수정"> </div>
