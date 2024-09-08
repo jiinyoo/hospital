@@ -116,7 +116,7 @@
 			</tr>
 			<tr>
 				<td class="res_btn">
-					<input type="button" onclick="location='../inq/reserve?doc_id=${doc.doc_id}'" value="예약">
+					<input type="button" onclick="location='../reserve?doc_id=${doc.doc_id}'" value="예약">
 				</td>
 			</tr>
 		</table>

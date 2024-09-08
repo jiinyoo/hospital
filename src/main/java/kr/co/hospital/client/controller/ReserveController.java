@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.ReserveDto;
 import kr.co.hospital.client.service.ReserveService;
@@ -55,8 +56,8 @@ public class ReserveController {
 	}
 	
 	@RequestMapping("/main/reserveOk")
-	public String reserveOk(ReserveDto rdto,HttpSession session) {
-		return service.reserveOk(rdto,session);
+	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response) {
+		return service.reserveOk(rdto,session,response);
 	}
 	
 }

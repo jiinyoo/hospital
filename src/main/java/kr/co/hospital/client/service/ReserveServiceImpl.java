@@ -13,10 +13,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.dto.WorkdayDto;
 import kr.co.hospital.client.dto.ReserveDto;
+import kr.co.hospital.client.dto.UserDto;
 import kr.co.hospital.client.mapper.ReserveMapper;
 
 @Service
@@ -35,6 +38,7 @@ public class ReserveServiceImpl implements ReserveService {
 			if(user_id.isEmpty() || user_phone.isEmpty() || user_jumin.isEmpty()) {
 				return "redirect:/main/beforeReserve";				
 			} else {
+				
 				model.addAttribute("user_jumin",user_jumin);
 				model.addAttribute("user_id",user_id);
 				model.addAttribute("user_phone",user_phone);
@@ -42,7 +46,7 @@ public class ReserveServiceImpl implements ReserveService {
 		}
 			model.addAttribute("doctor",mapper.getDoctor());
 			model.addAttribute("part",mapper.getPart());
-			
+			session.setAttribute("res", 1);
 			return "/client/reserve/reserve";			
 	}
 
@@ -139,12 +143,41 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public String reserveOk(ReserveDto rdto,HttpSession session) {
-		if(session.getAttribute("user_id")==null) {
-			
+	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response) {
+		if(session.getAttribute("res")==null) {
+			Cookie url=new Cookie("url", "/main/reserve");
+			url.setMaxAge(500);
+			url.setPath("/");
+			response.addCookie(url);
+			return "redirect:/main/reserve";
+		} else {
+			String res_code="R";
+			LocalDate today=LocalDate.now();
+			int year=today.getYear();
+			int month=today.getMonthValue();
+			int day=today.getDayOfMonth();
+			res_code+=year+String.format("%02d", month)+String.format("%02d", day);
+			String resnum=String.format("%03d", mapper.getResnum(res_code)); 
+			res_code+=resnum;
+			if(session.getAttribute("user_id")==null) {
+				rdto.setRes_code(res_code);
+				mapper.reserveOk(rdto);
+			} else {
+				UserDto udto=mapper.getUserinfo(rdto.getUser_id());
+				rdto.setUser_jumin(udto.getUser_jumin());
+				rdto.setUser_phone(udto.getUser_phone());
+				rdto.setRes_code(res_code);
+				mapper.reserveOk(rdto);
+			}
 		}
-		return "redirect:index";
+		session.removeAttribute("res");
+		return "redirect:/main/index";
 	}
+			
+			
+		
+		
+
 
 	@Override
 	public String beforeReserve(ReserveDto rdto) {
