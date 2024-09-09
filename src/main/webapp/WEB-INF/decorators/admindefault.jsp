@@ -129,7 +129,7 @@
             <li><span class="maincate">커뮤니티 관리</span>
                 <ul>
                     <li><a href="#">공지사항 관리</a></li>
-                    <li><a href="#">진료과별 게시판 관리</a></li>
+                    <li><a href="/admin/inquiry/list">진료과별 게시판 관리</a></li>
                     <li><a href="#">진료 후기 게시판 관리</a></li>
                     <li><a href="#">고객의 소리 관리</a></li>
                 </ul>
