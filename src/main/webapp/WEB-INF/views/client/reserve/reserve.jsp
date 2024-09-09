@@ -301,7 +301,13 @@
 		if(!chk1 || !chk2 || !chk3 || !chk4.value) {
 			alert("잘못된 경로");
 		} else {
-			document.getElementById("reserveForm").submit();
+			var timePart=chk4.value.split(":");
+			var hour=parseInt(timePart[0],10);
+			var min=timePart[1];
+			if (confirm(chk3+" "+hour+"시 "+min+"분 예약을 진행하시겠습니까?")) { // 확인 창 추가
+				var form=document.getElementById("reserveForm");
+				form.submit();
+			}
 		}
 	}
 	

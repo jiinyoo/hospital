@@ -23,4 +23,5 @@ public interface ReserveMapper {
 	public int getResnum(String res_code);
 	public void reserveOk(ReserveDto rdto);
 	public UserDto getUserinfo(String userid);
+	public ReserveDto reserveConfirm(String res_code);
 }

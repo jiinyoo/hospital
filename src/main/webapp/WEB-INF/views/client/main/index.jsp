@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,6 +42,43 @@
 	width:100%;
 }
 
+#reserve-container {
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform: translate(-50%, -100%);
+	background: white;
+	width:400px;
+	padding:20px;
+	border-radius: 10px;
+	box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+	text-align: center;
+}
+
+#reserve-container h3 {
+	margin-bottom:20px;
+}
+
+#reserve-container button {
+    background-color: #ff5e57;
+    border: none;
+    color: white;
+    padding: 5px 16px;
+    margin-top:12px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#reserve-container button:hover {
+    background-color: #ff3b30;
+}
+
+#reserve-container button:focus {
+    outline: none;
+}
 </style>
 <script>
 	$(function(){
@@ -55,7 +93,9 @@
 		},4000);
 	});
 	
-
+	function closereserve() {
+		document.getElementById("reserve-container").style.display="none";
+	}
 
 	
 </script>
@@ -71,7 +111,15 @@
 		</div>
 	</div>
 </section>
-
+<c:if test="${!empty rdto }">
+<div id="reserve-container">
+	<h2>${rdto.user_id}님 예약완료</h2>
+	<h3>예약 번호 : ${rdto.res_code }</h4>
+	<div>예약 날짜 : ${rdto.res_date }</div>
+	<div>예약 시간 : ${rdto.res_time }</div>
+	<button onclick="closereserve()">닫기</button>
+</div>
+</c:if>
 지인쓰 바보
 <hr>
 dd
