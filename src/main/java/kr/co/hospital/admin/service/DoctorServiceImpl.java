@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.dto.DoctorDto;
+import kr.co.hospital.admin.dto.WorkdayDto;
 import kr.co.hospital.admin.mapper.DoctorMapper;
 import kr.co.hospital.util.FileUtils;
 
@@ -61,19 +64,24 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public String addDoctor(HttpSession session,Model model) {
-		String userid=session.getAttribute("user_id").toString();
-		if(session.getAttribute("user_id")==null || mapper.getState(userid)==0) {
+		if(session.getAttribute("user_id")==null) {
 			return "redirect:/main/index";
-		} else if(mapper.getState(userid)!=0 && !mapper.isDoctor(userid)) {
-			model.addAttribute("user", mapper.getName(userid));
-			return "admin/doctor/addDoctor";
 		} else {
-			return "redirect:/admin/doctor/upDoctor";
+			String userid=session.getAttribute("user_id").toString();
+			if(mapper.getState(userid)==0) {
+				return "redirect:/main/index";
+			} else {
+				if(mapper.isDoctor(userid)) {
+					return "redirect:/admin/doctor/upDoctor";
+				}
+				model.addAttribute("user",mapper.getName(userid));
+				return "admin/doctor/addDoctor";
+			}
 		}
 	}
 
 	@Override
-	public String addDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
+	public String addDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request,WorkdayDto wdto) throws Exception {
 		MultipartFile file=request.getFile("file");
 		if(!file.isEmpty()) {
 			String fname=file.getOriginalFilename();
@@ -89,6 +97,21 @@ public class DoctorServiceImpl implements DoctorService {
 			
 		}
 		mapper.addDoctorOk(ddto);
+		int doc_id=mapper.getDocid(ddto.getDoc_userid());
+		wdto.setDoc_id(doc_id);
+		String[] dayofweeks = wdto.getDayofweeks();
+        int[] startTimes = wdto.getStart_times();
+        int[] endTimes = wdto.getEnd_times();
+		
+		for(int i=0;i<wdto.getStart_times().length;i++) {
+			wdto.setDayofweek(dayofweeks[i]);
+			LocalTime starttime=LocalTime.parse(String.format("%02d", startTimes[i]) +":00");
+			LocalTime endtime=LocalTime.parse(String.format("%02d", endTimes[i])+":00");
+			
+			wdto.setStart_time(starttime);
+			wdto.setEnd_time(endtime);
+			mapper.addWorkday(wdto);
+		}
 		
 		return "redirect:/admin/";
 	}
@@ -107,6 +130,9 @@ public class DoctorServiceImpl implements DoctorService {
 				DoctorDto ddto=mapper.upDoctor(userid);
 				ddto.setHistorys(ddto.getDoc_history().split("/"));
 				model.addAttribute("ddto",ddto);
+				
+				ArrayList<WorkdayDto> wdto=mapper.getWorkday(ddto.getDoc_id());
+				model.addAttribute("wdto",wdto);
 				return "/admin/doctor/upDoctor";
 			}
 			return "redirect:/admin/doctor/addDoctor";
@@ -114,28 +140,48 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	@Override
-	public String upDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
+	public String upDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request,WorkdayDto wdto) throws Exception {
 		MultipartFile file=request.getFile("file");
-		
-		String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+ddto.getDoc_img();
-		Path path=Paths.get(str);
-		if(Files.exists(path)) {
-			Files.delete(path);
-		}
-		
-		
+
 		if(!file.isEmpty()) {
 			String fname=file.getOriginalFilename();
-			str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
+			String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
 			str=FileUtils.getFileName(fname, str);
 			String saveFname=str.substring(str.lastIndexOf("/")+1);
 			
-			path=Paths.get(str);
+			Path path=Paths.get(str);
 			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 			
+			str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+mapper.getDocimg(ddto.getDoc_userid());
+			path=Paths.get(str);
+			if(Files.exists(path)) {
+				Files.delete(path);
+			}
+			
 			ddto.setDoc_img(saveFname);
+		} else {
+			ddto.setDoc_img(mapper.getDocimg(ddto.getDoc_userid()));
+			
 		}
 		mapper.upDoctorOk(ddto);
-		return null;
+		int doc_id=mapper.getDocid(ddto.getDoc_userid());
+		mapper.delWorkday(doc_id);
+		int[] start=wdto.getStart_times();
+		int[] end=wdto.getEnd_times();
+		String[] dayofweek=wdto.getDayofweeks();
+		wdto.setDoc_id(doc_id);
+		for(int i=0;i<start.length;i++) {
+			String stime=String.format("%02d", start[i]);
+			String etime=String.format("%02d", end[i]);
+			LocalTime starttime=LocalTime.parse(stime+":00");
+			LocalTime endtime=LocalTime.parse(etime+":00");
+			wdto.setStart_time(starttime);
+			wdto.setEnd_time(endtime);
+			wdto.setDayofweek(dayofweek[i]);
+			mapper.addWorkday(wdto);
+		}
+		
+	
+		return "redirect:/admin/";
 	}
 }

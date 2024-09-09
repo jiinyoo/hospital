@@ -5,8 +5,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.NoticeDto;
 import kr.co.hospital.client.service.NoticeService;
@@ -18,53 +21,76 @@ public class NoticeController {
 	@Qualifier("noti")
 	NoticeService service;
 	
-	/*@RequestMapping("/client/notice/write")
-	public String write(HttpServletRequest request,
+	@RequestMapping("/notice_write")
+	public String notice_write(HttpSession session,
 			Model model)
 	{
-		return service.write(request,model);
+		return service.notice_write(session,model);
 	}
 	
-	@RequestMapping("/client/notice/writeOk")
-	public String writeOk(NoticeDto ndto,HttpSession session)
+	@RequestMapping("/notice_writeOk")
+	public String notice_writeOk(NoticeDto ndto,
+			HttpSession session,
+			MultipartHttpServletRequest multi) throws Exception
 	{
-		return service.writeOk(ndto,session);
+		return service.notice_writeOk(ndto,session,multi);
 	}
 	
-	@RequestMapping("/client/notice/list")
-	public String list()
+	
+	@RequestMapping("/notice_list")
+	public String notice_list(Model model,
+			HttpSession session, 
+			HttpServletResponse response)
 	{
-		return service.list();
+		return service.notice_list(model,session,response);
 	}
 	
-	@RequestMapping("/client/notice/readnum")
-	public String readnum()
+	@RequestMapping("/notice_readnum")
+	public String notice_readnum(HttpServletRequest request)
 	{
-		return service.readnum();
+		return service.notice_readnum(request);
 	}
 	
-	@RequestMapping("/client/notice/content")
-	public String content()
+	@RequestMapping("/notice_content")
+	public String notice_content(HttpServletRequest request,
+			HttpSession session, 
+			Model model)
 	{
-		return service.content();
+		String notice_id = request.getParameter("notice_id");
+
+	    // 디버깅 로그 추가: notice_id 값 확인
+	    System.out.println("notice_id: " + notice_id);
+
+	    // notice_id가 null이거나 비어있을 경우 처리
+	    if (notice_id == null || notice_id.isEmpty()) {
+	        System.err.println("notice_id가 null이거나 비어 있습니다.");
+	        return "redirect:/error_page";  // 에러 페이지로 리다이렉트
+	    }
+		
+		return service.notice_content(request,session,model);
 	}
 	
-	@RequestMapping("/client/notice/update")
-	public String update()
+	@RequestMapping("/notice_update")
+	public String notice_update(HttpServletRequest request,
+			Model model,HttpSession session)
 	{
-		return service.update();
+		return service.notice_update(request, model,session);
 	}
 	
-	@RequestMapping("/client/notice/updateOk")
-	public String updateOk()
+	@RequestMapping("/notice_updateOk")
+	public String notice_updateOk(NoticeDto ndto,
+			HttpServletRequest request, 
+			MultipartHttpServletRequest multi,
+			HttpSession session) throws Exception 
 	{
-		return service.updateOk();
+		return service.notice_updateOk(ndto,request,multi,session);
+	
 	}
 	
-	@RequestMapping("/client/notice/delete")
-	public String delete()
+	@RequestMapping("/notice_delete")
+	public String notice_delete(HttpServletRequest request)
 	{
-		return service.delete();
+		return service.notice_delete(request);
 	}
-*/
+
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hospital.client.mapper.InquiryMapper">
+	<insert id="writeOk">
+		insert into inquiry
+		(user_id,title,content,part,state,img,bimil,group_order,writeday)
+		values (#{user_id},#{title},#{content},#{part},#{state},#{img},#{bimil},#{group_order},now())
+	</insert>
+	<select id="groupNumber" resultType="Integer">
+		select ifnull(max(inq_id),0)+1
+		from inquiry
+	</select>
+	<select id="inquirylist" resultType="HashMap">
+		select * from inquiry
+		order by group_order desc,
+		state asc
+	</select>
+	<update id="readnum">
+		update inquiry
+		set readnum=readnum+1
+		where inq_id=#{inq_id}
+	</update>
+	<select id="content" resultType="kr.co.hospital.client.dto.InquiryDto">
+		select * from inquiry
+		where inq_id=#{inq_id}
+	</select>
+	<delete id="delete">
+		delete from inquiry
+		where inq_id=#{inq_id}
+	</delete>
+	<update id="updateOk">
+		update inquiry
+		set title=#{title},content=#{content},
+		part=#{part},bimil=#{bimil},img=#{img}
+		where inq_id=#{inq_id}
+	</update>
+</mapper>

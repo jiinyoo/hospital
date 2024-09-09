@@ -7,14 +7,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-  body {
+
+  body 
+  {
     font-family: 'goorm-sans-bold', sans-serif;
     background-color: #f2f4f9;
     margin: 0;
     padding: 0;
   }
 
-  section {
+  section 
+  {
     width: 80%;
     max-width: 500px;
     margin: 40px auto;
@@ -24,24 +27,28 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
-  h3 {
+  h3 
+  {
     text-align: center;
     color: #B5B2FF;
     margin-bottom: 20px;
   }
   
-  div {
+  div 
+  {
     margin: auto;
   }
   
-  .ha {
+  .ha 
+  {
     margin-bottom:8px;
     padding:4px;
   }
 
   input[type="text"],
   input[type="password"],
-  input[type="submit"] {
+  input[type="submit"]
+  {
     font-family: 'goorm-sans-bold', sans-serif;
     width: calc(100% - 22px);
     padding: 10px;
@@ -52,20 +59,32 @@
     box-sizing: border-box;
   }
 
-  input[type="submit"] {
+  input[type="submit"] 
+  {
     background-color: #B5B2FF;
     color: white;
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease;
   }
 
-  input[type="submit"]:hover {
+  input[type="submit"]:hover 
+  {
     background-color: #7D78FF;
   }
 
-  .err {  
+  .err 
+  {  
     color:  #dc3545;
-    font-size: 17px;
+    font-size: 15px;
+  }
+  
+  #btn 
+  {
+    display: inline-block;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 15px;
   }
 </style>
 <script>
@@ -84,28 +103,43 @@
         else
             return true;   	
     }
+    
 </script>
 </head>
 <body>
  <section>
  	<form method="post" action="loginOk" onsubmit="return check(this)">
   	<input type="hidden" name="menu" value="${menu}">
-  		<h3> 로그인 ${user_name }</h3>
+  		<h3> 로그인 </h3>
+  		
   		<div>
+  		
    		<div class="ha"> 아이디 </div>
     		<input type="text" name="user_id" value="admin" id="txt">
   		</div>
-  		<div>
+  		
+  		<div> 
+  		
    		<div class="ha"> 비밀번호 </div>
    			<input type="password" name="user_pwd" value="1234" id="pwd">
   		</div>
+  		
   		<p>
    			<input type="submit" value="로그인" id="submit">
- 		 </p>
+ 		</p>
+ 		
   	<c:if test="${err==1}">
    		<div class="err" align="center"> 아이디 혹은 비밀번호가 다릅니다 </div>
   	</c:if>
+  	
+  	<div align="center">
+     <span id="btn" onclick="idSearch()"> 아이디 찾기 |</span> 
+     
+     <span id="btn" onclick="pwdSearch()">  비밀번호 찾기 </span>
+   </div>
+   
  	</form>
+ 	
  </section>
 </body>
 </html>

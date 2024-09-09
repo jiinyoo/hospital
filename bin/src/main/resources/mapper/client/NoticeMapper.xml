@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hospital.client.mapper.NoticeMapper">
+  <insert id="writeOk" parameterType="kr.co.hospital.client.dto.NoticeDto">
+    insert into notice(title,content,img,writeday)
+    values(#{title},#{content},#{img},now())
+  </insert>
+  <select id="list" resultType="kr.co.hospital.client.dto.NoticeDto">
+    select * from notice
+    order by id desc
+  </select>
+  <update id="readnum">
+    update notice set readnum=readnum+1
+    where id=#{id}
+  </update>
+  <select id="content" resultType="kr.co.hospital.client.dto.NoticeDto">
+    select * from notice
+    where id=#{id}
+  </select>
+  <update id="updateOk" parameterType="kr.co.hospital.client.dto.NoticeDto">
+    update notice
+    set title=#{title} , content=#{content}, img=#{img}
+    where id=#{id}
+  </update>
+  <delete id="delete">
+    delete from notice
+    where id=#{id}
+  </delete>
+</mapper>

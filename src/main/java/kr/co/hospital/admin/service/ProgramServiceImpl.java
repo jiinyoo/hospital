@@ -51,7 +51,7 @@ public class ProgramServiceImpl implements ProgramService {
 		MultipartFile file=multi.getFile("file");
 		String fname=file.getOriginalFilename();
 		String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
-		
+		//System.out.println("되는가"+str.substring(0,str.lastIndexOf("/")));
 		str=FileUtils.getFileName(fname, str);
 		String saveFname=str.substring(str.lastIndexOf("/")+1);
 		

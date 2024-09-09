@@ -10,7 +10,6 @@
     body {
         font-family: Arial, sans-serif;
         margin: 0;
-        padding: 20px;
         background-color: #f4f4f4;
     }
     section {
@@ -86,9 +85,9 @@
 				<td colspan="6" align="center">
 					<form method="get" action="afterMedi">
 						<select name="stype">
-							<option value="m.user_name">성함</option>
-							<option value="m.doc_name">담당의사</option>
-							<option value="m.medi_part">분야</option>
+							<option value="user_name">성함</option>
+							<option value="doc_name">담당의사</option>
+							<option value="medi_part">분야</option>
 						</select>
 						<input type="text" name="sword">
 						<input type="submit" value="검색">

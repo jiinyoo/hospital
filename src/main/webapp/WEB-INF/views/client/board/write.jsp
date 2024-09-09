@@ -59,31 +59,35 @@ $(document).ready(function() {
     
     $('#submit').click(function() {
         // Summernote에서 작성된 HTML 코드를 가져옵니다.
-        var editorContent = $('#summernote').summernote('code');
-		var user_id=$('#user_id').val();
-		var board_title=$('#board_title').val();
-        // FormData 객체에 에디터 내용을 추가합니다.
-        var formData = new FormData();
-        formData.append("user_id",user_id);
-        formData.append("board_title",board_title);
-        formData.append("board_content", editorContent);
-
-        // 서버로 AJAX 요청을 보냅니다.
-        $.ajax({
-            type: "POST",
-            url: '/boardwriteOk',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-            	window.location.href = "/boardlist";
-                // 서버 응답에 따라 추가 작업을 수행할 수 있습니다.
-            },
-            error: function(error) {
-                alert('Failed to submit post');
-                console.log(error);
-            }
-        });
+        if (!check()) {
+            event.preventDefault(); // 폼 제출 막기
+        } else {
+	        var editorContent = $('#summernote').summernote('code');
+			var user_id=$('#user_id').val();
+			var board_title=$('#board_title').val();
+	        // FormData 객체에 에디터 내용을 추가합니다.
+	        var formData = new FormData();
+	        formData.append("user_id",user_id);
+	        formData.append("board_title",board_title);
+	        formData.append("board_content", editorContent);
+	
+	        // 서버로 AJAX 요청을 보냅니다.
+	        $.ajax({
+	            type: "POST",
+	            url: '/boardwriteOk',
+	            data: formData,
+	            processData: false,
+	            contentType: false,
+	            success: function(response) {
+	            	window.location.href = "/boardlist";
+	                // 서버 응답에 따라 추가 작업을 수행할 수 있습니다.
+	            },
+	            error: function(error) {
+	                alert('Failed to submit post');
+	                console.log(error);
+	            }
+	        });
+       }
     });
     
 });
@@ -169,12 +173,40 @@ function imageUploader(file, el) {
      border:0.1px solid #ccc;
 	}
 
-	
+	ul {margin:0;}
 	#summernote {
     display: block; /* 블록 요소로 설정 */
     margin: 0 auto; /* 블록 요소의 가로 중앙 정렬 */
 	}
 </style>
+<script>
+
+function check()
+{
+	var title=document.getElementById("board_title");
+	var content=$("#summernote").summernote('code');
+	title.value=title.value.trim();
+	content=content.trim();
+	if(title.value.length>50) {
+		alert("제목은 50자 미만입니다.");
+		return false;
+	} else if(title.value=="") {
+		alert("제목을 입력하세요.")
+		return false;
+	} else if (content== "" || content=='<p><br></p>') {
+		alert("내용을 입력하세요")
+		return false;
+	} else {
+		return true;
+	}
+}
+
+
+
+
+</script>
+
+
 </head>
 <body>
 <section >
@@ -182,7 +214,7 @@ function imageUploader(file, el) {
 		<caption style="text-align: center;"><h2>진료후기 게시판 글쓰기</h2></caption>
 		<tr>
 			<td width="100">제목</td>
-			<td><input type="text" name="board_title"  id="board_title"></td>
+			<td><input type="text" name="board_title"  id="board_title" ></td>
 		</tr>
 		<tr>
 			<td>작성자</td>

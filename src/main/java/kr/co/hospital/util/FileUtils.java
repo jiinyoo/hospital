@@ -31,7 +31,9 @@ public class FileUtils {
 			}                                   // code = abcd
 			String[] imsi=fname.split("[.]");   // a.jpg  =>  [a] [jpg]
 			String newFname=imsi[0]+code+"."+imsi[1];       // aabcd.jpg
+			
 			str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+newFname;
+
 			
 			ff=new File(str);
 		}

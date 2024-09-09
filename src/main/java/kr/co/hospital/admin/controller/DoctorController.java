@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.dto.DoctorDto;
+import kr.co.hospital.admin.dto.WorkdayDto;
 import kr.co.hospital.admin.service.DoctorService;
 
 @Controller
@@ -36,8 +37,8 @@ public class DoctorController {
 	}
 	
 	@RequestMapping("/admin/doctor/addDoctorOk")
-	public String addDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
-		return service.addDoctorOk(ddto,request);
+	public String addDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request, WorkdayDto wdto) throws Exception {
+		return service.addDoctorOk(ddto,request,wdto);
 	}
 	
 	@RequestMapping("/admin/doctor/upDoctor")
@@ -46,7 +47,7 @@ public class DoctorController {
 	}
 	
 	@RequestMapping("/admin/doctor/upDoctorOk")
-	public String upDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request) throws Exception {
-		return service.upDoctorOk(ddto,request);
+	public String upDoctorOk(DoctorDto ddto,MultipartHttpServletRequest request,WorkdayDto wdto) throws Exception {
+		return service.upDoctorOk(ddto,request,wdto);
 	}
 }
