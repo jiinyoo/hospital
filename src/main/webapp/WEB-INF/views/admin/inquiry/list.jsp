@@ -33,31 +33,7 @@
 	}
 
 </style>
-<script>
-function check(user_id,bimil,inq_id) {
-	var session_user_id="${session_user_id}";
-	if(bimil==1) {
-		if(user_id==session_user_id) {
-			location.href="/inquiry/readnum?inq_id="+inq_id;
-		} else {
-			alert("작성자만 볼 수 있는 비밀글입니다.")
-		}
-	} else {
-		location.href="/inquiry/readnum?inq_id="+inq_id;	
-	}
-}
 
-
-function logincheck() {
-	var session_user_id="${session_user_id}";
-	if(session_user_id=="") {
-		alert("로그인 하셔야 글 작성이 가능합니다.")
-	}else {
-		location.href="/inquiry/write";
-	}
-}
-
-</script>
 </head>
 <body><!--(inquiry)list -->
 <section>
@@ -68,25 +44,37 @@ function logincheck() {
 		<td>제목</td>
 		<td>작성일</td>
 		<td>조회수</td>
+		<td>답변 버튼</td>	
 	</tr>
 	<c:forEach items="${imapAll}" var="imap">
 	<tr>
 		<td width="100">${imap.user_id}</td>
-		<td width="600">
+		<td width="300">
 		<c:if test="${imap.bimil==1}">
 			<span id="bimil"><img src="../../static/client/inquiry/lock.png" width="20px"></span>
 		</c:if>
+		<c:if test="${imap.state==1}">
 			<span id="part">${imap.part}</span>
-			<span id="title" onclick="check('${imap.user_id}','${imap.bimil}','${imap.inq_id}')"><a href="#">${imap.title}</a></span>
-		</a></td>
+		</c:if>
+			<span id="title"><a href="/admin/inquiry/readnum?inq_id=${imap.inq_id}">${imap.title}</a></span>
+		</a>
+		</td>
 		<td width="200">${imap.writeday}</a></td>
 		<td width="100">${imap.readnum}</td>
+		<td width="100">
+		<c:if test="${imap.state==1&&imap.answer==0}">
+		<a href="/admin/inquiry/write?part=${imap.part}&group_order=${imap.group_order}&bimil=${imap.bimil}&origin_user_id=${imap.user_id}&inq_id=${imap.inq_id}"><input type="button" value="답변 달기"></a>
+		</c:if>
+		</td>
 	</tr>
 	</c:forEach>
-	<tr align="right">
-		<td colspan="4"><input type="button" value="글쓰기" onclick="logincheck()"></td>
+	<tr>
+		<td colspan="5"></td>
 	</tr>
+
 </table>
 </section>
+
+
 </body>
 </html>

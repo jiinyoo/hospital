@@ -11,7 +11,7 @@
 		from inquiry
 	</select>
 	<select id="inquirylist" resultType="HashMap">
-		select * from inquiry
+		select * from inquiry 
 		order by group_order desc,
 		state asc
 	</select>
@@ -34,4 +34,8 @@
 		part=#{part},bimil=#{bimil},img=#{img}
 		where inq_id=#{inq_id}
 	</update>
+	<select id="getState" resultType="Integer">
+		select state from user
+		where user_id=#{session_user_id}
+	</select>	
 </mapper>

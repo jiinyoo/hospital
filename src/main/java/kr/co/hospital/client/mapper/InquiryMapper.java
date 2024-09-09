@@ -18,5 +18,6 @@ public interface InquiryMapper {
 	public int groupNumber();
 	public void delete(String inq_id);
 	public void updateOk(InquiryDto idto);
+	public int getState(String session_user_id);
 
 }

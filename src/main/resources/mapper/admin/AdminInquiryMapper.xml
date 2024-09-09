@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.hospital.admin.mapper.AdminInquiryMapper">
-	<select id="getState" resultType="String">
+	<select id="getState" resultType="Integer">
 		select state from user
 		where user_id=#{session_user_id}
 	</select>	
 	<select id="inquirylist" resultType="HashMap">
-		select * from inquiry
+		select * from inquiry 
 		order by group_order desc,
 		state asc
 	</select>
+	<update id="readnum">
+		update inquiry
+		set readnum=readnum+1
+		where inq_id=#{inq_id}
+	</update>
+	<insert id="writeOk">
+		insert into inquiry
+		(user_id,title,content,part,state,img,bimil,group_order,writeday,origin_user_id)
+		values (#{user_id},#{title},#{content},#{part},#{state},#{img},#{bimil},#{group_order},now(),#{origin_user_id})
+	</insert>
+	<update id="updateanswer">
+		update inquiry
+		set answer=1
+		where inq_id=#{inq_id}
+	</update>
 </mapper>
