@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,8 +28,8 @@ public class ReserveController {
 	
 	@RequestMapping("/main/reserve")
 	public String reserve(HttpServletRequest request,Model model,HttpSession session,
-			HttpServletResponse response) {
-		return service.reserve(request,model,session,response);
+			HttpServletResponse response,RedirectAttributes redirect) {
+		return service.reserve(request,model,session,response,redirect);
 	}
 	
 	@RequestMapping("/main/beforeReserve")
@@ -57,8 +58,10 @@ public class ReserveController {
 	}
 	
 	@RequestMapping("/main/reserveOk")
-	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response) {
-		return service.reserveOk(rdto,session,response);
+	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response,RedirectAttributes redirect) {
+		return service.reserveOk(rdto,session,response,redirect);
 	}
+	
+	
 	
 }

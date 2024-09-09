@@ -39,4 +39,8 @@
 	<select id="getUserinfo" resultType="kr.co.hospital.client.dto.UserDto">
 		select * from user where user_id=#{userid}
 	</select>
+	<select id="reserveConfirm" resultType="kr.co.hospital.client.dto.ReserveDto">
+		select * from reserve
+		where res_code=#{res_code}
+	</select>
 </mapper>
