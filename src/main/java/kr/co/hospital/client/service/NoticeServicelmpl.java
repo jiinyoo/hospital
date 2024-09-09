@@ -133,17 +133,11 @@ public class NoticeServicelmpl  implements NoticeService {
 		String notice_id=request.getParameter("notice_id");
 		
 		NoticeDto ndto=mapper.notice_content(notice_id);
-		if (ndto == null) {
-	        System.err.println("해당 notice_id에 대한 데이터를 찾을 수 없습니다: " + notice_id);
-	        return "redirect:/error_page";  // 에러 페이지로 리다이렉트
-	    }
-		System.out.println("공지사항 데이터: " + ndto);
+		
 		 // 이미지가 null이 아니고 빈 값이 아닌 경우, '/'로 구분하여 imgs 배열에 저장
 	    if (ndto.getImg() != null && !ndto.getImg().isEmpty()) {
 	        String[] imgs = ndto.getImg().split("/");
-
-	        // imgs 배열이 올바르게 생성되었는지 디버깅 로그 출력
-	        System.out.println("imgs 배열: " + Arrays.toString(imgs));
+	       
 	        ndto.setImgs(imgs);  // NoticeDto 객체에 imgs 배열 설정
 	    } else {
 	        ndto.setImgs(new String[0]);  // 이미지가 없을 경우 빈 배열 설정
@@ -169,8 +163,8 @@ public class NoticeServicelmpl  implements NoticeService {
 		NoticeDto ndto=mapper.notice_content(notice_id);
 		String img=ndto.getImg();
 		String[] imgs=ndto.getImg().split("/");
+
 		
-		model.addAttribute("img",img);
 		model.addAttribute("imgs",imgs);
 		model.addAttribute("ndto",ndto);
 		return "/client/notice/notice_update";
@@ -187,8 +181,8 @@ public class NoticeServicelmpl  implements NoticeService {
 			MultipartHttpServletRequest multi,
 			HttpSession session) throws Exception 
 	{
-		//System.out.println(ndto);
-		String user_id=null;
+		System.out.println(ndto);
+		String user_id=request.getParameter("user_id");
 		String notice_id=request.getParameter("notice_id");
 	    Iterator<String> imsi = multi.getFileNames();  // 파일 이름 가져오기 위한 반복자
 	    

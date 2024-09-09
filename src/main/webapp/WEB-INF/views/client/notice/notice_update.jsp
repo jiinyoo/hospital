@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -208,7 +208,7 @@
 			  }	  
 		  }
 	  
-		  // alert(delimg+"\n"+safeimg);
+		   alert(delimg+"\n"+safeimg);
 		  
 		  // delimg, safeimg를 서버에 전송
 		  document.uform.delimg.value=delimg;
@@ -223,7 +223,7 @@
 <body>
  <section>
    <form method="post" action="notice_updateOk" enctype="multipart/form-data" onsubmit="return check()">
-   <input type="hidden" id="notice_id" value="${ndto.notice_id}">
+   <input type="hidden" name="notice_id" value="${ndto.notice_id}">
    <input type="hidden" name="delimg" >
    <input type="hidden" name="safeimg" >
      <caption> <h3> 공지사항 글 수정 </h3></caption>
@@ -236,14 +236,14 @@
      	<textarea name="content" placeholder="내 용"> ${ndto.content} </textarea>
      </div>
      
-     <div id="outer"> 
+     <div> 
        <h4> 사진 수정 </h4>
        <hr>
        <div>
-      	 <c:forEach items="${nimgs}" var="img">
-      	 <c:if test="${nimg!=''}">
-         	<img src="/static/client/notice/${nimg}" style="max-width: 20%; height: auto;">
-         	<input type="checkbox" value="${nimg}">
+      	 <c:forEach items="${imgs}" var="img">
+      	 <c:if test="${img!=''}">
+         	<img src="/static/client/notice/${img}" style="max-width: 20%; height: auto;">
+         	<input type="checkbox" value="${img}" class="ingList">
          </c:if>
     	 </c:forEach>
        </div>
@@ -252,12 +252,14 @@
      		<input type="button" value="추가" onclick="add()"> 
      		<input type="button" value="삭제" onclick="del()"> 
     	</div>
+    	<div  id="outer">
      	<div id="one" class="one">
            <label for="fileUp0" class="label"> </label>
            <input type="file" id="fileUp0" name="fname0" class="file" onchange="previewImage(event)"> 
         
            <span class="img"> 
            </span>
+       </div>
        </div>
      </div>
      <div> <input type="submit" value="공지사항 수정"> </div>
