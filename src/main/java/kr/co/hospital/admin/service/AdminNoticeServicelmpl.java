@@ -1,4 +1,4 @@
-package kr.co.hospital.client.service;
+package kr.co.hospital.admin.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,28 +23,29 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import kr.co.hospital.admin.dto.AdminNoticeDto;
+import kr.co.hospital.admin.mapper.AdminNoticeMapper;
 import kr.co.hospital.admin.service.AdminMainService;
-import kr.co.hospital.client.dto.NoticeDto;
-import kr.co.hospital.client.mapper.NoticeMapper;
+
 import kr.co.hospital.util.FileUtils;
 import kr.co.hospital.util.NoticeUtils;
 
 @Service
-@Qualifier("noti")
-public class NoticeServicelmpl  implements NoticeService {
+@Qualifier("admin_noti")
+public class AdminNoticeServicelmpl  implements AdminNoticeService {
 	
 	@Autowired
-	private NoticeMapper mapper;
+	private AdminNoticeMapper mapper;
 	
 	@Override
-	public String notice_write(HttpSession session, 
+	public String admin_notice_write(HttpSession session, 
 			Model model)
 	{
 		if(session.getAttribute("user_id")!=null)
 		{
 			String user_id=session.getAttribute("user_id").toString();
 			model.addAttribute("user_id",user_id);
-			return "/client/notice/notice_write";
+			return "/admin/admin_notice/admin_notice_write";
 		}
 		else
 		{
@@ -53,7 +54,7 @@ public class NoticeServicelmpl  implements NoticeService {
 	}
 	
 	@Override
-	public String notice_writeOk(NoticeDto ndto,
+	public String admin_notice_writeOk(AdminNoticeDto ndto,
 			HttpSession session,
 			MultipartHttpServletRequest multi) throws Exception
 	{
@@ -82,8 +83,8 @@ public class NoticeServicelmpl  implements NoticeService {
 		}
 		ndto.setImg(fname);
 		
-		mapper.notice_writeOk(ndto);
-		return "redirect:/notice_list";
+		mapper.admin_notice_writeOk(ndto);
+		return "redirect:/admin/admin_notice/admin_notice_list";
 		}
 		else
 		{
@@ -92,7 +93,7 @@ public class NoticeServicelmpl  implements NoticeService {
 	}
 
 	@Override
-	public String notice_list(Model model,
+	public String admin_notice_list(Model model,
 			HttpSession session, 
 			HttpServletResponse response) 
 	{
@@ -100,15 +101,15 @@ public class NoticeServicelmpl  implements NoticeService {
 	    
 	    if(user_id!=null) 
 	    {
-			ArrayList<HashMap> map=mapper.notice_list();
+			ArrayList<HashMap> map=mapper.admin_notice_list();
 		
 			model.addAttribute("nmapAll",map);
 		
-			return "/client/notice/notice_list";
+			return "/admin/admin_notice/admin_notice_list";
 		}	
 		else
 		{
-			Cookie cookie = new Cookie("url", "/notice_list");
+			Cookie cookie = new Cookie("url", "/admin_notice_list");
 			cookie.setMaxAge(60 * 60 * 24); // 쿠키 유효 기간 (초 단위) - 여기서는 1일
 			cookie.setPath("/");
 			response.addCookie(cookie);
@@ -117,22 +118,22 @@ public class NoticeServicelmpl  implements NoticeService {
 	}
 
 	@Override
-	public String notice_readnum(HttpServletRequest request) 
+	public String admin_notice_readnum(HttpServletRequest request) 
 	{
 		String notice_id=request.getParameter("notice_id");
-		mapper.notice_readnum(notice_id);
-		return "redirect:/notice_content?notice_id="+notice_id;
+		mapper.admin_notice_readnum(notice_id);
+		return "redirect:/admin/admin_notice/admin_notice_content?notice_id="+notice_id;
 	}
 
 	@Override
-	public String notice_content(HttpServletRequest request, 
+	public String admin_notice_content(HttpServletRequest request, 
 			HttpSession session,
 			Model model) 
 	{
 		
 		String notice_id=request.getParameter("notice_id");
 		
-		NoticeDto ndto=mapper.notice_content(notice_id);
+		AdminNoticeDto ndto=mapper.admin_notice_content(notice_id);
 		if (ndto == null) {
 	        System.err.println("해당 notice_id에 대한 데이터를 찾을 수 없습니다: " + notice_id);
 	        return "redirect:/error_page";  // 에러 페이지로 리다이렉트
@@ -151,11 +152,11 @@ public class NoticeServicelmpl  implements NoticeService {
 	    
 		model.addAttribute("ndto",ndto);
 		model.addAttribute("user_id", session.getAttribute("user_id").toString());
-		return "client/notice/notice_content";
+		return "/admin/admin_notice/admin_notice_content";
 	}
 
 	@Override
-	public String notice_update(HttpServletRequest request, 
+	public String admin_notice_update(HttpServletRequest request, 
 			Model model,
 			HttpSession session)
 	{
@@ -166,14 +167,14 @@ public class NoticeServicelmpl  implements NoticeService {
 		{
 			session_user_id=session.getAttribute("user_id").toString();
 		
-		NoticeDto ndto=mapper.notice_content(notice_id);
+		AdminNoticeDto ndto=mapper.admin_notice_content(notice_id);
 		String img=ndto.getImg();
 		String[] imgs=ndto.getImg().split("/");
 		
 		model.addAttribute("img",img);
 		model.addAttribute("imgs",imgs);
 		model.addAttribute("ndto",ndto);
-		return "/client/notice/notice_update";
+		return "/admin/admin_notice/admin_notice_update";
 	    }
 	    else
 	    {
@@ -182,7 +183,7 @@ public class NoticeServicelmpl  implements NoticeService {
 	}
 
 	@Override
-	public String notice_updateOk(NoticeDto ndto, 
+	public String admin_notice_updateOk(AdminNoticeDto ndto, 
 			HttpServletRequest request, 
 			MultipartHttpServletRequest multi,
 			HttpSession session) throws Exception 
@@ -228,8 +229,8 @@ public class NoticeServicelmpl  implements NoticeService {
 			}
 		}
 		
-		mapper.notice_updateOk(ndto);
-		return "redirect:/notice_content?notice_id="+notice_id;
+		mapper.admin_notice_updateOk(ndto);
+		return "redirect:/admin_notice_content?notice_id="+notice_id;
 	    }
 	 else 
 	 {
@@ -238,13 +239,13 @@ public class NoticeServicelmpl  implements NoticeService {
 	}
 
 	@Override
-	public String notice_delete(HttpServletRequest request) 
+	public String admin_notice_delete(HttpServletRequest request) 
 	{
 		String user_id=request.getParameter("user_id");
 		String notice_id=request.getParameter("notice_id");
 			
-		mapper.notice_delete(user_id,notice_id);
-		return "redirect:/notice_list";
+		mapper.admin_notice_delete(user_id,notice_id);
+		return "redirect:/admin/admin_notice/admin_notice_list";
 	}
 
 }

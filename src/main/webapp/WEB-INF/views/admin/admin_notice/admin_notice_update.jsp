@@ -10,7 +10,7 @@
     /* 전체 페이지 스타일 */
     body 
   	{
-    	font-family: 'goorm-sans-bold', sans-serif;
+    	font-family: 'GongGothicMedium';
     	background-color: #f2f4f9;
     	margin: 0;
     	padding: 0;
@@ -42,13 +42,7 @@
         margin-top: 10px;
         margin-bottom: 20px;
     }
-    
-    div 
-  	{
-    	margin: auto;
- 	}
 
-    /* 입력 필드 스타일 */
     input[type="text"]
     {
     	font-family: 'goorm-sans-bold', sans-serif;
@@ -82,7 +76,7 @@
     /* 버튼 스타일 */
     input[type="button"] 
     {
-    	font-family: 'goorm-sans-bold', sans-serif;
+    	font-family: 'GongGothicMedium';
         width: 49%;
         padding: 10px;
         margin-top: 10px;
@@ -98,7 +92,7 @@
     
     input[type="submit"]
     {
-    	font-family: 'goorm-sans-bold', sans-serif;
+    	font-family: 'GongGothicMedium';
     	width: 99%;
         padding: 10px;
         margin-top: 30px;
@@ -221,7 +215,7 @@
 </head>
 <body>
  <section>
-   <form name="uform" method="post" action="notice_updateOk" enctype="multipart/form-data" onsubmit="return check()">
+   <form name="uform" method="post" action="admin_notice_updateOk" enctype="multipart/form-data" onsubmit="return check()">
    <input type="hidden" name="notice_id" value="${ndto.notice_id}">
    <input type="hidden" name="delimg" >  
    <input type="hidden" name="safeimg" >
