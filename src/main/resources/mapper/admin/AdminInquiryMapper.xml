@@ -25,4 +25,28 @@
 		set answer=1
 		where inq_id=#{inq_id}
 	</update>
+	<select id="content" resultType="kr.co.hospital.admin.dto.AdminInquiryDto">
+		select i.*, u.state as ustate from inquiry as i
+		inner join user as u on u.user_id=i.user_id
+		where inq_id=#{inq_id}
+	</select>
+	<delete id="delete">
+		delete from inquiry
+		where inq_id=#{inq_id}
+	</delete>
+	<update id="updateOk">
+		update inquiry
+		set title=#{title},content=#{content},
+		part=#{part},bimil=#{bimil},img=#{img}
+		where inq_id=#{inq_id}
+	</update>
+	<update id="updatezero">
+		update inquiry
+		set answer=0
+		where group_order=#{group_order}
+	</update>
+	<delete id="samegroupdelete">
+		delete from inquiry
+		where group_order=#{group_order}
+	</delete>
 </mapper>

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.hospital.admin.dto.AdminInquiryDto;
+import kr.co.hospital.client.dto.InquiryDto;
+
 
 @Mapper
 public interface AdminInquiryMapper {
@@ -15,5 +17,11 @@ public interface AdminInquiryMapper {
 	void readnum(String inq_id);
 	void writeOk(AdminInquiryDto aidto);
 	void updateanswer(String inq_id);
+	AdminInquiryDto content(String inq_id);
+	void delete(String inq_id);
+	void updateOk(InquiryDto idto);
+	void updatezero(int group_order);
+	void samegroupdelete(int group_order);
+	
 
 }

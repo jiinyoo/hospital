@@ -14,6 +14,7 @@ import kr.co.hospital.admin.dto.AdminInquiryDto;
 import kr.co.hospital.admin.service.AdminInquiryService;
 import kr.co.hospital.client.dto.InquiryDto;
 
+
 @Controller
 @Qualifier("AISI")
 public class AdminInquiryController {
@@ -40,6 +41,22 @@ public class AdminInquiryController {
 	public String inquirywriteOk(AdminInquiryDto aidto, MultipartHttpServletRequest multi, HttpSession session) throws Exception {
 		return service.writeOk(aidto,multi,session);
 	}
+	@RequestMapping("/admin/inquiry/content") 
+	public String inquirycontent(HttpServletRequest request,Model model,HttpSession session) {
+		return service.content(request, model,session); 
+	}
 	
+	@RequestMapping("/admin/inquiry/delete") 
+	public String inquirydelete(HttpServletRequest request, HttpSession session) throws Exception{
+		return service.delete(request, session);
+	}
+	@RequestMapping("/admin/inquiry/update") 
+	public String inquiryupdate(HttpServletRequest request,HttpSession session,Model model) throws Exception{
+		return service.update(request,session,model); 
+	}
 	
+	@RequestMapping("/admin/inquiry/updateOk") 
+	public String inquiryupdateOk(InquiryDto idto,HttpServletRequest request,HttpSession session,MultipartHttpServletRequest multi) throws Exception{
+		return service.updateOk(idto,request,session,multi); 
+	}
 }
