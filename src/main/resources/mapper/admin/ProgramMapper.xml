@@ -5,9 +5,14 @@
 		select * from program
 		order by pro_ju asc
 	</select>
+	<select id="juisnullcheck" resultType="Integer">
+		select count(*) as cnt 
+		from program  
+		where pro_ju=#{pro_ju}
+	</select>
 	<update id="programupdate">
-    update program
-    set 
+    	update program
+    	set 
         pro_name=#{pro_name},
         pro_info=#{pro_info},
         teach_name=#{teach_name},
@@ -15,7 +20,11 @@
         pro_inwon=#{pro_inwon},
         pro_part=#{pro_part},
         pro_img=#{pro_img}
-    where pro_ju=#{pro_ju}
-</update>
-
+    	where pro_ju=#{pro_ju}
+	</update>
+	<insert id="insertprogram">
+		insert into program(pro_name,pro_info,teach_name,pro_time,
+		pro_inwon,pro_part,pro_img,pro_ju) 
+		values (#{pro_name},#{pro_info},#{teach_name},#{pro_time},#{pro_inwon},#{pro_part},#{pro_img},#{pro_ju}) 
+	</insert>
 </mapper>

@@ -62,7 +62,14 @@ public class ProgramServiceImpl implements ProgramService {
 		
 		pdto.setPro_img(saveFname);
 		
-		mapper.programupdate(pdto);
+		
+		int jucheck=mapper.juisnullcheck(pdto.getPro_ju());
+		if(jucheck!=0) {
+			mapper.programupdate(pdto);
+		} else {
+			mapper.insertprogram(pdto);
+		}
+		
 		
 		
 		return "redirect:/admin/program/program";

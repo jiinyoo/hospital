@@ -47,10 +47,10 @@ $(function(){
 	<tr>
 		<td>관련과 </td>
 		<td><select name="pro_part">
-			<option value="0">정신과</option>
-			<option value="1">내분비과</option>
-			<option value="2">치과</option>
-			<option value="3">이비인후과</option>
+			<option value="정신과">정신과</option>
+			<option value="내분비과">내분비과</option>
+			<option value="치과">치과</option>
+			<option value="이비인후과">이비인후과</option>
         </select></td>
 	</tr>
 	<tr>
