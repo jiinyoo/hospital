@@ -58,8 +58,9 @@ public class ReserveController {
 	}
 	
 	@RequestMapping("/main/reserveOk")
-	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response,RedirectAttributes redirect) {
-		return service.reserveOk(rdto,session,response,redirect);
+	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response,RedirectAttributes redirect,
+			HttpServletRequest request) {
+		return service.reserveOk(rdto,session,response,redirect,request);
 	}
 	
 	

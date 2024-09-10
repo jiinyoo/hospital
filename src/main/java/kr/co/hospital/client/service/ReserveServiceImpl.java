@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,17 +38,16 @@ public class ReserveServiceImpl implements ReserveService {
 			String user_id=request.getParameter("user_id")==null?"":request.getParameter("user_id");
 			String user_phone=request.getParameter("user_phone")==null?"":request.getParameter("user_phone");
 			String user_jumin=request.getParameter("user_jumin")==null?"":request.getParameter("user_jumin");
-			if(user_id.isEmpty() || user_phone.isEmpty() || user_jumin.isEmpty()) {
+			Cookie chk=WebUtils.getCookie(request, "chk");
+			
+			if(user_id.isEmpty() || user_phone.isEmpty() || user_jumin.isEmpty() || chk==null) {
 				Cookie url=new Cookie("url", "/main/reserve");
 				url.setMaxAge(500);
 				url.setPath("/");
 				response.addCookie(url);
 				return "redirect:/main/beforeReserve";				
 			} else {
-				//1
-				redirect.addFlashAttribute("user_jumin", user_jumin);
-				redirect.addFlashAttribute("user_id",user_id);
-				redirect.addFlashAttribute("user_phone",user_phone);
+				
 				//2
 				model.addAttribute("user_jumin",user_jumin);
 				model.addAttribute("user_id",user_id);
@@ -57,7 +57,10 @@ public class ReserveServiceImpl implements ReserveService {
 			model.addAttribute("doctor",mapper.getDoctor());
 			model.addAttribute("part",mapper.getPart());
 			//2
-			session.setAttribute("res", 1);
+			Cookie chk=new Cookie("chk", "1");
+			chk.setMaxAge(500);
+			chk.setPath("/");
+			response.addCookie(chk);
 			return "/client/reserve/reserve";			
 	}
 
@@ -154,10 +157,12 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response,RedirectAttributes redirect) {
+	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response,RedirectAttributes redirect,
+			HttpServletRequest request) {
 		String res_code="";
+		Cookie chk=WebUtils.getCookie(request, "chk");
 		
-		if(session.getAttribute("res")==null) {
+		if(chk==null) {
 			Cookie url=new Cookie("url", "/main/reserve");
 			url.setMaxAge(500);
 			url.setPath("/");
@@ -183,7 +188,10 @@ public class ReserveServiceImpl implements ReserveService {
 				mapper.reserveOk(rdto);
 			}
 		}
-		session.removeAttribute("res");
+		chk=new Cookie("chk", "");
+		chk.setMaxAge(0);
+		chk.setPath("/");
+		response.addCookie(chk);
 		redirect.addFlashAttribute("rdto", mapper.reserveConfirm(res_code));
 		return "redirect:/main/index";
 	}

@@ -20,6 +20,6 @@ public interface ReserveService {
 	public HashMap chkDoc(HttpServletRequest request);
 	public Map getCal(HttpServletRequest request);
 	public HashMap chkDate(HttpServletRequest request);
-	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response, RedirectAttributes redirect);
+	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response, RedirectAttributes redirect,HttpServletRequest request);
 	public String beforeReserve(ReserveDto rdto);
 }

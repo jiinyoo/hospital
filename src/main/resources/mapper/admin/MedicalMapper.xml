@@ -4,7 +4,7 @@
 	<select id="afterMedi" resultType="Hashmap">
 		select medical.*,reserve.user_jumin from medical
 		inner join reserve on medical.res_code=reserve.res_code
-		where ${stype} like concat('%',#{sword},'%') limit #{index},10
+		where ${stype} like concat('%',#{sword},'%') order by medical.medi_id desc limit #{index},10
 	</select>
 	<select id="getChong" resultType="int">
 		select ceil(count(*)/10)
