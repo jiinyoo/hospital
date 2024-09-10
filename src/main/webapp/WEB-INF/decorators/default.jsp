@@ -342,11 +342,11 @@ hr
 
 <header>
 		<div id="loginbar"> 
-		 <c:if test="${user_id == null }">
+		 <c:if test="${sessionScope.user_id == null }">
 		  <a href="/main/login"> 로그인 </a>| 
 		  <a href="/main/user"> 회원 가입 </a>
 		 </c:if>
-		 <c:if test="${user_id != null }">
+		 <c:if test="${sessionScope.user_id != null }">
 		   ${user_id}님 | 
            <a href="/login/logout"> 로그아웃 </a> | 문의하기
          </c:if>
@@ -397,7 +397,7 @@ hr
 		<ul class="submenu">
 			<li>1:1문의</li>
 			<li><a href="/main/reserve">온라인 진료 예약</a></li>
-			<li>예약 조회</li>
+			<li><a href="/main/reserveSearch">예약 조회</a></li>
 		</ul>
 		<ul class="submenu">
 			<li>프로그램 예약</li>

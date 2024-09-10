@@ -12,5 +12,9 @@ public interface ProgramMapper {
 
 	public void programupdate(ProgramDto pdto);
 
+	public int juisnullcheck(String pro_ju);
+
+	public void insertprogram(ProgramDto pdto);
+
 
 }

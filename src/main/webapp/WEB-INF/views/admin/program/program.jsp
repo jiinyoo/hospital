@@ -36,7 +36,6 @@ function content(num)
 <button onclick="content(2)" type="button" name="thirdp" value="0">토요일 셋째주 프로그램 업데이트</button>
 <button onclick="content(3)" type="button" name="fourthp" value="0">토요일 넷째주 프로그램 업데이트</button>
 
-<c:forEach items="${plist}" var="pdto">
 	<table>
 		<tr>
 			<td width="140px">주차</td>
@@ -45,6 +44,7 @@ function content(num)
 			<td width="140px">파트</td>
 			<td width="140px">프로그램 이미지</td>
 		</tr>
+<c:forEach items="${plist}" var="pdto">
 	
 		<tr>
 			<td>${pdto.pro_ju+1}주차 </td>
@@ -55,8 +55,8 @@ function content(num)
 			<img src="../../static/admin/programfile/${pdto.pro_img}" width="300px">
 		</td>
 		</tr>
-	</table>
 </c:forEach>
+	</table>
 
 </section>
 </body>

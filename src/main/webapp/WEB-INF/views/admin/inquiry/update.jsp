@@ -48,7 +48,7 @@
 			reader.readAsDataURL(image);
 		}
 	}
-	
+	//업데이트할 때 다시 살필 필요 있음.
 	function bimilcheck() {
 		if(document.getElementById("bimilcheck").checked) {
 			document.getElementById("bimil").setAttribute("value","1")
@@ -58,63 +58,75 @@
 	}
 	
 	
-	window.onload=function() {
-		document.inquiry.part.value="${part}"
-	}
-	
 	function check() {
+		var safeimg="";
+		var delimg="";
+		var imgList=document.getElementsByClassName("imgList");
+		for(var i=0; i<imgList.length; i++) {
+			if(imgList[i].checked) {
+				delimg=delimg+imgList[i].value+"/";
+			} else {
+				safeimg=safeimg+imgList[i].value+"/";
+			}
+		}
+		document.inquiry.delimg.value=delimg;
+		document.inquiry.safeimg.value=safeimg;
+		
 		bimilcheck();
 		return true;
 		
 	}
-
-
+	
+	
+	window.onload=function() {
+		document.inquiry.part.value="${aidto.part}"
+		document.getElementById("bimil").value="${aidto.bimil}"
+	}
 </script>
 <style>
-section {
+
+      /* 페이지 전체에서 가운데 정렬 */
+    section {
         margin:auto;
         width: 1300px;
         height: 100vh; /* 뷰포트 전체 높이 사용 */
     }
-    /* 테이블의 최대 너비 설정 및 가운데 정렬 */
+ 
     table {
-    
         width:1000px;
     	margin:auto;
-    	margin-top: 30px;
+    	margin-top:50px;
     	border-collapse: collapse;
     }
-
-    /* 테이블 내부 요소 스타일링 */
     td {
 	    border-top: 1px solid black;
 	    padding: 10px; /* 셀 내부 여백 조정 */
 	    height: 30px;  /* 셀 높이 명확히 설정 */
 	}
 
-
     #submit {
         margin: auto; /* 자동으로 좌우 가운데 정렬 */
     }
-
-
 </style>
 </head>
 <body>
 <section>
-	<form name="inquiry" method="post" action="writeOk" enctype="multipart/form-data" onsubmit="return check()">
+	<form name="inquiry" method="post" action="updateOk" enctype="multipart/form-data" onsubmit="return check()">
 		<table>
-
-			<caption>진료 답변 등록</caption>
-			<input type="hidden" name="state" value="2">
-			<input type="hidden" name="bimil" value="${bimil}" id="bimil">
-			<input type="hidden" name="group_order"" value="${group_order}">
-			<input type="hidden" name="origin_user_id" value="${origin_user_id}">
+			<input type="hidden" name="delimg" >
+			<input type="hidden" name="safeimg" >
+			<input type="hidden" name="inq_id" value="${aidto.inq_id}">
+			<input type="hidden" name="bimil" id="bimil">
+			<caption>진료 문의 등록</caption>
 			<tr>
 				<td width="100">제목</td>
-				<td><input type="text" name="title"></td>
+				<td><input type="text" name="title" value="${aidto.title}"></td>
 			</tr>
-			<c:if test="${bimil==0}">
+			<tr>
+				<td width="100">작성자</td>
+				<td>${aidto.user_id}</td>
+			</tr>
+			<c:if test="${bimil!=1}">
 				<tr>
 					<td>비밀글 체크</td>
 					<td><input type="checkbox" name="bimilcheck" id="bimilcheck" >&nbsp; 비밀글로 설정하려면 체크하세요.</td>
@@ -134,8 +146,25 @@ section {
 			
 			<tr>
 				<td>내용</td>
-				<td><textarea name="content"></textarea></td>
+				<td><textarea name="content">${aidto.content}</textarea></td>
 			</tr>
+		
+			<tr>
+				<td rowspan="2">기존 이미지</td>
+				<td rowspan="2">
+					<div>
+						<c:forEach items="${imgs}" var="simg">
+						<c:if test="${simg!=''}">
+							<img src="../../static/client/inquiryfile/${simg}" width="100">
+							<input type="checkbox" value="${simg}" class="imgList">	
+						</c:if>				
+						</c:forEach>
+					</div>
+					<div>
+						기존 사진을 삭제하려면 checkbox를 선택하세요.
+					</div>				
+				</td>
+			<tr>
 			<tr>
 				<td>사진 업로드</td>
 				<td>
@@ -155,10 +184,9 @@ section {
 			</tr>
 			<tr align="center">
 				<td colspan="2">
-					<input type="submit" value="진료 답변 등록" >
+					<input type="submit" value="문의 글 수정" >
 				</td>
 			</tr>
-		</table>
 	</form>
 </section>	
 </body>

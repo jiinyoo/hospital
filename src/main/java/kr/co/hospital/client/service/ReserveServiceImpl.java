@@ -201,6 +201,4 @@ public class ReserveServiceImpl implements ReserveService {
 		return "/client/reserve/beforeReserve";
 	}
 
-
-	
 }

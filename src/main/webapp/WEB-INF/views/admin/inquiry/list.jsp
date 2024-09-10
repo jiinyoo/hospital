@@ -65,6 +65,10 @@
 		<c:if test="${imap.state==1&&imap.answer==0}">
 		<a href="/admin/inquiry/write?part=${imap.part}&group_order=${imap.group_order}&bimil=${imap.bimil}&origin_user_id=${imap.user_id}&inq_id=${imap.inq_id}"><input type="button" value="답변 달기"></a>
 		</c:if>
+		<c:if test="${imap.state==1&&imap.answer==1}">
+		답변 완료
+		</c:if>
+		
 		</td>
 	</tr>
 	</c:forEach>

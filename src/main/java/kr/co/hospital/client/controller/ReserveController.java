@@ -63,6 +63,9 @@ public class ReserveController {
 		return service.reserveOk(rdto,session,response,redirect,request);
 	}
 	
-	
+	@RequestMapping("/main/reserveSearch")
+	public String reserveSearch() {
+		return "/client/reserve/reserveSearch";
+	}
 	
 }
