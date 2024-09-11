@@ -58,7 +58,7 @@ public class ReserveServiceImpl implements ReserveService {
 				model.addAttribute("user_phone",user_phone);
 			}
 		}
-			model.addAttribute("doctor",mapper.getDoctor());
+			model.addAttribute("doctor",mapper.getDoctors());
 			model.addAttribute("part",mapper.getPart());
 			//2
 			Cookie chk=new Cookie("chk", "1");
@@ -236,7 +236,16 @@ public class ReserveServiceImpl implements ReserveService {
 			rdto=mapper.reserveView(userid, null);
 			
 		}
+		ArrayList<HashMap> docinfo=new ArrayList<>();
+		 
+		for(int i=0;i<rdto.size();i++) {
+			HashMap doctor=mapper.getDoctor(rdto.get(i).getDoc_id());
+			System.out.println(doctor);
+			docinfo.add(doctor);
+			
+		}
 		
+		model.addAttribute("doctor",docinfo);
 		model.addAttribute("rdto",rdto);
 		Cookie url=new Cookie("url", "");
 		url.setMaxAge(0);

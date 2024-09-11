@@ -5,7 +5,7 @@
 		select doc_part from doctor
 		group by doc_part
 	</select>
-	<select id="getDoctor" resultType="hashmap">
+	<select id="getDoctors" resultType="hashmap">
 		select * from doctor order by doc_part asc
 	</select>
 	<select id="chkpart" resultType="Hashmap">
@@ -49,5 +49,9 @@
 		<if test="user_info!=null">
 			${user_info}
 		</if>
+	</select>
+	<select id="getDoctor" resultType="hashmap">
+		select * from doctor
+		where doc_id=#{doc_id}
 	</select>
 </mapper>
