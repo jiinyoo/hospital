@@ -55,7 +55,7 @@ function check() {
 	</tr>
 	<tr>
 		<td>시간</td>
-		<td><input type="text" name="pro_time"></td>
+		<td><input type="time" name="pro_time"></td>
 	</tr>
 	<tr>
 		<td>총 인원 </td>
