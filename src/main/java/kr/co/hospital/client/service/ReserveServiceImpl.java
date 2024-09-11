@@ -36,13 +36,15 @@ public class ReserveServiceImpl implements ReserveService {
 	@Override
 	public String reserve(HttpServletRequest request,Model model,HttpSession session,
 			HttpServletResponse response,RedirectAttributes redirect) {
+		
 		if(session.getAttribute("user_id")==null) {
 			String user_id=request.getParameter("user_id")==null?"":request.getParameter("user_id");
 			String user_phone=request.getParameter("user_phone")==null?"":request.getParameter("user_phone");
 			String user_jumin=request.getParameter("user_jumin")==null?"":request.getParameter("user_jumin");
-			Cookie chk=WebUtils.getCookie(request, "chk");
 			
-			if(user_id.isEmpty() || user_phone.isEmpty() || user_jumin.isEmpty() || chk==null) {
+			
+			if(user_id.isEmpty() || user_phone.isEmpty() || user_jumin.isEmpty()) {
+				System.out.println("ing");
 				Cookie url=new Cookie("url", "/main/reserve");
 				url.setMaxAge(500);
 				url.setPath("/");
@@ -180,10 +182,12 @@ public class ReserveServiceImpl implements ReserveService {
 			String resnum=String.format("%03d", mapper.getResnum(res_code)); 
 			res_code+=resnum;
 			if(session.getAttribute("user_id")==null) {
+				rdto.setIsMember(1);
 				rdto.setRes_code(res_code);
 				mapper.reserveOk(rdto);
 			} else {
 				UserDto udto=mapper.getUserinfo(rdto.getUser_id());
+				rdto.setIsMember(0);
 				rdto.setUser_jumin(udto.getUser_jumin());
 				rdto.setUser_phone(udto.getUser_phone());
 				rdto.setRes_code(res_code);
@@ -211,13 +215,13 @@ public class ReserveServiceImpl implements ReserveService {
 			if("0".equals(chk))	{ // 핸드폰 번호로 조회
 				String user_id=request.getParameter("user_id");
 				String user_phone=request.getParameter("user_phone");				
-				user_phone="and user_phone='"+user_phone+"'";
+				user_phone="and user_phone='"+user_phone+"' and isMember='1'";
 				System.out.println(user_phone);
 				rdto=mapper.reserveView(user_id,user_phone);
 			} else if("1".equals(chk)) {  // 주민번호로 조회 
 				String user_id=request.getParameter("user_id");
 				String user_jumin=request.getParameter("user_jumin");
-				user_jumin="and user_jumin='"+user_jumin+"'";
+				user_jumin="and user_jumin='"+user_jumin+"' and isMember='1'";
 				rdto=mapper.reserveView(user_id,user_jumin);
 				
 			} else {
