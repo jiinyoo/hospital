@@ -397,7 +397,7 @@ hr
 		<ul class="submenu">
 			<li>1:1문의</li>
 			<li><a href="/main/reserve">온라인 진료 예약</a></li>
-			<li><a href="/main/reserveSearch">예약 조회</a></li>
+			<li><a href="/main/reserveView">예약 조회</a></li>
 		</ul>
 		<ul class="submenu">
 			<li>프로그램 예약</li>

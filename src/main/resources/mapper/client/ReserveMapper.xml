@@ -43,4 +43,11 @@
 		select * from reserve
 		where res_code=#{res_code}
 	</select>
+	<select id="reserveView" resultType="kr.co.hospital.client.dto.ReserveDto">
+		select * from reserve
+		where user_id=#{user_id}
+		<if test="user_info!=null">
+			${user_info}
+		</if>
+	</select>
 </mapper>

@@ -170,15 +170,17 @@ public class DoctorServiceImpl implements DoctorService {
 		int[] end=wdto.getEnd_times();
 		String[] dayofweek=wdto.getDayofweeks();
 		wdto.setDoc_id(doc_id);
-		for(int i=0;i<start.length;i++) {
-			String stime=String.format("%02d", start[i]);
-			String etime=String.format("%02d", end[i]);
-			LocalTime starttime=LocalTime.parse(stime+":00");
-			LocalTime endtime=LocalTime.parse(etime+":00");
-			wdto.setStart_time(starttime);
-			wdto.setEnd_time(endtime);
-			wdto.setDayofweek(dayofweek[i]);
-			mapper.addWorkday(wdto);
+		if(start!=null) {
+			for(int i=0;i<start.length;i++) {
+				String stime=String.format("%02d", start[i]);
+				String etime=String.format("%02d", end[i]);
+				LocalTime starttime=LocalTime.parse(stime+":00");
+				LocalTime endtime=LocalTime.parse(etime+":00");
+				wdto.setStart_time(starttime);
+				wdto.setEnd_time(endtime);
+				wdto.setDayofweek(dayofweek[i]);
+				mapper.addWorkday(wdto);
+			}			
 		}
 		
 	

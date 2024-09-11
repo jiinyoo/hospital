@@ -124,6 +124,47 @@
 			document.getElementById(next).focus();
 		}
 	}
+	
+	function non() {
+		var phone1=document.getElementById("phone1").value;
+		var phone2=document.getElementById("phone2").value;
+		var phone3=document.getElementById("phone3").value;
+		
+		var jumin1=document.getElementById("jumin1").value;
+		var jumin2=document.getElementById("jumin2").value;
+		
+		var chk=document.getElementById("chk").value;
+		
+		
+		if(chk==0) {
+		    // 연락처가 제대로 입력되었는지 확인
+		    if (phone1.length!==3 || phone2.length!==4 || phone3.length!==4) {
+		        alert("유효한 연락처를 입력해주세요.");
+		        return false;
+		    }			
+		} else {
+		    if (jumin1.length!==6 || jumin2.length!==7) {
+		        alert("유효한 주민등록번호를 입력해주세요.");
+		        return false;
+		    }			
+		}
+		// 이름이 입력되지 않았을 경우 경고
+	    if (document.getElementsByName("user_id")[0].value.trim()==="") {
+	        alert("성함을 입력해주세요.");
+	        return false;
+	    }
+
+
+	    // 주민등록번호 앞자리와 뒷자리가 제대로 입력되었는지 확인
+
+	    if(true) {
+	    	document.getElementsByName("user_phone")[0].value=phone1+"-"+phone2+"-"+phone3;
+	    	document.getElementsByName("user_jumin")[0].value=jumin1+"-"+jumin2;
+	    	
+	    	return true;
+	    }
+		
+	}
 </script>
 </head>
 <body>

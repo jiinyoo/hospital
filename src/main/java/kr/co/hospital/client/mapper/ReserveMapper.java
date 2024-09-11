@@ -24,4 +24,5 @@ public interface ReserveMapper {
 	public void reserveOk(ReserveDto rdto);
 	public UserDto getUserinfo(String userid);
 	public ReserveDto reserveConfirm(String res_code);
+	public ArrayList<ReserveDto> reserveView(String user_id, String user_info);
 }

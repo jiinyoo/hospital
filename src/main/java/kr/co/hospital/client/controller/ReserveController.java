@@ -68,4 +68,9 @@ public class ReserveController {
 		return "/client/reserve/reserveSearch";
 	}
 	
+	@RequestMapping("/main/reserveView")
+	public String reserveView(HttpSession session,Model model,HttpServletRequest request, HttpServletResponse response) {
+		return service.reserveView(session,model,request,response);
+	}
+	
 }

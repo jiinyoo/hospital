@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
@@ -200,5 +202,45 @@ public class ReserveServiceImpl implements ReserveService {
 	public String beforeReserve(ReserveDto rdto) {
 		return "/client/reserve/beforeReserve";
 	}
+
+	@Override
+	public String reserveView(HttpSession session, Model model, HttpServletRequest request,HttpServletResponse response) {
+		ArrayList<ReserveDto> rdto=new ArrayList<>();
+		if(session.getAttribute("user_id")==null) {
+			String chk=request.getParameter("chk");
+			if("0".equals(chk))	{ // 핸드폰 번호로 조회
+				String user_id=request.getParameter("user_id");
+				String user_phone=request.getParameter("user_phone");				
+				user_phone="and user_phone='"+user_phone+"'";
+				System.out.println(user_phone);
+				rdto=mapper.reserveView(user_id,user_phone);
+			} else if("1".equals(chk)) {  // 주민번호로 조회 
+				String user_id=request.getParameter("user_id");
+				String user_jumin=request.getParameter("user_jumin");
+				user_jumin="and user_jumin='"+user_jumin+"'";
+				rdto=mapper.reserveView(user_id,user_jumin);
+				
+			} else {
+				Cookie url=new Cookie("url", "/main/reserveView");
+				url.setMaxAge(60*3);
+				url.setPath("/");
+				response.addCookie(url);
+				return "redirect:/main/reserveSearch";
+			}
+		} else {
+			String userid=session.getAttribute("user_id").toString();
+			rdto=mapper.reserveView(userid, null);
+			
+		}
+		
+		model.addAttribute("rdto",rdto);
+		Cookie url=new Cookie("url", "");
+		url.setMaxAge(0);
+		url.setPath("/");
+		response.addCookie(url);
+		return "/client/reserve/reserveView";
+	} 
+	
+	
 
 }

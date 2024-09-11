@@ -22,4 +22,5 @@ public interface ReserveService {
 	public HashMap chkDate(HttpServletRequest request);
 	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response, RedirectAttributes redirect,HttpServletRequest request);
 	public String beforeReserve(ReserveDto rdto);
+	public String reserveView(HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response);
 }
