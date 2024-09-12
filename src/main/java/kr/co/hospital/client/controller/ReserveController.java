@@ -73,4 +73,19 @@ public class ReserveController {
 		return service.reserveView(session,model,request,response);
 	}
 	
+	@RequestMapping("/main/cancelRes")
+	public String cancelRes(HttpServletRequest request,HttpSession session) {
+		return service.cancelRes(request,session);
+	}
+	
+	@RequestMapping("/main/delsuccess")
+	public String delsuccess() {
+		return "/client/reserve/delsuccess";
+	}
+	
+	@RequestMapping("/main/addSuccess")
+	public String addSucess() {
+		return "/client/reserve/addSuccess";
+	}
+	
 }

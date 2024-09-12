@@ -14,7 +14,7 @@ import kr.co.hospital.client.dto.UserDto;
 @Mapper
 public interface ReserveMapper {
 	public ArrayList<String> getPart();
-	public ArrayList<HashMap> getDoctor();
+	public ArrayList<HashMap> getDoctors();
 	public ArrayList<HashMap> chkpart(String doc_part);
 	public String chkDoc(String doc_id);
 	public WorkdayDto getTime(String doc_id,int dayValue);
@@ -25,4 +25,7 @@ public interface ReserveMapper {
 	public UserDto getUserinfo(String userid);
 	public ReserveDto reserveConfirm(String res_code);
 	public ArrayList<ReserveDto> reserveView(String user_id, String user_info);
+	public ArrayList<ReserveDto> pastReserve(String user_id, String user_info);
+	public String getDoctor(int doc_id);
+	public void delRes(String res_id, String userid, String user_info);
 }

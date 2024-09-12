@@ -23,4 +23,5 @@ public interface ReserveService {
 	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response, RedirectAttributes redirect,HttpServletRequest request);
 	public String beforeReserve(ReserveDto rdto);
 	public String reserveView(HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response);
+	public String cancelRes(HttpServletRequest request, HttpSession session);
 }
