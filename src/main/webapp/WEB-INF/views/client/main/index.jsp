@@ -145,7 +145,7 @@ section #community .comm .more-btn a:hover {
 	</div>
 </section>
 
-
+<section>
 <!-- 공지사항 및 학술행사 -->
 	<div id="community">
         <!-- 공지사항 섹션 -->
