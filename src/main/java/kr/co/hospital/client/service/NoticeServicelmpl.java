@@ -101,7 +101,7 @@ public class NoticeServicelmpl  implements NoticeService {
 	    if(user_id!=null) 
 	    {
 			ArrayList<HashMap> map=mapper.notice_list();
-		
+			System.out.println("공지사항 목록: "+map);
 			model.addAttribute("nmapAll",map);
 		
 			return "/client/notice/notice_list";

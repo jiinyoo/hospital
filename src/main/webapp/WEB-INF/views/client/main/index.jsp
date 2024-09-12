@@ -195,20 +195,26 @@ section #community .comm .more-btn a:hover {
 	<div id="community">
         <!-- 공지사항 섹션 -->
 		<div class="comm">
+		
 			<div class="title">
 				공지사항
 				<div class="more-btn"><a href="../notice_list">더보기</a></div>
 			</div>
-			
+		
+		<c:if test="${!empty map}">
+		<p> 공지사항이 없습니다.</p>
 			<ul class="notice-list">
-				<c:forEach items="${nmapAll}" var="ndto">
+			
+				<c:forEach items="${nmapAll}" var="map" begin="0" end="2">
 					<li>
 						<a href="notice_readnum?notice_id=${ndto.notice_id}">${ndto.title}</a>
 						<span class="notice-date">${ndto.date}</span>
 					</li>
 				</c:forEach>
+				
 			</ul>
-			
+		</c:if>
+		
 		</div>
 		
 		<!-- 학술행사 칸 -->
