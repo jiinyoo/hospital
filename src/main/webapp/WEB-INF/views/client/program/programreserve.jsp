@@ -5,17 +5,75 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+
+table td {
+	text-align:center;
+	vertical-align: top;
+	padding: 5px;
+	width:100px;
+	height:100px;
+}
+
+.program {
+	display: block;
+	margin-top: 5px;
+	font-size: small;
+
+}
+
+
+</style>
+
+
+
+
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+var num=0
 window.onload=function() {
+	 num=0
 	 var today = new Date();
 	 currentYear = today.getFullYear(); // 전역 변수에 저장
 	 currentMonth = today.getMonth() + 1; // 전역 변수에 저장
 	 loadCalendar(currentYear, currentMonth);
 	 document.getElementById("currentMonthYear").innerText=currentYear+"년"+currentMonth+"월";
-	 
 }
+
+var i=0
+function changeMonth(value) {
+	 	var today = new Date();
+		currentYear = today.getFullYear(); // 전역 변수에 저장
+		num=num+value;
+		currentMonth = today.getMonth()+1+num; // 전역 변수에 저장
+	 	if(currentMonth==0){
+	 		i=0
+	 	}
+	   	if(currentMonth<0) {
+	   		i=(Math.floor((currentMonth-1)/12)*-1)-1
+	   	}
+	   	if(currentMonth>0) {
+		   	i=Math.floor((currentMonth-1)/12)-1   
+		}
+		if(currentMonth<=(-12*i)) {
+			 currentMonth=12*(i+1)+currentMonth;
+			 currentYear=currentYear-(i+1);
+		}
+		if(currentMonth>12*i+12) {
+			 currentMonth=currentMonth-12*(i+1);
+			 currentYear=currentYear+(i+1);
+		}
+	 
+	 	loadCalendar(currentYear, currentMonth);
+	 	document.getElementById("currentMonthYear").innerText=currentYear+"년"+currentMonth+"월";
+	
+}
+
+
+
+
 
 function loadCalendar(year, month) {
     var xhr = new XMLHttpRequest();  // XMLHttpRequest 객체 생성
@@ -42,11 +100,6 @@ function loadCalendar(year, month) {
 }
 
 
-function prevMonth(value) {
-	
-	
-	
-}
 
 </script>
 </head>
@@ -54,9 +107,9 @@ function prevMonth(value) {
 <section>
 	
 	<div id="calendar-navigation">
-        <button id="prevMonth" onclick="prevMonth(-1)">◀ 이전</button>
+        <button id="prevMonth" onclick="changeMonth(-1)">◀ 이전</button>
         <span id="currentMonthYear"></span>  <!-- 현재 월/연도 표시 -->
-        <button id="nextMonth" onclick="nextMonth(+1)">다음 ▶</button>
+        <button id="nextMonth" onclick="changeMonth(+1)">다음 ▶</button>
     </div>
 	<div id="calendar"></div>
 
