@@ -400,7 +400,7 @@ hr
 			<li><a href="/main/reserveView">예약 조회</a></li>
 		</ul>
 		<ul class="submenu">
-			<li>프로그램 예약</li>
+			<li><a href="/program/programreserve">프로그램 예약</a></li>
 		</ul>
 		<ul class="submenu">
 				<li><a href="/main/notice_list">공지사항</a></li>

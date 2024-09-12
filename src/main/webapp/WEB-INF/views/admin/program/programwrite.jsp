@@ -17,15 +17,32 @@ $(function(){
 		
 	});
 });
+
+
+
+function check() {
+	var input=document.getElementById("file");
+	if(input.files.length==0) {
+		alert("사진 파일을 추가하세요.");
+		return false;
+	} else {
+		return true;
+	}
+
+	
+}
+
+
+
 </script>
 </head>
 <body>
 <section>
-<form method="post" action="programwriteOk" enctype="multipart/form-data">
+<form method="post" action="programwriteOk" enctype="multipart/form-data" onsubmit="return check()" name="pkc">
 <input type="hidden" name="pro_ju" value="${pro_ju}">
 <table align="center" width="500px" height="500px";>
 	<tr>
-		<td width="200px";>프로그램 명  </td>
+		<td width="200px">프로그램 명  </td>
 		<td><input type="text" name="pro_name"></td>
 	</tr>
 	<tr>
@@ -38,11 +55,11 @@ $(function(){
 	</tr>
 	<tr>
 		<td>시간</td>
-		<td><input type="text" name="pro_time"></td>
+		<td><input type="time" name="pro_time"></td>
 	</tr>
 	<tr>
 		<td>총 인원 </td>
-		<td><input type="text" id="pro_inwon" name="pro_inwon"></td>
+		<td><input type="text" id="pro_inwon" name="pro_inwon" value="10" readonly></td>
 	</tr>
 	<tr>
 		<td>관련과 </td>
@@ -55,7 +72,7 @@ $(function(){
 	</tr>
 	<tr>
 		<td>대표 이미지</td>
-		<td><input type="file" name="file"></td>
+		<td><input type="file" name="file" id="file"></td>
 	</tr>
 	<tr>
 		<td></td>

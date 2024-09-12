@@ -50,17 +50,21 @@ public class ProgramServiceImpl implements ProgramService {
 	public String programwriteOk(ProgramDto pdto,MultipartHttpServletRequest multi,HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		MultipartFile file=multi.getFile("file");
 		String fname=file.getOriginalFilename();
-		String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
-		//System.out.println("되는가"+str.substring(0,str.lastIndexOf("/")));
-		str=FileUtils.getFileName(fname, str);
-		String saveFname=str.substring(str.lastIndexOf("/")+1);
 		
-		Path path=Paths.get(str);
-		Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
-		
-		System.out.println("파일 저장됨");
-		
-		pdto.setPro_img(saveFname);
+		if(!file.isEmpty()) {
+			String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
+			//System.out.println("되는가"+str.substring(0,str.lastIndexOf("/")));
+			str=FileUtils.getFileName(fname, str);
+			String saveFname=str.substring(str.lastIndexOf("/")+1);
+			
+			Path path=Paths.get(str);
+			Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
+			
+			System.out.println("파일 저장됨");
+			
+			pdto.setPro_img(saveFname);
+			
+		}
 		
 		
 		int jucheck=mapper.juisnullcheck(pdto.getPro_ju());
