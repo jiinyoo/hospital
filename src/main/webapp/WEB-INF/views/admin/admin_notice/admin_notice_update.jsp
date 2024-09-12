@@ -202,7 +202,7 @@
 			  }	  
 		  }
 	  
-		   alert(delimg+"\n"+safeimg);
+		  // alert(delimg+"\n"+safeimg);
 		  
 		  // delimg, safeimg를 서버에 전송
 		  document.uform.delimg.value=delimg;
