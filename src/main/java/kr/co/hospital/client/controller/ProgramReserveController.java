@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.hospital.client.service.ProgramReserveSevice;
@@ -22,6 +23,14 @@ public class ProgramReserveController {
 	public String programreserve(HttpServletRequest request, Model model) {
 		return service.ProgramReserve(request,model);
 	}
+	
+	
+	@RequestMapping("/program/calendar")
+	@ResponseBody
+	public String calendar(HttpServletRequest request, Model model) {
+		return service.calendar(request,model);
+	}
+	
 	
 
 }

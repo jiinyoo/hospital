@@ -18,6 +18,12 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 
 	@Override
 	public String ProgramReserve(HttpServletRequest request, Model model) {
+
+		return "/client/program/programreserve";
+	}
+
+	@Override
+	public String calendar(HttpServletRequest request, Model model) {
 		int year,month;
 		if(request.getParameter("year")==null) {
 			LocalDate today=LocalDate.now();
@@ -37,6 +43,46 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 			}
 		}
 		
-		return null;
+		LocalDate xday=LocalDate.of(year,month,1);
+		int yoil=xday.getDayOfWeek().getValue();
+		
+		if(yoil==7) {
+			yoil=0;
+		}
+		
+
+        int lastDay = xday.lengthOfMonth(); // 해당 월의 마지막 날
+
+        // HTML로 달력 생성
+        StringBuilder sb = new StringBuilder();
+        sb.append("<table border='1'><thead><tr>");
+        String[] days = {"일", "월", "화", "수", "목", "금", "토"};
+        for (String day : days) {
+            sb.append("<th>").append(day).append("</th>");
+        }
+        sb.append("</tr></thead><tbody><tr>");
+
+        // 첫 주 빈칸 채우기
+        for (int i = 0; i < yoil; i++) {
+            sb.append("<td></td>");
+        }
+
+        // 날짜 채우기
+        for (int day = 1; day <= lastDay; day++) {
+            sb.append("<td>").append(day).append("</td>");
+            if ((day + yoil) % 7 == 0) {  // 주가 끝나면 줄 바꿈
+                sb.append("</tr><tr>");
+            }
+        }
+
+        // 남은 칸 빈칸으로 채우기
+        while ((lastDay + yoil) % 7 != 0) {
+            sb.append("<td></td>");
+            lastDay++;
+        }
+
+        sb.append("</tr></tbody></table>");
+
+        return sb.toString();  // HTML로 반환
 	}
 }
