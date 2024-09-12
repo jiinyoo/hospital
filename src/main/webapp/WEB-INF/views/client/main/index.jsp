@@ -17,7 +17,7 @@
       height:360px;
       margin:auto;
       
-      margin-bottom: 150px;
+      margin-bottom: 70px;
       border-radius: 30px;
       /*box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);*/
    }
@@ -43,7 +43,7 @@
 }
 
 section #community {
-        width: 1340px;
+        width: 1330px;
         margin: auto;
         text-align: center;
         margin-top: 20px;
@@ -65,7 +65,7 @@ section #community .comm .title {
     font-size: 20px;
     font-weight: bold;
     color: black;
-    margin-bottom: 14px;
+    margin-bottom: 20px;
 }
 
 section #community .comm .notice-list {
@@ -153,17 +153,16 @@ section #community .comm .more-btn a:hover {
 		
 			<div class="title">
 				공지사항
-				<div class="more-btn"><a href="../notice_list">더보기</a></div>
+				<div class="more-btn"><a href="/main/notice_list">더보기</a></div>
 			</div>
 		
-		<c:if test="${!empty map}">
-		<p> 공지사항이 없습니다.</p>
+		<c:if test="${!empty nmapAll}">
 			<ul class="notice-list">
 			
-				<c:forEach items="${nmapAll}" var="map" begin="0" end="2">
+				<c:forEach items="${nmapAll}" var="ndto" begin="0" end="2">
 					<li>
 						<a href="notice_readnum?notice_id=${ndto.notice_id}">${ndto.title}</a>
-						<span class="notice-date">${ndto.date}</span>
+						<span class="notice-date">${ndto.writeday}</span>
 					</li>
 				</c:forEach>
 				
@@ -211,7 +210,7 @@ section #community .comm .more-btn a:hover {
 		</div>
     
 </div>
-지인쓰 바보
+지웬장~
 <hr>
 dd
 <hr>
