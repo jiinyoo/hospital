@@ -12,7 +12,7 @@
 * {margin:0; padding:0; box-sizing: border-box;}
 
  section {
-      font-family: 'GmarketSansMedium';
+      font-family: 'goorm-sans-bold';
       width:70%;
       height:360px;
       margin:auto;
@@ -79,6 +79,76 @@
 #reserve-container button:focus {
     outline: none;
 }
+
+section #community {
+        width: 1340px;
+        margin: auto;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: flex; /* 칸을 가로로 배치하기 위해 flexbox 사용 */
+        justify-content: space-between; /* 각 칸 사이에 공간을 고르게 배치 */
+    }
+
+    section #community .comm {
+    width: 32%; /* 3개의 칸이 고르게 배치되도록 설정 */
+    height:200px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 테두리 없이 그림자만 추가 */
+    text-align: left;
+}
+
+section #community .comm .title {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 14px;
+}
+
+section #community .comm .notice-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+section #community .comm .notice-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 14px;
+}
+
+section #community .comm .notice-list li a {
+    text-decoration: none;
+    color: #0073e6;
+    font-weight: normal;
+}
+
+section #community .comm .notice-list li a:hover {
+    text-decoration: underline;
+}
+
+section #community .comm .notice-date {
+    color: #999;
+    font-size: 14px;
+}
+
+section #community .comm .more-btn {
+    text-align: right;
+    margin-top: -18px;
+    font-size: 16px;
+}
+
+section #community .comm .more-btn a {
+    text-decoration: none;
+    color: #0073e6;
+    font-weight: bold;
+}
+
+section #community .comm .more-btn a:hover {
+    text-decoration: underline;
+}
 </style>
 <script>
 	$(function(){
@@ -110,20 +180,82 @@
 			<div class="slide_item"><img class="slideimgs" src="/static/client/main/3.jpg"></div>
 		</div>
 	</div>
-</section>
+
 <c:if test="${!empty rdto }">
 <div id="reserve-container">
 	<h2>${rdto.user_id}님 예약완료</h2>
-	<h3>예약 번호 : ${rdto.res_code }</h4>
+	<h3>예약 번호 : ${rdto.res_code }</h3>
 	<div>예약 날짜 : ${rdto.res_date }</div>
 	<div>예약 시간 : ${rdto.res_time }</div>
 	<button onclick="closereserve()">닫기</button>
 </div>
 </c:if>
+
+<!-- 공지사항 및 학술행사 -->
+	<div id="community">
+        <!-- 공지사항 섹션 -->
+		<div class="comm">
+			<div class="title">
+				공지사항
+				<div class="more-btn"><a href="../notice_list">더보기</a></div>
+			</div>
+			
+			<ul class="notice-list">
+				<c:forEach items="${nmapAll}" var="ndto">
+					<li>
+						<a href="notice_readnum?notice_id=${ndto.notice_id}">${ndto.title}</a>
+						<span class="notice-date">${ndto.date}</span>
+					</li>
+				</c:forEach>
+			</ul>
+			
+		</div>
+		
+		<!-- 학술행사 칸 -->
+		<div class="comm">
+			<div class="title">
+				학술행사
+				<div class="more-btn" ><a href="#">더보기</a></div>
+			</div>
+			
+			<ul class="notice-list">
+				<li>
+					<a href="#">SPC Webinar: BUN/Cr 수치 상승 고려 사항</a>
+					<span class="notice-date">2024.08.26</span>
+				</li>
+				<li>
+					<a href="#">의료인을 위한 온라인 강의</a>
+					<span class="notice-date">2024.08.20</span>
+				</li>
+				<li>
+					<a href="#">건강한 생각을 하기위한 준비자세</a>
+					<span class="notice-date">2024.08.15</span>
+				</li>
+			</ul>
+			
+		</div>
+
+		<!-- 추가적인 빈 섹션 -->
+		<div class="comm">
+			<div class="title">
+				병원 이용 시간
+			</div>
+			<!-- 원하는 내용을 여기에 추가 -->
+			<br>
+			<div class="section-info">
+				<p><strong>평일:</strong> 9:00 AM - 6:00 PM</p>
+				<br>
+				<p><strong>공휴일/주말:</strong> 9:00 AM - 3:00 PM</p>
+			</div>
+		</div>
+    
+</div>
 지인쓰 바보
 <hr>
 dd
 <hr>
 dd
+
+</section>
 </body>
 </html>
