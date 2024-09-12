@@ -200,7 +200,7 @@ public class ReserveServiceImpl implements ReserveService {
 		chk.setPath("/");
 		response.addCookie(chk);
 		redirect.addFlashAttribute("rdto", mapper.reserveConfirm(res_code));
-		return "redirect:/main/index";
+		return "redirect:/main/addSuccess";
 	}
 
 	@Override
@@ -211,19 +211,22 @@ public class ReserveServiceImpl implements ReserveService {
 	@Override
 	public String reserveView(HttpSession session, Model model, HttpServletRequest request,HttpServletResponse response) {
 		ArrayList<ReserveDto> rdto=new ArrayList<>();
+		ArrayList<ReserveDto> past=new ArrayList<>();
 		if(session.getAttribute("user_id")==null) {
 			String chk=request.getParameter("chk");
 			if("0".equals(chk))	{ // 핸드폰 번호로 조회
-				String user_id=request.getParameter("user_id");
-				String user_phone=request.getParameter("user_phone");				
-				user_phone="and user_phone='"+user_phone+"' and isMember='1'";
-				System.out.println(user_phone);
-				rdto=mapper.reserveView(user_id,user_phone);
+				String userid=request.getParameter("user_id");
+				String phone=request.getParameter("user_phone");
+				phone="and user_phone='"+phone+"' and isMember='1'";
+				rdto=mapper.reserveView(userid, phone);
+				past=mapper.pastReserve(userid, phone);
+				
 			} else if("1".equals(chk)) {  // 주민번호로 조회 
-				String user_id=request.getParameter("user_id");
-				String user_jumin=request.getParameter("user_jumin");
-				user_jumin="and user_jumin='"+user_jumin+"' and isMember='1'";
-				rdto=mapper.reserveView(user_id,user_jumin);
+				String userid=request.getParameter("user_id");
+				String jumin=request.getParameter("user_jumin");
+				jumin="and user_phone='"+jumin+"' and isMember='1'";
+				rdto=mapper.reserveView(userid, jumin);
+				past=mapper.pastReserve(userid, jumin);
 				
 			} else {
 				Cookie url=new Cookie("url", "/main/reserveView");
@@ -235,43 +238,50 @@ public class ReserveServiceImpl implements ReserveService {
 		} else {
 			String userid=session.getAttribute("user_id").toString();
 			rdto=mapper.reserveView(userid, null);
-			
-		}
-		ArrayList<HashMap> docinfo=new ArrayList<>();
-		 
-		for(int i=0;i<rdto.size();i++) {
-			HashMap doctor=mapper.getDoctor(rdto.get(i).getDoc_id());
-			System.out.println(doctor);
-			docinfo.add(doctor);
-			
+			past=mapper.pastReserve(userid, null);
 		}
 		
-		model.addAttribute("doctor",docinfo);
-		model.addAttribute("rdto",rdto);
 		Cookie url=new Cookie("url", "");
 		url.setMaxAge(0);
 		url.setPath("/");
 		response.addCookie(url);
 		
-		LocalDateTime today=LocalDateTime.now();
-		ArrayList<String> res=new ArrayList<>();
-		for(int i=0;i<rdto.size();i++) {
-			LocalDate resDate=LocalDate.parse(rdto.get(i).getRes_date());
-			LocalDateTime restime=LocalDateTime.of(resDate, rdto.get(i).getRes_time());
-			if(rdto.get(i).getState()==1) {
-				res.add("진료 완료");
-			} else {
-				if(today.isAfter(restime)) {
-					res.add("예약 취소");
-				} else {
-					res.add("진료 예정");
-				}
-			}
+		ArrayList<String> doc=new ArrayList<>();
+		for(ReserveDto reserve:rdto) {
+			doc.add(mapper.getDoctor(reserve.getDoc_id()));  
+		}
+		ArrayList<String> doc1=new ArrayList<>();
+		for(ReserveDto reserve:past) {
+			doc1.add(mapper.getDoctor(reserve.getDoc_id()));
 		}
 		
-		model.addAttribute("resDate",res);
+		model.addAttribute("doc",doc);
+		model.addAttribute("pastDoc",doc1);
+		model.addAttribute("past",past);
+		model.addAttribute("rdto",rdto);
+		
+
 		
 		return "/client/reserve/reserveView";
+	}
+
+	@Override
+	public String cancelRes(HttpServletRequest request, HttpSession session) {
+		if(session.getAttribute("user_id")==null) {
+			String res_id=request.getParameter("res_id");
+			String user_phone=request.getParameter("user_phone");
+			String user_id=request.getParameter("user_id");
+			
+			mapper.delRes(res_id, user_id, user_phone);
+			return "redirect:/main/delsuccess";
+			
+		} else {
+			String res_id=request.getParameter("res_id");
+			String userid=session.getAttribute("user_id").toString();
+			
+			mapper.delRes(res_id,userid,null);
+			return "redirect:/main/reserveView";
+		}
 	} 
 	
 	
