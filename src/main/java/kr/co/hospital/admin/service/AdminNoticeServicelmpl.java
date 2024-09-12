@@ -230,7 +230,7 @@ public class AdminNoticeServicelmpl  implements AdminNoticeService {
 		}
 		
 		mapper.admin_notice_updateOk(ndto);
-		return "redirect:/admin_notice_content?notice_id="+notice_id;
+		return "redirect:/admin/admin_notice/admin_notice_content?notice_id="+notice_id;
 	    }
 	 else 
 	 {
