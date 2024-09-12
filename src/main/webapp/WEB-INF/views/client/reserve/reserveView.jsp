@@ -7,29 +7,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	section {
+		width:800px;
+		margin: 30px auto;
+	}
+	
+	section table {
+		width: 100%;
+	}
+	
+	th {
+		text-align: left;
+		background: #ccc;
+		
+	}
+	
+	th,td {padding: 7px 16px;}
+</style>
 </head>
 <body>
 	<section>
 		<table>
 			<tr>
-				<td>예약번호</td>
-				<td>진찰과</td>
-				<td>의사명</td>
-				<td>예약일</td>
-				<td>비고</td>
+				<th>예약번호</th>
+				<th>진찰과</th>
+				<th>의사명</th>
+				<th>예약일</th>
+				<th>비고</th>
 			</tr>
+			
 			<c:forEach var="res" items="${rdto }" varStatus="sts">
-			<fmt:parseDate value="${res.res_date} ${res.res_time}" pattern="yyyy-MM-dd HH:mm" var="date"/>
-			<fmt:formatDate value="${date }" pattern="yyyy-MM-dd" var="date"/>
+			
 			<tr>
 				<td>${res.res_code}</td>
 				<td>${res.doc_part }</td>
 				<td>${doctor[sts.index].doc_name }</td>
-				<td align="center">
-					<div>${res.res_date }</div>
-					<div>${res.res_time }</div>
-				</td>
-				<td>${res.state==1?'진료완료':'진료예정'}</td>
+				<td>${res.res_date } ${res.res_time } </td>
+				<td> ${resDate[sts.index]} </td>
 			</tr>
 			</c:forEach>		
 		</table>

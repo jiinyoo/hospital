@@ -1,6 +1,7 @@
 package kr.co.hospital.client.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -251,6 +252,25 @@ public class ReserveServiceImpl implements ReserveService {
 		url.setMaxAge(0);
 		url.setPath("/");
 		response.addCookie(url);
+		
+		LocalDateTime today=LocalDateTime.now();
+		ArrayList<String> res=new ArrayList<>();
+		for(int i=0;i<rdto.size();i++) {
+			LocalDate resDate=LocalDate.parse(rdto.get(i).getRes_date());
+			LocalDateTime restime=LocalDateTime.of(resDate, rdto.get(i).getRes_time());
+			if(rdto.get(i).getState()==1) {
+				res.add("진료 완료");
+			} else {
+				if(today.isAfter(restime)) {
+					res.add("예약 취소");
+				} else {
+					res.add("진료 예정");
+				}
+			}
+		}
+		
+		model.addAttribute("resDate",res);
+		
 		return "/client/reserve/reserveView";
 	} 
 	
