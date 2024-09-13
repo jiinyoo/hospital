@@ -13,6 +13,7 @@ table td {
 	padding: 5px;
 	width:100px;
 	height:100px;
+	border-spacing:none;
 }
 
 .program {
@@ -21,7 +22,39 @@ table td {
 	font-size: small;
 
 }
+.modal {
+    display: none; /* 기본적으로 보이지 않음 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* 반투명 배경 */
+    justify-content: center;
+    align-items: center;
+}
 
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.btn {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
 
 </style>
 
@@ -101,10 +134,74 @@ function loadCalendar(year, month) {
 
 
 
+function viewconfirm(user_id,pro_ju,pro_name) {
+	
+	    if (confirm(user_id + "님 " + "토요일"+(pro_ju + 1) + "주차"+pro_name+ "수업을 신청하시겠습니까?")) {
+	        alert("hi");
+	    }
+	
+}
+
+
+
+function showModal(message, callback) {
+    // 모달 요소 가져오기
+    var modal = document.getElementById("confirmModal");
+    var modalMessage = document.getElementById("modalMessage");
+    var confirmBtn = document.getElementById("confirmBtn");
+    var cancelBtn = document.getElementById("cancelBtn");
+
+    // 메시지 설정
+    modalMessage.textContent = message;
+
+    // 모달 보이기
+    modal.style.display = "flex";
+
+    // 확인 버튼 클릭 시
+    confirmBtn.onclick = function() {
+        modal.style.display = "none"; // 모달 숨기기
+        callback(true); // 확인 선택 시 true 전달
+    };
+
+    // 취소 버튼 클릭 시
+    cancelBtn.onclick = function() {
+        modal.style.display = "none"; // 모달 숨기기
+        callback(false); // 취소 선택 시 false 전달
+    };
+}
+
+function viewconfirm(user_id, pro_ju, pro_name) {
+    var message = user_id + "님, 토요일 " + (pro_ju + 1) + "주차 " + pro_name + " 수업을 신청하시겠습니까?";
+    
+    // 커스텀 모달 호출
+    showModal(message, function(confirmed) {
+        if (confirmed) {
+            alert("수업 신청이 완료되었습니다.");
+            location.href="/program/preserveOk?user_id="+user_id+"&pro_ju?="+pro_ju+"&pro_name?="+pro_name;
+        } else {
+            alert("수업 신청이 취소되었습니다.");
+        }
+    });
+}
+
 </script>
 </head>
 <body>
 <section>
+	
+	<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <span id="modalMessage"></span>
+        <br/><br/>
+        <button id="confirmBtn" class="btn">확인</button>
+        <button id="cancelBtn" class="btn">취소</button>
+    </div>
+	</div>
+	
+	
+	
+	
+	
 	
 	<div id="calendar-navigation">
         <button id="prevMonth" onclick="changeMonth(-1)">◀ 이전</button>
