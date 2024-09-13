@@ -10,10 +10,10 @@ import kr.co.hospital.admin.dto.ProgramDto;
 public interface ProgramService {
 
 	public String program(HttpServletRequest request, Model model, HttpSession session);
-
-	public String programwrite(HttpServletRequest request, Model model, HttpSession session);
-
+	public String programwrite();
 	public String programwriteOk(ProgramDto pdto,MultipartHttpServletRequest multi,HttpServletRequest request, Model model, HttpSession session) throws Exception;
+	public String programdelete(HttpServletRequest request) throws Exception;
+	public String programupdate(HttpServletRequest request);
 
 
 }
