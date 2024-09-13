@@ -403,7 +403,7 @@ hr
 			<li><a href="/program/programreserve">프로그램 예약</a></li>
 		</ul>
 		<ul class="submenu">
-				<li><a href="../../notice_list">공지사항</a></li>
+				<li><a href="/main/notice_list">공지사항</a></li>
 				<li><a href="../../inquiry/list">진료과별 질문</a></li>
 				<li><a href="../../boardlist">진료 후기</a></li>
 				<li>고객의 소리</li>

@@ -21,14 +21,14 @@ public class NoticeController {
 	@Qualifier("noti")
 	NoticeService service;
 	
-	@RequestMapping("/notice_write")
+	@RequestMapping("/main/notice_write")
 	public String notice_write(HttpSession session,
 			Model model)
 	{
 		return service.notice_write(session,model);
 	}
 	
-	@RequestMapping("/notice_writeOk")
+	@RequestMapping("/main/notice_writeOk")
 	public String notice_writeOk(NoticeDto ndto,
 			HttpSession session,
 			MultipartHttpServletRequest multi) throws Exception
@@ -37,7 +37,7 @@ public class NoticeController {
 	}
 	
 	
-	@RequestMapping("/notice_list")
+	@RequestMapping("/main/notice_list")
 	public String notice_list(Model model,
 			HttpSession session, 
 			HttpServletResponse response)
@@ -45,13 +45,13 @@ public class NoticeController {
 		return service.notice_list(model,session,response);
 	}
 	
-	@RequestMapping("/notice_readnum")
+	@RequestMapping("/main/notice_readnum")
 	public String notice_readnum(HttpServletRequest request)
 	{
 		return service.notice_readnum(request);
 	}
 	
-	@RequestMapping("/notice_content")
+	@RequestMapping("/main/notice_content")
 	public String notice_content(HttpServletRequest request,
 			HttpSession session, 
 			Model model)
@@ -70,14 +70,14 @@ public class NoticeController {
 		return service.notice_content(request,session,model);
 	}
 	
-	@RequestMapping("/notice_update")
+	@RequestMapping("/main/notice_update")
 	public String notice_update(HttpServletRequest request,
 			Model model,HttpSession session)
 	{
 		return service.notice_update(request, model,session);
 	}
 	
-	@RequestMapping("/notice_updateOk")
+	@RequestMapping("/main/notice_updateOk")
 	public String notice_updateOk(NoticeDto ndto,
 			HttpServletRequest request, 
 			MultipartHttpServletRequest multi,
@@ -87,7 +87,7 @@ public class NoticeController {
 	
 	}
 	
-	@RequestMapping("/notice_delete")
+	@RequestMapping("/main/notice_delete")
 	public String notice_delete(HttpServletRequest request)
 	{
 		return service.notice_delete(request);

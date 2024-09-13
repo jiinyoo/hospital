@@ -83,7 +83,7 @@ public class NoticeServicelmpl  implements NoticeService {
 		ndto.setImg(fname);
 		
 		mapper.notice_writeOk(ndto);
-		return "redirect:/notice_list";
+		return "redirect:/main/notice_list";
 		}
 		else
 		{
@@ -101,14 +101,14 @@ public class NoticeServicelmpl  implements NoticeService {
 	    if(user_id!=null) 
 	    {
 			ArrayList<HashMap> map=mapper.notice_list();
-		
+			System.out.println("공지사항 목록: "+map);
 			model.addAttribute("nmapAll",map);
 		
 			return "/client/notice/notice_list";
 		}	
 		else
 		{
-			Cookie cookie = new Cookie("url", "/notice_list");
+			Cookie cookie = new Cookie("url", "/main/notice_list");
 			cookie.setMaxAge(60 * 60 * 24); // 쿠키 유효 기간 (초 단위) - 여기서는 1일
 			cookie.setPath("/");
 			response.addCookie(cookie);
@@ -121,7 +121,7 @@ public class NoticeServicelmpl  implements NoticeService {
 	{
 		String notice_id=request.getParameter("notice_id");
 		mapper.notice_readnum(notice_id);
-		return "redirect:/notice_content?notice_id="+notice_id;
+		return "redirect:/main/notice_content?notice_id="+notice_id;
 	}
 
 	@Override
@@ -229,7 +229,7 @@ public class NoticeServicelmpl  implements NoticeService {
 		}
 		
 		mapper.notice_updateOk(ndto);
-		return "redirect:/notice_content?notice_id="+notice_id;
+		return "redirect:/main/notice_content?notice_id="+notice_id;
 	    }
 	 else 
 	 {
@@ -244,7 +244,7 @@ public class NoticeServicelmpl  implements NoticeService {
 		String notice_id=request.getParameter("notice_id");
 			
 		mapper.notice_delete(user_id,notice_id);
-		return "redirect:/notice_list";
+		return "redirect:/main/notice_list";
 	}
 
 }

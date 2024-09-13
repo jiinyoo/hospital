@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="co.kr.hospital.client.mapper.ClientMainMapper">
-  
+<mapper namespace="kr.co.hospital.client.mapper.ClientMainMapper">
+  <select id="notice_list" resultType="HashMap">
+    select notice_id, title, date_format(writeday, '%Y.%m.%d') AS writeday 
+    from notice order by notice_id desc;
+  </select>
 </mapper>

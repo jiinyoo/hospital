@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.service.ProgramReserveSevice;
 
 
@@ -20,17 +22,20 @@ public class ProgramReserveController {
 	 ProgramReserveSevice service;
 	
 	@RequestMapping("/program/programreserve")
-	public String programreserve(HttpServletRequest request, Model model) {
-		return service.ProgramReserve(request,model);
+	public String programreserve(HttpServletRequest request, Model model,HttpSession session, HttpServletResponse response) {
+		return service.ProgramReserve(request,model,session,response);
 	}
 	
 	
 	@RequestMapping("/program/calendar")
 	@ResponseBody
-	public String calendar(HttpServletRequest request, Model model) {
-		return service.calendar(request,model);
+	public String calendar(HttpServletRequest request, Model model,HttpSession session) {
+		return service.calendar(request,model,session);
 	}
 	
-	
+	@RequestMapping("/program/preserveOk")
+	public String preserveOk(HttpServletRequest request, Model model,HttpSession session) {
+		return service.preserveOk(request,model,session);
+	}
 
 }
