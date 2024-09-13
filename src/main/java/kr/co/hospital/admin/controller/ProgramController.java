@@ -28,9 +28,9 @@ public class ProgramController {
 	
 	
 	@RequestMapping("/admin/program/programwrite")
-	public String programwrite(HttpServletRequest request, Model model, HttpSession session)
+	public String programwrite()
 	{
-		return service.programwrite(request,model,session);
+		return service.programwrite();
 		
 	}
 	
@@ -41,6 +41,21 @@ public class ProgramController {
 		
 	}
 	
+	
+	@RequestMapping("/admin/program/programdelete")
+	public String programdelete(HttpServletRequest request) throws Exception
+	{
+		return service.programdelete(request);
+		
+	}
+	
+	
+	@RequestMapping("/admin/program/programupdate")
+	public String programupdate(HttpServletRequest request) throws Exception
+	{
+		return service.programupdate(request);
+		
+	}
 	
 
 }

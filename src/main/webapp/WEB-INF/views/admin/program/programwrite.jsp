@@ -71,6 +71,26 @@ function check() {
         </select></td>
 	</tr>
 	<tr>
+		<td>시작일:</td>
+    	<td><input type="date" id="start_date" name="start_date" required></td>
+    </tr>
+    <tr>
+    	<td>종료일</td>
+    	<td><input type="date" id="end_date" name="end_date" required></td>
+    </tr>
+    <tr>
+    	<td>프로그램 요일 선택:</td>
+    	<td>   
+    	<input type="checkbox" name="day_of_week" value="0"> 일요일<br>
+        <input type="checkbox" name="day_of_week" value="1"> 월요일<br>
+        <input type="checkbox" name="day_of_week" value="2"> 화요일<br>
+        <input type="checkbox" name="day_of_week" value="3"> 수요일<br>
+        <input type="checkbox" name="day_of_week" value="4"> 목요일<br>
+        <input type="checkbox" name="day_of_week" value="5"> 금요일<br>
+        <input type="checkbox" name="day_of_week" value="6"> 토요일<br>
+        </td>
+    </tr>
+	<tr>
 		<td>대표 이미지</td>
 		<td><input type="file" name="file" id="file"></td>
 	</tr>

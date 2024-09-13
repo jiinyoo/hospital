@@ -1,5 +1,6 @@
 package kr.co.hospital.admin.service;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,11 +39,7 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 
 	@Override
-	public String programwrite(HttpServletRequest request, Model model, HttpSession session) {
-		// TODO Auto-generated method stub
-		String pro_ju=request.getParameter("pro_ju");
-		model.addAttribute("pro_ju",pro_ju);
-		
+	public String programwrite() {
 		return "/admin/program/programwrite";
 	}
 
@@ -56,29 +53,44 @@ public class ProgramServiceImpl implements ProgramService {
 			//System.out.println("되는가"+str.substring(0,str.lastIndexOf("/")));
 			str=FileUtils.getFileName(fname, str);
 			String saveFname=str.substring(str.lastIndexOf("/")+1);
-			
 			Path path=Paths.get(str);
 			Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
-			
 			System.out.println("파일 저장됨");
-			
 			pdto.setPro_img(saveFname);
-			
 		}
-		
-		
-		int jucheck=mapper.juisnullcheck(pdto.getPro_ju());
-		if(jucheck!=0) {
-			mapper.programupdate(pdto);
-		} else {
-			mapper.insertprogram(pdto);
-		}
-		
-		
+		mapper.insertprogram(pdto);
+		int proId = mapper.selectrecentid();
+		if (pdto.getDay_of_week() != null) {
+	        // 기존 데이터를 삭제하지 않고 새로운 데이터를 삽입
+	        mapper.deleteProgramDays(proId); // 선택적으로 기존 데이터 삭제
+	        for (Integer day : pdto.getDay_of_week()) {
+	            mapper.insertProgramDay(proId, day);
+	        }
+	    }
 		
 		return "redirect:/admin/program/program";
 		
 		
+	}
+
+	@Override
+	public String programdelete(HttpServletRequest request) throws Exception {
+		int pro_id=Integer.parseInt(request.getParameter("pro_id"));
+		ProgramDto pdto=mapper.getContent(pro_id);
+		String path=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString();
+		File file=new File(path,pdto.getPro_img());
+		if(file.exists()) {
+			file.delete();
+		}
+		mapper.deleteProgram(pro_id);
+		mapper.deleteProgramDays(pro_id);
+		return "redirect:/admin/program/program";
+	}
+
+	@Override
+	public String programupdate(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

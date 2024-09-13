@@ -21,42 +21,45 @@ table td{
 }
 </style>
 <script>
-function content(num)
-{
-	location.href="/admin/program/programwrite?pro_ju="+num;
-}
 </script>
 </head>
 <body>
 <section>
-
-
-<button onclick="content(0)" type="button" name="firstp" value="0">토요일 첫째주 프로그램 업데이트</button>
-<button onclick="content(1)" type="button" name="secondp" value="0">토요일 둘째주 프로그램 업데이트</button>
-<button onclick="content(2)" type="button" name="thirdp" value="0">토요일 셋째주 프로그램 업데이트</button>
-<button onclick="content(3)" type="button" name="fourthp" value="0">토요일 넷째주 프로그램 업데이트</button>
-
+<a href="/admin/program/programwrite"><input type="button" value="프로그램 등록"></a>
 	<table>
 		<tr>
-			<td width="140px">주차</td>
-			<td width="140px">프로그램 이름</td>
-			<td width="140px">강사</td>
-			<td width="140px">파트</td>
-			<td width="140px">프로그램 이미지</td>
+			<td width="100px">프로그램 이름</td>
+			<td width="100px">강사</td>
+			<td width="100px">파트</td>
+			<td width="100px">프로그램 이미지</td>
+			<td width="100px">삭제 및 수정</td>
+			<td width="150px">시작일</td>
+			<td width="150px">종료일</td>
+			<td width="100px">해당요일</td>
 		</tr>
-<c:forEach items="${plist}" var="pdto">
+	<c:forEach items="${plist}" var="pdto">
 	
 		<tr>
-			<td>${pdto.pro_ju+1}주차 </td>
 			<td>${pdto.pro_name}</td>
 			<td>${pdto.teach_name}</td>
 			<td>${pdto.pro_part}</td>
-		<td>
-			<img src="../../static/admin/programfile/${pdto.pro_img}" width="300px">
-		</td>
+			<td>
+				<img src="../../static/admin/programfile/${pdto.pro_img}" width="300px">
+			</td>
+			<td><a href="/admin/program/programdelete?pro_id=${pdto.pro_id}"><input type="button" value="삭제"></a>
+				<a href="/admin/program/programupdate?pro_id=${pdto.pro_id}"><input type="button" value="수정"></a>
+			</td>
+			<td>${pdto.start_date}</td>
+			<td>${pdto.end_date}</td>
+			<td>${pdto.days_of_week}</td>
+			<td>
+			
+			 </td>
 		</tr>
-</c:forEach>
+	</c:forEach>
+	
 	</table>
+		
 
 </section>
 </body>
