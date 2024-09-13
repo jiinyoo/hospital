@@ -43,7 +43,7 @@ public class ReserveServiceImpl implements ReserveService {
 			String user_phone=request.getParameter("user_phone")==null?"":request.getParameter("user_phone");
 			String user_jumin=request.getParameter("user_jumin")==null?"":request.getParameter("user_jumin");
 			
-			
+
 			if(user_id.isEmpty() || user_phone.isEmpty() || user_jumin.isEmpty()) {
 				System.out.println("ing");
 				Cookie url=new Cookie("url", "/main/reserve");
@@ -259,8 +259,6 @@ public class ReserveServiceImpl implements ReserveService {
 		model.addAttribute("pastDoc",doc1);
 		model.addAttribute("past",past);
 		model.addAttribute("rdto",rdto);
-		
-
 		
 		return "/client/reserve/reserveView";
 	}

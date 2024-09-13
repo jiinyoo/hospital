@@ -12,7 +12,7 @@
 	}
 </style>
 <script>
-	var countdown=3;
+	var countdown=2;
 	
 	window.onload=function() {
 		var ele=document.getElementById("countdown");
@@ -21,7 +21,7 @@
 			ele.innerHTML=countdown;
 			countdown--;
 			
-			if(countdown==0) {
+			if(countdown<0) {
 				clearInterval(timer);
 				window.location.href="/main/index";
 			}
