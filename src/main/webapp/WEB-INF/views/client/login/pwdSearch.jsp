@@ -63,6 +63,27 @@
         .error {
             color: red;
         }
+        
+  .additional-links 
+  {
+    text-align: center;
+    margin-top: 20px;
+    
+  }
+
+  .additional-links a 
+  {
+    margin: 0 10px;
+    font-size: 14px;
+
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .additional-links a:hover 
+  {
+    text-decoration: underline;
+  }
     </style>
 </head>
 <body>
@@ -99,6 +120,12 @@
             <c:if test="${not empty errorMessage}">
                 <p>${errorMessage}</p>
             </c:if>
+        </div>
+        
+       <div class="additional-links">
+          <a href="/main/user">회원가입</a> | 
+          <a href="/main/login">로그인</a> | 
+          <a href="/main/idSearch">아이디 찾기</a>
         </div>
     </div>
 </body>

@@ -123,7 +123,7 @@ public class LoginServicelmpl implements LoginService {
 	        
 	        if (savedCode != null && sentTime != null) {
 	            // 현재 시간이 인증번호 발송 시간에서 3분이 넘지 않았는지 확인
-	            if (sentTime.plusMinutes(3).isAfter(LocalDateTime.now())) {
+	            if (sentTime.plusMinutes(0).isAfter(LocalDateTime.now())) {
 	                if (savedCode.equals(inputCode)) {
 	                    model.addAttribute("successMessage", "인증 성공! 비밀번호는 '1234'입니다.");
 	                } else {
