@@ -96,24 +96,14 @@ public class NoticeServicelmpl  implements NoticeService {
 			HttpSession session, 
 			HttpServletResponse response) 
 	{
-		String user_id=(String) session.getAttribute("user_id");
-	    
-	    if(user_id!=null) 
-	    {
+		
 			ArrayList<HashMap> map=mapper.notice_list();
 			System.out.println("공지사항 목록: "+map);
 			model.addAttribute("nmapAll",map);
 		
 			return "/client/notice/notice_list";
-		}	
-		else
-		{
-			Cookie cookie = new Cookie("url", "/main/notice_list");
-			cookie.setMaxAge(60 * 60 * 24); // 쿠키 유효 기간 (초 단위) - 여기서는 1일
-			cookie.setPath("/");
-			response.addCookie(cookie);
-			return "redirect:/main/login";
-		}
+	
+
 	}
 
 	@Override
@@ -150,7 +140,6 @@ public class NoticeServicelmpl  implements NoticeService {
 	    }
 	    
 		model.addAttribute("ndto",ndto);
-		model.addAttribute("user_id", session.getAttribute("user_id").toString());
 		return "client/notice/notice_content";
 	}
 

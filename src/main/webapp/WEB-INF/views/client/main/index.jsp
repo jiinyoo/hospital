@@ -112,9 +112,38 @@ section #community .comm .more-btn a:hover {
     text-decoration: underline;
 }
 
+.icon-section {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    margin:auto;
+    width:100%;
+    background-color: #f9f9f9;
+}
+
+.icon-box {
+	height:150px;
+    text-align: center;
+    width: 15%;
+}
+
+.icon-box img {
+    width: 100%; /* 아이콘 크기 설정 */
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.icon-box p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+
 </style>
 <script>
 	$(function(){
+
 		setInterval(function(){
 		
 			$("#inner").animate({
@@ -124,6 +153,7 @@ section #community .comm .more-btn a:hover {
 				$("#inner").css("margin-left","0px");
 			});
 		},4000);
+		
 	});
 	
 	function closereserve() {
@@ -156,7 +186,9 @@ section #community .comm .more-btn a:hover {
 				<div class="more-btn"><a href="/main/notice_list">더보기</a></div>
 			</div>
 		
-		<c:if test="${!empty nmapAll}">
+		<c:if test="${empty nmapAll}">
+		<p> 공지사항이 없습니다 </p>
+		</c:if>
 			<ul class="notice-list">
 			
 				<c:forEach items="${nmapAll}" var="ndto" begin="0" end="2">
@@ -167,7 +199,7 @@ section #community .comm .more-btn a:hover {
 				</c:forEach>
 				
 			</ul>
-		</c:if>
+		
 		
 		</div>
 		
@@ -210,6 +242,39 @@ section #community .comm .more-btn a:hover {
 		</div>
     
 </div>
+<div class="icon-section">
+    <div class="icon-box">
+        <img src="/static/client/main/진료조회.jpg" alt="진료조회">
+        <p>진료조회</p>
+    </div>
+    <div class="icon-box">
+        <img src="/static/client/main/조회.jpg" alt="검사이력 및 결과조회">
+        <p>검사이력 및 결과조회</p>
+    </div>
+    <div class="icon-box">
+        <img src="/static/client/main/오셔.jpg" alt="오시는 길">
+        <p>오시는 길</p>
+    </div>
+    <div class="icon-box">
+        <img src="/static/client/main/주차.jpg" alt="주차안내">
+        <p>주차안내</p>
+    </div>
+    <div class="icon-box">
+        <img src="/static/client/main/위치.jpg" alt="원내위치안내">
+        <p>원내위치안내</p>
+    </div>
+    <div class="icon-box">
+        <img src="/static/client/main/생활.jpg" alt="병원생활안내">
+        <p>병원생활안내</p>
+    </div>
+    <div class="icon-box">
+        <img src="/static/client/main/등록.jpg" alt="외부영상 CD등록">
+        <p>외부영상 CD등록</p>
+    </div>
+</div>
+
+
+
 지웬장~
 <hr>
 dd
@@ -217,5 +282,6 @@ dd
 dd
 
 </section>
+
 </body>
 </html>

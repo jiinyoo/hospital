@@ -19,12 +19,12 @@ public class ClientMainController {
 	@RequestMapping("/")
 	public String home()
 	{
-		return service.clientmain();
+		return "redirect:/main/index";
 	}
 	
 	@RequestMapping("/main")
 	public String main() {
-		return "/client/main/index";
+		return "redirect:/main/index";
 	}
 	
 	@RequestMapping("/main/index")

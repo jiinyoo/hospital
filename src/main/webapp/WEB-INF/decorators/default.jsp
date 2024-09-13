@@ -31,7 +31,7 @@ body
 	position:relative;
 	width:100%;
 	height:50px;
-	background:#8C8C8C;
+	background:#8BBCFF;
 	margin:auto;
 }
 
@@ -79,13 +79,14 @@ body
 	align-items:center;
 	text-decoration: none;
 	color: black;
-
+	cursor: pointer;
 }
 
 #loginbar > a 
 {
 	text-decoration: none;
 	color: black;
+	
 }
 	
 nav
@@ -347,7 +348,10 @@ hr
 		  <a href="/main/user"> 회원 가입 </a>
 		 </c:if>
 		 <c:if test="${sessionScope.user_id != null }">
-		   ${user_id}님 | 
+		   <c:if test="${sessionScope.user_name==admin}">
+		 	 <a href="/admin/main/index">관리자 페이지</a> |
+		   </c:if>
+		   		${user_id}님 | 
            <a href="/login/logout"> 로그아웃 </a> | 문의하기
          </c:if>
 		</div>

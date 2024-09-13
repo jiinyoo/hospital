@@ -29,7 +29,7 @@ public class ClientMainServiceImpl implements ClientMainService{
 			HttpSession session, 
 			HttpServletResponse response) 
 	{
-
+			
 			ArrayList<HashMap> map=mapper.notice_list();
 			System.out.println("공지사항 목록: "+map);
 			model.addAttribute("nmapAll",map);
