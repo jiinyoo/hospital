@@ -212,6 +212,6 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 		
 		
 		// TODO Auto-generated method stub
-		return null;
+		return "/client/program/programOkView";
 	}
 }
