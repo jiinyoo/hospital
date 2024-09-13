@@ -21,8 +21,6 @@ table td {
 	font-size: small;
 
 }
-
-
 </style>
 
 
