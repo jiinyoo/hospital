@@ -113,6 +113,7 @@
 			</c:forEach>		
 		</table>
 		
+		<c:if test="${!empty sessionScope.user_id}">
 		<h2>지난 예약</h2>
 		<table>
 			<tr>
@@ -144,6 +145,7 @@
 			</tr>
 			</c:forEach>		
 		</table>
+		</c:if>
 	</section>
 	<div id="chkUser">
 		<form method="post" action="cancelRes" onsubmit="return chk()">
