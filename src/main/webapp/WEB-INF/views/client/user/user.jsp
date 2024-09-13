@@ -287,9 +287,10 @@
 	    }
 
 	    // 전화번호와 주민번호를 합친 값을 숨겨진 필드에 설정
-	    document.mform.user_phone.value = user_phone;
-	    document.mform.user_jumin_full.value = user_jumin;
 	    document.mform.user_email.value = user_email;
+	    document.mform.user_phone.value = user_phone;
+	    document.mform.user_jumin.value = user_jumin;
+	    
 
 	    return true;
 	}
@@ -313,6 +314,8 @@
     <form name="mform" method="post" action="userOk" onsubmit="return check()">
 
       <input type="hidden" name="user_email">
+      <input type="hidden" name="user_phone">
+      <input type="hidden" name="user_jumin">
       <h3> 회원 가입 </h3>
 
       <div class="form-group">

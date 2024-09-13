@@ -16,8 +16,8 @@
     and user_name=#{user_name}
   </select>
 
-  <select id="findPasswordByEmailAndId" resultType="boolean">
-    select count(*) > 0 from user 
+  <select id="findPassword" resultType="String">
+    select user_pwd from user 
     where user_email = #{user_email} 
     and user_id = #{user_id}
   </select>
