@@ -75,5 +75,34 @@ public class LoginServicelmpl implements LoginService {
 	    session.invalidate();
         return "redirect:/main/index";
    }
+	
+	@Override
+    public String idSearch(HttpServletRequest request, Model model) {
+        String user_email = request.getParameter("user_email");
+        String user_name = request.getParameter("user_name");
 
+        String user_id = mapper.findUserId(user_email, user_name); // 이메일과 이름을 모두 확인하는 쿼리
+
+        if (user_id != null) {
+            model.addAttribute("successMessage", "아이디: " + user_id);
+        } else {
+            model.addAttribute("errorMessage", "해당 이메일 및 이름으로 등록된 아이디가 없습니다.");
+        }
+        return "client/login/idSearch"; // 같은 페이지로 리턴
+    }
+
+    // 비밀번호 찾기: 이메일과 아이디를 모두 입력해야 비밀번호 재설정 링크를 전송
+    @Override
+    public String pwdSearch(HttpServletRequest request, Model model) {
+        String userEmail = request.getParameter("email");
+        String userId = request.getParameter("user_id");
+
+        boolean result = mapper.findPasswordByEmailAndId(userEmail, userId);
+        if (result) {
+            model.addAttribute("successMessage", "비밀번호 재설정 링크가 이메일로 전송되었습니다.");
+        } else {
+            model.addAttribute("errorMessage", "입력하신 정보가 맞지 않습니다.");
+        }
+        return "client/login/pwdSearch"; // 같은 페이지로 리턴
+    }
 }

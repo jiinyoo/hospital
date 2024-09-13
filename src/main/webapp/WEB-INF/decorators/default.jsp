@@ -135,12 +135,12 @@ nav #mainmenu #maincate
 
 #mainmenu #maincate > li:hover
 {
-	color:#5C1DB5;
+	color:#0073e6;
 }
 
 #mainmenu #maincate > li > a:hover
 {
-	color:#5C1DB5;
+	color:#0073e6;
 }
 
 #maincate .logo img 
@@ -352,7 +352,7 @@ hr
 		 	 <a href="/admin/main/index">관리자 페이지</a> |
 		   </c:if>
 		   		${user_id}님 | 
-           <a href="/login/logout"> 로그아웃 </a> | 문의하기
+           <a href="/main/logout"> 로그아웃 </a> | 문의하기
          </c:if>
 		</div>
 </header>

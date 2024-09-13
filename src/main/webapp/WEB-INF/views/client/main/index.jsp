@@ -14,7 +14,7 @@
  section {
       font-family: 'goorm-sans-bold';
       width:70%;
-      height:360px;
+      height:180px;
       margin:auto;
       
       margin-bottom: 70px;
@@ -46,7 +46,7 @@ section #community {
         width: 1330px;
         margin: auto;
         text-align: center;
-        margin-top: 20px;
+        margin-top: 240px;
         margin-bottom: 20px;
         display: flex; /* 칸을 가로로 배치하기 위해 flexbox 사용 */
         justify-content: space-between; /* 각 칸 사이에 공간을 고르게 배치 */
@@ -115,29 +115,40 @@ section #community .comm .more-btn a:hover {
 .icon-section {
     display: flex;
     justify-content: space-around;
-    margin-top: 30px;
-    margin:auto;
-    width:100%;
-    background-color: #f9f9f9;
+    margin: auto;
+    width: 75%;
+    background-color: #ffffff; /* 배경을 깔끔한 흰색으로 설정 */
+    
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 부드러운 그림자로 더 깔끔한 느낌 */
+    
 }
 
 .icon-box {
-	height:150px;
     text-align: center;
-    width: 15%;
+    width: 13%; /* 아이콘 상자의 너비를 줄여서 간격을 더 촘촘하게 */
+    padding: 20px; /* 상자 내부의 여백을 추가해서 간격을 확보 */
+    cursor:pointer;
+    transition: all 0.3s ease;
+}
+
+.icon-box:hover {
+	transform: scale(1.1);
 }
 
 .icon-box img {
-    width: 100%; /* 아이콘 크기 설정 */
-    height: 150px;
-    margin-bottom: 10px;
+    width: 100%; /* 아이콘 크기를 통일 */
+    height: 100px;
+    margin-bottom: 12px; /* 아이콘과 텍스트 사이의 간격 */
 }
 
 .icon-box p {
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
     color: #333;
+    background-color: transparent; /* 텍스트 배경을 투명하게 설정 */
 }
+
 
 
 </style>
@@ -242,6 +253,10 @@ section #community .comm .more-btn a:hover {
 		</div>
     
 </div>
+
+
+</section>
+
 <div class="icon-section">
     <div class="icon-box">
         <img src="/static/client/main/진료조회.jpg" alt="진료조회">
@@ -272,16 +287,16 @@ section #community .comm .more-btn a:hover {
         <p>외부영상 CD등록</p>
     </div>
 </div>
-
-
-
+<section>
+<br>
+<br>
+<br>
+<br>
 지웬장~
 <hr>
 dd
 <hr>
 dd
-
 </section>
-
 </body>
 </html>

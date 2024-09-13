@@ -10,5 +10,7 @@ public interface LoginService {
 	public String login(HttpServletRequest request,Model model);
 	public String loginOk(UserDto udto,HttpSession session,HttpServletRequest request,HttpServletResponse response);
 	public String logout(HttpSession session);
+	public String idSearch(HttpServletRequest request, Model model);
+	public String pwdSearch(HttpServletRequest request, Model model);
 
 }
