@@ -13,7 +13,8 @@ public interface ProgramService {
 	public String programwrite();
 	public String programwriteOk(ProgramDto pdto,MultipartHttpServletRequest multi,HttpServletRequest request, Model model, HttpSession session) throws Exception;
 	public String programdelete(HttpServletRequest request) throws Exception;
-	public String programupdate(HttpServletRequest request);
+	public String programupdate(HttpServletRequest request,Model model);
+	public String programupdateOk(MultipartHttpServletRequest multi,ProgramDto pdto, HttpServletRequest request, Model model, HttpSession session)throws Exception;
 
 
 }

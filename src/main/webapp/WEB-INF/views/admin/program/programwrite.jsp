@@ -39,7 +39,6 @@ function check() {
 <body>
 <section>
 <form method="post" action="programwriteOk" enctype="multipart/form-data" onsubmit="return check()" name="pkc">
-<input type="hidden" name="pro_ju" value="${pro_ju}">
 <table align="center" width="500px" height="500px";>
 	<tr>
 		<td width="200px">프로그램 명  </td>

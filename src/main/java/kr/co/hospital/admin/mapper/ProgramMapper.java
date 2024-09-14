@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
 import kr.co.hospital.admin.dto.ProgramDto;
+import kr.co.hospital.admin.dto.ProgramdaysDto;
 
 @Mapper
 public interface ProgramMapper {
-
 	public ArrayList<ProgramDto> programs();
 	public void programupdate(ProgramDto pdto);
 	public int juisnullcheck(String pro_ju);
@@ -17,6 +17,6 @@ public interface ProgramMapper {
 	public int selectrecentid();
 	public void deleteProgram(int pro_id);
 	public ProgramDto getContent(int pro_id);
-
-
+	public ArrayList<ProgramdaysDto> getProgramdays(int pro_id);
+	public void updateProgram(ProgramDto pdto);
 }

@@ -23,6 +23,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.mapper.ProgramMapper;
 import kr.co.hospital.util.FileUtils;
 import kr.co.hospital.admin.dto.ProgramDto;
+import kr.co.hospital.admin.dto.ProgramdaysDto;
 
 @Service
 @Qualifier("pc")
@@ -88,9 +89,51 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 
 	@Override
-	public String programupdate(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+	public String programupdate(HttpServletRequest request,Model model) {
+		int pro_id=Integer.parseInt(request.getParameter("pro_id"));
+		ProgramDto pdto=mapper.getContent(pro_id);
+		ArrayList<ProgramdaysDto> pdlist=mapper.getProgramdays(pro_id);
+		model.addAttribute("pdto",pdto);
+		model.addAttribute("pdlist",pdlist);
+		return "/admin/program/programupdate";
+	}
+
+	@Override
+	public String programupdateOk(MultipartHttpServletRequest multi,ProgramDto pdto, HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		MultipartFile file=multi.getFile("file");
+		String fname=file.getOriginalFilename();
+		String originimg=request.getParameter("originimg");
+		int pro_id=Integer.parseInt(request.getParameter("pro_id"));
+		if(!file.isEmpty()) {
+			String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
+			//System.out.println("되는가"+str.substring(0,str.lastIndexOf("/")));
+			str=FileUtils.getFileName(fname, str);
+			String saveFname=str.substring(str.lastIndexOf("/")+1);
+			Path path=Paths.get(str);
+			Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
+			System.out.println("파일 저장됨");
+			pdto.setPro_img(saveFname);
+			
+			String fororiginPath=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString();
+			File originfile = new File(fororiginPath,originimg);
+			if(originfile.exists()) {
+				originfile.delete();
+			}
+			
+		} else {
+			pdto.setPro_img(originimg);
+		}
+		mapper.updateProgram(pdto);
+		
+		int proId = pro_id;
+		if (pdto.getDay_of_week() != null) {
+	        // 기존 데이터를 삭제하지 않고 새로운 데이터를 삽입
+	        mapper.deleteProgramDays(proId); // 선택적으로 기존 데이터 삭제
+	        for (Integer day : pdto.getDay_of_week()) {
+	            mapper.insertProgramDay(proId, day);
+	        }
+	    }
+		return "redirect:/admin/program/program";
 	}
 	
 

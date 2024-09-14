@@ -32,16 +32,25 @@
     <delete id="deleteProgramDays">
         DELETE FROM programdays WHERE pro_id = #{pro_id}
     </delete>
-    
     <select id="selectrecentid" resultType="Integer">
     	select max(pro_id) from program
     </select>
-    
     <delete id="deleteProgram">
 		delete from program where pro_id=#{pro_id}    	
     </delete>
     <select id="getContent" resultType="kr.co.hospital.admin.dto.ProgramDto">
     	select * from program
     	where pro_id = #{pro_id}
-    </select>	
+    </select>
+    <select id="getProgramdays" resultType="kr.co.hospital.admin.dto.ProgramdaysDto">
+    	select * from programdays
+    	where pro_id=#{pro_id}
+    </select>
+    <update id="updateProgram" parameterType="kr.co.hospital.admin.dto.ProgramDto">
+    	update program
+		set pro_name=#{pro_name}, pro_img=#{pro_img}, pro_info=#{pro_info}, teach_name=#{teach_name},
+		pro_time=#{pro_time},pro_inwon=#{pro_inwon}, pro_part=#{pro_part}, start_date=#{start_date}, end_date=#{end_date}
+		where pro_id=#{pro_id}
+    </update>
+    
 </mapper>
