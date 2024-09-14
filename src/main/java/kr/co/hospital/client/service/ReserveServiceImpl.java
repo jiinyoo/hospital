@@ -212,6 +212,23 @@ public class ReserveServiceImpl implements ReserveService {
 	public String reserveView(HttpSession session, Model model, HttpServletRequest request,HttpServletResponse response) {
 		ArrayList<ReserveDto> rdto=new ArrayList<>();
 		ArrayList<ReserveDto> past=new ArrayList<>();
+		int month=request.getParameter("month")==null?1:Integer.parseInt(request.getParameter("month"));
+		LocalDate start=null; 
+		LocalDate end=null;
+		if(request.getParameter("start")==null || request.getParameter("start")=="") {
+			start=LocalDate.now().minusMonths(month);
+		} else {
+			start=LocalDate.parse(request.getParameter("start"));
+		}
+		
+		if(request.getParameter("end")==null || request.getParameter("end")=="") {
+			end=LocalDate.now();
+		} else {
+			end=LocalDate.parse(request.getParameter("end"));
+		}
+		
+		System.out.println(start+"부터 "+end+"까지");
+
 		if(session.getAttribute("user_id")==null) {
 			String chk=request.getParameter("chk");
 			if("0".equals(chk))	{ // 핸드폰 번호로 조회
@@ -219,14 +236,14 @@ public class ReserveServiceImpl implements ReserveService {
 				String phone=request.getParameter("user_phone");
 				phone="and user_phone='"+phone+"' and isMember='1'";
 				rdto=mapper.reserveView(userid, phone);
-				past=mapper.pastReserve(userid, phone);
+			//	past=mapper.pastReserve(userid, phone,month);
 				
 			} else if("1".equals(chk)) {  // 주민번호로 조회 
 				String userid=request.getParameter("user_id");
 				String jumin=request.getParameter("user_jumin");
 				jumin="and user_phone='"+jumin+"' and isMember='1'";
 				rdto=mapper.reserveView(userid, jumin);
-				past=mapper.pastReserve(userid, jumin);
+			//	past=mapper.pastReserve(userid, jumin,month);
 				
 			} else {
 				Cookie url=new Cookie("url", "/main/reserveView");
@@ -238,7 +255,7 @@ public class ReserveServiceImpl implements ReserveService {
 		} else {
 			String userid=session.getAttribute("user_id").toString();
 			rdto=mapper.reserveView(userid, null);
-			past=mapper.pastReserve(userid, null);
+			past=mapper.pastReserve(userid, month, start, end);
 		}
 		
 		Cookie url=new Cookie("url", "");

@@ -25,7 +25,7 @@ public interface ReserveMapper {
 	public UserDto getUserinfo(String userid);
 	public ReserveDto reserveConfirm(String res_code);
 	public ArrayList<ReserveDto> reserveView(String user_id, String user_info);
-	public ArrayList<ReserveDto> pastReserve(String user_id, String user_info);
+	public ArrayList<ReserveDto> pastReserve(String user_id, int month, LocalDate start, LocalDate end);
 	public String getDoctor(int doc_id);
 	public void delRes(String res_id, String userid, String user_info);
 }
