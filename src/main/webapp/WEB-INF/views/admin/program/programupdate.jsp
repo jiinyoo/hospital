@@ -23,15 +23,6 @@ $(function(){
     }); 
 });
 
-function check() {
-    var input = document.getElementById("file");
-    if (input.files.length == 0) {
-        alert("사진 파일을 추가하세요.");
-        return false;
-    } else {
-        return true;
-    }
-}
 
 window.onload = function() {
     <c:forEach items="${pdlist}" var="pddto">

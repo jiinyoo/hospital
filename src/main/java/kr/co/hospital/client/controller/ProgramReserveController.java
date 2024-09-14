@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import kr.co.hospital.client.dto.ProgramReserveDto;
 import kr.co.hospital.client.service.ProgramReserveSevice;
 
 
@@ -33,9 +34,13 @@ public class ProgramReserveController {
 		return service.calendar(request,model,session);
 	}
 	
-	@RequestMapping("/program/preserveview")
-	public String preserveOk(HttpServletRequest request, Model model,HttpSession session) {
+	@RequestMapping("/program/programreserveview")
+	public String programreserveview(HttpServletRequest request, Model model,HttpSession session) {
 		return service.preserview(request,model,session);
 	}
 
+	@RequestMapping("/program/preserveOk")
+	public String preserveOk(ProgramReserveDto prdto,HttpServletRequest request, Model model,HttpSession session) {
+		return service.preserveOk(prdto,request,model,session);
+	}
 }

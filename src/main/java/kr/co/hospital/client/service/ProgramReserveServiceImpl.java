@@ -1,6 +1,7 @@
 package kr.co.hospital.client.service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.ProgramDto;
+import kr.co.hospital.client.dto.ProgramReserveDto;
 import kr.co.hospital.client.mapper.ProgramReserveMapper;
 
 @Service
@@ -57,14 +59,12 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	
 	@Override
 	public String calendar(HttpServletRequest request, Model model,HttpSession session) {
-		
-		
 		if(session.getAttribute("user_id")!=null) {
 			String user_id=session.getAttribute("user_id").toString();		
-			
+			LocalDate today=null;
 		    int year, month;
 		    if (request.getParameter("year") == null) {
-		        LocalDate today = LocalDate.now();
+		        today = LocalDate.now();
 		        year = today.getYear();
 		        month = today.getMonthValue();
 		    } else {
@@ -103,7 +103,11 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	        }
 	        
 	        ArrayList<ProgramDto> programs = mapper.getPrograms();
-
+	        
+	        
+	      
+	        
+	        
 	        // 달력에 프로그램 표시
 	        for (int day = 1; day <= lastDay; day++) {
 	            LocalDate currentDate = LocalDate.of(year, month, day);
@@ -111,19 +115,31 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	            if (dayOfWeek == 7) {
 	                dayOfWeek = 0;
 	            }
-
+	            today = LocalDate.now();
 	            String cellContent = "<span>" + day + "</span>";
-
+	            
 	            // 현재 날짜에 프로그램이 있는지 확인
 	            for (ProgramDto program : programs) {
 	                LocalDate startDate = LocalDate.parse(program.getStart_date());
 	                LocalDate endDate = LocalDate.parse(program.getEnd_date());
 	                LocalDate programDate = LocalDate.of(year, month, day);
-
+	                
+	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	                String formattedDate = programDate.format(formatter);
+	                
+	                
+	                today = LocalDate.now();
+	                int chonginwon=program.getPro_inwon();
+	                int minusinwon=program.getMinus_inwon();
+	                int resinwon=chonginwon-minusinwon;
 	                if (programDate.isAfter(startDate.minusDays(1)) &&
 	                    programDate.isBefore(endDate.plusDays(1)) &&
+	                    programDate.isAfter(today) &&
+	                    resinwon>0 && 
 	                    parseDayOfWeek(program.getDay_of_week()).contains(dayOfWeek)) {
-	                    cellContent += "<br><span>" + program.getPro_name() + "</span>";
+	                	cellContent += "<br><span><a href='/program/programreserveview?pro_id=" 
+	                		    + program.getPro_id() + "&reserve_date=" + formattedDate 
+	                		    + "'>" + program.getPro_name() + "</a></span>";
 	                }
 	            }
 
@@ -152,8 +168,16 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	@Override
 	public String preserview(HttpServletRequest request, Model model, HttpSession session) {
 		if(session.getAttribute("user_id")!=null) {
+			String user_id=session.getAttribute("user_id").toString();
+			String reserve_date=request.getParameter("reserve_date");
 			
 			
+			int pro_id=Integer.parseInt(request.getParameter("pro_id"));
+			ProgramDto pdto=mapper.getProgram(pro_id);
+			
+			model.addAttribute("user_id",user_id);
+			model.addAttribute("pdto",pdto);
+			model.addAttribute("reserve_date",reserve_date);
 			
 			
 		}else {
@@ -161,5 +185,24 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 			
 		}
 		return "/client/program/programreserveview";
+	}
+
+
+	@Override
+	public String preserveOk(ProgramReserveDto prdto,HttpServletRequest request, Model model, HttpSession session) {
+		LocalDate today=LocalDate.now();
+		String todaystring=today.toString().replace("-", "");
+		//예약 번호 생성
+		String pres_number="p"+todaystring;
+		int num=mapper.getResNumber(pres_number)+1;
+		pres_number=pres_number+String.format("%03d",num);
+		prdto.setPres_number(pres_number);
+		//minus_inwon업데이트		
+		mapper.minusInwon(prdto.getP_inwon(),prdto.getPro_id());
+
+		//insert
+		mapper.insertPreserve(prdto);
+		
+		return "/client/program/preservecomplete";
 	}
 }
