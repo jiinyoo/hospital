@@ -176,8 +176,8 @@
 				<input type="hidden" name="user_jumin">	
 				<input type="hidden" name="chk" id="chk" value="0">
 				<div id="radio-container">
-					<label><input type="radio" id="phone" name="sel" onclick="self(this)">핸드폰으로 조회</label>
-					<label><input type="radio" id="jumin" name="sel" onclick="self(this)">주민번호로 조회</label>
+					<label><input type="radio" id="phone" name="sel" onclick="self(this)"> 핸드폰으로 조회</label>
+					<label><input type="radio" id="jumin" name="sel" onclick="self(this)"> 주민번호로 조회</label>
 				</div>
 				<input type="text" name="user_id" placeholder="성함">
 				<div id="phone-container">

@@ -17,6 +17,10 @@
 		width: 100%;
 	}
 	
+	section h2 {
+		margin-bottom: 20px;
+	}
+	
 	th {
 		text-align: left;
 		background: #ccc;
@@ -42,6 +46,34 @@
 		height: 30px;
 		width:20%;
 	}
+	
+	#pastSearch {
+		display:flex;
+		justify-content: space-between;
+		margin:20px 0 5px 0;
+		align-items: center;
+	}
+	
+	#pastSearch a {
+		text-decoration: none;
+		color: black;
+	}
+	
+	#pastSearch input[type="date"] {
+		height: 30px;
+		width: 150px;
+		font-weight: bold;
+	}
+	
+	#pastSearch input[type="submit"] {
+		border: none;
+		background: #8BBCFF;
+		font-weight: bolder;
+		font-size: 15px;
+		padding:3px 20px;
+		line-height: 20px;
+		margin-left: 5px;
+	}
 </style>
 <script>
 	function chkUser(resid,userid) {
@@ -57,6 +89,45 @@
 			document.getElementById(next).focus();
 		}
 	}
+	
+	window.onload=function() {
+	    var start="${param.start}";
+	    var end="${param.end}";
+	    var month="${param.month}";
+
+	    var today=new Date();
+	    var y=today.getFullYear();
+	    var m=today.getMonth()+1;
+	    var d=String(today.getDate()).padStart(2,"0");
+
+	    if(month) {
+	        month=parseInt(month);
+	        m=m-month;
+	        if(m<=0) {
+	            m=12+m;
+	            y=y-1;
+	        }
+	    }
+
+	    m=String(m).padStart(2,"0");
+
+	    var startDate=y+"-"+m+"-"+d;
+	    var endDate=today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0")+"-"+d;
+
+	    if(!start) {
+	        document.getElementById("start").value=startDate;
+	    } else {
+	        document.getElementById("start").value=start;
+	    }
+
+	    if(!end) {
+	        document.getElementById("end").value=endDate;
+	    } else {
+	        document.getElementById("end").value=end;
+	    }
+	}
+
+
 	
 	function chk() {
 		var phone1=document.getElementById("phone1").value;
@@ -113,7 +184,21 @@
 			</c:forEach>		
 		</table>
 		
+		<c:if test="${!empty sessionScope.user_id}">
 		<h2>지난 예약</h2>
+		<form method="get" action="reserveView" id="pastSearch">
+		<div>
+			<a href="?month=1" ${param.month==1?'style="color:red;"':''}>1달이내</a>
+			<a href="?month=3" ${param.month==3?'style="color:red;"':''}>3달이내</a>
+			<a href="?month=6" ${param.month==6?'style="color:red;"':''}>6달이내</a>
+			<a href="?month=0" ${param.month==0?'style="color:red;"':''}>전체보기</a>
+		</div>
+		<div>
+			<input type="date" name="start" id="start">~
+			<input type="date" name="end" id="end">
+			<input type="submit" value="조회하기">
+		</div>
+		</form>
 		<table>
 			<tr>
 				<th>예약번호</th>
@@ -144,6 +229,7 @@
 			</tr>
 			</c:forEach>		
 		</table>
+		</c:if>
 	</section>
 	<div id="chkUser">
 		<form method="post" action="cancelRes" onsubmit="return chk()">
