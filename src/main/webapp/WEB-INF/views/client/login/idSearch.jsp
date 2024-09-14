@@ -86,11 +86,11 @@
     <div class="search-container">
         <h3>아이디 찾기</h3>
         <form method="post" action="${pageContext.request.contextPath}/main/idSearch">
-    <label for="email">이메일</label>
-    <input type="text" name="email" placeholder="이메일을 입력하세요">
+    <label for="user_email">이메일</label>
+    <input type="text" name="user_email" placeholder="이메일을 입력하세요">
     
-    <label for="name">이름</label>
-    <input type="text" name="name" placeholder="이름을 입력하세요">
+    <label for="user_name">이름</label>
+    <input type="text" name="user_name" placeholder="이름을 입력하세요">
     
     <input type="submit" value="아이디 찾기">
 </form>

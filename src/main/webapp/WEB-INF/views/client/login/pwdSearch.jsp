@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>비밀번호 찾기</title>
     <style>
-        /* 스타일 추가 */
+        /* 스타일 */
         .search-container {
             width: 80%;
             max-width: 600px;
@@ -24,8 +24,9 @@
             text-align: center;
         }
 
-        .search-container input[type="text"] {
-            width: calc(100% - 20px);
+        .search-container input[type="text"],
+        .search-container input[type="password"] {
+            width: calc(100% - 40px);
             padding: 15px;
             margin: 10px 0;
             font-size: 16px;
@@ -34,7 +35,7 @@
         }
 
         .search-container input[type="submit"] {
-            width: calc(100% - 20px);
+            width: calc(100% - 40px);
             padding: 15px;
             background-color: #007bff;
             color: white;
@@ -50,13 +51,16 @@
             background-color: #0056b3;
         }
 
-        .message {
+        .message, .error {
             margin-top: 20px;
+            text-align: center;
+        }
+
+        .message {
             color: green;
         }
 
         .error {
-            margin-top: 20px;
             color: red;
         }
         
@@ -86,31 +90,39 @@
     <div class="search-container">
         <h3>비밀번호 찾기</h3>
         <form method="post" action="${pageContext.request.contextPath}/main/pwdSearch">
-            <label for="email">이메일</label>
-            <br>
-            <input type="text" name="email" placeholder="이메일을 입력하세요">
-            <br>
             <label for="user_id">아이디</label>
-            <br>
             <input type="text" name="user_id" placeholder="아이디를 입력하세요">
             
-            <input type="submit" value="비밀번호 찾기">
+            <label for="user_email">이메일</label>
+            <input type="text" name="user_email" placeholder="이메일을 입력하세요">
+            
+            <input type="submit" value="인증번호 받기">
         </form>
-
+        
+        <!-- 인증번호 입력 -->
+        <c:if test="${not empty isSent}">
+            <form method="post" action="${pageContext.request.contextPath}/main/verifyCode">
+                <label for="verification_code">인증번호</label>
+                <input type="text" name="verification_code" placeholder="이메일로 받은 인증번호를 입력하세요">
+                
+                <input type="submit" value="인증번호 확인">
+            </form>
+        </c:if>
+        
         <!-- 성공 메시지 -->
         <div class="message">
             <c:if test="${not empty successMessage}">
                 <p>${successMessage}</p>
             </c:if>
         </div>
-
         <!-- 실패 메시지 -->
         <div class="error">
             <c:if test="${not empty errorMessage}">
                 <p>${errorMessage}</p>
             </c:if>
         </div>
-        <div class="additional-links">
+        
+       <div class="additional-links">
           <a href="/main/user">회원가입</a> | 
           <a href="/main/login">로그인</a> | 
           <a href="/main/idSearch">아이디 찾기</a>
