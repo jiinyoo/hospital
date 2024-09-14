@@ -8,6 +8,8 @@ import kr.co.hospital.client.dto.UserDto;
 @Mapper
 public interface LoginMapper {
 	public String loginOk(UserDto udto);
-	public Integer getState(String userid);
+	public Integer getState(String user_id);
+	public String findUserId(String user_email, String user_name);
+	public String findPassword(String user_email, String user_id);
 
 }

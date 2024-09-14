@@ -241,52 +241,60 @@
 
   function check() {
 	    var user_email = document.mform.e1.value + "@" + document.mform.e2.value;
+	    var user_phone = document.mform.phone1.value + "-" + document.mform.phone2.value + "-" + document.mform.phone3.value;
+	    var user_jumin = document.mform.jumin1.value + "-" + document.mform.jumin2.value;
 	    var user_pwd = document.mform.user_pwd.value;
 	    var pwdPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
 
 	    if (uchk == 0) {
-	      alert("아이디를 확인하세요");
-	      return false;
+	        alert("아이디를 확인하세요");
+	        return false;
 	    }
 
 	    if (document.mform.user_name.value == "") {
-	      alert("이름을 입력하세요");
-	      return false;
+	        alert("이름을 입력하세요");
+	        return false;
 	    }
 
 	    if (!pwdPattern.test(user_pwd)) {
-	      alert("비밀번호는 8~20자, 영문, 숫자, 특수문자를 포함해야 합니다.");
-	      return false;
+	        alert("비밀번호는 8~20자, 영문, 숫자, 특수문자를 포함해야 합니다.");
+	        return false;
 	    }
 
 	    if (pchk == 0) {
-	      alert("비밀번호를 확인하세요");
-	      return false;
+	        alert("비밀번호를 확인하세요");
+	        return false;
 	    }
 
-	    if (document.mform.user_phone.value == "") {
-	      alert("전화번호를 입력하세요");
-	      return false;
+	    if (document.mform.phone1.value == "" || document.mform.phone2.value == "" || document.mform.phone3.value == "") {
+	        alert("전화번호를 입력하세요");
+	        return false;
 	    }
 
 	    if (document.mform.e1.value == "" || document.mform.e2.value == "") {
-	      alert("이메일을 입력하세요");
-	      return false;
+	        alert("이메일을 입력하세요");
+	        return false;
 	    }
 
-	    if (document.mform.user_jumin.value == "") {
-	      alert("주민번호를 입력하세요");
-	      return false;
+	    if (document.mform.jumin1.value == "" || document.mform.jumin2.value == "") {
+	        alert("주민번호를 입력하세요");
+	        return false;
 	    }
 
 	    if (document.mform.user_addr.value == "") {
-	      alert("주소를 입력하세요");
-	      return false;
+	        alert("주소를 입력하세요");
+	        return false;
 	    }
 
+	    // 전화번호와 주민번호를 합친 값을 숨겨진 필드에 설정
 	    document.mform.user_email.value = user_email;
+	    document.mform.user_phone.value = user_phone;
+	    document.mform.user_jumin.value = user_jumin;
+	    
+
 	    return true;
-	  }
+	}
+
 
   function onlyNum(my, next, maxlength) 
   {
@@ -306,6 +314,8 @@
     <form name="mform" method="post" action="userOk" onsubmit="return check()">
 
       <input type="hidden" name="user_email">
+      <input type="hidden" name="user_phone">
+      <input type="hidden" name="user_jumin">
       <h3> 회원 가입 </h3>
 
       <div class="form-group">
@@ -327,11 +337,11 @@
       </div>
 
       <div id="phone-container">
-        <input type="text" name="user_phone" id="phone1" placeholder="연락처" maxlength="3" oninput="onlyNum(this,'phone2',3)">
+        <input type="text" name="phone1" id="phone1" placeholder="연락처" maxlength="3" oninput="onlyNum(this,'phone2',3)">
         <span>-</span>
-        <input type="text" name="user_phone" id="phone2" maxlength="4" oninput="onlyNum(this,'phone3',4)">
+        <input type="text" name="phone2" id="phone2" maxlength="4" oninput="onlyNum(this,'phone3',4)">
         <span>-</span>
-        <input type="text" name="user_phone" id="phone3" maxlength="4" oninput="onlyNum(this,null)">
+        <input type="text" name="phone3" id="phone3" maxlength="4" oninput="onlyNum(this,null,null)">
       </div>
 
       <div class="form-group email-group">
@@ -347,9 +357,9 @@
       </div>
 
       <div id="jumin-container">
-        <input type="text" name="user_jumin" id="jumin1" placeholder="주민등록번호" maxlength="6" oninput="onlyNum(this,'jumin2',6)">
+        <input type="text" name="jumin1" id="jumin1" placeholder="주민등록번호" maxlength="6" oninput="onlyNum(this,'jumin2',6)">
         <span>-</span>
-        <input type="password" name="user_jumin" id="jumin2" maxlength="7" oninput="onlyNum(this,null)">
+        <input type="password" name="jumin2" id="jumin2" maxlength="7" oninput="onlyNum(this,null)">
       </div>
 
       <div class="form-group">
@@ -362,8 +372,8 @@
       
       <div class="additional-links">
           <a href="/main/login">로그인</a> | 
-          <a href="#">아이디 찾기</a> | 
-          <a href="#">패스워드 찾기</a>
+          <a href="/main/idSearch">아이디 찾기</a> | 
+          <a href="/main/pwdSearch">패스워드 찾기</a>
         </div>
 
     </form>
