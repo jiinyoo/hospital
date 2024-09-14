@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.hospital.client.mapper.ProgramReserveMapper">
-	<select id="firstProgram">
-		select * from program
-		where pro_ju=0
-	</select>
-	<select id="secondProgram">
-		select * from program
-		where pro_ju=1
-	</select>
-	<select id="thirdProgram">
-		select * from program
-		where pro_ju=2
-	</select>
-	<select id="fourthProgram">
-		select * from program
-		where pro_ju=3
+	<select id="getPrograms" resultType="kr.co.hospital.client.dto.ProgramDto">
+		SELECT 
+		    p.pro_id,
+		    p.pro_name,
+		    p.pro_img,
+		    p.pro_info,
+		    p.teach_name,
+		    p.pro_time,
+		    p.pro_inwon,
+		    p.pro_part,
+		    p.start_date,
+		    p.end_date,
+		    p.writeday,
+		    GROUP_CONCAT(pd.day_of_week ORDER BY pd.day_of_week ASC) AS day_of_week
+		FROM 
+		    program AS p
+		INNER JOIN 
+		    programdays AS pd
+		ON 
+		    p.pro_id = pd.pro_id
+		GROUP BY 
+		    p.pro_id
+		ORDER BY 
+		    p.pro_id DESC;
 	</select>
 
 </mapper>

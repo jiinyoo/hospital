@@ -8,6 +8,5 @@
 </head>
 <body>
 
-뭐라도 써놓자
 </body>
 </html>

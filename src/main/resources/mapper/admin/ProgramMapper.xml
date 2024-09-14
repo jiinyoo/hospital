@@ -52,5 +52,4 @@
 		pro_time=#{pro_time},pro_inwon=#{pro_inwon}, pro_part=#{pro_part}, start_date=#{start_date}, end_date=#{end_date}
 		where pro_id=#{pro_id}
     </update>
-    
 </mapper>

@@ -110,7 +110,7 @@ window.onload = function() {
     </tr>
     <tr>
         <td></td>
-        <td><input type="submit" value="업데이트하기"></td>
+        <td><input type="submit" value="수정하기"></td>
     </tr>
 </table>
 </form>

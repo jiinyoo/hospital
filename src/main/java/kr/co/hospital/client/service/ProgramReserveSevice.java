@@ -12,6 +12,6 @@ public interface ProgramReserveSevice {
 
 	String calendar(HttpServletRequest request, Model model, HttpSession session);
 
-	String preserveOk(HttpServletRequest request, Model model, HttpSession session);
+	String preserview(HttpServletRequest request, Model model, HttpSession session);
 
 }

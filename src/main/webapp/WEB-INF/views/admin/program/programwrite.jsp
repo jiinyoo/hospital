@@ -54,7 +54,7 @@ function check() {
 	</tr>
 	<tr>
 		<td>시간</td>
-		<td><input type="time" name="pro_time"></td>
+		<td><input type="time" name="pro_time" required></td>
 	</tr>
 	<tr>
 		<td>총 인원 </td>
@@ -95,7 +95,7 @@ function check() {
 	</tr>
 	<tr>
 		<td></td>
-		<td><input type="submit" value="업데이트하기"></td>
+		<td><input type="submit" value="등록하기"></td>
 	</tr>
 
 </table>

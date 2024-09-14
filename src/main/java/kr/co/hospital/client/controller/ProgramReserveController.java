@@ -33,9 +33,9 @@ public class ProgramReserveController {
 		return service.calendar(request,model,session);
 	}
 	
-	@RequestMapping("/program/preserveOk")
+	@RequestMapping("/program/preserveview")
 	public String preserveOk(HttpServletRequest request, Model model,HttpSession session) {
-		return service.preserveOk(request,model,session);
+		return service.preserview(request,model,session);
 	}
 
 }

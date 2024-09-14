@@ -9,11 +9,8 @@ import kr.co.hospital.client.dto.ProgramDto;
 @Mapper
 public interface ProgramReserveMapper {
 
+	ArrayList<ProgramDto> getPrograms();
 
-	ProgramDto firstProgram();
-	ProgramDto secondProgram();
-	ProgramDto thirdProgram();
-	ProgramDto fourthProgram();
-	
+
 	
 }
