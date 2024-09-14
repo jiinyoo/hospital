@@ -137,9 +137,9 @@
 
       <div class="buttons" align="center">
         <a href="notice_list">목록</a>
-        <c:if test="${user_id=='admin'}">
-          <a href="../notice_update?notice_id=${ndto.notice_id}">수정</a>
-          <a href="../notice_delete?notice_id=${ndto.notice_id}" class="delete">삭제</a>
+        <c:if test="${sessionScope.state==2}">
+          <a href="../main/notice_update?notice_id=${ndto.notice_id}">수정</a>
+          <a href="../main/notice_delete?notice_id=${ndto.notice_id}" class="delete">삭제</a>
         </c:if>
       </div>
     </form>

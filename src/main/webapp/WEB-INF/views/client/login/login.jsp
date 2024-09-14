@@ -136,11 +136,24 @@
             return true;   	
     }
     
-    function idSearch() {
+    function showError() 
+    {
+        var err="${param.err}";
+        if (err=='1') 
+        {
+            alert("아이디 또는 비밀번호가 틀렸습니다.");
+        }
+    }
+    
+    window.onload = showError;  // 페이지 로드 시 에러 확인
+    
+    function idSearch() 
+    {
       alert("아이디 찾기 페이지로 이동합니다.");
     }
 
-    function pwdSearch() {
+    function pwdSearch() 
+    {
       alert("비밀번호 찾기 페이지로 이동합니다.");
     }
 </script>
