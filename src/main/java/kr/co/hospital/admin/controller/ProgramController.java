@@ -49,12 +49,17 @@ public class ProgramController {
 		
 	}
 	
-	
 	@RequestMapping("/admin/program/programupdate")
-	public String programupdate(HttpServletRequest request) throws Exception
+	public String programupdate(HttpServletRequest request,Model model)
 	{
-		return service.programupdate(request);
-		
+		return service.programupdate(request,model);
+	}
+	
+	
+	@RequestMapping("/admin/program/programupdateOk")
+	public String programupdateOk(MultipartHttpServletRequest multi,ProgramDto pdto,HttpServletRequest request,Model model,HttpSession session) throws Exception
+	{
+		return service.programupdateOk(multi,pdto,request,model,session);
 	}
 	
 
