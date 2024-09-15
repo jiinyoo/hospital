@@ -348,10 +348,10 @@ hr
 		  <a href="/main/user"> 회원 가입 </a>
 		 </c:if>
 		 <c:if test="${sessionScope.user_id != null }">
-		   <c:if test="${sessionScope.user_name==admin}">
+		   <c:if test="${sessionScope.state==2}">
 		 	 <a href="/admin/main/index">관리자 페이지</a> |
 		   </c:if>
-		   		${user_id}님 | 
+		   		<a href="/main/userInfo">${sessionScope.user_id}님</a> | 
            <a href="/main/logout"> 로그아웃 </a> | 문의하기
          </c:if>
 		</div>

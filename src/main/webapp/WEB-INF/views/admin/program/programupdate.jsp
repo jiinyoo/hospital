@@ -23,15 +23,6 @@ $(function(){
     }); 
 });
 
-function check() {
-    var input = document.getElementById("file");
-    if (input.files.length == 0) {
-        alert("사진 파일을 추가하세요.");
-        return false;
-    } else {
-        return true;
-    }
-}
 
 window.onload = function() {
     <c:forEach items="${pdlist}" var="pddto">
@@ -43,6 +34,27 @@ window.onload = function() {
         document.getElementById("file_name").textContent = proImg.split('/').pop(); // Display image file name
     }
 }
+
+
+
+function check() {
+	
+	var chk=0;
+	var len=document.getElementsByClassName("yoil").length
+	for(var i=0; i<len; i++) {
+		if(document.getElementsByClassName("yoil")[i].checked) {
+			chk=1;
+		}
+	}
+	if(chk==0){
+		alert("요일을 하나 이상 체크하세요")
+		return false;
+	} else {
+		return true;
+	}
+}
+
+
 </script>
 </head>
 <body>
@@ -110,7 +122,7 @@ window.onload = function() {
     </tr>
     <tr>
         <td></td>
-        <td><input type="submit" value="업데이트하기"></td>
+        <td><input type="submit" value="수정하기"></td>
     </tr>
 </table>
 </form>

@@ -40,16 +40,18 @@ public class NoticeServicelmpl  implements NoticeService {
 	public String notice_write(HttpSession session, 
 			Model model)
 	{
-		if(session.getAttribute("user_id")!=null)
-		{
-			String user_id=session.getAttribute("user_id").toString();
-			model.addAttribute("user_id",user_id);
-			return "/client/notice/notice_write";
-		}
-		else
-		{
-			return "redirect:/main/login";
-		}
+		Integer state = (Integer) session.getAttribute("state");
+	    
+	    if (state != null && state == 2) 
+	    {
+	        String user_id = session.getAttribute("user_id").toString();
+	        model.addAttribute("user_id", user_id);
+	        return "/client/notice/notice_write";
+	    } 
+	    else 
+	    {
+	        return "redirect:/main/login";
+	    }
 	}
 	
 	@Override
@@ -57,7 +59,9 @@ public class NoticeServicelmpl  implements NoticeService {
 			HttpSession session,
 			MultipartHttpServletRequest multi) throws Exception
 	{
-		if(session.getAttribute("user_id")!=null) 
+		Integer state = (Integer) session.getAttribute("state");
+		
+		if(state != null && state == 2) 
 		{
 		String user_id=session.getAttribute("user_id").toString();
 		ndto.setUser_id(user_id);
@@ -150,10 +154,9 @@ public class NoticeServicelmpl  implements NoticeService {
 	{
 		
 		String notice_id=request.getParameter("notice_id");
-		String session_user_id=null;
-		if(session.getAttribute("user_id")!=null) 
+		Integer state = (Integer) session.getAttribute("state");
+		if(state != null && state == 2) 
 		{
-			session_user_id=session.getAttribute("user_id").toString();
 		
 		NoticeDto ndto=mapper.notice_content(notice_id);
 		String img=ndto.getImg();
@@ -177,13 +180,14 @@ public class NoticeServicelmpl  implements NoticeService {
 			HttpSession session) throws Exception 
 	{
 		//System.out.println(ndto);
-		String user_id=null;
+		Integer state = (Integer) session.getAttribute("state");
 		String notice_id=request.getParameter("notice_id");
-	    Iterator<String> imsi = multi.getFileNames();  // 파일 이름 가져오기 위한 반복자
 	    
-	    if(session.getAttribute("user_id")!=null) 
+	    
+	    if(state != null && state == 2) 
 	    {
-			user_id=session.getAttribute("user_id").toString();
+	    	Iterator<String> imsi = multi.getFileNames();  // 파일 이름 가져오기 위한 반복자
+	    	
 			String fname="";
 			while(imsi.hasNext()) 
 			{
@@ -231,9 +235,17 @@ public class NoticeServicelmpl  implements NoticeService {
 	{
 		String user_id=request.getParameter("user_id");
 		String notice_id=request.getParameter("notice_id");
+		Integer state = (Integer) request.getSession().getAttribute("state");
 			
-		mapper.notice_delete(user_id,notice_id);
-		return "redirect:/main/notice_list";
+		if (state != null && state == 2) 
+		{
+	        mapper.notice_delete(user_id, notice_id);
+	        return "redirect:/main/notice_list";
+	    } 
+		else 
+	    {
+	        return "redirect:/main/login";
+	    }
 	}
 
 }

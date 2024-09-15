@@ -1,21 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.hospital.client.mapper.ProgramReserveMapper">
-	<select id="firstProgram">
-		select * from program
-		where pro_ju=0
+	<select id="getPrograms" resultType="kr.co.hospital.client.dto.ProgramDto">
+		SELECT 
+		    p.pro_id,
+		    p.pro_name,
+		    p.pro_img,
+		    p.pro_info,
+		    p.teach_name,
+		    p.pro_time,
+		    p.pro_inwon,
+		    p.pro_part,
+		    p.start_date,
+		    p.minus_inwon,
+		    p.end_date,
+		    p.writeday,
+		    GROUP_CONCAT(pd.day_of_week ORDER BY pd.day_of_week ASC) AS day_of_week
+		FROM 
+		    program AS p
+		INNER JOIN 
+		    programdays AS pd
+		ON 
+		    p.pro_id = pd.pro_id
+		GROUP BY 
+		    p.pro_id
+		ORDER BY 
+		    p.pro_id DESC;
 	</select>
-	<select id="secondProgram">
-		select * from program
-		where pro_ju=1
+	<select id="getProgram" resultType="kr.co.hospital.client.dto.ProgramDto">
+		SELECT 
+			    p.pro_id,
+			    p.pro_name,
+			    p.pro_img,
+			    p.pro_info,
+			    p.teach_name,
+			    p.pro_time,
+			    p.pro_inwon,
+			    p.pro_part,
+			    p.start_date,
+			    p.minus_inwon,
+			    p.end_date,
+			    p.writeday,
+			    GROUP_CONCAT(
+			        CASE 
+			            WHEN pd.day_of_week = 0 THEN '일'
+			            WHEN pd.day_of_week = 1 THEN '월'
+			            WHEN pd.day_of_week = 2 THEN '화'
+			            WHEN pd.day_of_week = 3 THEN '수'
+			            WHEN pd.day_of_week = 4 THEN '목'
+			            WHEN pd.day_of_week = 5 THEN '금'
+			            WHEN pd.day_of_week = 6 THEN '토'
+			        END
+			        ORDER BY pd.day_of_week ASC
+			    ) AS day_of_week
+			FROM 
+			    program AS p
+			INNER JOIN 
+			    programdays AS pd
+			ON 
+			    p.pro_id = pd.pro_id
+			WHERE 
+			    p.pro_id = #{pro_id}
+			GROUP BY 
+			    p.pro_id
+			ORDER BY 
+			    p.pro_id DESC;
 	</select>
-	<select id="thirdProgram">
-		select * from program
-		where pro_ju=2
+	<select id="getResNumber" resultType="Integer">
+		select ifnull(max(right(pres_number,3)),0) from preserve
+		where pres_number like concat(#{pres_number},'%')  
 	</select>
-	<select id="fourthProgram">
-		select * from program
-		where pro_ju=3
+	<insert id="insertPreserve" parameterType="kr.co.hospital.client.dto.ProgramReserveDto">
+		insert into preserve(pro_id,user_id,pres_part,pres_date,pres_time,state,writeday,p_inwon,pres_number)
+		values (#{pro_id},#{user_id},#{pres_part},#{pres_date},#{pres_time},#{state},now(),#{p_inwon},#{pres_number})
+	</insert>
+	<select id="getProCapacity" resultType="Integer">
+	  SELECT IFNULL((pro_inwon - minus_inwon), 0) 
+  	  FROM program_capacity 
+  	  WHERE pro_id = #{pro_id} 
+      AND date = #{date}
 	</select>
-
+	<select id="getProgramCapacityOne" resultType="kr.co.hospital.client.dto.ProgramCapacityDto">
+		select * from program_capacity
+		where date=#{reserve_date}
+		and pro_id=#{pro_id}
+	</select>
+	<update id="pccminusinwonupdate" >
+		update program_capacity
+		set minus_inwon=minus_inwon+#{p_inwon}
+		where pro_id=#{pro_id}
+		and date=#{reserve_date}
+	</update>
 </mapper>

@@ -21,14 +21,24 @@ $(function(){
 
 
 function check() {
+	
+	var chk=0;
+	var len=document.getElementsByClassName("yoil").length
+	for(var i=0; i<len; i++) {
+		if(document.getElementsByClassName("yoil")[i].checked) {
+			chk=1;
+		}
+	}
 	var input=document.getElementById("file");
 	if(input.files.length==0) {
 		alert("사진 파일을 추가하세요.");
 		return false;
+	} else if(chk==0){
+		alert("요일을 하나 이상 체크하세요")
+		return false;
 	} else {
 		return true;
 	}
-
 	
 }
 
@@ -54,7 +64,7 @@ function check() {
 	</tr>
 	<tr>
 		<td>시간</td>
-		<td><input type="time" name="pro_time"></td>
+		<td><input type="time" name="pro_time" required></td>
 	</tr>
 	<tr>
 		<td>총 인원 </td>
@@ -80,13 +90,13 @@ function check() {
     <tr>
     	<td>프로그램 요일 선택:</td>
     	<td>   
-    	<input type="checkbox" name="day_of_week" value="0"> 일요일<br>
-        <input type="checkbox" name="day_of_week" value="1"> 월요일<br>
-        <input type="checkbox" name="day_of_week" value="2"> 화요일<br>
-        <input type="checkbox" name="day_of_week" value="3"> 수요일<br>
-        <input type="checkbox" name="day_of_week" value="4"> 목요일<br>
-        <input type="checkbox" name="day_of_week" value="5"> 금요일<br>
-        <input type="checkbox" name="day_of_week" value="6"> 토요일<br>
+    	<input type="checkbox" name="day_of_week" value="0" class="yoil"> 일요일<br>
+        <input type="checkbox" name="day_of_week" value="1" class="yoil"> 월요일<br>
+        <input type="checkbox" name="day_of_week" value="2" class="yoil"> 화요일<br>
+        <input type="checkbox" name="day_of_week" value="3" class="yoil"> 수요일<br>
+        <input type="checkbox" name="day_of_week" value="4" class="yoil"> 목요일<br>
+        <input type="checkbox" name="day_of_week" value="5" class="yoil"> 금요일<br>
+        <input type="checkbox" name="day_of_week" value="6" class="yoil"> 토요일<br>
         </td>
     </tr>
 	<tr>
@@ -95,7 +105,7 @@ function check() {
 	</tr>
 	<tr>
 		<td></td>
-		<td><input type="submit" value="업데이트하기"></td>
+		<td><input type="submit" value="등록하기"></td>
 	</tr>
 
 </table>

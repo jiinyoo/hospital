@@ -2,12 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.hospital.client.mapper.UserMapper">
   <insert id="userOk" parameterType="kr.co.hospital.client.dto.UserDto">
-    insert into user(user_id,user_pwd,user_name,user_phone,user_email,user_jumin,user_addr,writeday)
-    values(#{user_id},#{user_pwd},#{user_name},#{user_phone},#{user_email},#{user_jumin},#{user_addr},now())
+    insert into user(user_id,user_pwd,user_name,user_phone,user_email,user_jumin,user_addr,state,writeday)
+    values(#{user_id},#{user_pwd},#{user_name},#{user_phone},#{user_email},#{user_jumin},#{user_addr},#{state},now())
   </insert>
   
   <select id="useridCheck" resultType="String">
     select count(*) from user
     where user_id=#{user_id}
   </select>
+  
+  <select id="getUserInfo" parameterType="String" resultType="kr.co.hospital.client.dto.UserDto">
+    select id, user_id, user_name, user_phone, user_email, user_jumin, user_addr, writeday
+    from user
+    where user_id = #{user_id}
+    </select>
+  <update id="updateOkUser" parameterType="kr.co.hospital.client.dto.UserDto">
+    update user set
+    user_name=#{user_name},
+    user_phone=#{user_phone},
+    user_email=#{user_email},
+    user_jumin=#{user_jumin},
+    user_addr=#{user_addr}
+    where user_id=#{user_id}
+  </update>
+    
 </mapper>

@@ -8,5 +8,7 @@ import kr.co.hospital.client.dto.UserDto;
 public interface UserMapper {
 	public void userOk(UserDto udto);
 	public String useridCheck(String user_id);
+	public UserDto getUserInfo(String userId);
+	public void updateOkUser(UserDto udto);
 
 }

@@ -39,18 +39,20 @@ public class LoginServicelmpl implements LoginService {
 		String user_name=mapper.loginOk(udto);
 		String menu=request.getParameter("menu");
 		System.out.println(menu);
+		
 		if(user_name!=null)
 		{
 			System.out.println("로그인 성공");
-			session.setAttribute("user_id",udto.getUser_id());
-			String userid = udto.getUser_id();
-			if(mapper.getState(userid)==2) 
+			session.setAttribute("user_id",udto.getUser_id());		
+			int state=mapper.getState(udto.getUser_id());
+	        session.setAttribute("state",state);
+	        
+			if(state==2) 
 			{
 				return "redirect:/admin/main/index";
 			} 
 			else 
 			{
-				//게시판을 보려다가 로그인했으면 진료 후기 게시판으로 바로 로그인 되게 하는 것
 				Cookie cookie=WebUtils.getCookie(request, "url");
 				String url=null;
 				if(cookie!=null)
