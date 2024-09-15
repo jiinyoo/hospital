@@ -34,6 +34,27 @@ window.onload = function() {
         document.getElementById("file_name").textContent = proImg.split('/').pop(); // Display image file name
     }
 }
+
+
+
+function check() {
+	
+	var chk=0;
+	var len=document.getElementsByClassName("yoil").length
+	for(var i=0; i<len; i++) {
+		if(document.getElementsByClassName("yoil")[i].checked) {
+			chk=1;
+		}
+	}
+	if(chk==0){
+		alert("요일을 하나 이상 체크하세요")
+		return false;
+	} else {
+		return true;
+	}
+}
+
+
 </script>
 </head>
 <body>
