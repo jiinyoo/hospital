@@ -6,7 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -43,6 +45,33 @@ public class ProgramServiceImpl implements ProgramService {
 	public String programwrite() {
 		return "/admin/program/programwrite";
 	}
+	
+	// programcapacity 초기 설정 메서드
+	private void initializeProgramCapacity(int pro_id, String startDateStr, String endDateStr, int pro_inwon, List<Integer> daysOfWeek) {
+	    LocalDate startDate = LocalDate.parse(startDateStr);
+	    LocalDate endDate = LocalDate.parse(endDateStr);
+	    
+	    // start_date부터 end_date까지 반복하며, 선택된 요일에 해당하는 날짜만 처리
+	    LocalDate currentDate = startDate;
+	    while (!currentDate.isAfter(endDate)) {
+	        int dayOfWeek = currentDate.getDayOfWeek().getValue(); // 1(월요일) ~ 7(일요일)
+	        if (dayOfWeek == 7) {
+	            dayOfWeek = 0; // 일요일을 0으로 설정
+	        }
+
+	        // 선택된 요일에 해당하는 날짜에 대해서만 programcapacity에 값 삽입
+	        if (daysOfWeek.contains(dayOfWeek)) {
+	            mapper.insertProgramCapacity(pro_id, currentDate.toString(), pro_inwon);
+	        }
+
+	        currentDate = currentDate.plusDays(1); // 다음 날로 이동
+	    }
+	}
+	
+	
+	
+	
+	
 
 	@Override
 	public String programwriteOk(ProgramDto pdto,MultipartHttpServletRequest multi,HttpServletRequest request, Model model, HttpSession session) throws Exception {
@@ -68,11 +97,14 @@ public class ProgramServiceImpl implements ProgramService {
 	            mapper.insertProgramDay(proId, day);
 	        }
 	    }
+		initializeProgramCapacity(proId, pdto.getStart_date(), pdto.getEnd_date(), pdto.getPro_inwon(), pdto.getDay_of_week());
 		
 		return "redirect:/admin/program/program";
 		
 		
 	}
+	
+
 
 	@Override
 	public String programdelete(HttpServletRequest request) throws Exception {
@@ -85,6 +117,7 @@ public class ProgramServiceImpl implements ProgramService {
 		}
 		mapper.deleteProgram(pro_id);
 		mapper.deleteProgramDays(pro_id);
+		mapper.deleteProgramCapacity(pro_id);
 		return "redirect:/admin/program/program";
 	}
 
@@ -133,6 +166,11 @@ public class ProgramServiceImpl implements ProgramService {
 	            mapper.insertProgramDay(proId, day);
 	        }
 	    }
+		
+		mapper.deleteProgramCapacity(proId);
+		initializeProgramCapacity(proId, pdto.getStart_date(), pdto.getEnd_date(), pdto.getPro_inwon(), pdto.getDay_of_week());
+		
+		
 		return "redirect:/admin/program/program";
 	}
 	

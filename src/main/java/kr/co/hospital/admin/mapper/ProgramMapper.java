@@ -19,4 +19,6 @@ public interface ProgramMapper {
 	public ProgramDto getContent(int pro_id);
 	public ArrayList<ProgramdaysDto> getProgramdays(int pro_id);
 	public void updateProgram(ProgramDto pdto);
+	public void insertProgramCapacity(int pro_id, String date, int pro_inwon);
+	public void deleteProgramCapacity(int pro_id);
 }

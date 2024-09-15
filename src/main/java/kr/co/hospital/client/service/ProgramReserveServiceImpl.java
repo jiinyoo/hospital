@@ -14,6 +14,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import kr.co.hospital.client.dto.ProgramCapacityDto;
 import kr.co.hospital.client.dto.ProgramDto;
 import kr.co.hospital.client.dto.ProgramReserveDto;
 import kr.co.hospital.client.mapper.ProgramReserveMapper;
@@ -35,13 +36,8 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 			cookie.setMaxAge(60*60*24);
 			cookie.setPath("/");
 			response.addCookie(cookie);
-			
-			
 			return "redirect:/main/login";
 		}
-		
-		
-
 	}
 
 	
@@ -102,12 +98,9 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	            sb.append("<td></td>");
 	        }
 	        
+	        
+	        //프로그램들을 가져온다. 근데 워크데이를 월,화,수로 묶어서 하나로
 	        ArrayList<ProgramDto> programs = mapper.getPrograms();
-	        
-	        
-	      
-	        
-	        
 	        // 달력에 프로그램 표시
 	        for (int day = 1; day <= lastDay; day++) {
 	            LocalDate currentDate = LocalDate.of(year, month, day);
@@ -117,7 +110,6 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	            }
 	            today = LocalDate.now();
 	            String cellContent = "<span>" + day + "</span>";
-	            
 	            // 현재 날짜에 프로그램이 있는지 확인
 	            for (ProgramDto program : programs) {
 	                LocalDate startDate = LocalDate.parse(program.getStart_date());
@@ -126,16 +118,17 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	                
 	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	                String formattedDate = programDate.format(formatter);
+	                Integer availableCapacity = mapper.getProCapacity(program.getPro_id(), formattedDate);
+	            	if (availableCapacity == null) {
+						availableCapacity = 0;
+					}
+	                //이 부분은 각각의 program_capacity테이블을 돌면서 그날의 pro_inwon-minus_inwon이 0보다 큰 경우만 
+	                //달력에 잘 출력해야 함 그려면 각각의 day값에 program_capacity의 pro_inwon minus인원을 계산해야 하는 건데 이를 어떻게 할지 
 	                
-	                
-	                today = LocalDate.now();
-	                int chonginwon=program.getPro_inwon();
-	                int minusinwon=program.getMinus_inwon();
-	                int resinwon=chonginwon-minusinwon;
 	                if (programDate.isAfter(startDate.minusDays(1)) &&
 	                    programDate.isBefore(endDate.plusDays(1)) &&
 	                    programDate.isAfter(today) &&
-	                    resinwon>0 && 
+	                    availableCapacity > 0 && 
 	                    parseDayOfWeek(program.getDay_of_week()).contains(dayOfWeek)) {
 	                	cellContent += "<br><span><a href='/program/programreserveview?pro_id=" 
 	                		    + program.getPro_id() + "&reserve_date=" + formattedDate 
@@ -171,10 +164,13 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 			String user_id=session.getAttribute("user_id").toString();
 			String reserve_date=request.getParameter("reserve_date");
 			
-			
 			int pro_id=Integer.parseInt(request.getParameter("pro_id"));
-			ProgramDto pdto=mapper.getProgram(pro_id);
 			
+			
+			ProgramDto pdto=mapper.getProgram(pro_id);
+			ProgramCapacityDto pccdto=mapper.getProgramCapacityOne(reserve_date,pro_id);
+			System.out.println(pccdto.getMinus_inwon());
+			model.addAttribute("pccdto",pccdto);
 			model.addAttribute("user_id",user_id);
 			model.addAttribute("pdto",pdto);
 			model.addAttribute("reserve_date",reserve_date);
@@ -190,19 +186,29 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 
 	@Override
 	public String preserveOk(ProgramReserveDto prdto,HttpServletRequest request, Model model, HttpSession session) {
-		LocalDate today=LocalDate.now();
-		String todaystring=today.toString().replace("-", "");
-		//예약 번호 생성
-		String pres_number="p"+todaystring;
-		int num=mapper.getResNumber(pres_number)+1;
-		pres_number=pres_number+String.format("%03d",num);
-		prdto.setPres_number(pres_number);
-		//minus_inwon업데이트		
-		mapper.minusInwon(prdto.getP_inwon(),prdto.getPro_id());
-
-		//insert
-		mapper.insertPreserve(prdto);
+		if(session.getAttribute("user_id")!=null) {
+			String user_id=session.getAttribute("user_id").toString();
+			String reserve_date=request.getParameter("reserve_date");
+			LocalDate today=LocalDate.now();
+			String todaystring=today.toString().replace("-", "");
+			//예약 번호 생성
+			String pres_number="p"+todaystring;
+			int num=mapper.getResNumber(pres_number)+1;
+			pres_number=pres_number+String.format("%03d",num);
+			prdto.setPres_number(pres_number);
+			//insert
+			mapper.insertPreserve(prdto);
+			mapper.pccminusinwonupdate(prdto.getP_inwon(),prdto.getPro_id(),reserve_date);
+			ProgramDto pdto=mapper.getProgram(prdto.getPro_id());
+			model.addAttribute("prdto",prdto);
+			model.addAttribute("pdto",pdto);
+			model.addAttribute("user_id",user_id);
+			return "/client/program/preservecomplete";
+		} else {
+			return "redirect:/main/index";
+		}
 		
-		return "/client/program/preservecomplete";
+		
+		
 	}
 }

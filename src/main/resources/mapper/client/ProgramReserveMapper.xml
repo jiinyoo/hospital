@@ -70,14 +70,25 @@
 		select ifnull(max(right(pres_number,3)),0) from preserve
 		where pres_number like concat(#{pres_number},'%')  
 	</select>
-	<update id="minusInwon">
-		update program
-		set minus_inwon=minus_inwon+#{p_inwon}
-		where pro_id=#{pro_id}
-	</update>
 	<insert id="insertPreserve" parameterType="kr.co.hospital.client.dto.ProgramReserveDto">
 		insert into preserve(pro_id,user_id,pres_part,pres_date,pres_time,state,writeday,p_inwon,pres_number)
 		values (#{pro_id},#{user_id},#{pres_part},#{pres_date},#{pres_time},#{state},now(),#{p_inwon},#{pres_number})
 	</insert>
-
+	<select id="getProCapacity" resultType="Integer">
+	  SELECT IFNULL((pro_inwon - minus_inwon), 0) 
+  	  FROM program_capacity 
+  	  WHERE pro_id = #{pro_id} 
+      AND date = #{date}
+	</select>
+	<select id="getProgramCapacityOne" resultType="kr.co.hospital.client.dto.ProgramCapacityDto">
+		select * from program_capacity
+		where date=#{reserve_date}
+		and pro_id=#{pro_id}
+	</select>
+	<update id="pccminusinwonupdate" >
+		update program_capacity
+		set minus_inwon=minus_inwon+#{p_inwon}
+		where pro_id=#{pro_id}
+		and date=#{reserve_date}
+	</update>
 </mapper>
