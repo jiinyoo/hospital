@@ -160,11 +160,10 @@
                 </ul>
             </li>
             <li>
-            	<a href="#"><span class="maincate">회원관리</span></a>
+            	<a href="/admin/user/list"><span class="maincate">회원관리</span></a>
                 <ul>
-                    <li><a href="#">1:1 문의 관리</a></li>
+                    <li><a href="/admin/user/list"> 회원 관리 </a></li>
                 </ul>
-            </li>
             </li>
         </ul>
     </div>

@@ -32,7 +32,7 @@ import kr.co.hospital.util.NoticeUtils;
 
 @Service
 @Qualifier("admin_noti")
-public class AdminNoticeServicelmpl  implements AdminNoticeService {
+public class AdminNoticeServiceImpl  implements AdminNoticeService {
 	
 	@Autowired
 	private AdminNoticeMapper mapper;

@@ -128,21 +128,24 @@
     </style>
     
     <script type="text/javascript">
-    function check() {
-        var user_email = document.mform.e1.value + "@" + document.mform.e2.value;
-        var user_phone = document.mform.phone1.value + "-" + document.mform.phone2.value + "-" + document.mform.phone3.value;
-        var user_jumin = document.mform.jumin1.value + "-" + document.mform.jumin2.value;
+    function check() 
+    {
+        var user_email=document.mform.e1.value+ "@" +document.mform.e2.value;
+        var user_phone=document.mform.phone1.value+ "-" +document.mform.phone2.value + "-" + document.mform.phone3.value;
+        var user_jumin=document.mform.jumin1.value+ "-" +document.mform.jumin2.value;
 
-        document.mform.user_email.value = user_email;
-        document.mform.user_phone.value = user_phone;
-        document.mform.user_jumin.value = user_jumin;
+        document.mform.user_email.value=user_email;
+        document.mform.user_phone.value=user_phone;
+        document.mform.user_jumin.value=user_jumin;
 
         return true;
     }
 
-    function onlyNum(my, next, maxlength) {
-        my.value = my.value.replace(/[^0-9]/g, "");
-        if (my.value.length == maxlength && next != null) {
+    function onlyNum(my, next, maxlength) 
+    {
+        my.value=my.value.replace(/[^0-9]/g,"");
+        if (my.value.length==maxlength && next!=null) 
+        {
             document.getElementById(next).focus();
         }
     }
@@ -215,6 +218,7 @@
                 <div class="form-group submit-group">
                     <input class="submit" type="submit" value="정보 수정">
                 </div>
+                
             </form>
         </div>
     </div>
