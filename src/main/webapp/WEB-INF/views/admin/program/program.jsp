@@ -38,7 +38,7 @@ table td{
         <td width="150px">시작일</td>
         <td width="150px">종료일</td>
         <td width="100px">해당요일</td>
-        <td width="100px">수용 가능 인원</td>
+        <td width="100px">일일 수용 인원</td>
         <td width="100px">삭제 및 수정</td>
         <td width="100px">진행/종료 여부</td>
         
@@ -63,7 +63,7 @@ table td{
                     <td>${pdto.start_date}</td>
                     <td>${pdto.end_date}</td>
                     <td>${pdto.days_of_week}</td>
-                    <td>${pdto.pro_inwon - pdto.minus_inwon}/${pdto.pro_inwon}</td>
+                    <td>${pdto.pro_inwon}</td>
                     
                     <td><a href="/admin/program/programdelete?pro_id=${pdto.pro_id}"><input type="button" value="삭제"></a>
                         <a href="/admin/program/programupdate?pro_id=${pdto.pro_id}"><input type="button" value="수정"></a>
@@ -83,7 +83,7 @@ table td{
                         <td>${pdto.start_date}</td>
                         <td>${pdto.end_date}</td>
                         <td>${pdto.days_of_week}</td>
-                        <td>${pdto.pro_inwon - pdto.minus_inwon}/${pdto.pro_inwon}</td>
+                        <td>${pdto.pro_inwon}</td>
                         <td><a href="/admin/program/programdelete?pro_id=${pdto.pro_id}"><input type="button" value="삭제"></a>
                             <a href="/admin/program/programupdate?pro_id=${pdto.pro_id}"><input type="button" value="수정"></a>
                         </td>
@@ -105,7 +105,7 @@ table td{
         <td width="150px">시작일</td>
         <td width="150px">종료일</td>
         <td width="100px">해당요일</td>
-        <td width="100px">수용 가능 인원</td>
+        <td width="100px">일일 수용 인원</td>
         <td width="100px">삭제 및 수정</td>
         <td width="100px">진행/종료 여부</td>
     </tr>
@@ -129,7 +129,7 @@ table td{
                     <td>${pdto.start_date}</td>
                     <td>${pdto.end_date}</td>
                     <td>${pdto.days_of_week}</td>
-                    <td>${pdto.pro_inwon - pdto.minus_inwon}/${pdto.pro_inwon}</td>
+                    <td>${pdto.pro_inwon}</td>
                     <td><a href="/admin/program/programdelete?pro_id=${pdto.pro_id}"><input type="button" value="삭제"></a>
                         <a href="/admin/program/programupdate?pro_id=${pdto.pro_id}"><input type="button" value="수정"></a>
                     </td>
