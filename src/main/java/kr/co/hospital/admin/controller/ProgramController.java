@@ -62,5 +62,11 @@ public class ProgramController {
 		return service.programupdateOk(multi,pdto,request,model,session);
 	}
 	
+	@RequestMapping("/admin/program/programreservemanage")
+	public String programreservemanage(HttpServletRequest request,Model model,HttpSession session) throws Exception
+	{
+		return service.programreservemanage(request,model,session);
+	}
+	
 
 }

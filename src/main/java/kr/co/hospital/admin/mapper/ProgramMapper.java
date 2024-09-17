@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
 import kr.co.hospital.admin.dto.ProgramDto;
 import kr.co.hospital.admin.dto.ProgramdaysDto;
+import kr.co.hospital.admin.dto.ProgramReserveDto;
 
 @Mapper
 public interface ProgramMapper {
@@ -21,4 +22,5 @@ public interface ProgramMapper {
 	public void updateProgram(ProgramDto pdto);
 	public void insertProgramCapacity(int pro_id, String date, int pro_inwon);
 	public void deleteProgramCapacity(int pro_id);
+	public ArrayList<ProgramReserveDto> userpreserve();
 }

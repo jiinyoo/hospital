@@ -10,7 +10,6 @@ import kr.co.hospital.client.dto.ProgramReserveDto;
 
 @Mapper
 public interface ProgramReserveMapper {
-
 	ArrayList<ProgramDto> getPrograms();
 	ProgramDto getProgram(int pro_id);
 	int getResNumber(String pres_number);
@@ -19,7 +18,4 @@ public interface ProgramReserveMapper {
 	Integer getProCapacity(int pro_id, String date);
 	ProgramCapacityDto getProgramCapacityOne(String reserve_date, int pro_id);
 	void pccminusinwonupdate(int p_inwon,int pro_id, String reserve_date);
-
-
-	
 }

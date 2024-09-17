@@ -60,4 +60,8 @@
 		delete from program_capacity
 		where pro_id=#{pro_id}
 	</delete>
+	<select id="">
+	
+	</select>
+	
 </mapper>

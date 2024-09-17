@@ -12,7 +12,6 @@
 		    p.pro_inwon,
 		    p.pro_part,
 		    p.start_date,
-		    p.minus_inwon,
 		    p.end_date,
 		    p.writeday,
 		    GROUP_CONCAT(pd.day_of_week ORDER BY pd.day_of_week ASC) AS day_of_week
@@ -38,7 +37,6 @@
 			    p.pro_inwon,
 			    p.pro_part,
 			    p.start_date,
-			    p.minus_inwon,
 			    p.end_date,
 			    p.writeday,
 			    GROUP_CONCAT(

@@ -173,6 +173,12 @@ public class ProgramServiceImpl implements ProgramService {
 		
 		return "redirect:/admin/program/program";
 	}
+
+	@Override
+	public String programreservemanage(HttpServletRequest request, Model model, HttpSession session) {
+		mapper.userpreserve();
+		return "/admin/program/programreserve";
+	}
 	
 
 }
