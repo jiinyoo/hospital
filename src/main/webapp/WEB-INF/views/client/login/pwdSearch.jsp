@@ -25,6 +25,7 @@
         }
 
         .search-container input[type="text"],
+        .search-container input[type="email"],
         .search-container input[type="password"] {
             width: calc(100% - 40px);
             padding: 15px;
@@ -90,21 +91,23 @@
     <div class="search-container">
         <h3>비밀번호 찾기</h3>
         <form method="post" action="${pageContext.request.contextPath}/main/pwdSearch">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <label for="user_id">아이디</label>
-            <input type="text" name="user_id" placeholder="아이디를 입력하세요">
-            
+            <input type="text" name="user_id" placeholder="아이디를 입력하세요" value="${user_id}" required>
+            <br>
             <label for="user_email">이메일</label>
-            <input type="text" name="user_email" placeholder="이메일을 입력하세요">
+            <input type="email" name="user_email" placeholder="이메일을 입력하세요" value="${user_email}" required>
             
             <input type="submit" value="인증번호 받기">
         </form>
         
         <!-- 인증번호 입력 -->
-        <c:if test="${not empty isSent}">
+        
+        <c:if test="${isSent == true}">
             <form method="post" action="${pageContext.request.contextPath}/main/verifyCode">
                 <label for="verification_code">인증번호</label>
                 <input type="text" name="verification_code" placeholder="이메일로 받은 인증번호를 입력하세요">
-                
+                <c:out value="${isSent}" />
                 <input type="submit" value="인증번호 확인">
             </form>
         </c:if>

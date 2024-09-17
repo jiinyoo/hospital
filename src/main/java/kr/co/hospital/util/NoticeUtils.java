@@ -28,7 +28,6 @@ public class NoticeUtils {
 			String newFname=imsi[0]+code+"."+imsi[1];  
 			
 			str=ResourceUtils.getFile("classpath:static/client/notice").toPath().toString()+"/"+newFname;
-			str=ResourceUtils.getFile("classpath:static/client/notice").toPath().toString()+"/"+newFname;
 			
 			ff=new File(str);
 		}
