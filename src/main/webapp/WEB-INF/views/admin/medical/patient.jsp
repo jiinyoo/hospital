@@ -65,17 +65,26 @@
 				<th> 생년월일 </th>
 				<th> 분야 </th>
 				<th> 진료시간 </th>
+				<th> 비고 </th>
 			</tr>
 			<c:forEach var="pdto" items="${pdto}">
 			<tr>
 				<td> ${pdto.res_id } </td>
-				<td> <a href="patientView?res_id=${pdto.res_id}">${pdto.user_name }</a> </td>
+				<td> 
+					<c:if test="${pdto.state==0}">
+					<a href="patientView?res_id=${pdto.res_id}">${pdto.user_name }</a> 
+					</c:if>
+					<c:if test="${pdto.state==1}">
+					<a href="afterMediView?res_code=${pdto.res_code}"> ${pdto.user_name }</a>
+					</c:if>	
+				</td>
 				<c:if test="${state==2}">
 				<td> ${pdto.doc_name } </td>
 				</c:if>
 				<td> ${pdto.user_jumin }</td>
 				<td> ${pdto.doc_part } </td>
 				<td> ${pdto.res_date } ${pdto.res_time } </td>
+				<td>${pdto.state==0?'':'진료완료' }</td>
 			</tr>
 			</c:forEach>
 		</table>

@@ -67,7 +67,7 @@
 			<c:forEach var="mdto" items="${mdto}">
 			<tr>
 				<td> ${mdto.medi_id } </td>
-				<td><a href="afterMediView?medi_id=${mdto.medi_id}"> ${mdto.user_name } </a></td>
+				<td><a href="afterMediView?res_code=${mdto.res_code}"> ${mdto.user_name } </a></td>
 				<td> ${mdto.user_jumin }</td>
 				<td> ${mdto.doc_name } </td>
 				<td> ${mdto.medi_part} </td>
