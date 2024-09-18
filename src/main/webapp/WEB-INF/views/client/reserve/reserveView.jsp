@@ -127,7 +127,11 @@
 	    }
 	}
 
-
+	function confirmChk(resid) {
+		if(confirm("정말로 예약을 취소하시겠습니까?")) {
+			location="/main/cancelRes?res_id="+resid;
+		}
+	}
 	
 	function chk() {
 		var phone1=document.getElementById("phone1").value;
@@ -173,7 +177,7 @@
 				<td>
 					진료 예정
 					<c:if test="${!empty sessionScope.user_id}">
-					<input type="button" value="예약 취소" onclick="location='cancelRes?res_id=${res.res_id}'">
+					<input type="button" value="예약 취소" onclick="confirmChk('${res.res_id}')">
 					</c:if>
 					<c:if test="${empty sessionScope.user_id}">
 					
