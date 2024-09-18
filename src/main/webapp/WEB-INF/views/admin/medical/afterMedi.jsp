@@ -76,9 +76,17 @@
 			</c:forEach>
 			<tr>
 				<td colspan="6" align="center">
+				<c:if test="${pstart!=1}">
+				<a href="afterMedi?page=1">첫페이지</a>
+				<a href="afterMedi?page=${pstart-1}">이전</a>
+				</c:if>
 				<c:forEach var="i" begin="${pstart}" end="${pend}">
 				<a href="afterMedi?page=${i}">${i}</a>
 				</c:forEach>
+				<c:if test="${pend!=chong}">
+				<a href="afterMedi?page=${pend+1}">다음</a>
+				<a href="afterMedi?page=${chong}">마지막</a>
+				</c:if>
 				</td>
 			</tr>
 			<tr>
