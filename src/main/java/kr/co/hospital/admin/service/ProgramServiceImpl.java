@@ -180,6 +180,9 @@ public class ProgramServiceImpl implements ProgramService {
 
 	@Override
 	public String programreservemanage(HttpServletRequest request, Model model, HttpSession session) {
+		
+		
+		
 		ArrayList<ProgramReserveDto> prlist=mapper.userpreserve();
 		model.addAttribute("prlist", prlist);
 		return "/admin/program/programreservemanage";

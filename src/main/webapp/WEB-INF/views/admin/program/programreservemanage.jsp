@@ -55,13 +55,13 @@ function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
 				
 				<c:if test="${prdto.state==1}">
 					관리자에 의한 예약 취소
-				<input type="button" value="예약 재 승인" onclick="suyong('0','${prdto.pres_id}','${prdto.pro_id}','${prdto.pres_date}','${prdto.p_inwon}')">
+				<input type="button" value="예약 재승인" onclick="suyong('0','${prdto.pres_id}','${prdto.pro_id}','${prdto.pres_date}','${prdto.p_inwon}')">
 				</c:if>
 				
 				
 				<c:if test="${prdto.state==3}">
 					사용자에 의한 예약 취소
-				<input type="button" value="예약 재 승인" onclick="suyong('0','${prdto.pres_id}','${prdto.pro_id}','${prdto.pres_date}','${prdto.p_inwon}')">>	
+				<input type="button" value="예약 재승인" onclick="suyong('0','${prdto.pres_id}','${prdto.pro_id}','${prdto.pres_date}','${prdto.p_inwon}')">>	
 				
 				</c:if>
 				
@@ -75,9 +75,19 @@ function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
 			
 			</td>
 			<td>${prdto.p_inwon}</td>
-			
 		</tr>
 	</c:forEach>
+		<tr>
+			<td colspan="8">
+				<c:forEach	begin="${pstart}" end="${pend}" var=i>
+					<a href="/admin/program/programreservemanage?page=${page}">${i}</a>
+				</c:forEach>
+			
+			</td>
+		</tr>
+	
+	
+	
 	
 	
 	</table>
