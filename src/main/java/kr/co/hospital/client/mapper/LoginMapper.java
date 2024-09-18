@@ -11,5 +11,6 @@ public interface LoginMapper {
 	public Integer getState(String user_id);
 	public String findUserId(String user_email, String user_name);
 	public String findPassword(String user_email, String user_id);
+	public int updatePwd(String user_id, String newPwd);
 
 }

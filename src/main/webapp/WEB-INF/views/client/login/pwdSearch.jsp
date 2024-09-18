@@ -8,6 +8,7 @@
     <style>
         /* 스타일 */
         .search-container {
+        	font-family: 'goorm-sans-bold';
             width: 80%;
             max-width: 600px;
             margin: 80px auto;
@@ -36,6 +37,7 @@
         }
 
         .search-container input[type="submit"] {
+        	font-family: 'goorm-sans-bold';
             width: calc(100% - 40px);
             padding: 15px;
             background-color: #007bff;
@@ -67,6 +69,7 @@
         
   .additional-links 
   {
+  	
     text-align: center;
     margin-top: 20px;
     
@@ -74,6 +77,7 @@
 
   .additional-links a 
   {
+  	font-family: 'goorm-sans-bold';
     margin: 0 10px;
     font-size: 14px;
 
@@ -95,6 +99,7 @@
             <label for="user_id">아이디</label>
             <input type="text" name="user_id" placeholder="아이디를 입력하세요" value="${user_id}" required>
             <br>
+            <br>
             <label for="user_email">이메일</label>
             <input type="email" name="user_email" placeholder="이메일을 입력하세요" value="${user_email}" required>
             
@@ -102,8 +107,8 @@
         </form>
         
         <!-- 인증번호 입력 -->
-        
-        <c:if test="${isSent == true}">
+        <br>
+        <c:if test="${isSent==true}">
             <form method="post" action="${pageContext.request.contextPath}/main/verifyCode">
                 <label for="verification_code">인증번호</label>
                 <input type="text" name="verification_code" placeholder="이메일로 받은 인증번호를 입력하세요">

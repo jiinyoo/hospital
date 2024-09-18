@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.client.dto.UserDto;
 import kr.co.hospital.client.mapper.LoginMapper;
 import kr.co.hospital.util.MailSend;
+import kr.co.hospital.util.UserUtils;
 
 @Service
 @Qualifier("log")
@@ -109,9 +110,9 @@ public class LoginServicelmpl implements LoginService {
 	public String pwdSearch(HttpServletRequest request, Model model) 
 	{
 	    String userEmail=request.getParameter("user_email");
-	    String userId=request.getParameter("user_id");
+	    String user_id=request.getParameter("user_id");
 
-	    String password=mapper.findPassword(userEmail, userId);
+	    String password=mapper.findPassword(userEmail, user_id);
 	    
 	    if (password!=null) 
 	    {
@@ -120,7 +121,7 @@ public class LoginServicelmpl implements LoginService {
 	        HttpSession session = request.getSession();
 	        session.setAttribute("verificationCode", verificationCode);
 	        session.setAttribute("userEmail", userEmail);
-	        session.setAttribute("userId", userId);
+	        session.setAttribute("user_id", user_id);
 	        session.setAttribute("password", password);  // 비밀번호도 세션에 임시 저장
 	        session.setAttribute("verificationTime", LocalDateTime.now());  // 인증번호 생성 시간 저장
 	        
@@ -146,7 +147,7 @@ public class LoginServicelmpl implements LoginService {
 	         model.addAttribute("errorMessage", "입력하신 정보와 일치하는 계정이 없습니다.");
 	     }
 	    
-	    model.addAttribute("user_id", userId);
+	    model.addAttribute("user_id", user_id);
 	    model.addAttribute("user_email", userEmail);
 	    
 	    return "client/login/pwdSearch"; // 비밀번호 찾기 화면으로 리턴
@@ -155,12 +156,12 @@ public class LoginServicelmpl implements LoginService {
 	@Override
 	public String verifyCode(HttpServletRequest request, Model model) 
 	{
-	    String inputCode = request.getParameter("verification_code");
+	    String inputCode=request.getParameter("verification_code");
 
-	    HttpSession session = request.getSession();
-	    String savedCode = (String) session.getAttribute("verificationCode");
-	    LocalDateTime sentTime = (LocalDateTime) session.getAttribute("verificationTime");
-	    String password = (String) session.getAttribute("password");
+	    HttpSession session=request.getSession();
+	    String savedCode=(String) session.getAttribute("verificationCode");
+	    LocalDateTime sentTime=(LocalDateTime) session.getAttribute("verificationTime");
+	    String user_id=(String) session.getAttribute("user_id");
 
 	    System.out.println("세션에 저장된 인증번호: " + savedCode);
 	    System.out.println("세션에 저장된 인증 시간: " + sentTime);
@@ -172,8 +173,9 @@ public class LoginServicelmpl implements LoginService {
 	        {
 	            if (savedCode.equals(inputCode)) 
 	            {
-	                // 인증번호가 일치하면 비밀번호를 화면에 표시
-	                model.addAttribute("successMessage", "비밀번호는: " + password + " 입니다.");
+	            	session.setAttribute("reset_user_id", user_id);  
+	                session.removeAttribute("user_id");
+	                return "client/login/changePwd";  // 비밀번호 변경 페이지로 리턴
 	            } 
 	            else 
 	            {
@@ -193,12 +195,41 @@ public class LoginServicelmpl implements LoginService {
 	    return "client/login/pwdSearch";  // 비밀번호를 표시하는 페이지로 리턴
 	}
 
-	    // 인증번호 생성 로직
-	    private String generateVerificationCode() 
+	private String generateVerificationCode() 
+	{
+	    return UserUtils.ranPwd();
+	}
+	
+	@Override
+	public String changePwd(HttpServletRequest request, Model model) 
+	{
+		HttpSession session = request.getSession();
+		String user_id=(String) session.getAttribute("reset_user_id");
+	    String newPwd=request.getParameter("new_pwd");
+	    String confirmPwd=request.getParameter("confirm_pwd");
+
+	    if (newPwd.equals(confirmPwd)) 
 	    {
-	        Random random = new Random();
-	        int code = 100000 + random.nextInt(900000); // 6자리 랜덤 코드 생성
-	        return String.valueOf(code);
+	        // 새로운 비밀번호 저장 로직 (DB 업데이트)
+	        int result = mapper.updatePwd(user_id, newPwd);
+	        
+	        if (result > 0) {
+	            session.removeAttribute("reset_user_id");  // 비밀번호 변경 후 세션에서 reset_user_id 제거
+	            model.addAttribute("success", true);  // 성공 여부를 모델에 추가
+	        } else {
+	            model.addAttribute("success", false);  // 실패 시
+	        }
+	    } 
+	    else 
+	    {
+	        model.addAttribute("success", false);  // 비밀번호가 일치하지 않음
 	    }
+
+	    return "client/login/changePwd";  // 비밀번호 변경 페이지로 리턴
+
+	    
+	}
+
+
 	    
 }
