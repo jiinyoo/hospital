@@ -34,6 +34,7 @@
         }
 
         .search-container input[type="submit"] {
+        	font-family: 'goorm-sans-bold';
             width: calc(100% - 40px);
             padding: 15px;
             background-color: #007bff;
@@ -88,6 +89,7 @@
         <form method="post" action="${pageContext.request.contextPath}/main/idSearch">
     <label for="user_email">이메일</label>
     <input type="text" name="user_email" placeholder="이메일을 입력하세요">
+    <br>
     <br>
     <label for="user_name">이름</label>
     <br>
