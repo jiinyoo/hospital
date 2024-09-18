@@ -163,12 +163,12 @@ public class LoginServicelmpl implements LoginService {
 	    LocalDateTime sentTime=(LocalDateTime) session.getAttribute("verificationTime");
 	    String user_id=(String) session.getAttribute("user_id");
 
-	    System.out.println("세션에 저장된 인증번호: " + savedCode);
-	    System.out.println("세션에 저장된 인증 시간: " + sentTime);
+	    System.out.println("세션에 저장된 인증번호: "+ savedCode);
+	    System.out.println("세션에 저장된 인증 시간: "+ sentTime);
 	    
 	    if (savedCode != null && sentTime != null) 
 	    {
-	        // 인증 시간이 초과되지 않았는지 확인 (3분 제한)
+	        // 인증 시간이 초과되지 않았는지 확인 3분
 	        if (sentTime.plusMinutes(3).isAfter(LocalDateTime.now())) 
 	        {
 	            if (savedCode.equals(inputCode)) 
@@ -203,29 +203,29 @@ public class LoginServicelmpl implements LoginService {
 	@Override
 	public String changePwd(HttpServletRequest request, Model model) 
 	{
-		HttpSession session = request.getSession();
+		HttpSession session=request.getSession();
 		String user_id=(String) session.getAttribute("reset_user_id");
 	    String newPwd=request.getParameter("new_pwd");
 	    String confirmPwd=request.getParameter("confirm_pwd");
 
 	    if (newPwd.equals(confirmPwd)) 
 	    {
-	        // 새로운 비밀번호 저장 로직 (DB 업데이트)
+	        // 새로운 비밀번호 저장 로직
 	        int result = mapper.updatePwd(user_id, newPwd);
 	        
 	        if (result > 0) {
 	            session.removeAttribute("reset_user_id");  // 비밀번호 변경 후 세션에서 reset_user_id 제거
-	            model.addAttribute("success", true);  // 성공 여부를 모델에 추가
+	            model.addAttribute("success", true);
 	        } else {
-	            model.addAttribute("success", false);  // 실패 시
+	            model.addAttribute("success", false);
 	        }
 	    } 
 	    else 
 	    {
-	        model.addAttribute("success", false);  // 비밀번호가 일치하지 않음
+	        model.addAttribute("success", false);
 	    }
 
-	    return "client/login/changePwd";  // 비밀번호 변경 페이지로 리턴
+	    return "client/login/changePwd";
 
 	    
 	}

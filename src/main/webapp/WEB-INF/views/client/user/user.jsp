@@ -373,7 +373,7 @@
       <div class="additional-links">
           <a href="/main/login">로그인</a> | 
           <a href="/main/idSearch">아이디 찾기</a> | 
-          <a href="/main/pwdSearch">패스워드 찾기</a>
+          <a href="/main/pwdSearch">비밀번호 찾기</a>
         </div>
 
     </form>

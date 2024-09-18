@@ -97,9 +97,19 @@
         <tbody>
             <c:forEach var="mdto" items="${mdto}">
                 <tr>
-                    <td>${mdto.user_id}</td>
-                    <td>${mdto.user_name}</td>
-                    <td>${mdto.user_email}</td>
+             
+                    <td>
+                    	${mdto.user_id}
+                    </td>
+                    
+                    <td>
+                    	${mdto.user_name}
+                    </td>
+                    
+                    <td>
+                    	${mdto.user_email}
+                    </td>
+                    
                     <td>
                         <form method="post" action="updateState">
                             <input type="hidden" name="id" value="${mdto.id}">
@@ -110,6 +120,7 @@
                                 <option value="4" ${mdto.state==4 ? 'selected' : ''}>정지계정</option>
                             </select>
                     </td>
+                    
                     <td>
                             <button type="submit" class="button">변경</button>
                         </form>
