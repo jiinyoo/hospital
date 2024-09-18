@@ -6,6 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+
+function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
+    var chk = new XMLHttpRequest();
+    chk.onload = function() {
+        var response = JSON.parse(chk.responseText);
+        response=JSON.stringify(response, null, 2);
+        if(response=="100") {
+        	alert("수용인원을 추가하였습니다.재승인할 수 없습니다.");
+        } 
+    };
+    chk.open("GET", "/admin/program/chgstate?state=" + chgstate + "&pres_id=" + pres_id + "&pro_id=" + pro_id + "&pres_date=" + pres_date + "&p_inwon=" + p_inwon);
+    chk.send();
+    location.reload();
+}
+
+
+
+</script>
 </head>
 <body>
 <section>
@@ -31,24 +50,19 @@
 			<td>
 				<c:if test="${prdto.state==0}">
 					예약 완료
-				<a href="/admin/program/chgstate?state=1&pres_id=${prdto.pres_id}&pro_id=${pro_id}&pres_date=${pres_date}">
-				<input type="button" value="관리자 예약 취소">
-				</a>
+				<input type="button" value="관리자 예약 취소" onclick="suyong('1','${prdto.pres_id}','${prdto.pro_id}','${prdto.pres_date}','${prdto.p_inwon}')">
 				</c:if>
 				
 				<c:if test="${prdto.state==1}">
 					관리자에 의한 예약 취소
-				<a href="/admin/program/chgstate?state=0&pres_id=${prdto.pres_id}&pro_id=${pro_id}&pres_date=${pres_date}">
-				<input type="button" value="예약 재 승인">	
-				</a>
+				<input type="button" value="예약 재 승인" onclick="suyong('0','${prdto.pres_id}','${prdto.pro_id}','${prdto.pres_date}','${prdto.p_inwon}')">
 				</c:if>
 				
 				
 				<c:if test="${prdto.state==3}">
 					사용자에 의한 예약 취소
-				<a href="/admin/program/chgstate?state=0&&pres_id=${prdto.pres_id}&pro_id=${pro_id}&pres_date=${pres_date}">
-				<input type="button" value="예약 재 승인">	
-				</a>
+				<input type="button" value="예약 재 승인" onclick="suyong('0','${prdto.pres_id}','${prdto.pro_id}','${prdto.pres_date}','${prdto.p_inwon}')">>	
+				
 				</c:if>
 				
 				

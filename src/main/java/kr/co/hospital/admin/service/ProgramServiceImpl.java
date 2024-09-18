@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
@@ -25,6 +26,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.mapper.ProgramMapper;
 import kr.co.hospital.util.FileUtils;
+import kr.co.hospital.admin.dto.ProgramCapacityDto;
 import kr.co.hospital.admin.dto.ProgramDto;
 import kr.co.hospital.admin.dto.ProgramReserveDto;
 import kr.co.hospital.admin.dto.ProgramdaysDto;
@@ -185,22 +187,39 @@ public class ProgramServiceImpl implements ProgramService {
 
 	@Override
 	@ResponseBody
-	public String programchgstate(HttpServletRequest request, HttpSession session) {
+	public ResponseEntity<String> programchgstate(HttpServletRequest request, HttpSession session) {
 		int state=Integer.parseInt(request.getParameter("state"));
 		int pres_id=Integer.parseInt(request.getParameter("pres_id"));
 		int pro_id=Integer.parseInt(request.getParameter("pro_id"));
 		String pres_date=request.getParameter("pres_date");
-		mapper.updatestate(pres_id,state);
-		//state가 0이 었으면 pro_inwon을 회복해야하고
-		
-		
-		
-		//state가 1혹은 3이었으면 pro_inwon을 빼야 한다.
-		
-		
-		
-		return "redirect:/admin/program/programreservemanage";
+		int p_inwon=Integer.parseInt(request.getParameter("p_inwon"));
+		//state가 0이면 되돌리는 요청 minus인원에서 그 인원을 다시 더해야 하고
+		ProgramCapacityDto pcdto=mapper.getProgramCapacity(pro_id,pres_date);
+		int gap=pcdto.getPro_inwon() - pcdto.getMinus_inwon();
+		if(state==0) {
+			//program capacity에서 만약에 pro_inwon - minus_inwon이 p_inwon보다 적다면 alert메시지 보내야함
+			if(gap<p_inwon) {
+				return ResponseEntity.ok("100");
+			} else {
+				//아니라면 program_capacity의 minus인원 업데이트.
+				mapper.plusProgramCapacity(p_inwon,pro_id,pres_date);
+				mapper.updatestate(pres_id,state);
+				return ResponseEntity.ok("0");
+			}
+		//state가 1이거나 3인 요청 그 인원을 다시 빼야함	
+		} else if(state==1) {
+			//program capacity에서 minus인원에서 뺌
+			mapper.minusProgramCapacity(p_inwon,pro_id,pres_date);
+			mapper.updatestate(pres_id,state);
+
+			return ResponseEntity.ok("1");	
+		} else if(state==3) {
+			mapper.minusProgramCapacity(p_inwon,pro_id,pres_date);
+			mapper.updatestate(pres_id,state);
+			return ResponseEntity.ok("3");	
+		} else {
+			return ResponseEntity.ok("오류입니다.");
+		}
 	}
-	
 
 }
