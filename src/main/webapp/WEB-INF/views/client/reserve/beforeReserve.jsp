@@ -84,6 +84,7 @@
 		width:48%;
 		vertical-align: middle;
 	}
+
 	
 	#jumin-container span {
 		vertical-align: middle; /* '-' 수직 중앙 정렬 */

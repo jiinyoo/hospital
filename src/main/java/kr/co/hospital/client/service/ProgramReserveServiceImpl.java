@@ -28,7 +28,8 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	public String ProgramReserve(HttpServletRequest request, Model model,HttpSession session, HttpServletResponse response) {
 		
 		if(session.getAttribute("user_id")!=null) {
-			
+			ArrayList<ProgramDto> plist=mapper.righttimeprograms();
+			model.addAttribute("plist",plist);
 			return "/client/program/programreserve";
 		} else {
 			
@@ -174,10 +175,11 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 			model.addAttribute("user_id",user_id);
 			model.addAttribute("pdto",pdto);
 			model.addAttribute("reserve_date",reserve_date);
+			 
 			
 			
 		}else {
-			
+			return "redirect:/main/index";
 			
 		}
 		return "/client/program/programreserveview";

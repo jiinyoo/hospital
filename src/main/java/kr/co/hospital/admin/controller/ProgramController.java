@@ -2,6 +2,7 @@ package kr.co.hospital.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,6 +67,18 @@ public class ProgramController {
 	public String programreservemanage(HttpServletRequest request,Model model,HttpSession session) throws Exception
 	{
 		return service.programreservemanage(request,model,session);
+	}
+	
+	@RequestMapping("/admin/program/chgstate")
+	public ResponseEntity<String> chagestate(HttpServletRequest request,HttpSession session) throws Exception
+	{
+		return service.programchgstate(request,session);
+	}
+	
+	@RequestMapping("/admin/program/preserveuserdelete")
+	public String preserveuserdelete(HttpServletRequest request,HttpSession session)
+	{
+		return service.programuserdelete(request,session);
 	}
 	
 

@@ -73,4 +73,10 @@ public class LoginController {
 	                             HttpServletRequest request, Model model) {
 	        return service.verifyCode(request, model);
 	    }
+	    
+	    @RequestMapping("/main/changePwd")
+	    public String changePwd(HttpServletRequest request,Model model)
+	    {
+	    	return service.changePwd(request, model);
+	    }
 }

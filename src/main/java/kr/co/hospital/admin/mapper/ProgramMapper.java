@@ -3,6 +3,8 @@ package kr.co.hospital.admin.mapper;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import kr.co.hospital.admin.dto.ProgramCapacityDto;
 import kr.co.hospital.admin.dto.ProgramDto;
 import kr.co.hospital.admin.dto.ProgramdaysDto;
 import kr.co.hospital.admin.dto.ProgramReserveDto;
@@ -23,4 +25,9 @@ public interface ProgramMapper {
 	public void insertProgramCapacity(int pro_id, String date, int pro_inwon);
 	public void deleteProgramCapacity(int pro_id);
 	public ArrayList<ProgramReserveDto> userpreserve();
+	public void updatestate(int pres_id, int state);
+	public ProgramCapacityDto getProgramCapacity(int pro_id, String pres_date);
+	public void plusProgramCapacity(int p_inwon, int pro_id, String pres_date);
+	public void minusProgramCapacity(int p_inwon, int pro_id, String pres_date);
+	public void deleteonepreserve(int pres_id);
 }

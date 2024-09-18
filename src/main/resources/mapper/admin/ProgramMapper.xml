@@ -60,8 +60,37 @@
 		delete from program_capacity
 		where pro_id=#{pro_id}
 	</delete>
-	<select id="">
-	
+	<select id="userpreserve" resultType="kr.co.hospital.admin.dto.ProgramReserveDto">
+		select prs.*, u.user_name, u.user_phone,p.pro_name from preserve as prs
+		inner join user as u on prs.user_id=u.user_id 
+		inner join program as p on prs.pro_id=p.pro_id
+		order by prs.pres_id desc
 	</select>
+	<update id="updatestate">
+		update preserve
+		set state=#{state}
+		where pres_id=#{pres_id}
+	</update>
+	<select id="getProgramCapacity" resultType="kr.co.hospital.admin.dto.ProgramCapacityDto">
+		select * from program_capacity
+		where pro_id=#{pro_id}
+		and date=#{pres_date}
+	</select>
+	<update id="plusProgramCapacity">
+		update program_capacity
+		set minus_inwon=minus_inwon+#{p_inwon}
+		where pro_id=#{pro_id}
+		and date=#{pres_date}
+	</update>
+	<update id="minusProgramCapacity">
+		update program_capacity
+		set minus_inwon=minus_inwon-#{p_inwon}
+		where pro_id=#{pro_id}
+		and date=#{pres_date}
+	</update>
+	<delete id="deleteonepreserve">
+		delete from preserve
+		where pres_id=#{pres_id}
+	</delete>
 	
 </mapper>

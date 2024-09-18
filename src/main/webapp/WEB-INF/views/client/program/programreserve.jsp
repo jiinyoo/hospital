@@ -103,6 +103,70 @@ function loadCalendar(year, month) {
 </head>
 <body>
 <section>
+	<div id="programs">
+		<table>
+		    <tr>
+		        <td width="100px">프로그램 이름</td>
+		        <td width="100px">강사</td>
+		        <td width="100px">파트</td>
+		        <td width="100px">프로그램 이미지</td>
+		        <td width="150px">시작일</td>
+		        <td width="150px">종료일</td>
+		        <td width="100px">해당요일</td>
+		        <td width="100px">일일 수용 인원</td>
+		        <td width="100px">진행/종료 여부</td>
+		        
+		    </tr>
+		    <c:forEach items="${plist}" var="pdto">
+		        <c:set var="end_date" value="${pdto.end_date}"/>
+		        <c:set var="start_date" value="${pdto.start_date}"/>
+		        <fmt:parseDate value="${end_date}" var="end_date" pattern="yyyy-MM-dd"/>
+		        <fmt:parseDate value="${start_date}" var="start_date" pattern="yyyy-MM-dd"/>
+		        <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" var="today"/>
+		        <fmt:parseDate value="${today}" var="today_date" pattern="yyyy-MM-dd"/>
+		
+		        <c:choose>
+		            <c:when test="${start_date.before(today_date) && end_date.after(today_date)}">
+		                <tr>
+		                    <td>${pdto.pro_name}</td>
+		                    <td>${pdto.teach_name}</td>
+		                    <td>${pdto.pro_part}</td>
+		                    <td>
+		                        <img src="../../static/admin/programfile/${pdto.pro_img}" width="300px">
+		                    </td>
+		                    <td>${pdto.start_date}</td>
+		                    <td>${pdto.end_date}</td>
+		                    <td>${pdto.days_of_week}</td>
+		                    <td>${pdto.pro_inwon}</td>
+		                    <td>진행 중</td>
+		                </tr>
+		            </c:when>
+		            <c:otherwise>
+		                <c:if test="${start_date.after(today_date)}">
+		                    <tr>
+		                        <td>${pdto.pro_name}</td>
+		                        <td>${pdto.teach_name}</td>
+		                        <td>${pdto.pro_part}</td>
+		                        <td>
+		                            <img src="../../static/admin/programfile/${pdto.pro_img}" width="300px">
+		                        </td>
+		                        <td>${pdto.start_date}</td>
+		                        <td>${pdto.end_date}</td>
+		                        <td>${pdto.days_of_week}</td>
+		                        <td>${pdto.pro_inwon}</td>
+		                        <td>진행 예정</td>
+		                    </tr>
+		                </c:if>
+		            </c:otherwise>
+		        </c:choose>
+		    </c:forEach>
+		</table>
+	</div>
+	
+	
+	
+	
+	
 	
 	<div id="calendar-navigation">
         <button id="prevMonth" onclick="changeMonth(-1)">◀ 이전</button>

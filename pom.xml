@@ -92,6 +92,16 @@
 		<artifactId>sitemesh</artifactId>
 		<version>3.2.1</version>
 	   </dependency>
+
+	   
+	   <!-- 메일 -->
+	   <dependency>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-starter-mail</artifactId>
+	   </dependency>
+
+
+	   
 	</dependencies>
 	<build>
 		<plugins>
