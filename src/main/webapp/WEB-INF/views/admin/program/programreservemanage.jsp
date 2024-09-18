@@ -79,11 +79,22 @@ function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
 	</c:forEach>
 		<tr>
 			<td colspan="8">
-				<c:forEach	begin="${pstart}" end="${pend}" var=i>
-					<a href="/admin/program/programreservemanage?page=${page}">${i}</a>
+				<c:forEach	begin="${pstart}" end="${pend}" var="i">
+					<a href="/admin/program/programreservemanage?page=${page}&sword=${sword}&stype=${stype}">${i}</a>
 				</c:forEach>
-			
 			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="8">
+			<form action="/admin/program/programreservemanage">
+			<select name="stype">
+				<option value="p.pro_name" >프로그램 이름</option>
+				<option value="u.user_name">신청자 이름</option>
+			</select>
+			<input type="text" name="sword">
+			<input type="submit" value="검색">
+			</form>
 		</tr>
 	
 	

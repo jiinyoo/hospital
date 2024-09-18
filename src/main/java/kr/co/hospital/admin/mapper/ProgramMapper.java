@@ -24,10 +24,11 @@ public interface ProgramMapper {
 	public void updateProgram(ProgramDto pdto);
 	public void insertProgramCapacity(int pro_id, String date, int pro_inwon);
 	public void deleteProgramCapacity(int pro_id);
-	public ArrayList<ProgramReserveDto> userpreserve();
+	public ArrayList<ProgramReserveDto> userpreserve(int index, String stype, String sword);
 	public void updatestate(int pres_id, int state);
 	public ProgramCapacityDto getProgramCapacity(int pro_id, String pres_date);
 	public void plusProgramCapacity(int p_inwon, int pro_id, String pres_date);
 	public void minusProgramCapacity(int p_inwon, int pro_id, String pres_date);
 	public void deleteonepreserve(int pres_id);
+	public int getpreserveChong(String stype, String sword);
 }
