@@ -23,4 +23,5 @@ public interface ProgramMapper {
 	public void insertProgramCapacity(int pro_id, String date, int pro_inwon);
 	public void deleteProgramCapacity(int pro_id);
 	public ArrayList<ProgramReserveDto> userpreserve();
+	public void updatestate(int pres_id, int state);
 }

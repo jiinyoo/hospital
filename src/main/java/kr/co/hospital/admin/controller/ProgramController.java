@@ -68,5 +68,11 @@ public class ProgramController {
 		return service.programreservemanage(request,model,session);
 	}
 	
+	@RequestMapping("/admin/program/chgstate")
+	public String chagestate(HttpServletRequest request,HttpSession session) throws Exception
+	{
+		return service.programchgstate(request,session);
+	}
+	
 
 }

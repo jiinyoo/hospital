@@ -16,6 +16,7 @@ public interface ProgramService {
 	public String programupdate(HttpServletRequest request,Model model);
 	public String programupdateOk(MultipartHttpServletRequest multi,ProgramDto pdto, HttpServletRequest request, Model model, HttpSession session)throws Exception;
 	public String programreservemanage(HttpServletRequest request, Model model, HttpSession session);
+	public String programchgstate(HttpServletRequest request, HttpSession session);
 
 
 }

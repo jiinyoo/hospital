@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -25,6 +26,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.mapper.ProgramMapper;
 import kr.co.hospital.util.FileUtils;
 import kr.co.hospital.admin.dto.ProgramDto;
+import kr.co.hospital.admin.dto.ProgramReserveDto;
 import kr.co.hospital.admin.dto.ProgramdaysDto;
 
 @Service
@@ -176,8 +178,28 @@ public class ProgramServiceImpl implements ProgramService {
 
 	@Override
 	public String programreservemanage(HttpServletRequest request, Model model, HttpSession session) {
-		mapper.userpreserve();
-		return "/admin/program/programreserve";
+		ArrayList<ProgramReserveDto> prlist=mapper.userpreserve();
+		model.addAttribute("prlist", prlist);
+		return "/admin/program/programreservemanage";
+	}
+
+	@Override
+	@ResponseBody
+	public String programchgstate(HttpServletRequest request, HttpSession session) {
+		int state=Integer.parseInt(request.getParameter("state"));
+		int pres_id=Integer.parseInt(request.getParameter("pres_id"));
+		int pro_id=Integer.parseInt(request.getParameter("pro_id"));
+		String pres_date=request.getParameter("pres_date");
+		mapper.updatestate(pres_id,state);
+		//state가 0이 었으면 pro_inwon을 회복해야하고
+		
+		
+		
+		//state가 1혹은 3이었으면 pro_inwon을 빼야 한다.
+		
+		
+		
+		return "redirect:/admin/program/programreservemanage";
 	}
 	
 
