@@ -52,17 +52,17 @@ function deletecheck() {
 		<tr>
 			<td colspan="2">${aidto.content}</td>
 		</tr>
-		<tr>
-			<td colspan="2">
 			<c:forEach items="${aidto.imgs}" var="img">
 				<c:if test="${img!=''}">
+		<tr>
+				<td colspan="2">
 				<div>
 					<img src="../../static/client/inquiryfile/${img}">
 				</div>
+				</td>
+		</tr>
 				</c:if>
 			</c:forEach>
-			</td>
-		</tr>
 		<tr>
 			<td colspan="2" align="center">
 			<!--1. 이글을 쓴 이의 userstate가 1이나 2면 수정 삭제 버튼이 뜬다.
