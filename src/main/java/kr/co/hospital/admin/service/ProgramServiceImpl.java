@@ -222,4 +222,14 @@ public class ProgramServiceImpl implements ProgramService {
 		}
 	}
 
+	@Override
+	public String programuserdelete(HttpServletRequest request, HttpSession session) {
+		int pres_id=Integer.parseInt(request.getParameter("pres_id"));
+
+		
+		mapper.deleteonepreserve(pres_id);
+		
+		return "redirect:/admin/program/programreservemanage";
+	}
+
 }

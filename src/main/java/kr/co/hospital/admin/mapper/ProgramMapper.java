@@ -29,4 +29,5 @@ public interface ProgramMapper {
 	public ProgramCapacityDto getProgramCapacity(int pro_id, String pres_date);
 	public void plusProgramCapacity(int p_inwon, int pro_id, String pres_date);
 	public void minusProgramCapacity(int p_inwon, int pro_id, String pres_date);
+	public void deleteonepreserve(int pres_id);
 }

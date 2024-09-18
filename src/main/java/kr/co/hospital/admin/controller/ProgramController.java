@@ -75,5 +75,11 @@ public class ProgramController {
 		return service.programchgstate(request,session);
 	}
 	
+	@RequestMapping("/admin/program/preserveuserdelete")
+	public String preserveuserdelete(HttpServletRequest request,HttpSession session)
+	{
+		return service.programuserdelete(request,session);
+	}
+	
 
 }

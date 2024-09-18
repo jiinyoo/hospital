@@ -88,4 +88,9 @@
 		where pro_id=#{pro_id}
 		and date=#{pres_date}
 	</update>
+	<delete id="deleteonepreserve">
+		delete from preserve
+		where pres_id=#{pres_id}
+	</delete>
+	
 </mapper>

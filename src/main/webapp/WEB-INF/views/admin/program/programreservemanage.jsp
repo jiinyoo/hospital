@@ -66,9 +66,9 @@ function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
 				</c:if>
 				
 				
-				<c:if test="${prdot.state==2}">
+				<c:if test="${prdto.state==2}">
 					지난 예약
-				<a href="/admin/program/preserveuserdelete?pres_id=${prdto.pres_id}&pro_id=${pro_id}&pres_date=${pres_date}">
+				<a href="/admin/program/preserveuserdelete?pres_id=${prdto.pres_id}">
 				<input type="button" value="기록 삭제">
 				</a>
 				</c:if>
