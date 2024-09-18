@@ -46,7 +46,7 @@ section #community {
         width: 1330px;
         margin: auto;
         text-align: center;
-        margin-top: 240px;
+        margin-top: 170px;
         margin-bottom: 20px;
         display: flex; /* 칸을 가로로 배치하기 위해 flexbox 사용 */
         justify-content: space-between; /* 각 칸 사이에 공간을 고르게 배치 */
@@ -116,6 +116,7 @@ section #community .comm .more-btn a:hover {
     display: flex;
     justify-content: space-around;
     margin: auto;
+    margin-top:150px;
     width: 75%;
     background-color: #ffffff; /* 배경을 깔끔한 흰색으로 설정 */
     
