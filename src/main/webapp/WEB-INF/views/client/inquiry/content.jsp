@@ -52,17 +52,17 @@ function deletecheck() {
 		<tr>
 			<td colspan="2">${idto.content}</td>
 		</tr>
-		<tr>
-			<td colspan="2">
 			<c:forEach items="${idto.imgs}" var="img">
 				<c:if test="${img!=''}">
+		<tr>
+			<td colspan="2">
 				<div>
 					<img src="../../static/client/inquiryfile/${img}">
 				</div>
-				</c:if>
-			</c:forEach>
 			</td>
 		</tr>
+				</c:if>
+			</c:forEach>
 		<tr>
 			<td colspan="2" align="center">
 			<c:if test="${session_user_id==idto.user_id}">

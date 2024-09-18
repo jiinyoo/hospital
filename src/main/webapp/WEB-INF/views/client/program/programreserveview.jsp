@@ -41,20 +41,93 @@ $(function() {
 });
 </script>
 <style>
-    #space {
-        height:100px;
-    }
+section {
+       margin:auto;
+       width: 1300px;
+       height: 100vh; /* 뷰포트 전체 높이 사용 */
+   }
+
+
+ #space {
+     height:100px;
+ }
+ 
+    
+ #reserve {
+    margin: auto;
+    width: 60%; /* 중앙에 위치하도록 넓이 설정 */
+    border-collapse: collapse; /* 테두리가 하나로 합쳐지도록 설정 */
+    text-align: left; /* 텍스트가 왼쪽 정렬되도록 설정 */
+}
+	
+	/* 테이블 스타일 */
+table {
+    width: 100%; /* 테이블을 섹션에 맞게 꽉 채움 */
+    border-collapse: collapse; /* 테두리 겹침 제거 */
+    margin-bottom: 30px; /* 테이블 간 간격 추가 */
+    background-color: #f9f9f9; /* 테이블 배경색 */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+/* 테이블 셀 스타일 */
+table th, table td {
+    border: 1px solid #ddd; /* 셀 테두리 */
+    padding: 12px 15px; /* 셀 내부 여백 */
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    font-size: 16px; /* 글자 크기 */
+    color: #333; /* 텍스트 색상 */
+}
+
+/* 헤더 셀 스타일 */
+table th {
+    background-color: #0073e6; /* 헤더 배경색 */
+    color: white; /* 헤더 글자색 */
+    text-transform: uppercase; /* 대문자 변환 */
+    font-weight: bold; /* 굵은 글씨 */
+    letter-spacing: 0.05em; /* 글자 간격 조정 */
+}
+
+/* 짝수 행 배경색 */
+table tr:nth-child(even) {
+    background-color: #f2f2f2; /* 짝수 행 배경색 */
+}
+
+/* 제출 버튼 스타일 */
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3; /* 호버 시 색상 변경 */
+}
+
+/* 인원수 경고 텍스트 스타일 */
+#inwoninnertext {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+    
+    
 </style>
 </head>
 <body>
 <section>
     <form action="preserveOk" method="post" name="pkc" onsubmit="return check()">
-        <table>
+        <table id="reserve">
+            <caption><h2>${pdto.pro_name}&nbsp;예약</h2></caption>
             <input type="hidden" name="pro_id" value="${pdto.pro_id}">
             <input type="hidden" name="user_id" value="${user_id}">
             <input type="hidden" name="reserve_date" value="${reserve_date}">
             <input type="hidden" name="state" value="0">
-            <h2><caption>${pdto.pro_name}&nbsp;예약</caption></h2>
+            
             <tr>
                 <td width="200">파트</td>
                 <td width="400"><input type="text" name="pres_part" value="${pdto.pro_part}" readonly></td>
@@ -87,7 +160,7 @@ $(function() {
         </tr>
         <tr>
             <td width="500">프로그램 이미지</td>
-            <td width="800"><img src="../../static/admin/programfile/${pdto.pro_img}" width="780"></td>
+            <td width="800"><img src="../../static/admin/programfile/${pdto.pro_img}" width="200"></td>
         </tr>
         <tr>
             <td>프로그램 설명</td>
