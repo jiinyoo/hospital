@@ -17,7 +17,7 @@
       height:180px;
       margin:auto;
       
-      margin-bottom: 70px;
+      margin-bottom: 10px;
       border-radius: 30px;
       /*box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);*/
    }
@@ -46,7 +46,7 @@ section #community {
         width: 1330px;
         margin: auto;
         text-align: center;
-        margin-top: 170px;
+        margin-top: 230px;
         margin-bottom: 20px;
         display: flex; /* 칸을 가로로 배치하기 위해 flexbox 사용 */
         justify-content: space-between; /* 각 칸 사이에 공간을 고르게 배치 */
@@ -116,7 +116,7 @@ section #community .comm .more-btn a:hover {
     display: flex;
     justify-content: space-around;
     margin: auto;
-    margin-top:150px;
+    margin-top:270px;
     width: 75%;
     background-color: #ffffff; /* 배경을 깔끔한 흰색으로 설정 */
     
