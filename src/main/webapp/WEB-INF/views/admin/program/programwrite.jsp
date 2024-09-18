@@ -45,18 +45,31 @@ function check() {
 
 
 </script>
+<style>
+	section {
+		margin:auto;
+	}
+	
+	#pro_info {
+		width:300px;
+		height:200px;
+	
+	}
+
+</style>
 </head>
 <body>
 <section>
 <form method="post" action="programwriteOk" enctype="multipart/form-data" onsubmit="return check()" name="pkc">
 <table align="center" width="500px" height="500px";>
+	<caption><h2>프로그램 입력</h2></caption>
 	<tr>
 		<td width="200px">프로그램 명  </td>
 		<td><input type="text" name="pro_name"></td>
 	</tr>
 	<tr>
 		<td>프로그램 소개</td>
-		<td><textarea name="pro_info"></textarea></td>
+		<td><textarea name="pro_info" id="pro_info"></textarea></td>
 	</tr>
 	<tr>
 		<td>강사명</td>
@@ -80,7 +93,7 @@ function check() {
         </select></td>
 	</tr>
 	<tr>
-		<td>시작일:</td>
+		<td>시작일</td>
     	<td><input type="date" id="start_date" name="start_date" required></td>
     </tr>
     <tr>

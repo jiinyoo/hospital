@@ -17,7 +17,7 @@
       height:180px;
       margin:auto;
       
-      margin-bottom: 70px;
+      margin-bottom: 10px;
       border-radius: 30px;
       /*box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);*/
    }
@@ -46,7 +46,7 @@ section #community {
         width: 1330px;
         margin: auto;
         text-align: center;
-        margin-top: 240px;
+        margin-top: 230px;
         margin-bottom: 20px;
         display: flex; /* 칸을 가로로 배치하기 위해 flexbox 사용 */
         justify-content: space-between; /* 각 칸 사이에 공간을 고르게 배치 */
@@ -116,6 +116,7 @@ section #community .comm .more-btn a:hover {
     display: flex;
     justify-content: space-around;
     margin: auto;
+    margin-top:270px;
     width: 75%;
     background-color: #ffffff; /* 배경을 깔끔한 흰색으로 설정 */
     
@@ -149,7 +150,21 @@ section #community .comm .more-btn a:hover {
     background-color: transparent; /* 텍스트 배경을 투명하게 설정 */
 }
 
+/* 배너를 화면 오른쪽에 고정 */
+#floating-banner {
+    position: absolute;
+    top: 200px; /* 화면 상단에서의 위치 */
+    right: 50px; /* 화면 오른쪽에서의 위치 */
+    width: 200px; /* 배너 너비 */
+    z-index: 9999; /* 다른 요소 위에 표시 */
+    transition: top 0.6s ease-in-out; /* 부드러운 스크롤 애니메이션 */
+}
 
+#floating-banner img {
+    width: 100%; /* 이미지 크기 조정 */
+    border-radius: 17px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 배너에 그림자 추가 */
+}
 
 </style>
 <script>
@@ -167,9 +182,17 @@ section #community .comm .more-btn a:hover {
 		
 	});
 	
-	function closereserve() {
+	function closereserve() 
+	{
 		document.getElementById("reserve-container").style.display="none";
 	}
+
+	window.addEventListener('scroll', function() 
+	{
+	    var banner=document.getElementById('floating-banner');
+	    var targetY=window.scrollY+200;  // 스크롤 위치에서 100px 아래로 배너가 이동
+	    banner.style.top=targetY+ 'px';   // 배너 위치 설정
+	});
 
 	
 </script>
@@ -185,6 +208,12 @@ section #community .comm .more-btn a:hover {
 		</div>
 	</div>
 </section>
+
+<!-- 치과 배너 추가 -->
+<div id="floating-banner">
+    <img src="/static/client/main/병원 배너.png" alt="치과 배너">
+</div>
+
 
 <section>
 <!-- 공지사항 및 학술행사 -->

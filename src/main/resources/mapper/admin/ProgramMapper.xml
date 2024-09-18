@@ -64,8 +64,16 @@
 		select prs.*, u.user_name, u.user_phone,p.pro_name from preserve as prs
 		inner join user as u on prs.user_id=u.user_id 
 		inner join program as p on prs.pro_id=p.pro_id
-		order by prs.pres_id desc
+		where ${stype} like concat('%',#{sword},'%')
+		order by prs.pres_id desc limit #{index},10
 	</select>
+	<select id="getpreserveChong">
+		select ceil(count(*)/10) 
+		from preserve as prs
+		inner join user as u on prs.user_id=u.user_id 
+		inner join program as p on prs.pro_id=p.pro_id
+		where ${stype} like concat('%',#{sword},'%')
+	</select>	
 	<update id="updatestate">
 		update preserve
 		set state=#{state}

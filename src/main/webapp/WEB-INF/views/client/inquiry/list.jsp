@@ -27,7 +27,11 @@
 	    padding: 10px; /* 셀 내부 여백 조정 */
 	    height: 30px;  /* 셀 높이 명확히 설정 */
 	}
-
+	
+	table tr:first-child {
+    background-color: #B5B2FF;
+	}
+	
 	#part {
 		background-color:orange;
 	}

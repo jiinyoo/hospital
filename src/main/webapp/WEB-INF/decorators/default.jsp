@@ -16,12 +16,20 @@
     font-style: normal;
 }
 
+
 body 
 {
+	display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Viewport의 전체 높이 설정 */
 	font-family: 'goorm-sans-bold';
     background-color: #f2f4f9;
     margin: 0;
     padding: 0;
+}
+
+main {
+    flex-grow: 1; /* 메인 콘텐츠가 푸터를 하단으로 밀어내도록 */
 }
 
 * {margin:0; padding:0; box-sizing: border-box;}
@@ -330,6 +338,9 @@ hr
  <sitemesh:write property="head"/>
 
 </head>
+
+
+
 <body>
 <div id="ads">
 	<div id="ad">
@@ -420,17 +431,68 @@ hr
 	</span>
 	</nav>
 	<hr>
-	<div class="haha">
-	  
+
 	</div>
 
+<main>
+	<div class="haha">
+		<!-- 여기에 페이지의 메인 콘텐츠가 들어갑니다. -->
+	</div>
+</main>
 
 <sitemesh:write property="body"/>
 
 
-<footer>
 
+<footer style="background-color: #368AFF; padding: 50px 0; color: white; margin-top: 40px; font-family: 'goorm-sans-bold';">
+    <div class="footer-container" style="width: 80%; margin: auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+        
+        <div style="width: 30%;">
+            <h4 style="margin-bottom: 20px; font-size: 24px;">병원 소개</h4>
+            <p style="line-height: 1.8; font-size: 15px;">저희 병원은 최상의 의료 서비스를 제공하며 환자분들의 건강을 최우선으로 생각합니다. 믿을 수 있는 의료진과 함께 건강한 삶을 위한 최선을 다하고 있습니다.</p>
+        </div>
+        
+        <div style="width: 30%;">
+            <h4 style="margin-bottom: 20px; font-size: 24px; margin-left:40px;">빠른 링크</h4>
+            <ul style="list-style-type: none; padding: 0; line-height: 2; margin-left:40px;">
+                <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">병원 소개</a></li>
+                <li><a href="/main/beforeReserve" style="color: white; text-decoration: none; font-size: 15px;">진료 예약</a></li>
+                <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">연락처 : 010-1234-5678</a></li>
+                <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">자주 묻는 질문</a></li>
+            </ul>
+        </div>
+
+        <div style="width: 30%;">
+            <h4 style="margin-bottom: 20px; font-size: 24px;">연락처</h4>
+            <p style="line-height: 1.8; font-size: 15px;"><strong>전화:</strong> 031-1234-5678</p>
+            <p style="line-height: 1.8; font-size: 15px;"><strong>이메일:</strong> JangINHO@hospital.com</p>
+            <p style="line-height: 1.8; font-size: 15px;"><strong>주소:</strong> 경기 고양시 마두동 병원로 123</p>
+        </div>
+    </div>
+
+    <div style="width: 80%; margin: 30px auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+
+        <div>
+            <a href="#" style="text-decoration: none; color: white; margin-right: 15px;">
+                <i class="fab fa-facebook" style="font-size: 24px;"></i>
+            </a>
+            <a href="#" style="text-decoration: none; color: white; margin-right: 15px;">
+                <i class="fab fa-twitter" style="font-size: 24px;"></i>
+            </a>
+            <a href="#" style="text-decoration: none; color: white; margin-right: 15px;">
+                <i class="fab fa-instagram" style="font-size: 24px;"></i>
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 10px;">
+            <p>&copy; 2024 장인호 병원입니다. 최선을 다하겠습니다.</p>
+        </div>
+    </div>
 </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+
 
 
 </body>

@@ -180,11 +180,28 @@ public class ProgramServiceImpl implements ProgramService {
 
 	@Override
 	public String programreservemanage(HttpServletRequest request, Model model, HttpSession session) {
+		String stype=request.getParameter("stype")==null?"p.pro_name":request.getParameter("stype");
+		String sword=request.getParameter("sword")==null?"":request.getParameter("sword");
+		int page=request.getParameter("page")==null?1:Integer.parseInt(request.getParameter("page"));
+		int index=(page-1)*10;
+		int p=(page-1)/10;
+		int pstart=p*10+1;
+		int pend=pstart+9;
+		int chong=mapper.getpreserveChong(stype, sword);
+		if(chong<pend) {
+			pend=chong;
+		}
+
 		
 		
-		
-		ArrayList<ProgramReserveDto> prlist=mapper.userpreserve();
+		ArrayList<ProgramReserveDto> prlist=mapper.userpreserve(index,stype,sword);
 		model.addAttribute("prlist", prlist);
+		model.addAttribute("page",page);
+		model.addAttribute("pstart",pstart);
+		model.addAttribute("pend",pend);
+		model.addAttribute("chong",chong);
+		model.addAttribute("sword",sword);
+		model.addAttribute("stype",stype);
 		return "/admin/program/programreservemanage";
 	}
 

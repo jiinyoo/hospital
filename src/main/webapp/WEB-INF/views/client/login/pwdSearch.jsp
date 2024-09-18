@@ -94,7 +94,7 @@
 <body>
     <div class="search-container">
         <h3>비밀번호 찾기</h3>
-        <form method="post" action="${pageContext.request.contextPath}/main/pwdSearch">
+        <form method="post" action="pwdSearch">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <label for="user_id">아이디</label>
             <input type="text" name="user_id" placeholder="아이디를 입력하세요" value="${user_id}" required>
@@ -109,7 +109,7 @@
         <!-- 인증번호 입력 -->
         <br>
         <c:if test="${isSent==true}">
-            <form method="post" action="${pageContext.request.contextPath}/main/verifyCode">
+            <form method="post" action="verifyCode">
                 <label for="verification_code">인증번호</label>
                 <input type="text" name="verification_code" placeholder="이메일로 받은 인증번호를 입력하세요">
                 <c:out value="${isSent}" />

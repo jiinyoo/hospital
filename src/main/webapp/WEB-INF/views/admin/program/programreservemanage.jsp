@@ -6,6 +6,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+section {
+	margin:20px auto;
+}
+
+
+
+
+input[type=button]
+{
+    width:50px;
+    height:30px;
+    background-color:#8BBCFF;;
+    color:white;
+    border:1px solid white;
+    border-radius:5px;
+}
+
+#space {
+	height:30px;
+	
+
+}
+
+table {
+	border-spacing:0px;
+	align:center;
+	text-align:center;
+}
+
+table tr:first-child {
+	background-color:#B5B2FF;
+
+}
+
+table td{
+    border-spacing:0px;
+    border:1px solid black;
+}
+
+
+</style>
 <script>
 
 function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
@@ -14,7 +56,7 @@ function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
         var response = JSON.parse(chk.responseText);
         response=JSON.stringify(response, null, 2);
         if(response=="100") {
-        	alert("수용인원을 추가하였습니다.재승인할 수 없습니다.");
+        	alert("수용인원을 초과하였습니다.재승인할 수 없습니다.");
         } 
     };
     chk.open("GET", "/admin/program/chgstate?state=" + chgstate + "&pres_id=" + pres_id + "&pro_id=" + pro_id + "&pres_date=" + pres_date + "&p_inwon=" + p_inwon);
@@ -30,14 +72,14 @@ function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
 <section>
 	<table>
 		<tr>
-			<td>예약 번호</td>
-			<td>프로그램 명</td>
-			<td>프로그램 시행일</td>
-			<td>이름</td>	
-			<td>전화번호</td>		
-			<td>신청일</td>
-			<td width="200">상태</td>
-			<td>신청인원</td>
+			<td width="100">예약 번호</td>
+			<td width="150">프로그램 명</td>
+			<td width="150">프로그램 시행일</td>
+			<td width="100">이름</td>	
+			<td width="100">전화번호</td>		
+			<td width="150">신청일</td>
+			<td width="300">상태</td>
+			<td width="100">신청인원</td>
 		</tr>
 	<c:forEach items="${prlist}" var="prdto">
 		<tr>
@@ -79,11 +121,22 @@ function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
 	</c:forEach>
 		<tr>
 			<td colspan="8">
-				<c:forEach	begin="${pstart}" end="${pend}" var=i>
-					<a href="/admin/program/programreservemanage?page=${page}">${i}</a>
+				<c:forEach	begin="${pstart}" end="${pend}" var="i">
+					<a href="/admin/program/programreservemanage?page=${page}&sword=${sword}&stype=${stype}">${i}</a>
 				</c:forEach>
-			
 			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="8">
+			<form action="/admin/program/programreservemanage">
+			<select name="stype">
+				<option value="p.pro_name" >프로그램 이름</option>
+				<option value="u.user_name">신청자 이름</option>
+			</select>
+			<input type="text" name="sword">
+			<input type="submit" value="검색">
+			</form>
 		</tr>
 	
 	

@@ -97,19 +97,31 @@
         <tbody>
             <c:forEach var="mdto" items="${mdto}">
                 <tr>
-                    <td>${mdto.user_id}</td>
-                    <td>${mdto.user_name}</td>
-                    <td>${mdto.user_email}</td>
+             
+                    <td>
+                    	${mdto.user_id}
+                    </td>
+                    
+                    <td>
+                    	${mdto.user_name}
+                    </td>
+                    
+                    <td>
+                    	${mdto.user_email}
+                    </td>
+                    
                     <td>
                         <form method="post" action="updateState">
                             <input type="hidden" name="id" value="${mdto.id}">
                             <select name="state" class="status-select">
                                 <option value="0" ${mdto.state==0 ? 'selected' : ''}>일반회원</option>
                                 <option value="1" ${mdto.state==1 ? 'selected' : ''}>의사</option>  
+                                <option value="2" ${mdto.state==2 ? 'selected' : ''}>관리자</option>
                                 <option value="3" ${mdto.state==3 ? 'selected' : ''}>휴면계정</option>
                                 <option value="4" ${mdto.state==4 ? 'selected' : ''}>정지계정</option>
                             </select>
                     </td>
+                    
                     <td>
                             <button type="submit" class="button">변경</button>
                         </form>
