@@ -52,7 +52,7 @@ section #community {
         justify-content: space-between; /* 각 칸 사이에 공간을 고르게 배치 */
     }
 
-    section #community .comm {
+section #community .comm {
     width: 32%; /* 3개의 칸이 고르게 배치되도록 설정 */
     height:200px;
     padding: 20px;
