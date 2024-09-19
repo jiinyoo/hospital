@@ -153,8 +153,8 @@ nav #mainmenu #maincate
 
 #maincate .logo img 
 {
-
-	width:90px;
+	padding-right:30px;
+	width:240px;
 	transition: all 0.3s ease;
 }
 
@@ -377,7 +377,7 @@ hr
 			<li class="logo">
 			 <a href="/main/index">
 
-			  <img src="/static/client/main/병원 로고.png" width="100" valign="middle">
+			  <img src="/static/client/main/병원로고 7.png" valign="middle">
 
 			 </a>
 			</li>
