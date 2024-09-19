@@ -4,7 +4,7 @@
 
     <select id="getAllUsers" resultType="kr.co.hospital.admin.dto.ManagementDto">
         select id, user_id, user_name, 
-        user_email, state from user where state !=2
+        user_email, state from user where user_id !='admin'
     </select>
 
     <update id="updateState" parameterType="kr.co.hospital.admin.dto.ManagementDto">

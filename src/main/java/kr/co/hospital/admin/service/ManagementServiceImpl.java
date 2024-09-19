@@ -30,8 +30,8 @@ public class ManagementServiceImpl implements ManagementService {
 	    		HttpSession session) 
 	    {
 	    	 Integer state=(Integer)session.getAttribute("state");
-
-	         if (state!=null && state == 2) 
+	    	 String user_id=(String)session.getAttribute("user_id");
+	         if ("admin".equals(user_id)) 
 	         {
 	             mapper.updateState(mdto); 
 	             return "redirect:/admin/user/list";

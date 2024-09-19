@@ -121,7 +121,7 @@ public class LoginServicelmpl implements LoginService {
 	        HttpSession session = request.getSession();
 	        session.setAttribute("verificationCode", verificationCode);
 	        session.setAttribute("userEmail", userEmail);
-	        session.setAttribute("user_id", user_id);
+	        session.setAttribute("userid", user_id);
 	        session.setAttribute("password", password);  // 비밀번호도 세션에 임시 저장
 	        session.setAttribute("verificationTime", LocalDateTime.now());  // 인증번호 생성 시간 저장
 	        
@@ -201,7 +201,7 @@ public class LoginServicelmpl implements LoginService {
 	}
 	
 	@Override
-	public String changePwd(HttpServletRequest request, Model model) 
+	public String changePwd(HttpServletRequest request, Model model)
 	{
 		HttpSession session=request.getSession();
 		String user_id=(String) session.getAttribute("reset_user_id");
@@ -215,6 +215,8 @@ public class LoginServicelmpl implements LoginService {
 	        
 	        if (result > 0) {
 	            session.removeAttribute("reset_user_id");  // 비밀번호 변경 후 세션에서 reset_user_id 제거
+	            session.removeAttribute("new_pwd");  // 비밀번호 변경 후 세션에서 reset_user_id 제거
+	            session.removeAttribute("");  // 비밀번호 변경 후 세션에서 reset_user_id 제거
 	            model.addAttribute("success", true);
 	        } else {
 	            model.addAttribute("success", false);

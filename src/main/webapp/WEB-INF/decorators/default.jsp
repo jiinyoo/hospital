@@ -338,6 +338,9 @@ hr
  <sitemesh:write property="head"/>
 
 </head>
+
+
+
 <body>
 <div id="ads">
 	<div id="ad">

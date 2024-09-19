@@ -56,24 +56,21 @@
 		<if test="user_info==null">
 			and isMember='0'
 		</if>
-		and now() &lt; concat(res_date,' ', res_time)
+		and now()-interval 1 day &lt; concat(res_date,' ', res_time)
 		and state=0
 		order by res_date asc,
 		res_time asc
 	</select>
 	<select id="pastReserve" resultType="kr.co.hospital.client.dto.ReserveDto">
 		select * from reserve
-		where (user_id=#{user_id}
-			and isMember='0'
+		where user_id=#{user_id}
 		<if test="month==0">
-		and now() &gt; concat(res_date,' ', res_time))
+		and now() &gt; concat(res_date,' ', res_time)
 		</if>
 		<if test="month!=0">
-		and concat(res_date,' ', res_time) between #{start} and #{end})
+		and res_date between #{start} and #{end}
 		</if>
-		or (state!=0
-			and isMember='0'
-		)
+		and isMember='0'
 		order by res_date asc,
 		res_time asc
 	</select>
