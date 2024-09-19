@@ -174,6 +174,9 @@
                     <label class="info-label">아이디</label>
                     <span>${user.user_id}</span>
                     <input type="hidden" name="user_id" value="${user.user_id}">
+                    <button type="button" onclick="location.href='/main/uchangePwd'" style="margin-left: 10px; padding: 7px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        				비밀번호 변경
+    				</button>
                 </div>
 					<br>
                 <div class="form-group">

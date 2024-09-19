@@ -15,7 +15,8 @@
     select id, user_id, user_name, user_phone, user_email, user_jumin, user_addr, writeday
     from user
     where user_id = #{user_id}
-    </select>
+  </select>
+    
   <update id="updateOkUser" parameterType="kr.co.hospital.client.dto.UserDto">
     update user set
     user_name=#{user_name},
@@ -24,6 +25,12 @@
     user_jumin=#{user_jumin},
     user_addr=#{user_addr}
     where user_id=#{user_id}
+  </update>
+  
+  <update id="updatePwd">
+    update user
+    set user_pwd = #{new_pwd}
+    where user_id = #{user_id}
   </update>
     
 </mapper>
