@@ -16,8 +16,8 @@ section {
 
 input[type=button]
 {
-    width:50px;
     height:30px;
+    padding:5px;
     background-color:#8BBCFF;;
     color:white;
     border:1px solid white;
@@ -121,9 +121,40 @@ function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
 	</c:forEach>
 		<tr>
 			<td colspan="8">
+				<c:if test="${pstart!=1}">
+					<a href="/admin/program/programreservemanage?page=${pstart-1}&sword=${sword}&stype=${stype}">◀◀</a>
+				</c:if>
+				<c:if test="${pstart==1}">
+					◀◀
+				</c:if>
+				<c:if test="${page!=1}">
+					<a href="/admin/program/programreservemanage?page=${page-1}&sword=${sword}&stype=${stype}">◁</a>
+				</c:if>
+				<c:if test="${page==1}">
+					◁
+				</c:if>
+				
 				<c:forEach	begin="${pstart}" end="${pend}" var="i">
-					<a href="/admin/program/programreservemanage?page=${page}&sword=${sword}&stype=${stype}">${i}</a>
+					<c:set var="style" value=""/>
+					<c:if test="${page==i}">
+						<c:set var="style" value="style='color:red;'"/>
+					</c:if>
+					<a href="/admin/program/programreservemanage?page=${i}&sword=${sword}&stype=${stype}" ${style}>${i}</a>
 				</c:forEach>
+			
+			
+				<c:if test="${page!=chong}">
+					<a href="/admin/program/programreservemanage?page=${page+1}&sword=${sword}&stype=${stype}">▷</a>
+				</c:if>
+				<c:if test="${page==chong}">
+					▷
+				</c:if>
+				<c:if test="${pend==chong}">
+					▶▶
+				</c:if>
+				<c:if test="${pend!=chong}">
+					<a href="/admin/program/programreservemanage?page=${pend+1}&sword=${sword}&stype=${stype}">▶▶</a>
+				</c:if>
 			</td>
 		</tr>
 		

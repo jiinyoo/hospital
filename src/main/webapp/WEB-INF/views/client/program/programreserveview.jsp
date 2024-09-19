@@ -12,11 +12,10 @@
 $(function() {
     var maxSpinnerValue = 5; // 스피너의 최대값은 5명
     var maxAvailableInwon = ${pccdto.pro_inwon - pccdto.minus_inwon}; // 잔여 인원 계산
-
     // 스피너 설정 및 spin 이벤트 처리
     $("#p_inwon").spinner({
         min: 1,
-        max: maxSpinnerValue,
+        max: 5,
         spin: function(event, ui) {
             if (ui.value > maxAvailableInwon) {
                 $("#inwoninnertext").text("잔여 인원은 " + maxAvailableInwon + "명입니다. 더 이상 신청할 수 없습니다.");
@@ -25,17 +24,6 @@ $(function() {
             } else {
                 $("#inwoninnertext").text(""); // 잔여 인원이 초과하지 않으면 경고 메시지 삭제
             }
-        }
-    });
-
-    // 스피너 값 변경 감지 (값을 수동으로 입력할 경우)
-    $("#p_inwon").on("change", function() {
-        var currentValue = $(this).spinner("value");
-        if (currentValue > maxAvailableInwon) {
-            $("#inwoninnertext").text("잔여 인원은 " + maxAvailableInwon + "명입니다. 더 이상 신청할 수 없습니다.");
-            $(this).spinner("value", maxAvailableInwon); // 스피너를 최대 값으로 설정
-        } else {
-            $("#inwoninnertext").text(""); // 잔여 인원이 초과하지 않으면 경고 메시지 삭제
         }
     });
 });
@@ -142,7 +130,7 @@ input[type="submit"]:hover {
             </tr>
             <tr>
                 <td>인원</td>
-                <td><input type="text" id="p_inwon" name="p_inwon" value="1" onchange="inwoncheck(this.value)">
+                <td><input type="text" id="p_inwon" name="p_inwon" value="1" readonly>
                 	<br><span id="inwoninnertext"></span>
                 </td>
             </tr>
