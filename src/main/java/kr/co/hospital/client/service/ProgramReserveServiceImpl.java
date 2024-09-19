@@ -29,6 +29,7 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 		
 		if(session.getAttribute("user_id")!=null) {
 			ArrayList<ProgramDto> plist=mapper.righttimeprograms();
+			System.out.println(plist.get(0));
 			model.addAttribute("plist",plist);
 			return "/client/program/programreserve";
 		} else {
