@@ -166,7 +166,7 @@ function loadCalendar(year, month) {
 		        <fmt:parseDate value="${start_date}" var="start_date" pattern="yyyy-MM-dd"/>
 		        <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" var="today"/>
 		        <fmt:parseDate value="${today}" var="today_date" pattern="yyyy-MM-dd"/>
-		        out.print(${today_date});
+		
 		
 		      <c:choose>
 				  <c:when test="${start_date.equals(today_date) || (start_date.before(today_date) && end_date.after(today_date))}">

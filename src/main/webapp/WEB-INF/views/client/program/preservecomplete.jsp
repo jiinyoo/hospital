@@ -4,6 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- 캐시 무효화 설정 -->
+
+<!-- HTML 메타 캐시 제어 -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+
+
+
 <style>
 section {
        margin:auto;
@@ -60,18 +71,9 @@ table tr:nth-child(even) {
     background-color: #f9f9f9; /* 짝수 행에 배경색 추가 */
 }
 </style>
-<script>
-	window.onpageshow=function(event) {
-		if(event.persisted) {
-			history.go(1);			
-		}
-	}
 
-	window.onbeforeunload = function() {
-	    return "이 페이지를 벗어나면 예약 정보가 유실될 수 있습니다. 정말 나가시겠습니까?";
-	};
 
-</script>
+
 <title>Insert title here</title>
 </head>
 <body>

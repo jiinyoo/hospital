@@ -163,6 +163,7 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	@Override
 	public String preserview(HttpServletRequest request, Model model, HttpSession session) {
 		if(session.getAttribute("user_id")!=null) {
+			
 			String user_id=session.getAttribute("user_id").toString();
 			String reserve_date=request.getParameter("reserve_date");
 			
@@ -199,7 +200,6 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 			int num=mapper.getResNumber(pres_number)+1;
 			pres_number=pres_number+String.format("%03d",num);
 			prdto.setPres_number(pres_number);
-			//insert
 			mapper.insertPreserve(prdto);
 			mapper.pccminusinwonupdate(prdto.getP_inwon(),prdto.getPro_id(),reserve_date);
 			ProgramDto pdto=mapper.getProgram(prdto.getPro_id());
