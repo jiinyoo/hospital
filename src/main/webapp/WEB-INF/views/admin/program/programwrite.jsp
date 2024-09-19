@@ -44,6 +44,36 @@ function check() {
 
 
 
+//오늘 이전의 일자는 두 달력에서 모두 활성화 되면 안됨
+//end_date가 start_date보다 뒤의 날짜여야 함
+
+function validCalendar(my) {
+	var today=new Date();
+	var currentYear=today.getFullYear();
+	var currentMonth=("0"+(today.getMonth()+1)).slice(-2);
+	var currentDate=("0"+today.getDate()).slice(-2);
+	var formatdate=currentYear+"-"+currentMonth+"-"+currentDate;
+	document.getElementById("start_date").setAttribute("min", formatdate);
+	document.getElementById("end_date").setAttribute("min", formatdate);
+	
+	if(document.getElementById("start_date").value!="") {
+		var startdate=new Date(document.getElementById("start_date").value);
+		startdate.setDate(startdate.getDate()+1) //반환값이랑 실체 객체에 반영되는 것은 상이할 수 있다.
+		var endstartYear=startdate.getFullYear();
+		var endstartMonth=("0"+(startdate.getMonth()+1)).slice(-2);
+		var endstartDate=("0"+startdate.getDate()).slice(-2);
+		var formatdate=endstartYear+"-"+endstartMonth+"-"+endstartDate
+		document.getElementById("end_date").setAttribute("min", formatdate);
+	}
+}
+
+
+
+
+
+
+
+
 </script>
 <style>
 	section {
@@ -94,11 +124,11 @@ function check() {
 	</tr>
 	<tr>
 		<td>시작일</td>
-    	<td><input type="date" id="start_date" name="start_date" required></td>
+    	<td><input type="date" id="start_date" name="start_date" required onclick=validCalendar()></td>
     </tr>
     <tr>
     	<td>종료일</td>
-    	<td><input type="date" id="end_date" name="end_date" required></td>
+    	<td><input type="date" id="end_date" name="end_date" required onclick=validCalendar()></td>
     </tr>
     <tr>
     	<td>프로그램 요일 선택:</td>
