@@ -56,7 +56,7 @@
 	
 	.info-img img {
 		width: 180px;
-		height: 280px;
+		
 	}
 	
 	.res_btn {
@@ -88,6 +88,11 @@
 		background-color: #0056b3; /* 호버 시 배경색 변경 */
 		transform: scale(1.05); /* 호버 시 크기 증가 */
 	}
+	
+	.doc-li {
+		list-style-type: none;
+		padding: 10px;
+	}
 </style>
 </head>
 <body>
@@ -103,13 +108,13 @@
 		<table>
 			<tr>
 				<td rowspan="2" class="info-img">
-					<img src="/static/admin/programfile/${doc.doc_img }">
+					<img src="/static/admin/doctor/${doc.doc_img }">
 					<div><h2>${doc.doc_name }</h2>/${doc.doc_part }</div>
 				</td>
 				<td>
 					<ul>
 					<c:forEach var="his" items="${doc.historys}">
-						<li>${his}</li>
+						<li class="doc-li">${his}</li>
 					</c:forEach>
 					</ul>
 				</td>
