@@ -24,7 +24,7 @@ public class ManagementServiceImpl implements ManagementService {
 	    {
 		 int page=request.getParameter("page")==null ? 1 : Integer.parseInt(request.getParameter("page"));
 	        String search=request.getParameter("search")==null ? "" : request.getParameter("search").trim();
-	        int limit=10;  // 페이지당 보여줄 사용자 수
+	        int limit=4;  // 페이지당 보여줄 사용자 수
 	        int offset=(page-1)*limit;
 
 	        // 유저 수와 페이징 계산
@@ -36,20 +36,20 @@ public class ManagementServiceImpl implements ManagementService {
 	            // 검색 조건에 맞는 전체 유저 수 가져오기
 	            totalUsers=mapper.getTotalUsersBySearch(search);
 	            // 검색 조건에 맞는 유저 목록 가져오기
-	            mdto=mapper.getUsersBySearch(search, offset, limit);
+	            mdto=mapper.getUsersBySearch(search,offset,limit);
 	        } else {
 	            // 전체 유저 수 가져오기
-	            totalUsers = mapper.getTotalUsers();
+	            totalUsers=mapper.getTotalUsers();
 	            // 페이징 처리된 유저 목록 가져오기
-	            mdto = mapper.getUsersByPage(offset, limit);
+	            mdto = mapper.getUsersByPage(offset,limit);
 	        }
 
-	        int totalPages = (int) Math.ceil((double) totalUsers / limit);
+	        int totalPage=(int) Math.ceil((double)totalUsers/limit);
 
 	        // 모델에 필요한 정보 추가
-	        model.addAttribute("mdto", mdto);
-	        model.addAttribute("page", page);
-	        model.addAttribute("totalPages", totalPages);
+	        model.addAttribute("mdto",mdto);
+	        model.addAttribute("page",page);
+	        model.addAttribute("totalPage", totalPage);
 	        model.addAttribute("search", search);
 
 	        return "/admin/user/list";

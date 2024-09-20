@@ -68,39 +68,30 @@
             {
                 document.getElementById("error-message").innerText="비밀번호가 일치하지 않습니다.";
                 return false;
-            } 
+            }
             else 
             {
                 return true;
             }
         }
         
-        window.onload = function()
-        {
-            var success = "${success}";
-            if (success === "true") {
-                alert("비밀번호가 성공적으로 변경되었습니다.");
-                window.location.href = "${pageContext.request.contextPath}/main/uchangePwd";  // 성공 후 유저정보 페이지로 이동
-            } else if (success === "false") {
-                alert("비밀번호 변경에 실패했습니다. 다시 시도해주세요.");
-            }
-        }
+       
         
     </script>
 </head>
 <body>
 	<div class="change-password-container">
-	<h3> 회원비밀번호 변경 </h3>
+	<h3> 회원 비밀번호 변경 </h3>
 	<form method="post" action="uchangePwd" onsubmit="return validatePwd()">
 		<input type="hidden" name="user_id" value="${user_id}">
 		<label for="gijon_pwd"> 기존 비밀번호 </label>
 		<input type="password"  name="gijon_pwd" placeholder="기존 비밀번호를 입력하세요" required>
 		<br>
 		<label for="new_pwd"> 새로운 비밀번호 </label>
-		<input type="password"  name="new_pwd" placeholder="기존 비밀번호를 입력하세요" required>
+		<input type="password"  name="new_pwd" placeholder="새로운 비밀번호를 입력하세요" required>
 		<br>
-		<label for="confirm_pwd"> 비밀번호 확인 </label>
-		<input type="password"  name="confirm_pwd" placeholder="기존 비밀번호를 입력하세요" required>
+		<label for="confirm_pwd"> 새 비밀번호 확인 </label>
+		<input type="password"  name="confirm_pwd" placeholder="새로운 비밀번호를 다시 입력하세요" required>
 		
 		<div id="error-message" class="error-message"></div>
 			

@@ -8,34 +8,34 @@
     <title>회원 관리</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'goorm-sans-bold';
             margin: 0;
             padding: 0;
             background-color: #f4f6f9;
         }
 
         h2 {
-        	width:10%;
+        	width:100%;
             text-align: center;
             color: #007bff;
             margin-top: 40px;
-            font-size: 24px;
+            font-size: 28px;
         }
 
-        .container {
+        .contain {
             width: 100%;
             margin: 0 auto;
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative; /* 알림 메시지의 위치를 지정할 수 있도록 설정 */
         }
 
         table {
-            width: 80%;
+            width: 100%;
+            margin:20px;
             border-collapse: collapse;
             margin-top:30px;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
         }
 
         table, th, td {
@@ -78,12 +78,35 @@
             background-color: #0056b3;
         }
         
-        .pagination {
+        .search-form {
+        	text-align:center;
+        }
+        
+        .search-form input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .search-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* 페이지 네비게이션 중앙 정렬 */
+        .page {
             text-align: center;
             margin: 20px 0;
         }
 
-        .pagination a {
+        .page a {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -93,11 +116,11 @@
             text-decoration: none;
         }
 
-        .pagination a:hover {
+        .page a:hover {
             background-color: #0056b3;
         }
 
-        .pagination .current-page {
+        .page .current-page {
             background-color: #0056b3;
             color: white;
             font-weight: bold;
@@ -107,10 +130,11 @@
 </head>
 <body>
 
-<div class="container">
-    <h2>회원 관리</h2>
+<div class="contain">
 
-    <table>
+    <h2>회원 관리</h2>
+		
+    <table align="center">
         <thead>
             <tr>
                 <th>아이디</th>
@@ -156,13 +180,18 @@
             </c:forEach>
         </tbody>
     </table>
-    
-    <div class="pagination">
+   <div class="search-form">
+    <form method="get" action="list">
+        <input type="text" name="search" value="${search}" placeholder="아이디, 이름 검색">
+        <button type="submit">검색</button>
+    </form>
+   </div> 
+    <div class="page">
         <c:if test="${page>1}">
             <a href="list?page=${page-1}&search=${search}">이전</a>
         </c:if>
 
-        <c:forEach var="i" begin="1" end="${totalPages}">
+        <c:forEach var="i" begin="1" end="${totalPage}">
             <c:if test="${i==page}">
                 <a class="current-page">${i}</a>
             </c:if>
@@ -171,7 +200,7 @@
             </c:if>
         </c:forEach>
 
-        <c:if test="${page<totalPages}">
+        <c:if test="${page<totalPage}">
             <a href="list?page=${page+1}&search=${search}">다음</a>
         </c:if>
     </div>

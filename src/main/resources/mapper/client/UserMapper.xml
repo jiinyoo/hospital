@@ -12,9 +12,8 @@
   </select>
   
   <select id="getUserInfo" parameterType="String" resultType="kr.co.hospital.client.dto.UserDto">
-    select id, user_id, user_name, user_phone, user_email, user_jumin, user_addr, writeday
-    from user
-    where user_id = #{user_id}
+    select * from user
+    where user_id = #{userId}
   </select>
     
   <update id="updateOkUser" parameterType="kr.co.hospital.client.dto.UserDto">
@@ -27,10 +26,10 @@
     where user_id=#{user_id}
   </update>
   
-  <update id="updatePwd">
+  <update id="updatePwd" parameterType="map">
     update user
     set user_pwd = #{new_pwd}
-    where user_id = #{user_id}
+    where user_id = #{userId}
   </update>
     
 </mapper>
