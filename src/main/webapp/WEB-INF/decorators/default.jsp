@@ -377,7 +377,7 @@ hr
 			<li class="logo">
 			 <a href="/main/index">
 
-			  <img src="/static/client/main/logo7.png" valign="middle">
+			  <img src="/static/client/main/병원로고 7.png" valign="middle">
 
 			 </a>
 			</li>
