@@ -306,7 +306,7 @@
 			var min=timePart[1];
 			if (confirm(chk3+" "+hour+"시 "+min+"분 예약을 진행하시겠습니까?")) { // 확인 창 추가
 				var form=document.getElementById("reserveForm");
-	//			window.history.replaceState(null, null, "/main/index");
+			//	window.history.replaceState(null, null, "/main/index");
 
 				form.submit();
 			}
