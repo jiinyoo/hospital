@@ -133,6 +133,17 @@
 		}
 	}
 	
+	function chkDate(n) {
+		var start=document.getElementById("start").value;
+		start=new Date(start);
+		var end=new Date(n.value);
+		
+		if((end-start)<0) {
+			alert("기간을 확인해주세요.");
+			n.value="";
+		}
+	}
+	
 	function chk() {
 		var phone1=document.getElementById("phone1").value;
 		var phone2=document.getElementById("phone2").value;
@@ -199,7 +210,7 @@
 		</div>
 		<div>
 			<input type="date" name="start" id="start">~
-			<input type="date" name="end" id="end">
+			<input type="date" name="end" id="end" onchange="chkDate(this)">
 			<input type="submit" value="조회하기">
 		</div>
 		</form>
