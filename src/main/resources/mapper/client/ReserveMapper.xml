@@ -56,7 +56,7 @@
 		<if test="user_info==null">
 			and isMember='0'
 		</if>
-		and now()-interval 1 day &lt; concat(res_date,' ', res_time)
+		and <![CDATA[ now() <= concat(res_date,' ', res_time) ]]>
 		and state=0
 		order by res_date asc,
 		res_time asc
@@ -65,7 +65,7 @@
 		select * from reserve
 		where user_id=#{user_id}
 		<if test="month==0">
-		and now() &gt; concat(res_date,' ', res_time)
+		and <![CDATA[now() > concat(res_date,' ', res_time)]]>
 		</if>
 		<if test="month!=0">
 		and res_date between #{start} and #{end}

@@ -96,10 +96,12 @@ public class DoctorServiceImpl implements DoctorService {
 			ddto.setDoc_img(saveFname);
 			
 		}
+		
 		mapper.addDoctorOk(ddto);
 		int doc_id=mapper.getDocid(ddto.getDoc_userid());
 		wdto.setDoc_id(doc_id);
 		String[] dayofweeks = wdto.getDayofweeks();
+		System.out.println(dayofweeks);
         int[] startTimes = wdto.getStart_times();
         int[] endTimes = wdto.getEnd_times();
 		

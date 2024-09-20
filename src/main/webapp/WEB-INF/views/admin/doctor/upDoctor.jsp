@@ -311,7 +311,7 @@
 	<c:forEach begin="0" end="6" var="index">
 	<input type="hidden" class="dayofweeks"name="dayofweeks" value="${index }">
 	<tr>
-		<td width="10%">
+		<td width="10%" ${index==6 || index==0 ? "style='color:red;'":"" }>
 			<c:if test="${index==1 }"> 월 </c:if>
 			<c:if test="${index==2 }"> 화 </c:if>
 			<c:if test="${index==3 }"> 수 </c:if>
