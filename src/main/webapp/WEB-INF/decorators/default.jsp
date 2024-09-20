@@ -330,6 +330,11 @@ hr
 			h++;
 			setTimeout(move,15);
 		}
+		if(h == -50)
+		{
+			document.getElementById("ads").removeChild();
+			
+		}
 		move();
 	}
 	
