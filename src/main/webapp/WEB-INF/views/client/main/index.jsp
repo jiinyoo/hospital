@@ -56,8 +56,9 @@ section #community {
     width: 32%; /* 3개의 칸이 고르게 배치되도록 설정 */
     height:200px;
     padding: 20px;
+    background-color:white;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 테두리 없이 그림자만 추가 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 테두리 없이 그림자만 추가 */
     text-align: left;
 }
 
@@ -326,6 +327,11 @@ section #community .comm .more-btn a:hover {
 dd
 <hr>
 dd
+</section>
+<section>
+	<div class="program-box">
+		
+	</div>
 </section>
 </body>
 </html>

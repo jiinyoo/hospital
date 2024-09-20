@@ -147,7 +147,7 @@ function loadCalendar(year, month) {
 		<table id="programtable">
 		<caption><h2>진행 예정 및 진행 중 프로그램</h2></caption>
 		    <tr>
-		        <td width="150px">프로그램 이름</td>
+		        <td width="150px">프로그램 이름 </td>
 		        <td width="100px">강사</td>
 		        <td width="100px">파트</td>
 		        <td width="300px">프로그램 이미지</td>
@@ -159,6 +159,7 @@ function loadCalendar(year, month) {
 		        
 		    </tr>
 		    <c:forEach items="${plist}" var="pdto">
+		    
 		        <c:set var="end_date" value="${pdto.end_date}"/>
 		        <c:set var="start_date" value="${pdto.start_date}"/>
 		        <fmt:parseDate value="${end_date}" var="end_date" pattern="yyyy-MM-dd"/>
@@ -166,40 +167,42 @@ function loadCalendar(year, month) {
 		        <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" var="today"/>
 		        <fmt:parseDate value="${today}" var="today_date" pattern="yyyy-MM-dd"/>
 		
-		        <c:choose>
-		            <c:when test="${start_date.before(today_date) && end_date.after(today_date)}">
-		                <tr>
-		                    <td>${pdto.pro_name}</td>
-		                    <td>${pdto.teach_name}</td>
-		                    <td>${pdto.pro_part}</td>
-		                    <td>
-		                        <img src="../../static/admin/programfile/${pdto.pro_img}" width="300px">
-		                    </td>
-		                    <td>${pdto.start_date}</td>
-		                    <td>${pdto.end_date}</td>
-		                    <td>${pdto.days_of_week}</td>
-		                    <td>${pdto.pro_inwon}</td>
-		                    <td>진행 중</td>
-		                </tr>
-		            </c:when>
-		            <c:otherwise>
-		                <c:if test="${start_date.after(today_date)}">
-		                    <tr>
-		                        <td>${pdto.pro_name}</td>
-		                        <td>${pdto.teach_name}</td>
-		                        <td>${pdto.pro_part}</td>
-		                        <td>
-		                            <img src="../../static/admin/programfile/${pdto.pro_img}" width="300px">
-		                        </td>
-		                        <td>${pdto.start_date}</td>
-		                        <td>${pdto.end_date}</td>
-		                        <td>${pdto.days_of_week}</td>
-		                        <td>${pdto.pro_inwon}</td>
-		                        <td>진행 예정</td>
-		                    </tr>
-		                </c:if>
-		            </c:otherwise>
-		        </c:choose>
+		
+		      <c:choose>
+				  <c:when test="${start_date.equals(today_date) || (start_date.before(today_date) && end_date.after(today_date))}">
+				      <!-- 진행 중인 프로그램 -->
+				      <tr>
+				          <td>${pdto.pro_name}</td>
+				          <td>${pdto.teach_name}</td>
+				          <td>${pdto.pro_part}</td>
+				          <td><img src="../../static/admin/programfile/${pdto.pro_img}" width="300px"></td>
+				          <td>${pdto.start_date}</td>
+				          <td>${pdto.end_date}</td>
+				          <td>${pdto.days_of_week}</td>
+				          <td>${pdto.pro_inwon}</td>
+				          <td>진행 중</td>
+				      </tr>
+				  </c:when>
+				  <c:when test="${start_date.after(today_date)}">
+				      <!-- 진행 예정 프로그램 -->
+				      <tr>
+				          <td>${pdto.pro_name}</td>
+				          <td>${pdto.teach_name}</td>
+				          <td>${pdto.pro_part}</td>
+				          <td><img src="../../static/admin/programfile/${pdto.pro_img}" width="300px"></td>
+				          <td>${pdto.start_date}</td>
+				          <td>${pdto.end_date}</td>
+				          <td>${pdto.days_of_week}</td>
+				          <td>${pdto.pro_inwon}</td>
+				          <td>진행 예정</td>
+				      </tr>
+				  </c:when>
+				  <c:otherwise>
+				      <!-- 기타 조건, 모든 조건이 일치하지 않는 경우 -->
+				      <!-- 예를 들어 종료된 프로그램 처리 등 -->
+				  </c:otherwise>
+				</c:choose>
+
 		    </c:forEach>
 		</table>
 	</div>

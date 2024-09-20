@@ -53,5 +53,11 @@ public class UserController {
     {
         return service.updateOkUser(udto, session);
     }
+    
+    @RequestMapping("/main/uchangePwd")
+    public String uchangePwd(HttpServletRequest request,Model model)
+    {
+    	return service.uchangePwd(request,model);
+    }
 
 }
