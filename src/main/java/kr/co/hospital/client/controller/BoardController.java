@@ -76,10 +76,15 @@ public class BoardController {
 	
 	@RequestMapping("/boardlist")
 
-	public String boardlist(HttpSession session,Model model,HttpServletResponse response) {
-		return service.boardlist(session,model,response);
-
+	public String boardlist(HttpSession session,Model model,HttpServletResponse response, HttpServletRequest request) {
+		return service.boardlist(session,model,response,request);
+		
 	}
+	
+	
+	
+	
+	
 	 @PostMapping(value = "/boardimageupload")
 	 @ResponseBody
 	    // @RequestParam은 자바스크립트에서 설정한 이름과 반드시 같아야합니다.
@@ -112,6 +117,8 @@ public class BoardController {
 			}
 			
 		}
+	 
+	 
 	 
 	 
 	 @PostMapping("/boardwriteOk")

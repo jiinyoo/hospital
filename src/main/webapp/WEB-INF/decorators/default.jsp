@@ -297,6 +297,31 @@ hr
     }
 }
 
+
+}
+
+
+#user {
+	position:relative;
+	
+}
+
+#userdetail {
+	position:absolute;
+	left : 1388px;
+	top:98px;
+	background:white;
+	border:1px solid #8BBCFF;
+	display:none;
+}
+
+#userdetail > li {
+	list-style-type:none;
+	text-align:left;
+}
+
+
+
 </style>
 <script>
 	
@@ -333,6 +358,16 @@ hr
 		move();
 	}
 	
+	
+	function viewuser() {
+		document.getElementById("userdetail").style.display="block";
+	}
+	
+	
+	function hideuser() {
+		document.getElementById("userdetail").style.display="none";
+	}
+	
 </script>
 
  <sitemesh:write property="head"/>
@@ -362,7 +397,14 @@ hr
 		   <c:if test="${sessionScope.state==2}">
 		 	 <a href="/admin/main/index">관리자 페이지</a> |
 		   </c:if>
-		   		<a href="/main/userInfo">${sessionScope.user_id}님</a> | 
+		   		<span id="user" onmouseover="viewuser()" onmouseout="hideuser()">${sessionScope.user_id}님</span>
+		   									<ul id="userdetail">
+		   										<li><a href="/main/userInfo">회원 정보</a></li>
+		   										<li>프로그램 예약 조회</li>
+		   									</ul>		
+		   		
+		   		
+		   		 | 
            <a href="/main/logout"> 로그아웃 </a> | 문의하기
          </c:if>
 		</div>
