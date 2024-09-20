@@ -77,6 +77,32 @@
         .button:hover {
             background-color: #0056b3;
         }
+        
+        .pagination {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            margin: 0 2px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .pagination a:hover {
+            background-color: #0056b3;
+        }
+
+        .pagination .current-page {
+            background-color: #0056b3;
+            color: white;
+            font-weight: bold;
+        }
+        
     </style>
 </head>
 <body>
@@ -130,6 +156,26 @@
             </c:forEach>
         </tbody>
     </table>
+    
+    <div class="pagination">
+        <c:if test="${page>1}">
+            <a href="list?page=${page-1}&search=${search}">이전</a>
+        </c:if>
+
+        <c:forEach var="i" begin="1" end="${totalPages}">
+            <c:if test="${i==page}">
+                <a class="current-page">${i}</a>
+            </c:if>
+            <c:if test="${i!=page}">
+                <a href="list?page=${i}&search=${search}">${i}</a>
+            </c:if>
+        </c:forEach>
+
+        <c:if test="${page<totalPages}">
+            <a href="list?page=${page+1}&search=${search}">다음</a>
+        </c:if>
+    </div>
+    
 </div>
 
 </body>

@@ -38,11 +38,12 @@ public class NoticeController {
 	
 	
 	@RequestMapping("/main/notice_list")
-	public String notice_list(Model model,
+	public String notice_list(HttpServletRequest request,
+			Model model,
 			HttpSession session, 
 			HttpServletResponse response)
 	{
-		return service.notice_list(model,session,response);
+		return service.notice_list(request,model,session,response);
 	}
 	
 	@RequestMapping("/main/notice_readnum")

@@ -10,4 +10,8 @@ import kr.co.hospital.admin.dto.ManagementDto;
 public interface ManagementMapper {
 	public List<ManagementDto> getAllUsers();
     public void updateState(ManagementDto mdto);
+	public int getTotalUsers();
+	public List<ManagementDto> getUsersByPage(int offset, int limit);
+	public int getTotalUsersBySearch(String search);
+	public List<ManagementDto> getUsersBySearch(String search, int offset, int limit);
 }

@@ -86,9 +86,30 @@
     .write-button a:hover {
         background-color: #7D78FF;
     }
+    
+    .page {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .page a {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #B5B2FF;
+        color: white;
+        margin: 0 2px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .page a:hover {
+        background-color: #7D78FF;
+    }
 </style>
 </head>
 <body>
+<p>pstart: ${pstart}, pend: ${pend}, chong: ${chong}, page: ${page}</p>
+
  <section>
    <table width="900" align="center">
     <caption> <h3> 공지 사항 </h3></caption>
@@ -109,6 +130,32 @@
     </tr>  
     </c:forEach>
    </table>
+   
+   <div class="page">
+   
+       <c:if test="${page > 1}">
+    	<a href="notice_list?page=${page - 1}">◀◀</a>
+	   </c:if>
+
+       
+       <c:forEach var="i" begin="${pstart}" end="${pend}">
+       
+           <c:if test="${page==i}">
+               <a style="background-color: #7D78FF;">${i}</a>
+           </c:if>
+           
+           <c:if test="${page!=i}">
+               <a href="notice_list?page=${i}">${i}</a>
+           </c:if>
+           
+       </c:forEach>
+       
+       <c:if test="${page < chong}">
+    	<a href="notice_list?page=${page + 1}">▶▶</a>
+	   </c:if>
+
+       
+   </div>
    
    <c:if test="${user_id=='admin'}">
      <div class="write-button">

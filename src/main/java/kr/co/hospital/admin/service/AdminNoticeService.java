@@ -11,7 +11,7 @@ import kr.co.hospital.admin.dto.AdminNoticeDto;
 public interface AdminNoticeService {
 	public String admin_notice_write(HttpSession session, Model model);
 	public String admin_notice_writeOk(AdminNoticeDto ndto, HttpSession session, MultipartHttpServletRequest multi) throws Exception;
-	public String admin_notice_list(Model model, HttpSession session, HttpServletResponse response);
+	public String admin_notice_list(HttpServletRequest request, Model model, HttpSession session, HttpServletResponse response);
 	public String admin_notice_readnum(HttpServletRequest request);
 	public String admin_notice_content(HttpServletRequest request, HttpSession session, Model model);
 	public String admin_notice_update(HttpServletRequest request, Model model, HttpSession session);

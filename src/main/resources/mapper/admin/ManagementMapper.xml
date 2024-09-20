@@ -13,4 +13,37 @@
         where id=#{id}
     </update>
     
+    <select id="getUsersByPage" resultType="kr.co.hospital.admin.dto.ManagementDto">
+    	SELECT * 
+    	FROM user 
+    	WHERE user_id != 'admin'
+   	 	ORDER BY user_name
+    	LIMIT #{offset}, #{limit}
+    	
+	</select>
+
+	<select id="getTotalUsers" resultType="int">
+    	SELECT COUNT(*) FROM user 
+    	WHERE user_id != 'admin'
+	</select>
+    
+    <select id="getUsersBySearch" resultType="kr.co.hospital.admin.dto.ManagementDto">
+    	SELECT id, user_id, user_name, user_email, state 
+   	 	FROM user 
+   	 	WHERE user_id != 'admin' 
+    	AND (user_id LIKE CONCAT('%', #{search}, '%') 
+         OR user_name LIKE CONCAT('%', #{search}, '%') 
+    	ORDER BY user_name
+    	LIMIT #{offset}, #{limit}
+	</select>
+
+	<select id="getTotalUsersBySearch" resultType="int">
+    	SELECT COUNT(*) 
+    	FROM user 
+    	WHERE user_id != 'admin' 
+    	AND (user_id LIKE CONCAT('%', #{search}, '%') 
+         OR user_name LIKE CONCAT('%', #{search}, '%') 
+	</select>
+    
+    
 </mapper>

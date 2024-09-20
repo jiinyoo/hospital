@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kr.co.hospital.admin.dto.ManagementDto;
 import kr.co.hospital.admin.service.ManagementService;
@@ -18,9 +19,10 @@ public class ManagementController {
 	private ManagementService service;
 	
 	@RequestMapping("/admin/user/list")
-	public String List(Model model)
+	public String List(HttpServletRequest request,
+			Model model)
 	{
-		return service.List(model);
+		return service.List(request,model);
 	}
 	
 	@RequestMapping("/admin/user/updateState")
