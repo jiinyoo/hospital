@@ -95,6 +95,7 @@ public class UserServicelmpl implements UserService {
     @Override
 	public String uchangePwd(HttpServletRequest request, Model model)
 	{
+    	
 		HttpSession session=request.getSession();
 		String gijonPwd = request.getParameter("gijon_pwd");  // 기존 비밀번호
 		System.out.println("입력된 기존 비밀번호: " + gijonPwd);
@@ -112,29 +113,24 @@ public class UserServicelmpl implements UserService {
 	    UserDto user = mapper.getUserInfo(userId);  // DB에서 사용자 정보 가져옴
 	    System.out.println("User: " + user);  // 디버깅을 위한 로그 추가
 	    System.out.println("User Password from DB: " + user.getUser_pwd());
-	    
+	    if(gijonPwd!=null)
+	    {
 	    if (!user.getUser_pwd().equals(gijonPwd)) {
-	        model.addAttribute("success", false);
+	        
 	        model.addAttribute("message", "기존 비밀번호가 일치하지 않습니다.");
 	        return "client/user/uchangePwd";
 	    }
 
-	    // 2. 새 비밀번호와 비밀번호 확인이 일치하는지 확인
-	    if (!new_pwd.equals(confirmPwd)) {
-	        model.addAttribute("success", false);
-	        model.addAttribute("message", "새 비밀번호가 일치하지 않습니다.");
-	        return "client/user/uchangePwd";
-	    }
-
-	    // 3. 새로운 비밀번호로 업데이트
 	    int result = mapper.updatePwd(userId, new_pwd);
 	    if (result > 0) {
-	        model.addAttribute("success", true);
+	        
+	        model.addAttribute("message", "비밀번호가 성공적으로 변경되었습니다.");
 	    } else {
-	        model.addAttribute("success", false);
+	        
 	        model.addAttribute("message", "비밀번호 변경에 실패했습니다. 다시 시도해주세요.");
 	    }
-
+	    
+	    }
 	    return "client/user/uchangePwd";
 
 	    

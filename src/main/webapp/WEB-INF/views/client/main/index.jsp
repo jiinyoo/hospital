@@ -56,9 +56,9 @@ section #community {
     width: 32%; /* 3개의 칸이 고르게 배치되도록 설정 */
     height:200px;
     padding: 20px;
-    background-color:white;
+    background-color:#FDFFFF;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 테두리 없이 그림자만 추가 */
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3); /* 테두리 없이 그림자만 추가 */
     text-align: left;
 }
 
@@ -72,6 +72,7 @@ section #community .comm .title {
 section #community .comm .notice-list {
     list-style-type: none;
     padding: 0;
+    
 }
 
 section #community .comm .notice-list li {
@@ -80,12 +81,14 @@ section #community .comm .notice-list li {
     padding: 8px 0;
     border-bottom: 1px solid #eaeaea;
     font-size: 14px;
+    
 }
 
 section #community .comm .notice-list li a {
     text-decoration: none;
     color: #0073e6;
     font-weight: normal;
+
 }
 
 section #community .comm .notice-list li a:hover {

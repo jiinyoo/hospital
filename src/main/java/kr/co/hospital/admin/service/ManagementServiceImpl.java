@@ -24,7 +24,7 @@ public class ManagementServiceImpl implements ManagementService {
 	    {
 		 int page=request.getParameter("page")==null ? 1 : Integer.parseInt(request.getParameter("page"));
 	        String search=request.getParameter("search")==null ? "" : request.getParameter("search").trim();
-	        int limit=4;  // 페이지당 보여줄 사용자 수
+	        int limit=10;  // 페이지당 보여줄 사용자 수
 	        int offset=(page-1)*limit;
 
 	        // 유저 수와 페이징 계산

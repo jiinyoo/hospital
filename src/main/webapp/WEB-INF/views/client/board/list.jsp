@@ -33,6 +33,7 @@
 
 </head>
 <body>
+<section>
 <table>
 	<caption><h2>진료 후기 게시판</h2></caption>
 	<tr>
@@ -53,5 +54,6 @@
 	<td colspan="4"><a href="../../boardwrite"><input type="button" value="글쓰기" ></a></td>
 </tr>
 </table>
+</section>
 </body>
 </html>
