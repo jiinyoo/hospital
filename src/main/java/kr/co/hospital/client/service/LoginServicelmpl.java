@@ -161,7 +161,7 @@ public class LoginServicelmpl implements LoginService {
 	    HttpSession session=request.getSession();
 	    String savedCode=(String) session.getAttribute("verificationCode");
 	    LocalDateTime sentTime=(LocalDateTime) session.getAttribute("verificationTime");
-	    String user_id=(String) session.getAttribute("user_id");
+	    String user_id=(String) session.getAttribute("userid");
 
 	    System.out.println("세션에 저장된 인증번호: "+ savedCode);
 	    System.out.println("세션에 저장된 인증 시간: "+ sentTime);
@@ -174,7 +174,7 @@ public class LoginServicelmpl implements LoginService {
 	            if (savedCode.equals(inputCode)) 
 	            {
 	            	session.setAttribute("reset_user_id", user_id);  
-	                session.removeAttribute("user_id");
+	                session.removeAttribute("userid");
 	                return "client/login/changePwd";  // 비밀번호 변경 페이지로 리턴
 	            } 
 	            else 
@@ -215,8 +215,8 @@ public class LoginServicelmpl implements LoginService {
 	        
 	        if (result > 0) {
 	            session.removeAttribute("reset_user_id");  // 비밀번호 변경 후 세션에서 reset_user_id 제거
-	            session.removeAttribute("new_pwd");  // 비밀번호 변경 후 세션에서 reset_user_id 제거
-	            session.removeAttribute("");  // 비밀번호 변경 후 세션에서 reset_user_id 제거
+  // 비밀번호 변경 후 세션에서 reset_user_id 제거
+	              // 비밀번호 변경 후 세션에서 reset_user_id 제거
 	            model.addAttribute("success", true);
 	        } else {
 	            model.addAttribute("success", false);

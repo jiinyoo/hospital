@@ -12,21 +12,29 @@
     section {
         margin:auto;
         width: 1300px;
-        height: 100vh; /* 뷰포트 전체 높이 사용 */
     }
  
     table {
-        width:1000px;
+    	width:780px;
     	margin:auto;
     	margin-top:50px;
     	border-collapse: collapse;
     	
+    }
+    
+    table img {
+    	width:150px;
     }
 
     td {
 	    border-top: 1px solid black;
 	    padding: 10px; /* 셀 내부 여백 조정 */
 	    height: 30px;  /* 셀 높이 명확히 설정 */
+	}
+	
+	submit {
+		padding:20px;
+		border-radius:10px;
 	}
 </style>
 <script>
@@ -52,22 +60,24 @@ function deletecheck() {
 		<tr>
 			<td colspan="2">${idto.content}</td>
 		</tr>
-			<c:forEach items="${idto.imgs}" var="img">
-				<c:if test="${img!=''}">
 		<tr>
 			<td colspan="2">
-				<div>
+			<c:forEach items="${idto.imgs}" var="img">
+				<c:if test="${img!=''}">
+		
 					<img src="../../static/client/inquiryfile/${img}">
-				</div>
-			</td>
-		</tr>
+		
 				</c:if>
 			</c:forEach>
+			</td>
+		</tr>
 		<tr>
 			<td colspan="2" align="center">
 			<c:if test="${session_user_id==idto.user_id}">
-			<a href="/inquiry/update?inq_id=${idto.inq_id}"><input type="button" value="수정"></a>
-			<a href="/inquiry/delete?inq_id=${idto.inq_id}"><input type="button" value="삭제" onclick="return deletecheck()"></a>
+			
+			<a href="/inquiry/list"><input type="submit" value="목록"></a>
+			<a href="/inquiry/update?inq_id=${idto.inq_id}"><input type="submit" value="수정"></a>
+			<a href="/inquiry/delete?inq_id=${idto.inq_id}"><input type="submit" value="삭제" onclick="return deletecheck()"></a>
 			</c:if>
 			</td>
 		</tr>

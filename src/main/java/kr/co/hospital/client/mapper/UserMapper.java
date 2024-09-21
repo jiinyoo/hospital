@@ -10,5 +10,6 @@ public interface UserMapper {
 	public String useridCheck(String user_id);
 	public UserDto getUserInfo(String userId);
 	public void updateOkUser(UserDto udto);
+	public int updatePwd(String user_id, String new_pwd);
 
 }
