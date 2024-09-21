@@ -96,16 +96,39 @@ public class NoticeServicelmpl  implements NoticeService {
 	}
 
 	@Override
-	public String notice_list(Model model,
+	public String notice_list(HttpServletRequest request,
+			Model model,
 			HttpSession session, 
 			HttpServletResponse response) 
 	{
+		int page=request.getParameter("page")==null ? 1 : Integer.parseInt(request.getParameter("page"));
+	    int pageSize=8; // 한 페이지에 보여줄 데이터 수
+	    int totalNotices=mapper.getTotalNoticeCount(); // 전체 공지사항 개수를 가져오는 메서드 필요
+
+	    // 전체 페이지 수 계산
+	    int chong=(totalNotices%pageSize==0)?totalNotices/pageSize : (totalNotices/pageSize)+1;
+
+	    // 페이지 시작과 끝 설정
+	    int pstart=(page-1)/8*8+1;
+	    int pend=pstart+7;
+	    if (pend>chong) 
+	    {
+	        pend=chong;
+	    }
+
+	    // 시작 index 설정
+	    int index=(page-1)*pageSize;
+
+	    // 페이지에 맞는 데이터 가져오기
+	    ArrayList<HashMap> map=mapper.notice_list(index,pageSize); // 페이지별 데이터 가져오는 메서드
+	    
+	    model.addAttribute("nmapAll",map);
+	    model.addAttribute("page",page);
+	    model.addAttribute("pstart",pstart);
+	    model.addAttribute("pend",pend);
+	    model.addAttribute("chong",chong);
 		
-			ArrayList<HashMap> map=mapper.notice_list();
-			System.out.println("공지사항 목록: "+map);
-			model.addAttribute("nmapAll",map);
-		
-			return "/client/notice/notice_list";
+	    return "/client/notice/notice_list";
 	
 
 	}

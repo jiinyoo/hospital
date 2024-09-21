@@ -39,11 +39,12 @@ public class AdminNoticeController {
 	
 	
 	@RequestMapping("admin/admin_notice/admin_notice_list")
-	public String admin_notice_list(Model model,
+	public String admin_notice_list(HttpServletRequest request,
+			Model model,
 			HttpSession session, 
 			HttpServletResponse response)
 	{
-		return service.admin_notice_list(model,session,response);
+		return service.admin_notice_list(request,model,session,response);
 	}
 	
 	@RequestMapping("/admin/admin_notice/admin_notice_readnum")
