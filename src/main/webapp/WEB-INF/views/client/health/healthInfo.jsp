@@ -46,7 +46,7 @@
         width: 420px; 
         height: 250px;
         object-fit: cover;
-        margin-left: 20px;
+        margin: 20px;
         border-radius: 15px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }

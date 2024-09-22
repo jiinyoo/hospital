@@ -108,7 +108,7 @@
 </style>
 </head>
 <body>
-<p>pstart: ${pstart}, pend: ${pend}, chong: ${chong}, page: ${page}</p>
+<%-- <p>pstart: ${pstart}, pend: ${pend}, chong: ${chong}, page: ${page}</p> --%>
 
  <section>
    <table width="900" align="center">
