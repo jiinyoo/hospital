@@ -117,9 +117,9 @@
 </div>
 
 <div class="sub-header">
-    <a href="#">관리자 페이지 메인</a>
+    <a href="/admin/main/index">관리자 페이지 메인</a>
     <a href="/main/index">운영 홈페이지 가기</a>
-    <a href="/main/logout">관리자 로그아웃</a>
+    <a href="/main/logout">로그아웃</a>
 </div>
 
 <div class="container">

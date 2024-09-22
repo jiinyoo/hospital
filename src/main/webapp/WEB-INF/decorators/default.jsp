@@ -278,7 +278,7 @@ nav #mainmenu
 hr 
 {
 	border: 0;
-	border-top: 1px solid #eee;
+	border-top: 1.5px solid #eee;
 	margin-top: 20px 0;
 }
 
@@ -369,7 +369,7 @@ hr
 		  <a href="/main/user"> 회원 가입 </a>
 		 </c:if>
 		 <c:if test="${sessionScope.user_id != null }">
-		   <c:if test="${sessionScope.state==2}">
+		   <c:if test="${sessionScope.state==1 || sessionScope.state==2}">
 		 	 <a href="/admin/main/index">관리자 페이지</a> |
 		   </c:if>
 		   		<a href="/main/userInfo">${sessionScope.user_id}님</a> | 
