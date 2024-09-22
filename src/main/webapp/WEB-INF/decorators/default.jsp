@@ -16,12 +16,20 @@
     font-style: normal;
 }
 
+
 body 
 {
+	display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Viewport의 전체 높이 설정 */
 	font-family: 'goorm-sans-bold';
     background-color: #f2f4f9;
     margin: 0;
     padding: 0;
+}
+
+main {
+    flex-grow: 1; /* 메인 콘텐츠가 푸터를 하단으로 밀어내도록 */
 }
 
 * {margin:0; padding:0; box-sizing: border-box;}
@@ -31,7 +39,7 @@ body
 	position:relative;
 	width:100%;
 	height:50px;
-	background:#8C8C8C;
+	background:#8BBCFF;
 	margin:auto;
 }
 
@@ -72,27 +80,28 @@ body
 #loginbar
 {	
 	margin:auto;
-	margin-top: 15px;
+	
 	width:1300px;
-	height:30px;
+	height:40px;
 	text-align:right;
-	align-items:center;
-	text-decoration: none;
+	align-content:center;
 	color: black;
-
+	cursor: pointer;
 }
 
 #loginbar > a 
 {
 	text-decoration: none;
+	height:30px;
 	color: black;
+	
 }
 	
 nav
 {
  	position :relative;
  	width:1300px;
- 	height:100px;
+ 	height:130px;
  	margin:auto;
  	font-size:20px;
 }
@@ -100,13 +109,10 @@ nav
 nav #mainmenu
 {
 	width:1300px;
-}
-
-nav #mainmenu #maincate
-{
-	padding-left:0px;
+	height:130px;
 	
 }
+
 
 #mainmenu #maincate > li 
 {
@@ -115,12 +121,13 @@ nav #mainmenu #maincate
 	width:180px;
 	color:#626262;
 	text-align:center;
-	height:100px;
+	height:130px;
 	line-height:100px;
 	margin: 0; /* 기본 마진 제거 */
 	padding: 0; /* 기본 패딩 제거 */
 	position:relative;
 	cursor: pointer;
+	align-content: center;
 
 }
 
@@ -134,18 +141,18 @@ nav #mainmenu #maincate
 
 #mainmenu #maincate > li:hover
 {
-	color:#5C1DB5;
+	color:#0073e6;
 }
 
 #mainmenu #maincate > li > a:hover
 {
-	color:#5C1DB5;
+	color:#0073e6;
 }
 
 #maincate .logo img 
 {
-
-	width:90px;
+	padding-right:30px;
+	width:240px;
 	transition: all 0.3s ease;
 }
 
@@ -257,7 +264,8 @@ nav #mainmenu #maincate
 	
 }
 
-#submenus .submenu > li > a {
+#submenus .submenu > li > a 
+{
 
     text-decoration: none;
     width: 100%;
@@ -267,10 +275,61 @@ nav #mainmenu #maincate
 
 }
 
-hr
+/* 하위 메뉴 */
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown a {
+    text-decoration: none;
+    color: black;
+}
+
+#userMenu {
+	right:0;
+    display: none;
+    top:20px;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 150px;
+    z-index: 11;
+}
+
+#userMenu a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    text-align:center;
+    border-bottom: 1px solid #ddd;
+}
+
+#userMenu a:last-child {
+    border-bottom: none;
+}
+
+#userMenu a:hover {
+	text-decoration: none;
+    background-color: white;
+    color: #007bff;
+}
+
+/* 마우스를 올렸을 때 하위 메뉴 표시 */
+.dropdown:hover #userMenu {
+	text-decoration: none;
+    display: block;
+}
+
+hr 
 {
- border:0.1px solid #ccc;
- 
+	border: 0;
+	border-top: 2px solid #eee;
+	margin-top: 20px 0;
 }
 
 /* 계단형으로 서서히 내려오는 애니메이션 정의 */
@@ -316,10 +375,20 @@ hr
 		
 		var h=0;
 		function move(){
-			if(h<=50)
-				document.getElementById("ad").style.marginTop=-h+"px";
-			h++;
+			if(h<=50) {
+				document.getElementById("ads").style.marginTop=-h+"px";
+			
+		}
+		h++;
+		
+		if(h <= 50){
 			setTimeout(move,15);
+		} else
+		{
+			 document.getElementById("ads").style.display = "none";
+			
+		}
+		
 		}
 		move();
 	}
@@ -329,6 +398,9 @@ hr
  <sitemesh:write property="head"/>
 
 </head>
+
+
+
 <body>
 <div id="ads">
 	<div id="ad">
@@ -342,13 +414,25 @@ hr
 
 <header>
 		<div id="loginbar"> 
-		 <c:if test="${user_id == null }">
+		 <c:if test="${sessionScope.user_id == null }">
 		  <a href="/main/login"> 로그인 </a>| 
 		  <a href="/main/user"> 회원 가입 </a>
 		 </c:if>
-		 <c:if test="${user_id != null }">
-		   ${user_id}님 | 
-           <a href="/login/logout"> 로그아웃 </a> | 문의하기
+		 <c:if test="${sessionScope.user_id != null }">
+		   <c:if test="${sessionScope.state==1 || sessionScope.state==2}">
+		 	 <a href="/admin/main/index">관리자 페이지</a> |
+		   </c:if>
+		    <div class="dropdown">
+                <a href="/main/userInfo">${sessionScope.user_id}님</a>
+                <!-- 하위 메뉴 -->
+                <div id="userMenu">
+                    <a href="/main/userInfo">회원 정보</a>
+                    <a href="/main/reserveView">예약 정보</a>
+                    <a href="#">나의 문의</a>
+                    <a href="#">진료 내역</a>
+                </div>
+            </div> | 
+           <a href="/main/logout"> 로그아웃 </a> | 문의하기
          </c:if>
 		</div>
 </header>
@@ -362,16 +446,16 @@ hr
 			<li class="logo">
 			 <a href="/main/index">
 
-			  <img src="/static/client/main/병원 로고.png" width="100" valign="middle">
+			  <img src="/static/client/main/병원 로고7.png" valign="middle">
 
 			 </a>
 			</li>
-			<li class="hov">병원 소개</li>
+			<li class="hov"><a href="/main/hospital">병원 소개</a></li>
 			<li class="hov"><a href="/main/info/part?part=">의료진 안내</a></li>
 			<li class="hov">상담/예약</li>
-			<li class="hov">프로그램 예약</li>
+			<li class="hov"><a href="/program/programreserve">프로그램 예약</a></li>
 			<li class="hov">커뮤니티</li>
-			<li class="hov">건강 정보</li>
+			<li class="hov"><a href="/main/healthInfo">건강 정보</a></li>
 		</ul>
 	</div>
 	
@@ -397,36 +481,87 @@ hr
 		<ul class="submenu">
 			<li>1:1문의</li>
 			<li><a href="/main/reserve">온라인 진료 예약</a></li>
-			<li>예약 조회</li>
+			<li><a href="/main/reserveView">예약 조회</a></li>
 		</ul>
 		<ul class="submenu">
-			<li>프로그램 예약</li>
+			<li><a href="/program/programreserve">프로그램 예약</a></li>
 		</ul>
 		<ul class="submenu">
-				<li><a href="../../notice_list">공지사항</a></li>
+				<li><a href="/main/notice_list">공지사항</a></li>
 				<li><a href="../../inquiry/list">진료과별 질문</a></li>
 				<li><a href="../../boardlist">진료 후기</a></li>
 				<li>고객의 소리</li>
 		</ul>
 		<ul class="submenu">
-			<li>건강정보</li>
+			<li><a href="/main/healthInfo">건강정보</a></li>
 		</ul>
 	</div>
 	</span>
 	</span>
 	</nav>
 	<hr>
-	<div class="haha">
-	  
+
 	</div>
 
+<main>
+	<div class="haha">
+		<!-- 여기에 페이지의 메인 콘텐츠가 들어갑니다. -->
+	</div>
+</main>
 
 <sitemesh:write property="body"/>
 
 
-<footer>
 
+<footer style="background-color: #368AFF; padding: 50px 0; color: white; margin-top: 40px; font-family: 'goorm-sans-bold';">
+    <div class="footer-container" style="width: 80%; margin: auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+        
+        <div style="width: 30%;">
+            <h4 style="margin-bottom: 20px; font-size: 24px;">병원 소개</h4>
+            <p style="line-height: 1.8; font-size: 15px;">저희 병원은 최상의 의료 서비스를 제공하며 환자분들의 건강을 최우선으로 생각합니다. 믿을 수 있는 의료진과 함께 건강한 삶을 위한 최선을 다하고 있습니다.</p>
+        </div>
+        
+        <div style="width: 30%;">
+            <h4 style="margin-bottom: 20px; font-size: 24px; margin-left:40px;">빠른 링크</h4>
+            <ul style="list-style-type: none; padding: 0; line-height: 2; margin-left:40px;">
+                <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">병원 소개</a></li>
+                <li><a href="/main/beforeReserve" style="color: white; text-decoration: none; font-size: 15px;">진료 예약</a></li>
+                <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">연락처 : 010-1234-5678</a></li>
+                <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">자주 묻는 질문</a></li>
+            </ul>
+        </div>
+
+        <div style="width: 30%;">
+            <h4 style="margin-bottom: 20px; font-size: 24px;">연락처</h4>
+            <p style="line-height: 1.8; font-size: 15px;"><strong>전화:</strong> 031-123-4567</p>
+            <p style="line-height: 1.8; font-size: 15px;"><strong>이메일:</strong> JangINHO@hospital.com</p>
+            <p style="line-height: 1.8; font-size: 15px;"><strong>주소:</strong> 경기 고양시 마두동 병원로 123</p>
+        </div>
+    </div>
+
+    <div style="width: 80%; margin: 30px auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+
+        <div>
+            <a href="#" style="text-decoration: none; color: white; margin-right: 15px;">
+                <i class="fab fa-facebook" style="font-size: 24px;"></i>
+            </a>
+            <a href="#" style="text-decoration: none; color: white; margin-right: 15px;">
+                <i class="fab fa-twitter" style="font-size: 24px;"></i>
+            </a>
+            <a href="#" style="text-decoration: none; color: white; margin-right: 15px;">
+                <i class="fab fa-instagram" style="font-size: 24px;"></i>
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 10px;">
+            <p>&copy; 2024 장인호 병원입니다. 최선을 다하겠습니다.</p>
+        </div>
+    </div>
 </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+
 
 
 </body>

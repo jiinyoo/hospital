@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>        
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,8 @@
 	    display: flex;
 	    justify-content: space-around;
 	    align-items: center; /* 수평 중앙 정렬 */
-	    margin: 100px auto;
+	    margin:auto;
+	    margin-top:100px;
 	}
 	
 	h2 {
@@ -20,7 +22,7 @@
 	
 	#non-container, #login-container {
 	    width: 40%;
-	    height: 300px;
+	    height: 250px;
 	    margin: auto;
 	    display: flex;
 	    flex-direction: column;
@@ -82,11 +84,13 @@
 		width:48%;
 		vertical-align: middle;
 	}
+
 	
 	#jumin-container span {
 		vertical-align: middle; /* '-' 수직 중앙 정렬 */
 	}
 	
+	#err {text-align: center;}
 </style>
 <script>
 	function non() {
@@ -134,6 +138,7 @@
 </script>
 </head>
 <body>
+
 	<section>
 		<div id="non-container">
 		<h2>비회원 예약</h2>
@@ -165,5 +170,8 @@
 			</form>
 		</div>
 	</section>
+	<c:if test="${param.err==1 }">
+	<div id="err">세션이 만료되었습니다.</div>
+	</c:if>
 </body>
 </html>

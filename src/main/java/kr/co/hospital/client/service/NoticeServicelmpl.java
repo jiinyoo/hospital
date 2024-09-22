@@ -40,16 +40,18 @@ public class NoticeServicelmpl  implements NoticeService {
 	public String notice_write(HttpSession session, 
 			Model model)
 	{
-		if(session.getAttribute("user_id")!=null)
-		{
-			String user_id=session.getAttribute("user_id").toString();
-			model.addAttribute("user_id",user_id);
-			return "/client/notice/notice_write";
-		}
-		else
-		{
-			return "redirect:/main/login";
-		}
+		Integer state = (Integer) session.getAttribute("state");
+	    
+	    if (state != null && state == 2) 
+	    {
+	        String user_id = session.getAttribute("user_id").toString();
+	        model.addAttribute("user_id", user_id);
+	        return "/client/notice/notice_write";
+	    } 
+	    else 
+	    {
+	        return "redirect:/main/login";
+	    }
 	}
 	
 	@Override
@@ -57,7 +59,9 @@ public class NoticeServicelmpl  implements NoticeService {
 			HttpSession session,
 			MultipartHttpServletRequest multi) throws Exception
 	{
-		if(session.getAttribute("user_id")!=null) 
+		Integer state = (Integer) session.getAttribute("state");
+		
+		if(state != null && state == 2) 
 		{
 		String user_id=session.getAttribute("user_id").toString();
 		ndto.setUser_id(user_id);
@@ -83,7 +87,7 @@ public class NoticeServicelmpl  implements NoticeService {
 		ndto.setImg(fname);
 		
 		mapper.notice_writeOk(ndto);
-		return "redirect:/notice_list";
+		return "redirect:/main/notice_list";
 		}
 		else
 		{
@@ -92,28 +96,41 @@ public class NoticeServicelmpl  implements NoticeService {
 	}
 
 	@Override
-	public String notice_list(Model model,
+	public String notice_list(HttpServletRequest request,
+			Model model,
 			HttpSession session, 
 			HttpServletResponse response) 
 	{
-		String user_id=(String) session.getAttribute("user_id");
-	    
-	    if(user_id!=null) 
+		int page=request.getParameter("page")==null ? 1 : Integer.parseInt(request.getParameter("page"));
+	    int pageSize=8; // 한 페이지에 보여줄 데이터 수
+	    int totalNotices=mapper.getTotalNoticeCount(); // 전체 공지사항 개수를 가져오는 메서드 필요
+
+	    // 전체 페이지 수 계산
+	    int chong=(totalNotices%pageSize==0)?totalNotices/pageSize : (totalNotices/pageSize)+1;
+
+	    // 페이지 시작과 끝 설정
+	    int pstart=(page-1)/8*8+1;
+	    int pend=pstart+7;
+	    if (pend>chong) 
 	    {
-			ArrayList<HashMap> map=mapper.notice_list();
+	        pend=chong;
+	    }
+
+	    // 시작 index 설정
+	    int index=(page-1)*pageSize;
+
+	    // 페이지에 맞는 데이터 가져오기
+	    ArrayList<HashMap> map=mapper.notice_list(index,pageSize); // 페이지별 데이터 가져오는 메서드
+	    
+	    model.addAttribute("nmapAll",map);
+	    model.addAttribute("page",page);
+	    model.addAttribute("pstart",pstart);
+	    model.addAttribute("pend",pend);
+	    model.addAttribute("chong",chong);
 		
-			model.addAttribute("nmapAll",map);
-		
-			return "/client/notice/notice_list";
-		}	
-		else
-		{
-			Cookie cookie = new Cookie("url", "/notice_list");
-			cookie.setMaxAge(60 * 60 * 24); // 쿠키 유효 기간 (초 단위) - 여기서는 1일
-			cookie.setPath("/");
-			response.addCookie(cookie);
-			return "redirect:/main/login";
-		}
+	    return "/client/notice/notice_list";
+	
+
 	}
 
 	@Override
@@ -121,7 +138,7 @@ public class NoticeServicelmpl  implements NoticeService {
 	{
 		String notice_id=request.getParameter("notice_id");
 		mapper.notice_readnum(notice_id);
-		return "redirect:/notice_content?notice_id="+notice_id;
+		return "redirect:/main/notice_content?notice_id="+notice_id;
 	}
 
 	@Override
@@ -150,7 +167,6 @@ public class NoticeServicelmpl  implements NoticeService {
 	    }
 	    
 		model.addAttribute("ndto",ndto);
-		model.addAttribute("user_id", session.getAttribute("user_id").toString());
 		return "client/notice/notice_content";
 	}
 
@@ -161,10 +177,9 @@ public class NoticeServicelmpl  implements NoticeService {
 	{
 		
 		String notice_id=request.getParameter("notice_id");
-		String session_user_id=null;
-		if(session.getAttribute("user_id")!=null) 
+		Integer state = (Integer) session.getAttribute("state");
+		if(state != null && state == 2) 
 		{
-			session_user_id=session.getAttribute("user_id").toString();
 		
 		NoticeDto ndto=mapper.notice_content(notice_id);
 		String img=ndto.getImg();
@@ -188,13 +203,14 @@ public class NoticeServicelmpl  implements NoticeService {
 			HttpSession session) throws Exception 
 	{
 		//System.out.println(ndto);
-		String user_id=null;
+		Integer state = (Integer) session.getAttribute("state");
 		String notice_id=request.getParameter("notice_id");
-	    Iterator<String> imsi = multi.getFileNames();  // 파일 이름 가져오기 위한 반복자
 	    
-	    if(session.getAttribute("user_id")!=null) 
+	    
+	    if(state != null && state == 2) 
 	    {
-			user_id=session.getAttribute("user_id").toString();
+	    	Iterator<String> imsi = multi.getFileNames();  // 파일 이름 가져오기 위한 반복자
+	    	
 			String fname="";
 			while(imsi.hasNext()) 
 			{
@@ -229,7 +245,7 @@ public class NoticeServicelmpl  implements NoticeService {
 		}
 		
 		mapper.notice_updateOk(ndto);
-		return "redirect:/notice_content?notice_id="+notice_id;
+		return "redirect:/main/notice_content?notice_id="+notice_id;
 	    }
 	 else 
 	 {
@@ -242,9 +258,17 @@ public class NoticeServicelmpl  implements NoticeService {
 	{
 		String user_id=request.getParameter("user_id");
 		String notice_id=request.getParameter("notice_id");
+		Integer state = (Integer) request.getSession().getAttribute("state");
 			
-		mapper.notice_delete(user_id,notice_id);
-		return "redirect:/notice_list";
+		if (state != null && state == 2) 
+		{
+	        mapper.notice_delete(user_id, notice_id);
+	        return "redirect:/main/notice_list";
+	    } 
+		else 
+	    {
+	        return "redirect:/main/login";
+	    }
 	}
 
 }

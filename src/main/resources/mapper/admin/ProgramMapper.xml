@@ -2,20 +2,103 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.hospital.admin.mapper.ProgramMapper">
 	<select id="programs" resultType="kr.co.hospital.admin.dto.ProgramDto">
-		select * from program
-		order by pro_ju asc
+			SELECT p.*, 
+			       GROUP_CONCAT(DISTINCT 
+			           CASE pd.day_of_week
+			               WHEN 1 THEN '월'
+			               WHEN 2 THEN '화'
+			               WHEN 3 THEN '수'
+			               WHEN 4 THEN '목'
+			               WHEN 5 THEN '금'
+			               WHEN 6 THEN '토'
+			               WHEN 0 THEN '일'
+			           END
+			       ORDER BY pd.day_of_week SEPARATOR ', ') AS days_of_week
+			FROM program p
+			INNER JOIN programdays pd ON p.pro_id = pd.pro_id
+			GROUP BY p.pro_id
+			ORDER BY p.pro_id DESC
 	</select>
-	<update id="programupdate">
-    update program
-    set 
-        pro_name=#{pro_name},
-        pro_info=#{pro_info},
-        teach_name=#{teach_name},
-        pro_time=#{pro_time},
-        pro_inwon=#{pro_inwon},
-        pro_part=#{pro_part},
-        pro_img=#{pro_img}
-    where pro_ju=#{pro_ju}
-</update>
+	<insert id="insertprogram">
+		insert into program(pro_name, pro_img, pro_info,teach_name,
+		pro_time,pro_inwon,pro_part,start_date,end_date,writeday)
+		values(#{pro_name},#{pro_img},#{pro_info},#{teach_name},#{pro_time},#{pro_inwon},#{pro_part},#{start_date},#{end_date},now())
+	</insert>
+	<insert id="insertProgramDay">
+        INSERT INTO programdays (pro_id, day_of_week) 
+        VALUES (#{pro_id}, #{day_of_week})
+    </insert>
 
+    <delete id="deleteProgramDays">
+        DELETE FROM programdays WHERE pro_id = #{pro_id}
+    </delete>
+    <select id="selectrecentid" resultType="Integer">
+    	select max(pro_id) from program
+    </select>
+    <delete id="deleteProgram">
+		delete from program where pro_id=#{pro_id}    	
+    </delete>
+    <select id="getContent" resultType="kr.co.hospital.admin.dto.ProgramDto">
+    	select * from program
+    	where pro_id = #{pro_id}
+    </select>
+    <select id="getProgramdays" resultType="kr.co.hospital.admin.dto.ProgramdaysDto">
+    	select * from programdays
+    	where pro_id=#{pro_id}
+    </select>
+    <update id="updateProgram" parameterType="kr.co.hospital.admin.dto.ProgramDto">
+    	update program
+		set pro_name=#{pro_name}, pro_img=#{pro_img}, pro_info=#{pro_info}, teach_name=#{teach_name},
+		pro_time=#{pro_time},pro_inwon=#{pro_inwon}, pro_part=#{pro_part}, start_date=#{start_date}, end_date=#{end_date}
+		where pro_id=#{pro_id}
+    </update>
+    <insert id="insertProgramCapacity">
+	    INSERT INTO program_capacity (pro_id, date, pro_inwon, minus_inwon)
+	    VALUES (#{pro_id}, #{date}, #{pro_inwon}, 0)
+	</insert>
+	<delete id="deleteProgramCapacity">
+		delete from program_capacity
+		where pro_id=#{pro_id}
+	</delete>
+	<select id="userpreserve" resultType="kr.co.hospital.admin.dto.ProgramReserveDto">
+		select prs.*, u.user_name, u.user_phone,p.pro_name from preserve as prs
+		inner join user as u on prs.user_id=u.user_id 
+		inner join program as p on prs.pro_id=p.pro_id
+		where ${stype} like concat('%',#{sword},'%')
+		order by prs.pres_id desc limit #{index},10
+	</select>
+	<select id="getpreserveChong">
+		select ceil(count(*)/10) 
+		from preserve as prs
+		inner join user as u on prs.user_id=u.user_id 
+		inner join program as p on prs.pro_id=p.pro_id
+		where ${stype} like concat('%',#{sword},'%')
+	</select>	
+	<update id="updatestate">
+		update preserve
+		set state=#{state}
+		where pres_id=#{pres_id}
+	</update>
+	<select id="getProgramCapacity" resultType="kr.co.hospital.admin.dto.ProgramCapacityDto">
+		select * from program_capacity
+		where pro_id=#{pro_id}
+		and date=#{pres_date}
+	</select>
+	<update id="plusProgramCapacity">
+		update program_capacity
+		set minus_inwon=minus_inwon+#{p_inwon}
+		where pro_id=#{pro_id}
+		and date=#{pres_date}
+	</update>
+	<update id="minusProgramCapacity">
+		update program_capacity
+		set minus_inwon=minus_inwon-#{p_inwon}
+		where pro_id=#{pro_id}
+		and date=#{pres_date}
+	</update>
+	<delete id="deleteonepreserve">
+		delete from preserve
+		where pres_id=#{pres_id}
+	</delete>
+	
 </mapper>

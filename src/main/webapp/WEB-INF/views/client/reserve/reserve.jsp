@@ -7,76 +7,133 @@
 <meta charset="UTF-8">
 <title>Calendar</title>
 <style>
-    .category {
-	    border: 1px solid #ccc;
-	    padding: 10px;
-	    background-color: #f9f9f9;
-	    min-height: 300px; /* 고정된 높이 설정 */
-	}
-	
-	section {
-	    width: 1100px;
-	    margin: 30px auto;
-	    display: grid;
-	    grid-template-columns: 1fr 1fr 1fr 1fr;
-	    gap: 20px;
-	    align-items: start; /* 그리드 항목 상단 정렬 */
-	}
+    body {
+        background-color: #f4f4f4;
+        color: #333;
+    }
+    
+    section {
+        width: 1200px;
+        margin: 30px auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
 
+    .category {
+        border: 1px solid #ddd;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        min-height: 350px;
+    }
+    
     .category h2 {
         text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        color: #555;
     }
-    .category select, .category ul {
+    
+    .doc_part, .doc_name {
+        display: block;
+        border: none;
         width: 100%;
-        padding: 10px;
+        height: 45px;
+        margin: 10px 0;
+        background: #eee;
+        color: #333;
+        font-size: 1em;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
+    
+    .doc_part:hover, .doc_name:hover {
+        background-color: #ddd;
+    }
+
+    .doc_part.active, .doc_name.active {
+        background-color: #007bff;
+        color: white;
+    }
+
     table {
         width: 100%;
         border-collapse: collapse;
-        text-align: center;
+        margin-top: 10px;
     }
+    
     th, td {
         width: 14.28%;
-        border: 1px solid #ccc;
         padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
     }
-    
+
     .disabled {
-	    color: #ccc;
-	    pointer-events: none;
-	}
-	
-	.doc_part {
-		border:none;
-		width: 200px;
-		height: 40px;
-		margin: 5px;
-		background: #ccc;
-	}
-    
-   	.doc_name {
-		border:none;
-		width: 130px;
-		height: 40px;
-		margin: 5px;
-		background: #ccc;
-	}
-	
-	#doc_list span {
-		font-size: 13px;
-	}
-	
-	#cal-btn {text-align: right; margin:10px 0;}
-	
-	.time-btn {
-		border:none;
-		margin:10px;
-		width:50px;
-		height: 20px;
-	}
-	
-	
+        color: #aaa;
+        pointer-events: none;
+    }
+
+    #cal-btn {
+        text-align: center;
+        margin: 15px 0;
+    }
+
+    #cal-btn button {
+        border: none;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1em;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #cal-btn button:hover {
+        background-color: #0056b3;
+    }
+
+    .time-btn {
+        border: none;
+        background-color: #007bff;
+        color: white;
+        margin: 10px;
+        width: 50px;
+        height: 30px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .time-btn.disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .time-btn:hover:not(.disabled) {
+        background-color: #0056b3;
+    }
+
+    #calendar {
+        margin-top: 20px;
+    }
+
+    #calendarTitle {
+        text-align: center;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+
+    input[type="button"] {
+        font-size: 1em;
+    }
+
 </style>
+
 <script>
 	var isChkPart=0;
 	var isChkDoc=0;
@@ -106,9 +163,9 @@
 	            var addDiv=document.createElement("div");
 	            addDiv.appendChild(addInput);
 	            
-	            var addSpan=document.createElement("span");
+	   /*         var addSpan=document.createElement("span");
 	            addSpan.innerText=doctor.doc_part;
-	            addDiv.appendChild(addSpan);
+	            addDiv.appendChild(addSpan);*/
 	            
 	            document.getElementById("doc_list").appendChild(addDiv);
 	            
@@ -301,7 +358,15 @@
 		if(!chk1 || !chk2 || !chk3 || !chk4.value) {
 			alert("잘못된 경로");
 		} else {
-			document.getElementById("reserveForm").submit();
+			var timePart=chk4.value.split(":");
+			var hour=parseInt(timePart[0],10);
+			var min=timePart[1];
+			if (confirm(chk3+" "+hour+"시 "+min+"분 예약을 진행하시겠습니까?")) { // 확인 창 추가
+				var form=document.getElementById("reserveForm");
+			//	window.history.replaceState(null, null, "/main/index");
+
+				form.submit();
+			}
 		}
 	}
 	
@@ -321,6 +386,12 @@
 	        }
 	    }
 	}
+	
+	window.onpageshow = function(event) {
+		if(event.persisted) {
+			history.go(1);			
+		}
+	};	
 
 </script>
 </head>
@@ -342,7 +413,6 @@
 	        <c:forEach var="doc" items="${doctor }">
 	        	<div>
 	        		<input type="button" class="doc_name" value="${doc.doc_name }" data-docid="${doc.doc_id}" onclick="chkDoc(${doc.doc_id},this)">
-	        		<span>${doc.doc_part }</span>
 	        	</div>
 	        </c:forEach>
         </div>

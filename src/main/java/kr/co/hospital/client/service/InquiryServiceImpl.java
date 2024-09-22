@@ -75,9 +75,11 @@ public class InquiryServiceImpl implements InquiryService {
 		String session_user_id=null;
 		if(session.getAttribute("user_id")!=null) {
 			session_user_id=session.getAttribute("user_id").toString();
+			int sessionstate=mapper.getState(session_user_id);
 			ArrayList<HashMap> imapAll=mapper.inquirylist();
 			model.addAttribute("imapAll",imapAll);
 			model.addAttribute("session_user_id",session_user_id);
+			model.addAttribute("sessionstate",sessionstate);
 			return "/client/inquiry/list";
 		}else {
 			Cookie cookie=new Cookie("url","/inquiry/list");

@@ -11,7 +11,7 @@ import kr.co.hospital.client.dto.NoticeDto;
 public interface NoticeService {
 	public String notice_write(HttpSession session, Model model);
 	public String notice_writeOk(NoticeDto ndto, HttpSession session, MultipartHttpServletRequest multi) throws Exception;
-	public String notice_list(Model model, HttpSession session, HttpServletResponse response);
+	public String notice_list(HttpServletRequest request, Model model, HttpSession session, HttpServletResponse response);
 	public String notice_readnum(HttpServletRequest request);
 	public String notice_content(HttpServletRequest request, HttpSession session, Model model);
 	public String notice_update(HttpServletRequest request, Model model, HttpSession session);

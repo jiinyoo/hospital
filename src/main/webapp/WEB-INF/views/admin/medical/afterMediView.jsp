@@ -47,6 +47,11 @@
 	select#medi_type {
 		margin-left: 10px;
 	}
+	
+	.medi-li {
+		list-style-type: none;
+		padding: 6px;
+	}
 </style>
 </head>
 <body>
@@ -71,7 +76,7 @@
 				<td>
 					<ul>
 					<c:forEach var="medi" items="${mdto.medi_types}">
-					<li>${medi }</li>
+					<li class="medi-li">${medi }</li>
 					</c:forEach>
 					</ul>
 				</td>

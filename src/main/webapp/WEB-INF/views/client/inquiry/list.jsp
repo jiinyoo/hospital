@@ -27,26 +27,34 @@
 	    padding: 10px; /* 셀 내부 여백 조정 */
 	    height: 30px;  /* 셀 높이 명확히 설정 */
 	}
-
+	
+	table tr:first-child {
+    background-color: #B5B2FF;
+	}
+	
 	#part {
 		background-color:orange;
 	}
 
 </style>
 <script>
-function check(user_id,bimil,inq_id) {
-	var session_user_id="${session_user_id}";
-	if(bimil==1) {
-		if(user_id==session_user_id) {
-			location.href="/inquiry/readnum?inq_id="+inq_id;
-		} else {
-			alert("작성자만 볼 수 있는 비밀글입니다.")
-		}
-	} else {
-		location.href="/inquiry/readnum?inq_id="+inq_id;	
-	}
+function check(user_id, bimil, inq_id, origin_user_id) {
+    var session_user_id = "${session_user_id}";
+    var sessionstate="${sessionstate}"
+    if (bimil == 1) {
+        if (user_id == session_user_id ) {//이 글의 user_id가 session_id와 같을 때
+        	location.href = "/inquiry/readnum?inq_id=" + inq_id;
+        } else if(origin_user_id == session_user_id) {
+            location.href = "/inquiry/readnum?inq_id=" + inq_id;
+        } else if (sessionstate ==1 || sessionstate==2) {
+            location.href = "/inquiry/readnum?inq_id=" + inq_id;
+        } else {
+            alert("작성자만 볼 수 있는 비밀글입니다.");
+        }
+    } else {
+        location.href = "/inquiry/readnum?inq_id=" + inq_id;
+    }
 }
-
 
 function logincheck() {
 	var session_user_id="${session_user_id}";
@@ -76,15 +84,19 @@ function logincheck() {
 		<c:if test="${imap.bimil==1}">
 			<span id="bimil"><img src="../../static/client/inquiry/lock.png" width="20px"></span>
 		</c:if>
+		<c:if test="${imap.state==1}">
 			<span id="part">${imap.part}</span>
-			<span id="title" onclick="check('${imap.user_id}','${imap.bimil}','${imap.inq_id}')"><a href="#">${imap.title}</a></span>
+		</c:if>
+			<span id="title" onclick="check('${imap.user_id}','${imap.bimil}','${imap.inq_id}','${imap.origin_user_id != null ? imap.origin_user_id : ''}')"><a href="#">${imap.title}</a></span>
 		</a></td>
 		<td width="200">${imap.writeday}</a></td>
 		<td width="100">${imap.readnum}</td>
 	</tr>
 	</c:forEach>
 	<tr align="right">
-		<td colspan="4"><input type="button" value="글쓰기" onclick="logincheck()"></td>
+		<td colspan="4">
+		<input type="button" value="글쓰기" onclick="logincheck()">
+		</td>
 	</tr>
 </table>
 </section>

@@ -80,7 +80,17 @@
         }
     }
 	
-	
+	window.onload=function() {
+		var start=document.getElementsByClassName("Schk_rest");
+		var end=document.getElementsByClassName("Echk_rest");
+		var dayofweek=document.getElementsByClassName("dayofweeks");
+		var rest=document.getElementsByClassName("rest");
+		
+		start[0].disabled=true;
+		end[0].disabled=true;
+		rest[0].checked=true;
+		dayofweek[0].disabled=true;
+	}
 </script>
 <style>
 	body {user-select: none;}
@@ -259,14 +269,14 @@
 	<c:forEach begin="0" end="6" var="index">
 	<input type="hidden" class="dayofweeks" name="dayofweeks" value="${index }">
 	<tr>
-		<td width="10%">
-			<c:if test="${index==0 }"> 월 </c:if>
-			<c:if test="${index==1 }"> 화 </c:if>
-			<c:if test="${index==2 }"> 수 </c:if>
-			<c:if test="${index==3 }"> 목 </c:if>
-			<c:if test="${index==4 }"> 금 </c:if>
-			<c:if test="${index==5 }"> 토 </c:if>
-			<c:if test="${index==6 }"> 일 </c:if>
+		<td width="10%" ${index==6 || index==0 ? "style='color:red;'":"" }>
+			<c:if test="${index==1 }"> 월 </c:if>
+			<c:if test="${index==2 }"> 화 </c:if>
+			<c:if test="${index==3 }"> 수 </c:if>
+			<c:if test="${index==4 }"> 목 </c:if>
+			<c:if test="${index==5 }"> 금 </c:if>
+			<c:if test="${index==6 }"> 토 </c:if>
+			<c:if test="${index==0 }"> 일 </c:if>
 		</td>
 		<td>
 			<select name="start_times" class="Schk_rest" onchange="uptime(this)">

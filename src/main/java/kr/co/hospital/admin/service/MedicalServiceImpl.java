@@ -70,8 +70,8 @@ public class MedicalServiceImpl implements MedicalService {
 	@Override
 	public String afterMediView(HttpServletRequest request,Model model,HttpSession session,
 			HttpServletResponse response) {
-		String medi_id=request.getParameter("medi_id");
-		MedicalDto mdto=mapper.mediView(medi_id);
+		String res_code=request.getParameter("res_code");
+		MedicalDto mdto=mapper.mediView(res_code);
 		
 		if(session.getAttribute("user_id")==null) {
 			Cookie url=new Cookie("url", "/admin/medical/afterMedi");

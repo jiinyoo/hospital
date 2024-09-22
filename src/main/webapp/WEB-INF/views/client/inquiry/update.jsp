@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script>
 	function add() {
 		var filetag=document.getElementsByClassName("file")
@@ -88,7 +89,6 @@
     section {
         margin:auto;
         width: 1300px;
-        height: 100vh; /* 뷰포트 전체 높이 사용 */
     }
  
     table {
@@ -111,13 +111,16 @@
 <body>
 <section>
 	<form name="inquiry" method="post" action="updateOk" enctype="multipart/form-data" onsubmit="return check()">
-		<table>
 			<input type="hidden" name="delimg" >
 			<input type="hidden" name="safeimg" >
 			<input type="hidden" name="inq_id" value="${idto.inq_id}">
 			<input type="hidden" name="bimil" id="bimil" value="0">
-			<caption>진료 문의 등록</caption>
 			<input type="hidden" name="state" value="1">
+			
+		<table>
+			
+			<caption>진료 문의 등록</caption>
+			
 			<tr>
 				<td width="100">제목</td>
 				<td><input type="text" name="title" value="${idto.title}"></td>
@@ -189,6 +192,7 @@
 					<input type="submit" value="문의 글 수정" >
 				</td>
 			</tr>
+		</table>
 	</form>
 </section>	
 </body>

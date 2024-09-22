@@ -63,7 +63,11 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public String boardcontent(HttpServletRequest request, Model model, HttpSession session) {
-		String user_id=session.getAttribute("user_id").toString();
+		String user_id=null;
+		if(session.getAttribute("user_id")!=null) {
+			user_id=session.getAttribute("user_id").toString();
+			
+		}
 		String board_id=request.getParameter("board_id");
 		BoardDto bdto=mapper.boardcontent(board_id);
 		model.addAttribute("bdto",bdto);

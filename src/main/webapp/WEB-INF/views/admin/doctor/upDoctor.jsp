@@ -265,7 +265,7 @@
 	<tr>
 		<td rowspan="4" width="20%">
 			<div class="img">
-			    <img id="docImg" src="/static/admin/programfile/${ddto.doc_img}" height="120">
+			    <img id="docImg" src="/static/admin/doctor/${ddto.doc_img}" height="120">
 			    <div class="img-change" onclick="chgimg()">사진을 변경하려면 클릭하세요</div>
 			</div>
 		</td>
@@ -311,14 +311,14 @@
 	<c:forEach begin="0" end="6" var="index">
 	<input type="hidden" class="dayofweeks"name="dayofweeks" value="${index }">
 	<tr>
-		<td width="10%">
-			<c:if test="${index==0 }"> 월 </c:if>
-			<c:if test="${index==1 }"> 화 </c:if>
-			<c:if test="${index==2 }"> 수 </c:if>
-			<c:if test="${index==3 }"> 목 </c:if>
-			<c:if test="${index==4 }"> 금 </c:if>
-			<c:if test="${index==5 }"> 토 </c:if>
-			<c:if test="${index==6 }"> 일 </c:if>
+		<td width="10%" ${index==6 || index==0 ? "style='color:red;'":"" }>
+			<c:if test="${index==1 }"> 월 </c:if>
+			<c:if test="${index==2 }"> 화 </c:if>
+			<c:if test="${index==3 }"> 수 </c:if>
+			<c:if test="${index==4 }"> 목 </c:if>
+			<c:if test="${index==5 }"> 금 </c:if>
+			<c:if test="${index==6 }"> 토 </c:if>
+			<c:if test="${index==0 }"> 일 </c:if>
 		</td>
 		<td>
 			<select name="start_times" class="Schk_rest" onchange="uptime(this)">

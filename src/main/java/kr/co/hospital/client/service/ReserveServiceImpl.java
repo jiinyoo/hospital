@@ -1,6 +1,7 @@
 package kr.co.hospital.client.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,6 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,12 +36,16 @@ public class ReserveServiceImpl implements ReserveService {
 
 	@Override
 	public String reserve(HttpServletRequest request,Model model,HttpSession session,
-			HttpServletResponse response) {
+			HttpServletResponse response,RedirectAttributes redirect) {
+		
 		if(session.getAttribute("user_id")==null) {
 			String user_id=request.getParameter("user_id")==null?"":request.getParameter("user_id");
 			String user_phone=request.getParameter("user_phone")==null?"":request.getParameter("user_phone");
 			String user_jumin=request.getParameter("user_jumin")==null?"":request.getParameter("user_jumin");
+			
+
 			if(user_id.isEmpty() || user_phone.isEmpty() || user_jumin.isEmpty()) {
+				System.out.println("ing");
 				Cookie url=new Cookie("url", "/main/reserve");
 				url.setMaxAge(500);
 				url.setPath("/");
@@ -44,14 +53,19 @@ public class ReserveServiceImpl implements ReserveService {
 				return "redirect:/main/beforeReserve";				
 			} else {
 				
+				//2
 				model.addAttribute("user_jumin",user_jumin);
 				model.addAttribute("user_id",user_id);
 				model.addAttribute("user_phone",user_phone);
 			}
 		}
-			model.addAttribute("doctor",mapper.getDoctor());
+			model.addAttribute("doctor",mapper.getDoctors());
 			model.addAttribute("part",mapper.getPart());
-			session.setAttribute("res", 1);
+			//2
+			Cookie chk=new Cookie("chk", "1");
+			chk.setMaxAge(500);
+			chk.setPath("/");
+			response.addCookie(chk);
 			return "/client/reserve/reserve";			
 	}
 
@@ -148,15 +162,19 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response) {
-		if(session.getAttribute("res")==null) {
+	public String reserveOk(ReserveDto rdto,HttpSession session,HttpServletResponse response,RedirectAttributes redirect,
+			HttpServletRequest request) {
+		String res_code="";
+		Cookie chk=WebUtils.getCookie(request, "chk");
+		
+		if(chk==null) {
 			Cookie url=new Cookie("url", "/main/reserve");
 			url.setMaxAge(500);
 			url.setPath("/");
 			response.addCookie(url);
-			return "redirect:/main/reserve";
+			return "redirect:/main/beforeReserve?err=1";
 		} else {
-			String res_code="R";
+			res_code="R";
 			LocalDate today=LocalDate.now();
 			int year=today.getYear();
 			int month=today.getMonthValue();
@@ -165,28 +183,122 @@ public class ReserveServiceImpl implements ReserveService {
 			String resnum=String.format("%03d", mapper.getResnum(res_code)); 
 			res_code+=resnum;
 			if(session.getAttribute("user_id")==null) {
+				rdto.setIsMember(1);
 				rdto.setRes_code(res_code);
 				mapper.reserveOk(rdto);
 			} else {
 				UserDto udto=mapper.getUserinfo(rdto.getUser_id());
+				rdto.setIsMember(0);
 				rdto.setUser_jumin(udto.getUser_jumin());
 				rdto.setUser_phone(udto.getUser_phone());
 				rdto.setRes_code(res_code);
 				mapper.reserveOk(rdto);
 			}
 		}
-		session.removeAttribute("res");
-		return "redirect:/main/index";
+		chk=new Cookie("chk", "");
+		chk.setMaxAge(0);
+		chk.setPath("/");
+		response.addCookie(chk);
+		redirect.addFlashAttribute("rdto", mapper.reserveConfirm(res_code));
+		return "redirect:/main/addSuccess";
 	}
-			
-			
-		
-		
-
 
 	@Override
 	public String beforeReserve(ReserveDto rdto) {
 		return "/client/reserve/beforeReserve";
 	}
+
+	@Override
+	public String reserveView(HttpSession session, Model model, HttpServletRequest request,HttpServletResponse response) {
+		ArrayList<ReserveDto> rdto=new ArrayList<>();
+		ArrayList<ReserveDto> past=new ArrayList<>();
+		int month=request.getParameter("month")==null?1:Integer.parseInt(request.getParameter("month"));
+		LocalDate start=null; 
+		LocalDate end=null;
+		if(request.getParameter("start")==null || request.getParameter("start")=="") {
+			start=LocalDate.now().minusMonths(month);
+		} else {
+			start=LocalDate.parse(request.getParameter("start"));
+		}
+		
+		if(request.getParameter("end")==null || request.getParameter("end")=="") {
+			end=LocalDate.now();
+		} else {
+			end=LocalDate.parse(request.getParameter("end"));
+		}
+		
+		System.out.println(start+"부터 "+end+"까지");
+
+		if(session.getAttribute("user_id")==null) {
+			String chk=request.getParameter("chk");
+			if("0".equals(chk))	{ // 핸드폰 번호로 조회
+				String userid=request.getParameter("user_id");
+				String phone=request.getParameter("user_phone");
+				phone="and user_phone='"+phone+"' and isMember='1'";
+				rdto=mapper.reserveView(userid, phone);
+			//	past=mapper.pastReserve(userid, phone,month);
+				
+			} else if("1".equals(chk)) {  // 주민번호로 조회 
+				String userid=request.getParameter("user_id");
+				String jumin=request.getParameter("user_jumin");
+				jumin="and user_phone='"+jumin+"' and isMember='1'";
+				rdto=mapper.reserveView(userid, jumin);
+			//	past=mapper.pastReserve(userid, jumin,month);
+				
+			} else {
+				Cookie url=new Cookie("url", "/main/reserveView");
+				url.setMaxAge(60*3);
+				url.setPath("/");
+				response.addCookie(url);
+				return "redirect:/main/reserveSearch";
+			}
+		} else {
+			String userid=session.getAttribute("user_id").toString();
+			rdto=mapper.reserveView(userid, null);
+			past=mapper.pastReserve(userid, month, start, end);
+		}
+		
+		Cookie url=new Cookie("url", "");
+		url.setMaxAge(0);
+		url.setPath("/");
+		response.addCookie(url);
+		
+		ArrayList<String> doc=new ArrayList<>();
+		for(ReserveDto reserve:rdto) {
+			doc.add(mapper.getDoctor(reserve.getDoc_id()));  
+		}
+		ArrayList<String> doc1=new ArrayList<>();
+		for(ReserveDto reserve:past) {
+			doc1.add(mapper.getDoctor(reserve.getDoc_id()));
+		}
+		
+		model.addAttribute("doc",doc);
+		model.addAttribute("pastDoc",doc1);
+		model.addAttribute("past",past);
+		model.addAttribute("rdto",rdto);
+		
+		return "/client/reserve/reserveView";
+	}
+
+	@Override
+	public String cancelRes(HttpServletRequest request, HttpSession session) {
+		if(session.getAttribute("user_id")==null) {
+			String res_id=request.getParameter("res_id");
+			String user_phone=request.getParameter("user_phone");
+			String user_id=request.getParameter("user_id");
+			
+			mapper.delRes(res_id, user_id, user_phone);
+			return "redirect:/main/delsuccess";
+			
+		} else {
+			String res_id=request.getParameter("res_id");
+			String userid=session.getAttribute("user_id").toString();
+			
+			mapper.delRes(res_id,userid,null);
+			return "redirect:/main/reserveView";
+		}
+	} 
 	
+	
+
 }

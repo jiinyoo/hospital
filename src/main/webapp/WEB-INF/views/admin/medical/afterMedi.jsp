@@ -67,7 +67,7 @@
 			<c:forEach var="mdto" items="${mdto}">
 			<tr>
 				<td> ${mdto.medi_id } </td>
-				<td><a href="afterMediView?medi_id=${mdto.medi_id}"> ${mdto.user_name } </a></td>
+				<td><a href="afterMediView?res_code=${mdto.res_code}"> ${mdto.user_name } </a></td>
 				<td> ${mdto.user_jumin }</td>
 				<td> ${mdto.doc_name } </td>
 				<td> ${mdto.medi_part} </td>
@@ -76,9 +76,17 @@
 			</c:forEach>
 			<tr>
 				<td colspan="6" align="center">
+				<c:if test="${pstart!=1}">
+				<a href="afterMedi?page=1">첫페이지</a>
+				<a href="afterMedi?page=${pstart-1}">이전</a>
+				</c:if>
 				<c:forEach var="i" begin="${pstart}" end="${pend}">
 				<a href="afterMedi?page=${i}">${i}</a>
 				</c:forEach>
+				<c:if test="${pend!=chong}">
+				<a href="afterMedi?page=${pend+1}">다음</a>
+				<a href="afterMedi?page=${chong}">마지막</a>
+				</c:if>
 				</td>
 			</tr>
 			<tr>

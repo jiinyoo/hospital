@@ -5,7 +5,7 @@
 		select doc_part from doctor
 		group by doc_part
 	</select>
-	<select id="getDoctor" resultType="hashmap">
+	<select id="getDoctors" resultType="hashmap">
 		select * from doctor order by doc_part asc
 	</select>
 	<select id="chkpart" resultType="Hashmap">
@@ -33,10 +33,53 @@
 		where res_code like concat(#{res_code},'%')
 	</select>
 	<insert id="reserveOk">
-		insert into reserve (doc_id, doc_part, user_id, user_phone, res_code, user_jumin, res_date, res_time, writeday)
-		values (#{doc_id},#{doc_part},#{user_id},#{user_phone},#{res_code},#{user_jumin},#{res_date},#{res_time},now())
+		insert into reserve (doc_id, doc_part, user_id, user_phone, res_code, user_jumin, res_date, res_time, writeday, isMember)
+		values (#{doc_id},#{doc_part},#{user_id},#{user_phone},#{res_code},#{user_jumin},#{res_date},#{res_time},now(), #{isMember})
 	</insert>
 	<select id="getUserinfo" resultType="kr.co.hospital.client.dto.UserDto">
 		select * from user where user_id=#{userid}
 	</select>
+	<select id="reserveConfirm" resultType="kr.co.hospital.client.dto.ReserveDto">
+		select * from reserve
+		where res_code=#{res_code}
+	</select>
+	<select id="getDoctor" resultType="String">
+		select doc_name from doctor
+		where doc_id=#{doc_id}
+	</select>
+	<select id="reserveView" resultType="kr.co.hospital.client.dto.ReserveDto">
+		select * from reserve
+		where user_id=#{user_id}
+		<if test="user_info!=null">
+			${user_info}
+		</if>
+		<if test="user_info==null">
+			and isMember='0'
+		</if>
+		and <![CDATA[ now() <= concat(res_date,' ', res_time) ]]>
+		and state=0
+		order by res_date asc,
+		res_time asc
+	</select>
+	<select id="pastReserve" resultType="kr.co.hospital.client.dto.ReserveDto">
+		select * from reserve
+		where user_id=#{user_id}
+		<if test="month==0">
+		and <![CDATA[now() > concat(res_date,' ', res_time)]]>
+		</if>
+		<if test="month!=0">
+		and res_date between #{start} and #{end}
+		</if>
+		and isMember='0'
+		order by res_date asc,
+		res_time asc
+	</select>
+	<delete id="delRes">
+		delete from reserve
+		where res_id=#{res_id}
+		and user_id=#{userid}
+		<if test="user_info!=null">
+		and user_phone=#{user_info}
+		</if>
+	</delete>
 </mapper>

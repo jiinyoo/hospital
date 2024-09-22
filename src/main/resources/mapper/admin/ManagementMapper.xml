@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hospital.admin.mapper.ManagementMapper">
+
+    <select id="getAllUsers" resultType="kr.co.hospital.admin.dto.ManagementDto">
+        select id, user_id, user_name, 
+        user_email, state from user where user_id !='admin'
+    </select>
+
+    <update id="updateState" parameterType="kr.co.hospital.admin.dto.ManagementDto">
+        update user set
+        state=#{state}
+        where id=#{id}
+    </update>
+    
+    <select id="getUsersByPage" resultType="kr.co.hospital.admin.dto.ManagementDto">
+    	select * from user 
+    	where user_id != 'admin'
+   	 	order by user_name
+    	limit #{offset}, #{limit}
+    	
+	</select>
+
+	<select id="getTotalUsers" resultType="int">
+    	select count(*) from user 
+    	where user_id != 'admin'
+	</select>
+    
+    <select id="getUsersBySearch" resultType="kr.co.hospital.admin.dto.ManagementDto">
+    	select *
+   	 	from user 
+   	 	where user_id != 'admin' 
+    	and (user_id like '%' #{search} '%' 
+         or user_name like '%' #{search} '%')
+    	order by user_name
+    	limit #{offset}, #{limit}
+	</select>
+
+	<select id="getTotalUsersBySearch" resultType="int">
+    	select count(*) 
+    	from user 
+    	where user_id != 'admin' 
+    	and (user_id like concat('%', #{search}, '%') 
+         or user_name like concat('%', #{search}, '%')) 
+	</select>
+    
+    
+</mapper>
