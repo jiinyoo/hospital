@@ -105,11 +105,7 @@
 		color: #555;
 	}
 	
-	hr {
-		border: 0;
-		border-top: 1px solid #eee;
-		margin: 30px 0;
-	}
+
 </style>
 </head>
 <body>

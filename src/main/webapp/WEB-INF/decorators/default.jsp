@@ -101,7 +101,7 @@ nav
 {
  	position :relative;
  	width:1300px;
- 	height:100px;
+ 	height:130px;
  	margin:auto;
  	font-size:20px;
 }
@@ -109,13 +109,10 @@ nav
 nav #mainmenu
 {
 	width:1300px;
-}
-
-nav #mainmenu #maincate
-{
-	padding-left:0px;
+	height:130px;
 	
 }
+
 
 #mainmenu #maincate > li 
 {
@@ -124,12 +121,13 @@ nav #mainmenu #maincate
 	width:180px;
 	color:#626262;
 	text-align:center;
-	height:100px;
+	height:130px;
 	line-height:100px;
 	margin: 0; /* 기본 마진 제거 */
 	padding: 0; /* 기본 패딩 제거 */
 	position:relative;
 	cursor: pointer;
+	align-content: center;
 
 }
 
@@ -266,7 +264,8 @@ nav #mainmenu #maincate
 	
 }
 
-#submenus .submenu > li > a {
+#submenus .submenu > li > a 
+{
 
     text-decoration: none;
     width: 100%;
@@ -276,10 +275,11 @@ nav #mainmenu #maincate
 
 }
 
-hr
+hr 
 {
- border:0.1px solid #ccc;
- 
+	border: 0;
+	border-top: 1px solid #eee;
+	margin-top: 20px 0;
 }
 
 /* 계단형으로 서서히 내려오는 애니메이션 정의 */
@@ -325,15 +325,20 @@ hr
 		
 		var h=0;
 		function move(){
-			if(h<=50)
-				document.getElementById("ad").style.marginTop=-h+"px";
-			h++;
-			setTimeout(move,15);
-		}
-		if(h == -50)
-		{
-			document.getElementById("ads").removeChild();
+			if(h<=50) {
+				document.getElementById("ads").style.marginTop=-h+"px";
 			
+		}
+		h++;
+		
+		if(h <= 50){
+			setTimeout(move,15);
+		} else
+		{
+			 document.getElementById("ads").style.display = "none";
+			
+		}
+		
 		}
 		move();
 	}
@@ -391,7 +396,7 @@ hr
 			<li class="hov">상담/예약</li>
 			<li class="hov">프로그램 예약</li>
 			<li class="hov">커뮤니티</li>
-			<li class="hov">건강 정보</li>
+			<li class="hov"><a href="/main/healthInfo">건강 정보</a></li>
 		</ul>
 	</div>
 	
@@ -429,7 +434,7 @@ hr
 				<li>고객의 소리</li>
 		</ul>
 		<ul class="submenu">
-			<li>건강정보</li>
+			<li><a href="/main/healthInfo">건강정보</a></li>
 		</ul>
 	</div>
 	</span>
