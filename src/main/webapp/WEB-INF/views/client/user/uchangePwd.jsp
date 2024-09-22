@@ -126,6 +126,17 @@
           }
         }
         
+        function check() {
+        	var new_pwd = document.mform.new_pwd.value;
+    	    var pwdPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+    	    
+    	    if (!pwdPattern.test(new_pwd)) {
+    	        alert("비밀번호는 8~20자, 영문, 숫자, 특수문자를 포함해야 합니다.");
+    	        return false;
+    	    }
+    	    return true;
+        }
+        
     </script>
 </head>
 <body>
@@ -133,7 +144,7 @@
 	<a href="/main/updateUser" class="cancel-link"> 변경 취소 </a>
 	<h3> 회원 비밀번호 변경 </h3>
 
-	<form name="mform" method="post" action="uchangePwd">
+	<form name="mform" method="post" action="uchangePwd" onsubmit="return check()">
 		<input type="hidden" name="user_id" value="${user_id}">
 		<label for="gijon_pwd"> 기존 비밀번호 </label>
 		<input type="password"  name="gijon_pwd" placeholder="기존 비밀번호를 입력하세요" required>

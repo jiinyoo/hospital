@@ -160,7 +160,7 @@ section #community .comm .more-btn a:hover {
     top: 200px; /* 화면 상단에서의 위치 */
     right: 50px; /* 화면 오른쪽에서의 위치 */
     width: 200px; /* 배너 너비 */
-    z-index: 9999; /* 다른 요소 위에 표시 */
+    z-index: 10; /* 다른 요소 위에 표시 */
     transition: top 0.6s ease-in-out; /* 부드러운 스크롤 애니메이션 */
 }
 

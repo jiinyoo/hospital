@@ -80,12 +80,11 @@ main {
 #loginbar
 {	
 	margin:auto;
-	margin-top: 15px;
+	
 	width:1300px;
-	height:30px;
+	height:40px;
 	text-align:right;
-	align-items:center;
-	text-decoration: none;
+	align-content:center;
 	color: black;
 	cursor: pointer;
 }
@@ -93,6 +92,7 @@ main {
 #loginbar > a 
 {
 	text-decoration: none;
+	height:30px;
 	color: black;
 	
 }
@@ -275,10 +275,60 @@ nav #mainmenu
 
 }
 
+/* 하위 메뉴 */
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown a {
+    text-decoration: none;
+    color: black;
+}
+
+#userMenu {
+	right:0;
+    display: none;
+    top:20px;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 150px;
+    z-index: 11;
+}
+
+#userMenu a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    text-align:center;
+    border-bottom: 1px solid #ddd;
+}
+
+#userMenu a:last-child {
+    border-bottom: none;
+}
+
+#userMenu a:hover {
+	text-decoration: none;
+    background-color: white;
+    color: #007bff;
+}
+
+/* 마우스를 올렸을 때 하위 메뉴 표시 */
+.dropdown:hover #userMenu {
+	text-decoration: none;
+    display: block;
+}
+
 hr 
 {
 	border: 0;
-	border-top: 1.5px solid #eee;
+	border-top: 2px solid #eee;
 	margin-top: 20px 0;
 }
 
@@ -372,7 +422,16 @@ hr
 		   <c:if test="${sessionScope.state==1 || sessionScope.state==2}">
 		 	 <a href="/admin/main/index">관리자 페이지</a> |
 		   </c:if>
-		   		<a href="/main/userInfo">${sessionScope.user_id}님</a> | 
+		    <div class="dropdown">
+                <a href="/main/userInfo">${sessionScope.user_id}님</a>
+                <!-- 하위 메뉴 -->
+                <div id="userMenu">
+                    <a href="/main/userInfo">회원 정보</a>
+                    <a href="/main/reserveView">예약 정보</a>
+                    <a href="#">나의 문의</a>
+                    <a href="#">진료 내역</a>
+                </div>
+            </div> | 
            <a href="/main/logout"> 로그아웃 </a> | 문의하기
          </c:if>
 		</div>
@@ -391,10 +450,10 @@ hr
 
 			 </a>
 			</li>
-			<li class="hov">병원 소개</li>
+			<li class="hov"><a href="/main/hospital">병원 소개</a></li>
 			<li class="hov"><a href="/main/info/part?part=">의료진 안내</a></li>
 			<li class="hov">상담/예약</li>
-			<li class="hov">프로그램 예약</li>
+			<li class="hov"><a href="/program/programreserve">프로그램 예약</a></li>
 			<li class="hov">커뮤니티</li>
 			<li class="hov"><a href="/main/healthInfo">건강 정보</a></li>
 		</ul>
@@ -474,7 +533,7 @@ hr
 
         <div style="width: 30%;">
             <h4 style="margin-bottom: 20px; font-size: 24px;">연락처</h4>
-            <p style="line-height: 1.8; font-size: 15px;"><strong>전화:</strong> 031-1234-5678</p>
+            <p style="line-height: 1.8; font-size: 15px;"><strong>전화:</strong> 031-123-4567</p>
             <p style="line-height: 1.8; font-size: 15px;"><strong>이메일:</strong> JangINHO@hospital.com</p>
             <p style="line-height: 1.8; font-size: 15px;"><strong>주소:</strong> 경기 고양시 마두동 병원로 123</p>
         </div>
