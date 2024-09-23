@@ -86,7 +86,7 @@ main {
 	text-align:right;
 	align-content:center;
 	color: black;
-	cursor: pointer;
+	
 }
 
 #loginbar > a 
@@ -94,6 +94,7 @@ main {
 	text-decoration: none;
 	height:30px;
 	color: black;
+	cursor: pointer;
 	
 }
 	
@@ -103,7 +104,7 @@ nav
  	width:1300px;
  	height:130px;
  	margin:auto;
- 	font-size:20px;
+ 	font-size:22px;
 }
 
 nav #mainmenu
@@ -191,9 +192,9 @@ nav #mainmenu
 	left:0px;
 	top:90px;
 	background:white;
-	border-left:0.5px solid #DAD9FF;
-	border-right:0.5px solid #DAD9FF;
-	border-bottom:5px solid #C8C7ED;
+	border-left:0.5px solid #2a83c7;
+	border-right:0.5px solid #2a83c7;
+	border-bottom:5px solid #2a83c7;
 	opacity: 0;  
 	
 }
@@ -208,12 +209,13 @@ nav #mainmenu
 
 #submenus .submenu:first-child
 {
-	border-top:5px solid #C8C7ED;
+	border-top:5px solid #2a83c7;
 	
 }
 
 #submenus .submenu:last-child
 {
+	
 	width:200px;
 
 }
@@ -248,25 +250,27 @@ nav #mainmenu
 
 #submenus .submenu > li:hover 
 {
-	background-color: #B5B2FF;
+	background-color: #90C3FF;
 	
 }
 
 #submenus .submenu > li:first-child
 {
-	border-top:5px solid #C8C7ED;
+	border-top:5px solid #2a83c7;
 	
 }
 
 #submenus .submenu:last-child > li
 {
+	
 	width:200px;
 	
 }
 
 #submenus .submenu > li > a 
 {
-
+	font-size:16px;
+	padding:2px;
     text-decoration: none;
     width: 100%;
     text-align: center;
@@ -370,9 +374,32 @@ hr
 	text-align:left;
 }
 
+#scrollToTopBtn {
+	width:3%;
+    display: none; /* 처음에 숨겨져 있음 */
+    position: fixed; /* 화면에 고정 */
+    bottom: 20px; /* 아래에서부터 20px */
+    right: 30px; /* 오른쪽에서부터 30px */
+    z-index: 99; /* 다른 요소 위에 표시 */
+    font-size: 18px; /* 버튼 글자 크기 */
+    border: none; /* 테두리 없음 */
+    outline: none; /* 아웃라인 없음 */
+    background-color: #353535; /* 버튼 배경색 */
+    color: white; /* 버튼 글자색 */
+    cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+    padding: 15px; /* 버튼 패딩 */
+    border-radius: 10px; /* 둥근 테두리 */
+    transition: background-color 0.3s ease;
+}
+
+#scrollToTopBtn:hover {
+    background-color: black; /* 마우스 오버 시 버튼 배경색 변경 */
+}
 
 
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
 <script>
 	
 	function viewSub()
@@ -428,6 +455,26 @@ hr
 		document.getElementById("userdetail").style.display="none";
 	}
 	
+
+	// 스크롤 이벤트가 발생할 때 버튼 표시 및 숨기기
+	window.onscroll = function() {
+	    scrollFunction();
+	};
+
+	function scrollFunction() {
+	    var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+	    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+	        scrollToTopBtn.style.display = "block";  // 스크롤 시 버튼 보이기
+	    } else {
+	        scrollToTopBtn.style.display = "none";  // 스크롤이 상단에 있으면 숨기기
+	    }
+	}
+
+	// 부드럽게 위로 스크롤하는 함수
+	function scrollToTop() {
+	    window.scrollTo({ top: 0, behavior: 'smooth' });
+	}
+	
 </script>
 
  <sitemesh:write property="head"/>
@@ -437,6 +484,10 @@ hr
 
 
 <body>
+<button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">
+	<i class="fas fa-angle-double-up"></i>
+</button>
+
 <div id="ads">
 	<div id="ad">
 		<div id="container"> 
@@ -458,7 +509,7 @@ hr
 		 	 <a href="/admin/main/index">관리자 페이지</a> |
 		   </c:if>
 		    <div class="dropdown">
-                <a href="/main/userInfo">${sessionScope.user_id}님</a>
+                <a href="#">${sessionScope.user_id}님</a>
                 <!-- 하위 메뉴 -->
                 <div id="userMenu">
                     <a href="/main/userInfo">회원 정보</a>
@@ -467,7 +518,7 @@ hr
                     <a href="#">진료 내역</a>
                 </div>
             </div> | 
-           <a href="/main/logout"> 로그아웃 </a> | 문의하기
+           <a href="/main/logout"> 로그아웃 </a> | <a href="#">문의하기</a>
          </c:if>
 		</div>
 </header>
@@ -514,7 +565,7 @@ hr
 		</ul>
 		
 		<ul class="submenu">
-			<li>1:1문의</li>
+			
 			<li><a href="/main/reserve">온라인 진료 예약</a></li>
 			<li><a href="/main/reserveView">예약 조회</a></li>
 		</ul>
@@ -524,8 +575,8 @@ hr
 		</ul>
 		<ul class="submenu">
 				<li><a href="/main/notice_list">공지사항</a></li>
-				<li><a href="../../main/inquirylist">진료과별 질문</a></li>
-				<li><a href="../../main/boardlist">진료 후기</a></li>
+				<li><a href="/main/inquirylist">진료과별 질문</a></li>
+				<li><a href="/main/boardlist">진료 후기</a></li>
 				<li><a href="/main/healthInfo">건강정보</a></li>
 		</ul>
 	</div>
@@ -542,11 +593,13 @@ hr
 	</div>
 </main>
 
+
+
 <sitemesh:write property="body"/>
 
 
 
-<footer style="background-color: #368AFF; padding: 50px 0; color: white; margin-top: 40px; font-family: 'goorm-sans-bold';">
+<footer style="background-color: #004fa8; padding: 50px 0; color: white; margin-top: 40px; font-family: 'goorm-sans-bold';">
     <div class="footer-container" style="width: 80%; margin: auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
         
         <div style="width: 30%;">
@@ -554,9 +607,9 @@ hr
             <p style="line-height: 1.8; font-size: 15px;">저희 병원은 최상의 의료 서비스를 제공하며 환자분들의 건강을 최우선으로 생각합니다. 믿을 수 있는 의료진과 함께 건강한 삶을 위한 최선을 다하고 있습니다.</p>
         </div>
         
-        <div style="width: 30%;">
-            <h4 style="margin-bottom: 20px; font-size: 24px; margin-left:40px;">빠른 링크</h4>
-            <ul style="list-style-type: none; padding: 0; line-height: 2; margin-left:40px;">
+        <div style="width: 20%;">
+            <h4 style="margin-bottom: 20px; font-size: 24px; margin-left:60px;">빠른 링크</h4>
+            <ul style="list-style-type: none; padding: 0; line-height: 2; margin-left:60px;">
                 <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">병원 소개</a></li>
                 <li><a href="/main/beforeReserve" style="color: white; text-decoration: none; font-size: 15px;">진료 예약</a></li>
                 <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">연락처 : 010-1234-5678</a></li>
@@ -567,12 +620,14 @@ hr
         <div style="width: 30%;">
             <h4 style="margin-bottom: 20px; font-size: 24px;">연락처</h4>
             <p style="line-height: 1.8; font-size: 15px;"><strong>전화:</strong> 031-123-4567</p>
+            <br>
             <p style="line-height: 1.8; font-size: 15px;"><strong>이메일:</strong> JangINHO@hospital.com</p>
+            <br>
             <p style="line-height: 1.8; font-size: 15px;"><strong>주소:</strong> 경기 고양시 마두동 병원로 123</p>
         </div>
     </div>
 
-    <div style="width: 80%; margin: 30px auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+    <div style="width: 80%; margin: auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
 
         <div>
             <a href="#" style="text-decoration: none; color: white; margin-right: 15px;">

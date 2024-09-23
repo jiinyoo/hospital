@@ -38,16 +38,16 @@
     }
     
     #ntitle {
-    	width:700px;
+    	width:500px;
     	text-align: left;
-    	padding-left: 20px;
+    	padding-left: 50px;
     	color:black;
     	
     }
     
     #nntitle {
     	text-align: left;
-    	padding-left: 20px;
+    	padding-left: 50px;
     }
 	
 	td {
@@ -111,7 +111,7 @@
         background-color: #004fa8;
         color: white;
         margin: 0 2px;
-        
+        border-radius: 4px;
         text-decoration: none;
     }
 
@@ -140,7 +140,7 @@
     </tr>
     <c:forEach items="${nmapAll}" var="ndto">
     <tr align="center">
-      <td> 관리자 </td>
+      <td> 병원장 </td>
       <td id="nntitle"> 
        <a href="notice_readnum?notice_id=${ndto.notice_id}">${ndto.title}</a>
       </td>

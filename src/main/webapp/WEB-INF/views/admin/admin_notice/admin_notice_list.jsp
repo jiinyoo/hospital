@@ -23,11 +23,10 @@
     /* 제목 스타일 */
     h2 {
     	
-        text-align: left;
+        text-align: center;
         color: #004fa8;
         margin-bottom: 20px;
         font-size: 30px;
-        margin-left: 10px;
         
     }
     
@@ -41,16 +40,16 @@
     }
     
     #ntitle {
-    	width:700px;
+    	width:500px;
     	text-align: left;
-    	padding-left: 20px;
+    	padding-left: 50px;
     	color:black;
     	
     }
     
     #nntitle {
     	text-align: left;
-    	padding-left: 20px;
+    	padding-left: 50px;
     }
 	
 	td {
@@ -114,7 +113,7 @@
         background-color: #004fa8;
         color: white;
         margin: 0 2px;
-        
+        border-radius: 4px;
         text-decoration: none;
     }
 
@@ -132,10 +131,10 @@
 <body>
  <section>
    <table width="900" align="center">
-    <caption> <h3> 공지 사항 </h3></caption>
+    <caption> <h2> 공지 사항 </h2></caption>
     <tr id="table-header" align="center">
     <tr align="center">
-      <th id="nuser"> 작성자 </th>
+      <th id="nuser"> 병원장 </th>
       <th id="ntitle"> 제 목 </th>
       <th> 조회수 </th>
       <th> 작성일 </th>

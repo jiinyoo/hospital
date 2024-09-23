@@ -161,7 +161,7 @@
           </c:if>
          </c:forEach>
       </div>
-
+	<br>
       <div class="buttons" align="center">
         <a href="notice_list">목록</a>
         <c:if test="${sessionScope.state==2}">

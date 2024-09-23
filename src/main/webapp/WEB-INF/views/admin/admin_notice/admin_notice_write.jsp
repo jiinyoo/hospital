@@ -11,9 +11,10 @@
     section 
   	{
 
-		width:800px;
-
-		padding: 60px;
+		width: 100%;
+ 	    max-width: 800px;
+    	margin: 50px auto;
+        padding: 30px 50px;
     	background-color: #ffffff;
     	border-radius: 5px;
     	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -183,11 +184,29 @@
 		  }
 		  
 	}
+	
+	function validateForm() {
+        var title = document.getElementsByName("title")[0].value;
+        var content = document.getElementsByName("content")[0].value;
+        
+        if (title.trim() === "") {
+            alert("제목을 입력해주세요.");
+            return false;
+        }
+        
+        if (content.trim() === "") {
+            alert("내용을 입력해주세요.");
+            return false;
+        }
+
+        return true;
+    }
+	
 </script>
 </head>
 <body>
  <section id="">
-   <form method="post" action="admin_notice_writeOk" enctype="multipart/form-data">
+   <form method="post" action="admin_notice_writeOk" enctype="multipart/form-data" onsubmit="return validateForm();">
      <caption> <h3> 공지 글쓰기 </h3> </caption>
      <div> 
      	<input type="text" name="title" placeholder="제 목"> 

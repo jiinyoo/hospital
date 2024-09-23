@@ -183,11 +183,29 @@
 		  }
 		  
 	}
+	
+	function validateForm() {
+        var title = document.getElementsByName("title")[0].value;
+        var content = document.getElementsByName("content")[0].value;
+        
+        if (title.trim() === "") {
+            alert("제목을 입력해주세요.");
+            return false;
+        }
+        
+        if (content.trim() === "") {
+            alert("내용을 입력해주세요.");
+            return false;
+        }
+
+        return true;
+    }
+	
 </script>
 </head>
 <body>
  <section>
-   <form method="post" action="notice_writeOk" enctype="multipart/form-data">
+   <form method="post" action="notice_writeOk" enctype="multipart/form-data"onsubmit="return validateForm();">
      <caption> <h3> 공지 글쓰기 </h3> </caption>
      <div> 
      	<input type="text" name="title" placeholder="제 목"> 
