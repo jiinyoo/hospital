@@ -10,7 +10,7 @@
     <update id="updateState" parameterType="kr.co.hospital.admin.dto.ManagementDto">
         update user set
         state=#{state}
-        where id=#{id}
+        where user_id=#{user_id}
     </update>
     
     <select id="getUsersByPage" resultType="kr.co.hospital.admin.dto.ManagementDto">
@@ -44,5 +44,19 @@
          or user_name like concat('%', #{search}, '%')) 
 	</select>
     
+    <select id="isDoctor" resultType="boolean">
+    	select count(*) from doctor where doc_userid=#{id}
+    </select>
     
+    <select id="getDocId" resultType="int">
+    	select doc_id from doctor where doc_userid=#{id}
+    </select>
+    
+    <delete id="delWorkday">
+    	delete from workday where doc_id=#{doc_id}
+    </delete>
+    
+    <delete id="delDoctor">
+    	delete from doctor where doc_id=#{doc_id}
+    </delete>
 </mapper>

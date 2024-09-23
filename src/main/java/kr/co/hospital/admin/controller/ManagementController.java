@@ -27,9 +27,9 @@ public class ManagementController {
 	
 	@RequestMapping("/admin/user/updateState")
     public String updateState(ManagementDto mdto,
-    		 HttpSession session) 
+    		 HttpSession session, HttpServletRequest request) 
 	{
-        return service.updateState(mdto, session);
+        return service.updateState(mdto, session, request);
     }
 
 }
