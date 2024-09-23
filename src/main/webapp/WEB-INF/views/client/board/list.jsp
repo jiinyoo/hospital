@@ -27,10 +27,28 @@
 	    padding: 10px; /* 셀 내부 여백 조정 */
 	    height: 30px;  /* 셀 높이 명확히 설정 */
 	}
+	
+	a {
+		text-decoration:none;
+		color:black;
+		
+	}
+
 </style>
 <script>
+window.onload=function() {
+	
+	var sword = "${param.sword}";
+	var stype = "${param.stype}";
+	if (sword) {
+		document.getElementById("sword").value = sword;
+	}
+	if (stype) {
+		document.getElementsByName("stype")[0].value = stype;
+	}
+	
+}
 </script>
-
 </head>
 <body>
 <section>
@@ -46,13 +64,69 @@
 	<tr>
 		<td width="100">${bdto.user_id}</td>
 		<td width="600"><a href="../../boardreadnum?board_id=${bdto.board_id}">${bdto.board_title}</a></td>
-		<td width="200">${bdto.writeday}</a></td>
+		<td width="200">${bdto.writeday}</td>
 		<td width="100">${bdto.board_readnum}</td>
 	</tr>
 	</c:forEach>
-<tr align="right">
-	<td colspan="4"><a href="../../boardwrite"><input type="button" value="글쓰기" ></a></td>
-</tr>
+	<tr align="right">
+		<td colspan="4"><a href="../../boardwrite"><input type="button" value="글쓰기" ></a></td>
+	</tr>
+	<tr align="center">
+		<td colspan="4">
+		
+		
+		<c:if test="${pstart!=1}">		
+			<a href="/boardlist?page=${pstart-1}&sword=${sword}&stype=${stype}">◀◀</a>
+		</c:if>
+		<c:if test="${pstart==1}">		
+			 ◀◀
+		</c:if>
+		
+		<c:if test="${page!=1}">
+			<a href="/boardlist?page=${page-1}&sword=${sword}&stype=${stype}">◁</a>
+		</c:if>
+		<c:if test="${page==1}">
+			◁
+		</c:if>
+		
+		
+		<c:forEach begin="${pstart}" end="${pend}" var="i">
+			<c:if test="${page==i}">
+				<a href="/boardlist?page=${i}&sword=${sword}&stype=${stype}" style="color:red;">${i}</a>
+			</c:if>
+			<c:if test="${page!=i}">
+				<a href="/boardlist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
+			</c:if>
+		</c:forEach>	
+		
+		<c:if test="${page!=chong }">
+			<a href="/boardlist?page=${page+1}&sword=${sword}&stype=${stype}">▷</a>
+		</c:if>
+		<c:if test="${page==chong }">
+			▷
+		</c:if>
+		
+		<c:if test="${pend!=chong }">
+			<a href="/boardlist?page=${pend+1}&sword=${sword}&stype=${stype}">▶▶</a>
+		</c:if>
+		<c:if test="${pend==chong}">
+			▶▶
+		</c:if>
+		</td>
+	</tr>
+	<tr align="center">
+		<td colspan="4">
+		<form name="pkc" action="/boardlist" method="post">
+			<select name="stype">
+				<option value="user_id">작성자 아이디</option>			
+				<option value="board_title">제목</option>
+				<option value="board_content">내용</option>
+				<input type="text" name="sword" id="sword">
+				<input type="submit" value="검색">
+			</select>
+		</form>
+		</td>
+	</tr>
 </table>
 </section>
 </body>

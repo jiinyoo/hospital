@@ -45,10 +45,10 @@
 
 
 #calendar-outer table td {
-	text-align:center;
+	text-align:left;
 	vertical-align: top;
 	padding: 5px;
-	width:100px;
+	width:150px;
 	height:100px;
 	border-spacing:none;
 }
@@ -66,6 +66,12 @@
     justify-content: center; /* 가운데 정렬 */
     margin: 20px 0; /* 위, 아래 여백 설정 */
 } 
+
+#programname
+{
+	margin-top:5px;
+
+}
 
 </style>
 <meta charset="UTF-8">

@@ -32,8 +32,8 @@ public class InquiryController {
 	}
 	
 	@RequestMapping("/inquiry/list")
-	public String inquirylist(HttpSession session,Model model,HttpServletResponse response)  {
-		return service.list(session, model,response);
+	public String inquirylist(HttpSession session,Model model,HttpServletResponse response, HttpServletRequest request)  {
+		return service.list(session, model,response,request);
 	}
 	@RequestMapping("/inquiry/readnum") 
 	public String inquiryreadnum(HttpServletRequest request,HttpSession session) {

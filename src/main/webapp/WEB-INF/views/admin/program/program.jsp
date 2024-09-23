@@ -47,6 +47,20 @@ table td{
     border:1px solid black;
 }
 </style>
+<script>
+window.onload=function() {
+	
+	var sword = "${param.sword}";
+	var stype = "${param.stype}";
+	if (sword) {
+		document.getElementById("sword").value = sword;
+	}
+	if (stype) {
+		document.getElementsByName("stype")[0].value = stype;
+	}
+	
+}
+</script>
 </head>
 <body>
 <section>
@@ -103,7 +117,68 @@ table td{
                 </c:choose>
             </td>
         </tr>
-    </c:forEach>
+        </c:forEach>
+        
+        <tr align="center">
+		<td colspan="10">
+		
+		
+		<c:if test="${pstart!=1}">		
+			<a href="/admin/program/program?page=${pstart-1}&sword=${sword}&stype=${stype}">◀◀</a>
+		</c:if>
+		<c:if test="${pstart==1}">		
+			 ◀◀
+		</c:if>
+		
+		<c:if test="${page!=1}">
+			<a href="/admin/program/program?page=${page-1}&sword=${sword}&stype=${stype}">◁</a>
+		</c:if>
+		<c:if test="${page==1}">
+			◁
+		</c:if>
+		
+		
+		<c:forEach begin="${pstart}" end="${pend}" var="i">
+			<c:if test="${page==i}">
+				<a href="/admin/program/program?page=${i}&sword=${sword}&stype=${stype}" style="color:red;">${i}</a>
+			</c:if>
+			<c:if test="${page!=i}">
+				<a href="/admin/program/program?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
+			</c:if>
+		</c:forEach>	
+		
+		<c:if test="${page!=chong }">
+			<a href="/admin/program/program?page=${page+1}&sword=${sword}&stype=${stype}">▷</a>
+		</c:if>
+		<c:if test="${page==chong }">
+			▷
+		</c:if>
+		
+		<c:if test="${pend!=chong }">
+			<a href="/admin/program/program?page=${pend+1}&sword=${sword}&stype=${stype}">▶▶</a>
+		</c:if>
+		<c:if test="${pend==chong}">
+			▶▶
+		</c:if>
+		</td>
+	</tr>
+	<tr align="center">
+		<td colspan="10">
+		<form name="pkc" action="/admin/program/program" method="post">
+			<select name="stype">
+				<option value="p.pro_name">프로그램 제목</option>			
+				<option value="p.pro_part">파트</option>
+				<option value="p.teach_name">강사</option>
+				<input type="text" name="sword" id="sword">
+				<input type="submit" value="검색">
+			</select>
+		</form>
+		</td>
+	</tr>
+        
+        
+        
+        
 </table>
 </section>
 </body>

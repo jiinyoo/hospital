@@ -13,7 +13,7 @@ import kr.co.hospital.client.dto.InquiryDto;
 public interface AdminInquiryMapper {
 
 	int getState(String session_user_id);
-	ArrayList<HashMap> inquirylist();
+	ArrayList<HashMap> inquirylist(int index, String stype, String sword);
 	void readnum(String inq_id);
 	void writeOk(AdminInquiryDto aidto);
 	void updateanswer(String inq_id);
@@ -22,6 +22,7 @@ public interface AdminInquiryMapper {
 	void updateOk(InquiryDto idto);
 	void updatezero(int group_order);
 	void samegroupdelete(int group_order);
+	int getChong(String stype, String sword);
 	
 
 }

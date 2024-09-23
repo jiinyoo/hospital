@@ -347,6 +347,31 @@ hr
     }
 }
 
+
+}
+
+
+#user {
+	position:relative;
+	
+}
+
+#userdetail {
+	position:absolute;
+	left : 1388px;
+	top:98px;
+	background:white;
+	border:1px solid #8BBCFF;
+	display:none;
+}
+
+#userdetail > li {
+	list-style-type:none;
+	text-align:left;
+}
+
+
+
 </style>
 <script>
 	
@@ -391,6 +416,16 @@ hr
 		
 		}
 		move();
+	}
+	
+	
+	function viewuser() {
+		document.getElementById("userdetail").style.display="block";
+	}
+	
+	
+	function hideuser() {
+		document.getElementById("userdetail").style.display="none";
 	}
 	
 </script>

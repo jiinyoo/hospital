@@ -11,7 +11,7 @@ import kr.co.hospital.admin.dto.ProgramReserveDto;
 
 @Mapper
 public interface ProgramMapper {
-	public ArrayList<ProgramDto> programs();
+	public ArrayList<ProgramDto> programs(int index, String stype, String sword);
 	public void programupdate(ProgramDto pdto);
 	public int juisnullcheck(String pro_ju);
 	public void insertprogram(ProgramDto pdto);
@@ -31,4 +31,5 @@ public interface ProgramMapper {
 	public void minusProgramCapacity(int p_inwon, int pro_id, String pres_date);
 	public void deleteonepreserve(int pres_id);
 	public int getpreserveChong(String stype, String sword);
+	public int getChong(String stype, String sword);
 }

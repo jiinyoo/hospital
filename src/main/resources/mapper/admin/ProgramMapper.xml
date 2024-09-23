@@ -16,8 +16,13 @@
 			       ORDER BY pd.day_of_week SEPARATOR ', ') AS days_of_week
 			FROM program p
 			INNER JOIN programdays pd ON p.pro_id = pd.pro_id
+			where ${stype} like concat('%',#{sword},'%') 
 			GROUP BY p.pro_id
-			ORDER BY p.pro_id DESC
+			ORDER BY p.pro_id DESC limit #{index},10
+	</select>
+	<select id="getChong" resultType="Integer">
+			select ceil(count(*)/10) from program as p
+			where ${stype} like concat('%',#{sword},'%') 
 	</select>
 	<insert id="insertprogram">
 		insert into program(pro_name, pro_img, pro_info,teach_name,

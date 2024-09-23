@@ -11,9 +11,10 @@
 		from inquiry
 	</select>
 	<select id="inquirylist" resultType="HashMap">
-		select * from inquiry 
+		select * from inquiry
+		where ${stype} like concat('%',#{sword},'%')
 		order by group_order desc,
-		state asc
+		state asc limit #{index}, 10
 	</select>
 	<update id="readnum">
 		update inquiry
@@ -37,5 +38,9 @@
 	<select id="getState" resultType="Integer">
 		select state from user
 		where user_id=#{session_user_id}
+	</select>
+	<select id="getChong" resultType="Integer">
+		select ceil(count(*)/10) from inquiry
+		where ${stype} like concat('%',#{sword},'%')
 	</select>	
 </mapper>

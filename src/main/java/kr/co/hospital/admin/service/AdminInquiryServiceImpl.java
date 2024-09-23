@@ -35,16 +35,43 @@ public class AdminInquiryServiceImpl implements AdminInquiryService {
 	AdminInquiryMapper mapper;
 
 	@Override
-	public String inquirylist(HttpSession session, Model model, HttpServletResponse response) {
+	public String inquirylist(HttpSession session, Model model, HttpServletResponse response,HttpServletRequest request) {
 		String session_user_id=null;
 		if(session.getAttribute("user_id")!=null) {
 			session_user_id=session.getAttribute("user_id").toString();
 			int state=mapper.getState(session_user_id);
 			System.out.println("state값"+state);
 			if(state==1 || state==2) {
-				ArrayList<HashMap> imapAll=mapper.inquirylist();
+				int page=request.getParameter("page")!=null?Integer.parseInt(request.getParameter("page")):1;
+				String stype=request.getParameter("stype")!=null?request.getParameter("stype"):"user_id";
+				String sword=request.getParameter("sword")!=null?request.getParameter("sword"):"";
+				
+				int index=(page-1)*10;
+				int pstart=page/10;
+				if(page%10==0) {
+					pstart=pstart-1;
+				}
+				pstart=(pstart*10)+1;
+				int pend=pstart+9;
+				
+				int chong=mapper.getChong(stype,sword);
+				
+				if(pend>chong) {
+					
+					pend=chong;
+				}
+				
+				ArrayList<HashMap> imapAll=mapper.inquirylist(index,stype,sword);
 				model.addAttribute("imapAll",imapAll);
 				model.addAttribute("session_user_id",session_user_id);
+				model.addAttribute("page",page);
+				model.addAttribute("pstart",pstart);
+				model.addAttribute("pend",pend);
+				model.addAttribute("chong",chong);
+				model.addAttribute("stype",stype);
+				model.addAttribute("sword",sword);
+				
+				
 				return "/admin/inquiry/list";
 			} else {
 				return "redirect:/main/index";
