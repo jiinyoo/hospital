@@ -62,7 +62,7 @@ public class InquiryServiceImpl implements InquiryService {
 			System.out.println("group_order"+group_order);
 			idto.setGroup_order(group_order);
 			mapper.writeOk(idto);
-			return "redirect:/inquiry/list";
+			return "redirect:/main/inquirylist";
 		}else {
 			return "redirect:/main/login";
 		}
@@ -108,7 +108,7 @@ public class InquiryServiceImpl implements InquiryService {
 			model.addAttribute("sword",sword);
 			return "/client/inquiry/list";
 		}else {
-			Cookie cookie=new Cookie("url","/inquiry/list");
+			Cookie cookie=new Cookie("url","/main/inquirylist");
 			cookie.setMaxAge(60*60*24);
 			cookie.setPath("/");
 			response.addCookie(cookie);
@@ -120,7 +120,7 @@ public class InquiryServiceImpl implements InquiryService {
 	public String readnum(HttpServletRequest request) {
 		String inq_id=request.getParameter("inq_id");
 		mapper.readnum(inq_id);
-		return "redirect:/inquiry/content?inq_id="+inq_id;
+		return "redirect:/main/inquirycontent?inq_id="+inq_id;
 	}
 
 	@Override
@@ -131,8 +131,10 @@ public class InquiryServiceImpl implements InquiryService {
 		}
 		String inq_id=request.getParameter("inq_id");
 		InquiryDto idto=mapper.content(inq_id);
-		String[] imgs=idto.getImg().split("/");
-		idto.setImgs(imgs);
+		if(idto.getImg()!=null) {
+			String[] imgs=idto.getImg().split("/");
+			idto.setImgs(imgs);
+		}
 		model.addAttribute("idto",idto);
 		model.addAttribute("session_user_id",session_user_id);
 		return "client/inquiry/content";
@@ -159,7 +161,7 @@ public class InquiryServiceImpl implements InquiryService {
 			//File file=new File(path+"/"+delimgs[i])
 			//파일을 지운다.
 			mapper.delete(inq_id);
-			return "redirect:/inquiry/list";
+			return "redirect:/main/inquirylist";
 			
 		}else {
 			return "redirect:/main/login";
@@ -221,7 +223,7 @@ public class InquiryServiceImpl implements InquiryService {
 				}
 			}
 			mapper.updateOk(idto);
-			return "redirect:/inquiry/content?inq_id="+inq_id;
+			return "redirect:/main/inquirycontent?inq_id="+inq_id;
 		} else {
 			return "redirect:/main/login"; 
 		}

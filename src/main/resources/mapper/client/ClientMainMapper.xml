@@ -3,6 +3,10 @@
 <mapper namespace="kr.co.hospital.client.mapper.ClientMainMapper">
   <select id="notice_list" resultType="HashMap">
     select notice_id, title, date_format(writeday, '%Y.%m.%d') AS writeday 
-    from notice order by notice_id desc;
+    from notice order by notice_id desc 
   </select>
+  <select id="program_list" resultType="HashMap">
+  		select * from program
+  		order by pro_id desc
+  </select> 	
 </mapper>

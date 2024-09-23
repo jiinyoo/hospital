@@ -33,7 +33,10 @@ public class ClientMainServiceImpl implements ClientMainService{
 			ArrayList<HashMap> map=mapper.notice_list();
 			System.out.println("공지사항 목록: "+map);
 			model.addAttribute("nmapAll",map);
-		
+			
+			ArrayList<HashMap> programmap=mapper.program_list();
+			model.addAttribute("programmap", programmap);
+			
 			return "/client/main/index";
 	}
 }
