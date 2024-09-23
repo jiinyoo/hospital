@@ -373,13 +373,15 @@ section #community .comm .more-btn a:hover {
 <br>
 <div id="programs">
 	<c:forEach items="${programmap}" var="pdto" begin="0" end="3">
+	<a href="/main/programreserve">
 	<div class="card">
     	<img src="../../static/admin/programfile/${pdto.pro_img}" alt="Card Image">
    		 <div class="card-body">
      	 <div class="card-title">${pdto.pro_name}</div>
-      	<div class="card-text">${pdto.teach_name}</div>
+      	<div class="card-text">강사 : ${pdto.teach_name}</div>
       	</div>
     </div>
+    </a>
 </c:forEach>
 </div>
 지웬장~
