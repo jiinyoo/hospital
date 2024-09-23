@@ -52,7 +52,7 @@ public class LoginServicelmpl implements LoginService {
 			int state=mapper.getState(udto.getUser_id());
 	        session.setAttribute("state",state);
 	        
-			if(state==2) 
+			if(state==1 || state==2) 
 			{
 				return "redirect:/admin/main/index";
 			} 

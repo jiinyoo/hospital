@@ -85,7 +85,7 @@ public class DoctorServiceImpl implements DoctorService {
 		MultipartFile file=request.getFile("file");
 		if(!file.isEmpty()) {
 			String fname=file.getOriginalFilename();
-			String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
+			String str=ResourceUtils.getFile("classpath:static/admin/doctor").toPath().toString()+"/"+fname;
 			
 			str=FileUtils.getFileName(fname, str);
 			String saveFname=str.substring(str.lastIndexOf("/")+1);
@@ -147,14 +147,14 @@ public class DoctorServiceImpl implements DoctorService {
 
 		if(!file.isEmpty()) {
 			String fname=file.getOriginalFilename();
-			String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
+			String str=ResourceUtils.getFile("classpath:static/admin/doctor").toPath().toString()+"/"+fname;
 			str=FileUtils.getFileName(fname, str);
 			String saveFname=str.substring(str.lastIndexOf("/")+1);
 			
 			Path path=Paths.get(str);
 			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 			
-			str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+mapper.getDocimg(ddto.getDoc_userid());
+			str=ResourceUtils.getFile("classpath:static/admin/doctor").toPath().toString()+"/"+mapper.getDocimg(ddto.getDoc_userid());
 			path=Paths.get(str);
 			if(Files.exists(path)) {
 				Files.delete(path);

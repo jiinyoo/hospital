@@ -86,21 +86,67 @@
             }
         }
         
+        var pchk=0;
+        function pwdCheck(n) 
+        {
+        	var new_pwd=document.mform.new_pwd.value;
+            var confirm_pwd=document.mform.confirm_pwd.value;
+        	
+          var pwdPattern=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+
+          if (!pwdPattern.test(new_pwd)) 
+          {
+            document.getElementById("pId").innerText="비밀번호는 8~20자, 영문, 숫자, 특수문자를 포함해야 합니다.";
+            document.getElementById("pId").style.color="red";
+            pchk=0;
+            
+            return;
+          }
+          if (n==1 || (n==0 && confirm_pwd!="")) 
+          {
+            if (new_pwd==confirm_pwd) 
+            {
+              document.getElementById("pId").innerText="비밀번호가 일치합니다";
+              document.getElementById("pId").style.color="green";
+              document.getElementById("pId").style.color="green";
+              pchk = 1;
+            } 
+            else 
+            {
+              document.getElementById("pId").innerText="비밀번호가 일치하지 않습니다";
+              document.getElementById("pId").style.color="red";
+              document.getElementById("pId").style.color="red";
+              pchk = 0;
+            }
+          }
+        }
+        
+        function check() {
+        	var new_pwd = document.mform.new_pwd.value;
+    	    var pwdPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+    	    
+    	    if (!pwdPattern.test(new_pwd)) {
+    	        alert("비밀번호는 8~20자, 영문, 숫자, 특수문자를 포함해야 합니다.");
+    	        return false;
+    	    }
+    	    return true;
+        }
+        
     </script>
 </head>
 <body>
     <div class="change-password-container">
         <h3>비밀번호 변경</h3>
-        <form method="post" action="${pageContext.request.contextPath}/main/changePwd" onsubmit="return validatePwd()">
+        <form name="mform" method="post" action="${pageContext.request.contextPath}/main/changePwd" onsubmit="return validatePwd() && check()">
             <input type="hidden" name="user_id" value="${user_id}"/>
             
             <label for="new_pwd">새로운 비밀번호</label>
-            <input type="password" name="new_pwd" placeholder="새로운 비밀번호를 입력하세요" required>
+            <input type="password" name="new_pwd" onkeyup="pwdCheck(0)" placeholder="새로운 비밀번호를 입력하세요" required>
             <br>
             <br>
             <label for="confirm_pwd">비밀번호 확인</label>
-            <input type="password" name="confirm_pwd" placeholder="비밀번호를 다시 입력하세요" required>
-
+            <input type="password" name="confirm_pwd" onkeyup="pwdCheck(1)" placeholder="비밀번호를 다시 입력하세요" required>
+			<span id="pId"></span>
             <!-- 에러 메시지 출력 영역 -->
             <div id="error-message" class="error-message"></div>
             

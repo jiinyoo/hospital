@@ -7,8 +7,15 @@
   </insert>
   <select id="notice_list" resultType="HashMap">
     select * from notice
-    order by notice_id desc
+    order by writeday desc
+    limit #{index}, #{pageSize}
   </select>
+  
+  <select id="getTotalNoticeCount" resultType="int">
+    select count(*) from notice
+  </select>
+  
+  
   <update id="notice_readnum">
     update notice set readnum=readnum+1
     where notice_id=#{notice_id}

@@ -51,6 +51,7 @@ window.onload=function() {
 </script>
 </head>
 <body>
+<section>
 <table>
 	<caption><h2>진료 후기 게시판</h2></caption>
 	<tr>
@@ -127,5 +128,6 @@ window.onload=function() {
 		</td>
 	</tr>
 </table>
+</section>
 </body>
 </html>

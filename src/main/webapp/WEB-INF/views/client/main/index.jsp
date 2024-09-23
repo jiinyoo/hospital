@@ -56,9 +56,9 @@ section #community {
     width: 32%; /* 3개의 칸이 고르게 배치되도록 설정 */
     height:200px;
     padding: 20px;
-    background-color:white;
+    background-color:#FDFFFF;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 테두리 없이 그림자만 추가 */
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3); /* 테두리 없이 그림자만 추가 */
     text-align: left;
 }
 
@@ -72,6 +72,7 @@ section #community .comm .title {
 section #community .comm .notice-list {
     list-style-type: none;
     padding: 0;
+    
 }
 
 section #community .comm .notice-list li {
@@ -80,12 +81,14 @@ section #community .comm .notice-list li {
     padding: 8px 0;
     border-bottom: 1px solid #eaeaea;
     font-size: 14px;
+    
 }
 
 section #community .comm .notice-list li a {
     text-decoration: none;
     color: #0073e6;
     font-weight: normal;
+
 }
 
 section #community .comm .notice-list li a:hover {
@@ -157,7 +160,7 @@ section #community .comm .more-btn a:hover {
     top: 200px; /* 화면 상단에서의 위치 */
     right: 50px; /* 화면 오른쪽에서의 위치 */
     width: 200px; /* 배너 너비 */
-    z-index: 9999; /* 다른 요소 위에 표시 */
+    z-index: 10; /* 다른 요소 위에 표시 */
     transition: top 0.6s ease-in-out; /* 부드러운 스크롤 애니메이션 */
 }
 
