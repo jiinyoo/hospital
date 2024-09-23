@@ -97,7 +97,7 @@
 </head>
 <body>
 <section>
-	<form name="inquiry" method="post" action="writeOk" enctype="multipart/form-data" onsubmit="return check()">
+	<form name="inquiry" method="post" action="inquirywriteOk" enctype="multipart/form-data" onsubmit="return check()">
 		<table>
 			<input type="hidden" name="bimil" id="bimil" value="0">
 			<caption>진료 문의 등록</caption>

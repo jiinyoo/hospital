@@ -132,8 +132,9 @@ public class DoctorServiceImpl implements DoctorService {
 				DoctorDto ddto=mapper.upDoctor(userid);
 				ddto.setHistorys(ddto.getDoc_history().split("/"));
 				model.addAttribute("ddto",ddto);
-				
+				String[] phone=ddto.getDoc_phone().split("-");
 				ArrayList<WorkdayDto> wdto=mapper.getWorkday(ddto.getDoc_id());
+				model.addAttribute("phone",phone);
 				model.addAttribute("wdto",wdto);
 				return "/admin/doctor/upDoctor";
 			}

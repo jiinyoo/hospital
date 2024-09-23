@@ -14,4 +14,8 @@ public interface ManagementMapper {
 	public List<ManagementDto> getUsersByPage(int offset, int limit);
 	public int getTotalUsersBySearch(String search);
 	public List<ManagementDto> getUsersBySearch(String search, int offset, int limit);
+	public boolean isDoctor(String id);
+	public int getDocId(String id);
+	public void delWorkday(int doc_id);
+	public void delDoctor(int doc_id);
 }

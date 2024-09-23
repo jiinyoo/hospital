@@ -8,6 +8,6 @@ import kr.co.hospital.admin.dto.ManagementDto;
 
 public interface ManagementService {
 	 public String List(HttpServletRequest request, Model model);
-     public String updateState(ManagementDto mdto,HttpSession session);
+     public String updateState(ManagementDto mdto,HttpSession session, HttpServletRequest request);
 
 }

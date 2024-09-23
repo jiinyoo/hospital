@@ -23,8 +23,8 @@ public class AdminInquiryController {
 	AdminInquiryService service;
 
 	@RequestMapping("/admin/inquiry/list")
-	public String inquirylist(HttpSession session,Model model,HttpServletResponse response) {
-		return service.inquirylist(session,model,response);
+	public String inquirylist(HttpSession session,Model model,HttpServletResponse response, HttpServletRequest request) {
+		return service.inquirylist(session,model,response,request);
 	}
 	
 	@RequestMapping("/admin/inquiry/readnum") 

@@ -170,6 +170,52 @@ section #community .comm .more-btn a:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 배너에 그림자 추가 */
 }
 
+.card {
+    width: 285px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 20px;
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+    font-size: 14px;
+    color: #555;
+  }
+  
+
+#protitle {
+	margin:auto;
+}
+  
+
+#programs .card {
+
+	display:inline-block;
+
+}
+
+
+
+#0073e6
+  
 </style>
 <script>
 	$(function(){
@@ -250,8 +296,7 @@ section #community .comm .more-btn a:hover {
 		<!-- 학술행사 칸 -->
 		<div class="comm">
 			<div class="title">
-				학술행사
-				<div class="more-btn" ><a href="#">더보기</a></div>
+				프로그램
 			</div>
 			
 			<ul class="notice-list">
@@ -320,11 +365,23 @@ section #community .comm .more-btn a:hover {
         <p>외부영상 CD등록</p>
     </div>
 </div>
+
+<br><br>
+<div id="protitle" style="color:#0073e6;">우리 센터 프로그램</div>
 <section>
+
 <br>
-<br>
-<br>
-<br>
+<div id="programs">
+	<c:forEach items="${programmap}" var="pdto" begin="0" end="3">
+	<div class="card">
+    	<img src="../../static/admin/programfile/${pdto.pro_img}" alt="Card Image">
+   		 <div class="card-body">
+     	 <div class="card-title">${pdto.pro_name}</div>
+      	<div class="card-text">${pdto.teach_name}</div>
+      	</div>
+    </div>
+</c:forEach>
+</div>
 지웬장~
 <hr>
 dd

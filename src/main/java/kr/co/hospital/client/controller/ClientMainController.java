@@ -39,6 +39,6 @@ public class ClientMainController {
 	@GetMapping("/main/hospital")
 	public String hospital()
 	{
-		return "client/info/hospital";
+		return "/client/info/hospital";
 	}
 }

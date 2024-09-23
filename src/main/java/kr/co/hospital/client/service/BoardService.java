@@ -9,7 +9,7 @@ import kr.co.hospital.client.dto.BoardDto;
 
 public interface BoardService {
 	String boardwrite(HttpSession session,Model model);
-	String boardlist(HttpSession session, Model model,HttpServletResponse response);
+	String boardlist(HttpSession session, Model model,HttpServletResponse response, HttpServletRequest request);
 	void boardinsert(BoardDto bdto);
 	String boardreadnum(HttpServletRequest request);
 	String boardcontent(HttpServletRequest request, Model model, HttpSession session);

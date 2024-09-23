@@ -11,7 +11,7 @@ import kr.co.hospital.client.dto.InquiryDto;
 
 public interface AdminInquiryService {
 
-	String inquirylist(HttpSession session, Model model, HttpServletResponse response);
+	String inquirylist(HttpSession session, Model model, HttpServletResponse response, HttpServletRequest request);
 
 	String readnum(HttpServletRequest request,HttpSession session);
 

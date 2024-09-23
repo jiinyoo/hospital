@@ -43,43 +43,42 @@ public class BoardController {
 	BoardService service;
 	private final WebApplicationContext context;
 	
-	@RequestMapping("/boardwrite")
+	@RequestMapping("/main/boardwrite")
 	public String boardwrite(HttpSession session,Model model) {
 		return service.boardwrite(session,model);
 	}
 	
-	@RequestMapping("/boardreadnum")
+	@RequestMapping("/main/boardreadnum")
 	public String boardreadnum(HttpServletRequest request) {
 		return service.boardreadnum(request);
 	}
 	
-	@RequestMapping("/boardcontent")
+	@RequestMapping("/main/boardcontent")
 	public String boardcontent(HttpServletRequest request, Model model, HttpSession session) {
 		return service.boardcontent(request, model, session);
 	}
 	
 	
-	@RequestMapping("/boarddelete")
+	@RequestMapping("/main/boarddelete")
 	public String boarddelete(HttpServletRequest request) {
 		return service.boarddelete(request);
 	}
 	
-	@RequestMapping("/boardupdate")
+	@RequestMapping("/main/boardupdate")
 	public String boardupdate(HttpServletRequest request, Model model) {
 		return service.boardupdate(request,model);
 	}
 	
-	
 
-	
-	
-	
-	@RequestMapping("/boardlist")
+	@RequestMapping("/main/boardlist")
 
-	public String boardlist(HttpSession session,Model model,HttpServletResponse response) {
-		return service.boardlist(session,model,response);
-
+	public String boardlist(HttpSession session,Model model,HttpServletResponse response, HttpServletRequest request) {
+		return service.boardlist(session,model,response,request);
+		
 	}
+	
+	
+	
 	 @PostMapping(value = "/boardimageupload")
 	 @ResponseBody
 	    // @RequestParam은 자바스크립트에서 설정한 이름과 반드시 같아야합니다.
@@ -114,7 +113,9 @@ public class BoardController {
 		}
 	 
 	 
-	 @PostMapping("/boardwriteOk")
+	 
+	 
+	 @PostMapping("/main/boardwriteOk")
 	 @ResponseBody
 	    public void boardwriteOk(BoardDto bdto) {
 	        // postContent는 Summernote에서 작성된 HTML 코드입니다.
@@ -126,7 +127,7 @@ public class BoardController {
 	    }
 	
 	 
-	 @PostMapping("/boardupdateOk")
+	 @PostMapping("/main/boardupdateOk")
 	 @ResponseBody
 	    public void boardupdateOk(BoardDto bdto, HttpServletRequest request) {
 	        // postContent는 Summernote에서 작성된 HTML 코드입니다.

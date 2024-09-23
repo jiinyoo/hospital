@@ -43,16 +43,16 @@ function check(user_id, bimil, inq_id, origin_user_id) {
     var sessionstate="${sessionstate}"
     if (bimil == 1) {
         if (user_id == session_user_id ) {//이 글의 user_id가 session_id와 같을 때
-        	location.href = "/inquiry/readnum?inq_id=" + inq_id;
+        	location.href = "/main/inquiryreadnum?inq_id=" + inq_id;
         } else if(origin_user_id == session_user_id) {
-            location.href = "/inquiry/readnum?inq_id=" + inq_id;
+            location.href = "/main/inquiryreadnum?inq_id=" + inq_id;
         } else if (sessionstate ==1 || sessionstate==2) {
-            location.href = "/inquiry/readnum?inq_id=" + inq_id;
+            location.href = "/main/inquiryreadnum?inq_id=" + inq_id;
         } else {
             alert("작성자만 볼 수 있는 비밀글입니다.");
         }
     } else {
-        location.href = "/inquiry/readnum?inq_id=" + inq_id;
+        location.href = "/main/inquiryreadnum?inq_id=" + inq_id;
     }
 }
 
@@ -61,9 +61,26 @@ function logincheck() {
 	if(session_user_id=="") {
 		alert("로그인 하셔야 글 작성이 가능합니다.")
 	}else {
-		location.href="/inquiry/write";
+		location.href="/main/inquirywrite";
 	}
 }
+
+
+
+
+window.onload=function() {
+	
+	var sword = "${param.sword}";
+	var stype = "${param.stype}";
+	if (sword) {
+		document.getElementById("sword").value = sword;
+	}
+	if (stype) {
+		document.getElementsByName("stype")[0].value = stype;
+	}
+	
+}
+
 
 </script>
 </head>
@@ -96,6 +113,62 @@ function logincheck() {
 	<tr align="right">
 		<td colspan="4">
 		<input type="button" value="글쓰기" onclick="logincheck()">
+		</td>
+	</tr>
+	<tr align="center">
+		<td colspan="4">
+		
+		
+		<c:if test="${pstart!=1}">		
+			<a href="/main/inquirylist?page=${pstart-1}&sword=${sword}&stype=${stype}">◀◀</a>
+		</c:if>
+		<c:if test="${pstart==1}">		
+			 ◀◀
+		</c:if>
+		
+		<c:if test="${page!=1}">
+			<a href="/main/inquirylist?page=${page-1}&sword=${sword}&stype=${stype}">◁</a>
+		</c:if>
+		<c:if test="${page==1}">
+			◁
+		</c:if>
+		
+		
+		<c:forEach begin="${pstart}" end="${pend}" var="i">
+			<c:if test="${page==i}">
+				<a href="/main/inquirylist?page=${i}&sword=${sword}&stype=${stype}" style="color:red;">${i}</a>
+			</c:if>
+			<c:if test="${page!=i}">
+				<a href="/main/inquirylist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
+			</c:if>
+		</c:forEach>	
+		
+		<c:if test="${page!=chong }">
+			<a href="/main/inquirylist?page=${page+1}&sword=${sword}&stype=${stype}">▷</a>
+		</c:if>
+		<c:if test="${page==chong }">
+			▷
+		</c:if>
+		
+		<c:if test="${pend!=chong }">
+			<a href="/main/inquirylist?page=${pend+1}&sword=${sword}&stype=${stype}">▶▶</a>
+		</c:if>
+		<c:if test="${pend==chong}">
+			▶▶
+		</c:if>
+		</td>
+	</tr>
+	<tr align="center">
+		<td colspan="4">
+		<form name="pkc" action="/main/inquirylist" method="post">
+			<select name="stype">
+				<option value="user_id">작성자 아이디</option>			
+				<option value="title">제목</option>
+				<option value="part">과</option>
+				<input type="text" name="sword" id="sword">
+				<input type="submit" value="검색">
+			</select>
+		</form>
 		</td>
 	</tr>
 </table>

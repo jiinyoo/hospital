@@ -347,6 +347,31 @@ hr
     }
 }
 
+
+}
+
+
+#user {
+	position:relative;
+	
+}
+
+#userdetail {
+	position:absolute;
+	left : 1388px;
+	top:98px;
+	background:white;
+	border:1px solid #8BBCFF;
+	display:none;
+}
+
+#userdetail > li {
+	list-style-type:none;
+	text-align:left;
+}
+
+
+
 </style>
 <script>
 	
@@ -391,6 +416,16 @@ hr
 		
 		}
 		move();
+	}
+	
+	
+	function viewuser() {
+		document.getElementById("userdetail").style.display="block";
+	}
+	
+	
+	function hideuser() {
+		document.getElementById("userdetail").style.display="none";
 	}
 	
 </script>
@@ -453,7 +488,7 @@ hr
 			<li class="hov"><a href="/main/hospital">병원 소개</a></li>
 			<li class="hov"><a href="/main/info/part?part=">의료진 안내</a></li>
 			<li class="hov">상담/예약</li>
-			<li class="hov"><a href="/program/programreserve">프로그램 예약</a></li>
+			<li class="hov"><a href="/main/programreserve">프로그램 예약</a></li>
 			<li class="hov">커뮤니티</li>
 			<li class="hov"><a href="/main/healthInfo">건강 정보</a></li>
 		</ul>
@@ -465,10 +500,10 @@ hr
 		</ul>
 		
 		<ul class="submenu">
-			<li>병원 인삿말</li>
-			<li>미션과 비전</li>
-			<li>조직도</li>
-			<li>오시는 길</li>
+			<li><a href="/main/hospital#menu1">병원 인삿말</a></li>
+			<li><a href="/main/hospital#menu2">미션과 비전</a></li>
+			<li><a href="/main/hospital#menu3">조직도</a></li>
+			<li><a href="/main/hospital#menu4">오시는 길</a></li>
 		</ul>
 		
 		<ul class="submenu">
@@ -484,12 +519,12 @@ hr
 			<li><a href="/main/reserveView">예약 조회</a></li>
 		</ul>
 		<ul class="submenu">
-			<li><a href="/program/programreserve">프로그램 예약</a></li>
+			<li><a href="/main/programreserve">프로그램 예약</a></li>
 		</ul>
 		<ul class="submenu">
 				<li><a href="/main/notice_list">공지사항</a></li>
-				<li><a href="../../inquiry/list">진료과별 질문</a></li>
-				<li><a href="../../boardlist">진료 후기</a></li>
+				<li><a href="../../main/inquirylist">진료과별 질문</a></li>
+				<li><a href="../../main/boardlist">진료 후기</a></li>
 				<li>고객의 소리</li>
 		</ul>
 		<ul class="submenu">

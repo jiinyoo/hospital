@@ -162,7 +162,7 @@
                     
                     <td>
                         <form method="post" action="updateState">
-                            <input type="hidden" name="id" value="${mdto.id}">
+                            <input type="hidden" name="user_id" value="${mdto.user_id}">
                             <select name="state" class="status-select">
                                 <option value="0" ${mdto.state==0 ? 'selected' : ''}>일반회원</option>
                                 <option value="1" ${mdto.state==1 ? 'selected' : ''}>의사</option>  

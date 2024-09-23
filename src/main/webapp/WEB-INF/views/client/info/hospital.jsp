@@ -119,7 +119,7 @@
     </div>
 
     <!-- 병원 소개 섹션 -->
-    <div class="section">
+    <div class="section" id="menu1">
         <h2>병원 소개</h2>
         <p>
             장인호 병원은 환자의 건강을 최우선으로 생각하며, 현대적이고 전문적인 의료 서비스를 제공합니다. 저희 병원은 최신 의료기술과
@@ -139,7 +139,7 @@
     </div>
 
     <!-- 미션과 비전 -->
-    <div class="section mission">
+    <div class="section mission" id="menu2">
         <h2>미션과 비전</h2>
         <p>
             장인호 병원의 미션은 "환자 중심의 케어"입니다. 모든 환자들에게 신뢰받는 의료 서비스를 제공하며, 개인 맞춤형 치료를 통해
@@ -153,13 +153,13 @@
     </div>
 
     <!-- 조직도 섹션 -->
-    <div class="section image-section">
+    <div class="section image-section" id="menu3">
         <h2>조직도</h2>
         <img src="/static/client/info/조직도.jpg" alt="장인호 병원 조직도">
     </div>
 
     <!-- 오시는 길 섹션 -->
-    <div class="section location">
+    <div class="section location" id="menu4">
         <h2>오시는 길</h2>
         <p>
             장인호 병원은 경기도 고양시에 위치하고 있으며, 병원 내 주차 공간을 비롯하여 다양한 교통수단으로 쉽게 방문하실 수 있습니다.
