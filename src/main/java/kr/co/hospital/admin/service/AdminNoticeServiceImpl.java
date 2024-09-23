@@ -174,8 +174,8 @@ public class AdminNoticeServiceImpl  implements AdminNoticeService {
 	        ndto.setImgs(new String[0]);  // 이미지가 없을 경우 빈 배열 설정
 	    }
 	    
+	    ndto.setContent(ndto.getContent().replace("\r\n", "<br>"));
 		model.addAttribute("ndto",ndto);
-		model.addAttribute("user_id", session.getAttribute("user_id").toString());
 		return "/admin/admin_notice/admin_notice_content";
 	}
 

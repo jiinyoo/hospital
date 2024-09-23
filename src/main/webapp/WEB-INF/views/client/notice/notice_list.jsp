@@ -8,75 +8,88 @@
 <title>Insert title here</title>
 <style>
     /* 전체 페이지 스타일 */
-    body {
-        font-family: 'goorm-sans-bold', sans-serif;
-        background-color: #f2f4f9;
-        margin: 0;
-        padding: 0;
-    }
     
     section {
-        width: 80%;
-        max-width: 900px;
+        width: 100%;
+        max-width: 1100px;
         margin: 50px auto;
-        padding: 20px;
+        padding: 30px 50px;
         background-color: #ffffff;
-        border-radius: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+
     }
 
     /* 제목 스타일 */
-    h3 {
-        text-align: center;
-        color: #B5B2FF;
+    h2 {
+        text-align: left;
+        color: #004fa8;
         margin-bottom: 20px;
-        font-size: 22px;
+        font-size: 30px;
+        margin-left: 10px;
+        
     }
     
     /* 테이블 스타일 */
     table {
         width: 100%;
-        border-collapse: collapse;
+		border-collapse: collapse;
         margin: 0 auto;
+        
     }
+    
+    #ntitle {
+    	width:700px;
+    	text-align: left;
+    	padding-left: 20px;
+    	color:black;
+    	
+    }
+    
+    #nntitle {
+    	text-align: left;
+    	padding-left: 20px;
+    }
+	
+	td {
+		border-bottom: 1px solid #ccc;
 
-    table, th, td {
-        border: 1px solid #ccc;
-    }
+	}
 
     th, td {
-        padding: 10px;
+        padding: 6px;
         text-align: center;
     }
 
     th {
-        background-color: #B5B2FF;
-        color: white;
+    	background: #f9f9f9 url(/static/client/notice/divide_line.png) no-repeat 0 center;
+    	width:150px;
+    	border-top:1px solid black;
+    	border-bottom: 1px solid #ccc;
     }
 
     /* 링크 스타일 */
     a {
-        color: #7D78FF;
+        color: #004fa8;
         text-decoration: none;
         font-weight: bold;
     }
 
     a:hover {
-        color: #5a58e0;
+        color: blue;
     }
 
     /* 글 작성 버튼 스타일 */
     .write-button {
         margin-top: 20px;
-        text-align: center;
+        text-align: right;
     }
 
     .write-button a {
         display: inline-block;
         padding: 10px 20px;
-        background-color: #B5B2FF;
+        background-color: #004fa8;
         color: white;
-        border-radius: 10px;
+        border-radius: 5px;
         font-size: 14px;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -84,7 +97,7 @@
     }
 
     .write-button a:hover {
-        background-color: #7D78FF;
+        background-color: #033D7F;
     }
     
     .page {
@@ -95,15 +108,21 @@
     .page a {
         display: inline-block;
         padding: 8px 16px;
-        background-color: #B5B2FF;
+        background-color: #004fa8;
         color: white;
         margin: 0 2px;
-        border-radius: 5px;
+        
         text-decoration: none;
     }
 
     .page a:hover {
-        background-color: #7D78FF;
+        background-color: #033D7F;
+    }
+    
+
+    
+    #nuser {
+    	
     }
 </style>
 </head>
@@ -112,19 +131,19 @@
 
  <section>
    <table width="900" align="center">
-    <caption> <h3> 공지 사항 </h3></caption>
-    <tr align="center">
-      <td> 제 목 </td>
-      <td> 작성자 </td>
-      <td> 조회수 </td>
-      <td> 작성일 </td>
+    <caption> <h2> 공지 사항 </h2></caption>
+    <tr id="table-header" align="center">
+      <th id="nuser"> 작성자 </th>
+      <th id="ntitle"> 제 목 </th>
+      <th> 조회수 </th>
+      <th> 작성일 </th>
     </tr>
     <c:forEach items="${nmapAll}" var="ndto">
     <tr align="center">
-      <td align="left"> 
+      <td> 관리자 </td>
+      <td id="nntitle"> 
        <a href="notice_readnum?notice_id=${ndto.notice_id}">${ndto.title}</a>
       </td>
-      <td> 관리자 </td>
       <td> ${ndto.readnum} </td>
       <td> ${ndto.writeday} </td>
     </tr>  
@@ -141,7 +160,7 @@
        <c:forEach var="i" begin="${pstart}" end="${pend}">
        
            <c:if test="${page==i}">
-               <a style="background-color: #7D78FF;">${i}</a>
+               <a style="background-color: #033D7F;">${i}</a>
            </c:if>
            
            <c:if test="${page!=i}">
@@ -159,9 +178,10 @@
    
    <c:if test="${user_id=='admin'}">
      <div class="write-button">
-       <a href="notice_write">글 작성</a>
+       <a href="notice_write">공지 작성</a>
      </div>
    </c:if>
+   
  </section>
 
 </body>

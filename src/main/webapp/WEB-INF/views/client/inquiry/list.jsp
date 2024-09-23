@@ -7,35 +7,141 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	section {
-        margin:auto;
-        width: 1300px;
-        height: 100vh; /* 뷰포트 전체 높이 사용 */
-    }
-    /* 테이블의 최대 너비 설정 및 가운데 정렬 */
-    table {
+    /* 전체 페이지 스타일 */
     
-        width:1000px;
-    	margin:auto;
-    	margin-top: 30px;
-    	border-collapse: collapse;
+    section {
+        width: 100%;
+        max-width: 1100px;
+        margin: 50px auto;
+        padding: 30px 50px;
+        background-color: #ffffff;
+        border-radius: 10px;
+
     }
 
-    /* 테이블 내부 요소 스타일링 */
-    td {
-	    border-top: 1px solid black;
-	    padding: 10px; /* 셀 내부 여백 조정 */
-	    height: 30px;  /* 셀 높이 명확히 설정 */
-	}
+    /* 제목 스타일 */
+    h2 {
+        text-align: left;
+        color: #004fa8;
+        margin-bottom: 20px;
+        font-size: 30px;
+        margin-left: 10px;
+        
+    }
+    
+    /* 테이블 스타일 */
+    table {
+        width: 100%;
+		border-collapse: collapse;
+        margin: 0 auto;
+        
+    }
+    
+    #ntitle {
+    	width:700px;
+    	text-align: left;
+    	padding-left: 20px;
+    	color:black;
+    	
+    }
+    
+    #nntitle {
+    	text-align: left;
+    	padding-left: 20px;
+    }
 	
-	table tr:first-child {
-    background-color: #B5B2FF;
-	}
-	
-	#part {
-		background-color:orange;
+	td {
+		border-bottom: 1px solid #ccc;
+
 	}
 
+    th, td {
+        padding: 6px;
+        text-align: center;
+    }
+
+    th {
+    	background: #f9f9f9 url(/static/client/notice/divide_line.png) no-repeat 0 center;
+    	width:150px;
+    	border-top:1px solid black;
+    	border-bottom: 1px solid #ccc;
+    }
+
+    /* 링크 스타일 */
+    a {
+        color: #004fa8;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: blue;
+    }
+
+
+    .write-button {
+    	font-family: 'goorm-sans-bold';
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #004fa8;
+        color: white;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        margin-top: 20px;
+        text-align: right;
+    }
+
+    .write-button:hover {
+        background-color: #033D7F;
+    }
+    
+    .page {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .page a {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #004fa8;
+        color: white;
+        margin: 0 2px;
+        
+        text-decoration: none;
+    }
+
+    .page a:hover {
+        background-color: #033D7F;
+    }
+    
+	#sform input,#sform select {
+		font-family: 'goorm-sans-bold';
+		margin-left:8px;
+		height:30px;
+	}
+	
+	#sform {
+		margin-top: 20px;
+	}
+	
+	
+	#sform input[type="submit"] {
+		font-family: 'goorm-sans-bold';
+        display: inline-block;
+        width: 70px;
+        height:30px;
+        background-color: #004fa8;
+        color: white;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        line-height: 30px;
+	}
 </style>
 <script>
 function check(user_id, bimil, inq_id, origin_user_id) {
@@ -89,15 +195,15 @@ window.onload=function() {
 	<table>
 	<caption><h2>진료과별 질문 게시판</h2></caption>
 	<tr>
-		<td>작성자</td>
-		<td>제목</td>
-		<td>작성일</td>
-		<td>조회수</td>
+		<th>작성자</th>
+		<th id="ntitle">제목</th>
+		<th>작성일</th>
+		<th>조회수</th>
 	</tr>
 	<c:forEach items="${imapAll}" var="imap">
 	<tr>
 		<td width="100">${imap.user_id}</td>
-		<td width="600">
+		<td width="600" id="nntitle">
 		<c:if test="${imap.bimil==1}">
 			<span id="bimil"><img src="../../static/client/inquiry/lock.png" width="20px"></span>
 		</c:if>
@@ -110,15 +216,9 @@ window.onload=function() {
 		<td width="100">${imap.readnum}</td>
 	</tr>
 	</c:forEach>
-	<tr align="right">
-		<td colspan="4">
-		<input type="button" value="글쓰기" onclick="logincheck()">
-		</td>
-	</tr>
-	<tr align="center">
-		<td colspan="4">
-		
-		
+	</table>
+
+	<div align="center" class="page">		
 		<c:if test="${pstart!=1}">		
 			<a href="/main/inquirylist?page=${pstart-1}&sword=${sword}&stype=${stype}">◀◀</a>
 		</c:if>
@@ -136,7 +236,7 @@ window.onload=function() {
 		
 		<c:forEach begin="${pstart}" end="${pend}" var="i">
 			<c:if test="${page==i}">
-				<a href="/main/inquirylist?page=${i}&sword=${sword}&stype=${stype}" style="color:red;">${i}</a>
+				<a href="/main/inquirylist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
 			</c:if>
 			<c:if test="${page!=i}">
 				<a href="/main/inquirylist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
@@ -156,22 +256,24 @@ window.onload=function() {
 		<c:if test="${pend==chong}">
 			▶▶
 		</c:if>
-		</td>
-	</tr>
-	<tr align="center">
-		<td colspan="4">
-		<form name="pkc" action="/main/inquirylist" method="post">
+	</div>
+	<div align="center">
+		
+		<form name="pkc" action="/main/inquirylist" method="post" id="sform">
 			<select name="stype">
-				<option value="user_id">작성자 아이디</option>			
+				<option value="user_id">작성자</option>			
 				<option value="title">제목</option>
-				<option value="part">과</option>
+				<option value="part">진료과</option>
 				<input type="text" name="sword" id="sword">
 				<input type="submit" value="검색">
 			</select>
 		</form>
+	</div>
+		<div align="right">
+		<td colspan="4">
+		<input type="button" value="글쓰기" onclick="logincheck()" class="write-button">
 		</td>
-	</tr>
-</table>
+	</div>
 </section>
 </body>
 </html>

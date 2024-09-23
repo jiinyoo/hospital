@@ -165,7 +165,7 @@ public class NoticeServicelmpl  implements NoticeService {
 	    } else {
 	        ndto.setImgs(new String[0]);  // 이미지가 없을 경우 빈 배열 설정
 	    }
-	    
+	    ndto.setContent(ndto.getContent().replace("\r\n", "<br>"));
 		model.addAttribute("ndto",ndto);
 		return "client/notice/notice_content";
 	}

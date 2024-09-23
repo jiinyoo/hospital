@@ -6,40 +6,35 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    /* 전체 페이지 스타일 */
-    body 
-  	{
-    	font-family: 'goorm-sans-bold', sans-serif;
-    	background-color: #f2f4f9;
-    	margin: 0;
-    	padding: 0;
-  	}	
+
     
     section 
   	{
  	    width: 80%;
- 	    max-width: 550px;
+ 	    max-width: 800px;
     	margin: 50px auto;
     	padding: 60px;
     	background-color: #ffffff;
-    	border-radius: 40px;
-    	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    	border-radius: 5px;
+    	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   	}
 
     /* 제목 스타일 */
     h3 {
-        text-align: center;
-        color: #B5B2FF;
+        text-align: left;
+        color: #004fa8;
         margin-bottom: 20px;
-        font-size:22px;
+        margin-left:10px;
+        font-size:30px;
     }
     
     h4 {
-    	text-align: center;
-        color: #B5B2FF;
-        font-size:20px;
+    	text-align: left;
+        color: #004fa8;
+        font-size:30px;
         margin-top: 10px;
         margin-bottom: 20px;
+        margin-left:10px;
     }
     
     div 
@@ -55,8 +50,8 @@
         padding: 10px;
         margin-bottom: 20px;
         border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 14px;
+        border-radius: 5px;
+        font-size: 16px;
         outline: none;
     }
     
@@ -73,8 +68,8 @@
     	height:200px;
     	margin-bottom: 20px;
         border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 14px;
+        border-radius: 5px;
+        font-size: 16px;
         outline: none;
     }
 
@@ -82,13 +77,14 @@
     input[type="button"] 
     {
     	font-family: 'goorm-sans-bold', sans-serif;
-        width: 49%;
-        padding: 10px;
+        width: 20px;
+        height: 20px;
         margin-top: 10px;
         margin-bottom: 15px;
-        background-color: #B5B2FF;
+        margin-left: 7px;
+        background-color: #004fa8;
         border: none;
-        border-radius: 10px;
+        border-radius: 5px;
         color: white;
         font-size: 14px;
         cursor: pointer;
@@ -98,13 +94,13 @@
     input[type="submit"]
     {
     	font-family: 'goorm-sans-bold', sans-serif;
-    	width: 99%;
+    	width: 100px;
         padding: 10px;
         margin-top: 30px;
         margin-bottom: 10px;
-        background-color: #B5B2FF;
+        background-color: #004fa8;
         border: none;
-        border-radius: 10px;
+        border-radius: 5px;
         color: white;
         font-size: 14px;
         cursor: pointer;
@@ -113,15 +109,15 @@
 
     input[type="button"]:hover,
     input[type="submit"]:hover {
-        background-color: #7D78FF;
+        background-color: #033D7F;
     }
 
     /* 이미지 미리보기 스타일 */
     .img img {
         margin-top: 10px;
-        max-width: 100px;
-        max-height: 100px;
-        border-radius: 10px;
+        max-width: 130px;
+        max-height: 130px;
+        border-radius: 5px;
         border: 1px solid #ddd;
     }
 
@@ -178,7 +174,7 @@
 		  reader.onload = function() 
 		  {
 			  var imgElement=input.nextElementSibling;
-			  imgElement.innerHTML="<img src='"+reader.result+" 'alt='이미지 미리보기' width='100px' height='100px'>";
+			  imgElement.innerHTML="<img src='"+reader.result+" 'alt='이미지 미리보기'>";
 		  }
 
 		  if(input.files && input.files[0]) 
@@ -200,18 +196,19 @@
      	<textarea name="content" placeholder="내 용"></textarea>
      </div>
      <div id="outer"> 
-       <h4> 사진 등록 </h4>
-       <div> 
-     		<input type="button" value="추가" onclick="add()"> 
-     		<input type="button" value="삭제" onclick="del()"> 
-    	</div>
+       <h4> 사진 등록 
+       		<span>
+       			<input type="button" value="+" onclick="add()"> 
+     			<input type="button" value="-" onclick="del()">
+     		</span>
+		</h4>
      	<div id="one" class="one">
            <label for="fileUp0" class="label"> </label>
            <input type="file" id="fileUp0" name="fname0" class="file" onchange="previewImage(event)"> 
            <span class="img"></span>
        </div>
      </div>
-     <div> <input type="submit" value="후기 등록"> </div>
+     <div style="text-align: center;"> <input type="submit" value="공지 등록"> </div>
    </form>
  </section>
 
