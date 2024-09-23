@@ -118,7 +118,7 @@ nav #mainmenu
 {
 	display:inline-block;
 	list-style-type:none;
-	width:180px;
+	width:210px;
 	color:#626262;
 	text-align:center;
 	height:130px;
@@ -187,7 +187,7 @@ nav #mainmenu
 {
 	display:none;
 	padding-left:0px;
-	width:183px;
+	width:215px;
 	left:0px;
 	top:90px;
 	background:white;
@@ -223,7 +223,7 @@ nav #mainmenu
 	list-style-type:none;
 	justify-content: center;
 	display:flex;
-	width:183px;
+	width:215px;
 	height:30px;
 	line-height: 30px; /* 중앙 정렬 */
     margin: 0; /* 기본 마진 제거 */
@@ -490,7 +490,7 @@ hr
 			<li class="hov">상담/예약</li>
 			<li class="hov"><a href="/main/programreserve">프로그램 예약</a></li>
 			<li class="hov">커뮤니티</li>
-			<li class="hov"><a href="/main/healthInfo">건강 정보</a></li>
+			
 		</ul>
 	</div>
 	
@@ -520,15 +520,13 @@ hr
 		</ul>
 		<ul class="submenu">
 			<li><a href="/main/programreserve">프로그램 예약</a></li>
+			<li><a href="/main/#">프로그램 예약 조회</a></li>
 		</ul>
 		<ul class="submenu">
 				<li><a href="/main/notice_list">공지사항</a></li>
 				<li><a href="../../main/inquirylist">진료과별 질문</a></li>
 				<li><a href="../../main/boardlist">진료 후기</a></li>
-				<li>고객의 소리</li>
-		</ul>
-		<ul class="submenu">
-			<li><a href="/main/healthInfo">건강정보</a></li>
+				<li><a href="/main/healthInfo">건강정보</a></li>
 		</ul>
 	</div>
 	</span>
