@@ -9,7 +9,7 @@
 	section {
         margin:auto;
         width: 1300px;
-        height: 100vh; /* 뷰포트 전체 높이 사용 */
+      
     }
     /* 테이블의 최대 너비 설정 및 가운데 정렬 */
 
