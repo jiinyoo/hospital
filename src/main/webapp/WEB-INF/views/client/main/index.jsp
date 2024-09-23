@@ -172,7 +172,7 @@ section #community .comm .more-btn a:hover {
     width: 285px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     margin: 20px;
   }
@@ -198,15 +198,38 @@ section #community .comm .more-btn a:hover {
     color: #555;
   }
   
+  #pro-container {
+  	width:100%;
+  	padding-bottom:20px;
+  	border: 1px solid white;
+  	background: white;
+  	margin:60px 0;
+  	box-shadow: 0 0px 20px rgba(0, 0, 0.1, 0.2);
+  }
 
 #protitle {
 	margin:auto;
 }
   
 
-#programs .card {
 
+#programs .card {
+	transition: all 0.3s ease;
 	display:inline-block;
+	margin-bottom:20px;
+
+}
+
+#programs .card:hover {
+	transform: scale(1.04);
+	display:inline-block;
+
+}
+
+#programs .card a {
+	
+	text-decoration: none;
+	color:black;
 
 }
 
@@ -371,30 +394,34 @@ section #community .comm .more-btn a:hover {
     </div>
 </div>
 
-<br><br><br>
-<div id="protitle" style="color:#0073e6; font-size:22px;">우리 센터 프로그램</div>
-<section>
 
-<br>
-<div id="programs">
+
+
+<div align="center">
+
+ <div id="pro-container">
+ <div id="protitle" style="color:#0073e6; font-size:30px; margin-top:40px;">프로그램 현황</div>
+  <div id="programs" style="margin-top:20px;">
 	<c:forEach items="${programmap}" var="pdto" begin="0" end="3">
+	
 	<div class="card">
-    	<img src="../../static/admin/programfile/${pdto.pro_img}" alt="Card Image">
+	<a href="/main/programreserve">
+    	<img src="/static/admin/programfile/${pdto.pro_img}" alt="Card Image">
    		 <div class="card-body">
      	 <div class="card-title">${pdto.pro_name}</div>
-      	<div class="card-text">${pdto.teach_name}</div>
+      	 <div class="card-text">강사 : ${pdto.teach_name}</div>
       	</div>
+     </a> 	
     </div>
+	
+    
 	</c:forEach>
-</div>
-지웬장~
-<hr>
-dd
-<hr>
-dd
-</section>
-<section>
 
-</section>
+  </div>
+  
+ </div>
+
+</div>
+<br>
 </body>
 </html>

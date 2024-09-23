@@ -61,7 +61,6 @@ main {
 {
 	position:absolute;
     text-align:center;
-    right:580px;
     top: 15px;
     color: black;
 }
@@ -85,7 +84,6 @@ main {
 	height:40px;
 	text-align:right;
 	align-content:center;
-	color: black;
 	
 }
 
@@ -93,9 +91,20 @@ main {
 {
 	text-decoration: none;
 	height:30px;
-	color: black;
+	color: #626262;
 	cursor: pointer;
 	
+}
+
+#back
+{
+	background: white;
+	top:52px;
+	width:100%;
+	height:170px;
+	position: absolute;
+	z-index: -1000;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 	
 nav
@@ -287,7 +296,7 @@ nav #mainmenu
 
 .dropdown a {
     text-decoration: none;
-    color: black;
+    color: #626262;
 }
 
 #userMenu {
@@ -489,9 +498,10 @@ hr
 </button>
 
 <div id="ads">
+<div id="back"></div>
 	<div id="ad">
 		<div id="container"> 
-			<div id="event"> 한번 입원하면 3박이 무료! </div>
+			<div id="event"> 환자분들의 편의를 위해 "10월 1일(화) 임시공휴일 정산 진료" 합니다. </div>
 		<div id="xx" onclick="adx()">닫기</div>
 		</div>
 	</div>
@@ -523,8 +533,9 @@ hr
 		</div>
 </header>
 <hr>
-
+	
 	<nav>
+	
 	<span id="total" onmouseout="hideSub()">
 	<span id="mainsub">
 	<div id="mainmenu" onmouseover="viewSub()">
@@ -583,23 +594,16 @@ hr
 	</span>
 	</span>
 	</nav>
-	<hr>
+
 
 	</div>
-
-<main>
-	<div class="haha">
-		<!-- 여기에 페이지의 메인 콘텐츠가 들어갑니다. -->
-	</div>
-</main>
-
 
 
 <sitemesh:write property="body"/>
 
 
 
-<footer style="background-color: #004fa8; padding: 50px 0; color: white; margin-top: 40px; font-family: 'goorm-sans-bold';">
+<footer style="background-color: #004fa8; padding: 50px 0; color: white;  font-family: 'goorm-sans-bold';">
     <div class="footer-container" style="width: 80%; margin: auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
         
         <div style="width: 30%;">
