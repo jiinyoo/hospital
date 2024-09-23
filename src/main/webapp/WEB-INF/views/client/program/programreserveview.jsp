@@ -40,7 +40,6 @@ $(function() {
 section {
        margin:auto;
        width: 1300px;
-       height: 100vh; /* 뷰포트 전체 높이 사용 */
    }
 
 
@@ -113,6 +112,15 @@ input[type="submit"]:hover {
     
     
 </style>
+<script>
+window.onpageshow = function(event) {
+	
+	   if(event.persisted || (window.performance && window.performance.navigation.type == 2))
+	    	history.go(1);
+	};
+</script>
+
+
 </head>
 <body>
 <section>

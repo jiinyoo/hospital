@@ -388,11 +388,10 @@
 	}
 	
 	window.onpageshow = function(event) {
-		if(event.persisted) {
-			history.go(1);			
-		}
-	};	
-
+		
+		   if(event.persisted || (window.performance && window.performance.navigation.type == 2))
+		    	history.go(1);
+		};
 </script>
 </head>
 <body>

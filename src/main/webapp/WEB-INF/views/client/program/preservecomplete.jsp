@@ -19,7 +19,6 @@
 section {
        margin:auto;
        width: 1300px;
-       height: 100vh; /* 뷰포트 전체 높이 사용 */
    }
    
    
@@ -71,7 +70,9 @@ table tr:nth-child(even) {
     background-color: #f9f9f9; /* 짝수 행에 배경색 추가 */
 }
 </style>
+<script>
 
+</script>
 
 
 
