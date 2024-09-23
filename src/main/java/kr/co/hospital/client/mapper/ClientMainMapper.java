@@ -13,6 +13,9 @@ public interface ClientMainMapper {
 
 	public ArrayList<HashMap> notice_list();
 
+	public ArrayList<HashMap> program_list();
+
+
 	
 	
 }

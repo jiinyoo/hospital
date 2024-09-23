@@ -21,42 +21,42 @@ public class InquiryController {
 	@Autowired
 	InquiryService service;
 	
-	@RequestMapping("/inquiry/write")
+	@RequestMapping("/main/inquirywrite")
 	public String inquirywrite() {
 		return "/client/inquiry/write";
 	}
 	
-	@RequestMapping("/inquiry/writeOk")
+	@RequestMapping("/main/inquirywriteOk")
 	public String inquirywriteOk(InquiryDto idto, MultipartHttpServletRequest multi, HttpSession session) throws Exception {
 		return service.writeOk(idto,multi,session);
 	}
 	
-	@RequestMapping("/inquiry/list")
+	@RequestMapping("/main/inquirylist")
 	public String inquirylist(HttpSession session,Model model,HttpServletResponse response, HttpServletRequest request)  {
 		return service.list(session, model,response,request);
 	}
-	@RequestMapping("/inquiry/readnum") 
+	@RequestMapping("/main/inquiryreadnum") 
 	public String inquiryreadnum(HttpServletRequest request,HttpSession session) {
 		return service.readnum(request); 
 	}
-	@RequestMapping("/inquiry/content") 
+	@RequestMapping("/main/inquirycontent") 
 	public String inquirycontent(HttpServletRequest request,Model model,HttpSession session) {
 		return service.content(request, model,session); 
 	}
 	
-	@RequestMapping("/inquiry/update") 
+	@RequestMapping("/main/inquiryupdate") 
 	public String inquiryupdate(HttpServletRequest request,HttpSession session,Model model) throws Exception{
 		return service.update(request,session,model); 
 	}
 	
 
-	@RequestMapping("/inquiry/delete") 
+	@RequestMapping("/main/inquirydelete") 
 	public String inquirydelte(HttpServletRequest request, HttpSession session) throws Exception{
 		return service.delete(request,session); 
 	}
 	
 	
-	@RequestMapping("/inquiry/updateOk") 
+	@RequestMapping("/main/inquiryupdateOk") 
 	public String inquiryupdateOk(InquiryDto idto,HttpServletRequest request,HttpSession session,MultipartHttpServletRequest multi) throws Exception{
 		return service.updateOk(idto,request,session,multi); 
 	}

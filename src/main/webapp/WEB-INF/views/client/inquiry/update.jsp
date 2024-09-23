@@ -110,7 +110,7 @@
 </head>
 <body>
 <section>
-	<form name="inquiry" method="post" action="updateOk" enctype="multipart/form-data" onsubmit="return check()">
+	<form name="inquiry" method="post" action="inquiryupdateOk" enctype="multipart/form-data" onsubmit="return check()">
 			<input type="hidden" name="delimg" >
 			<input type="hidden" name="safeimg" >
 			<input type="hidden" name="inq_id" value="${idto.inq_id}">

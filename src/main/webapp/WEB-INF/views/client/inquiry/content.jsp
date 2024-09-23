@@ -75,9 +75,9 @@ function deletecheck() {
 			<td colspan="2" align="center">
 			<c:if test="${session_user_id==idto.user_id}">
 			
-			<a href="/inquiry/list"><input type="submit" value="목록"></a>
-			<a href="/inquiry/update?inq_id=${idto.inq_id}"><input type="submit" value="수정"></a>
-			<a href="/inquiry/delete?inq_id=${idto.inq_id}"><input type="submit" value="삭제" onclick="return deletecheck()"></a>
+			<a href="/main/inquirylist"><input type="submit" value="목록"></a>
+			<a href="/main/inquiryupdate?inq_id=${idto.inq_id}"><input type="submit" value="수정"></a>
+			<a href="/main/inquirydelete?inq_id=${idto.inq_id}"><input type="submit" value="삭제" onclick="return deletecheck()"></a>
 			</c:if>
 			</td>
 		</tr>

@@ -29,12 +29,11 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 		
 		if(session.getAttribute("user_id")!=null) {
 			ArrayList<ProgramDto> plist=mapper.righttimeprograms();
-			System.out.println(plist.get(0));
 			model.addAttribute("plist",plist);
 			return "/client/program/programreserve";
 		} else {
 			
-			Cookie cookie=new Cookie("url","/program/programreserve");
+			Cookie cookie=new Cookie("url","/main/programreserve");
 			cookie.setMaxAge(60*60*24);
 			cookie.setPath("/");
 			response.addCookie(cookie);
@@ -132,7 +131,7 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	                    programDate.isAfter(today) &&
 	                    availableCapacity > 0 && 
 	                    parseDayOfWeek(program.getDay_of_week()).contains(dayOfWeek)) {
-	                	cellContent += "<br><span id='programname'><a href='/program/programreserveview?pro_id=" 
+	                	cellContent += "<br><span id='programname'><a href='/main/programreserveview?pro_id=" 
 	                		    + program.getPro_id() + "&reserve_date=" + formattedDate 
 	                		    + "'>"+"★"+ program.getPro_name() + "</a></span><p>";
 	                }

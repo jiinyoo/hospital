@@ -22,7 +22,7 @@ public class ProgramReserveController {
 	@Autowired
 	 ProgramReserveSevice service;
 	
-	@RequestMapping("/program/programreserve")
+	@RequestMapping("/main/programreserve")
 	public String programreserve(HttpServletRequest request, Model model,HttpSession session, HttpServletResponse response) {
 		return service.ProgramReserve(request,model,session,response);
 	}
@@ -34,12 +34,12 @@ public class ProgramReserveController {
 		return service.calendar(request,model,session);
 	}
 	
-	@RequestMapping("/program/programreserveview")
+	@RequestMapping("/main/programreserveview")
 	public String programreserveview(HttpServletRequest request, Model model,HttpSession session) {
 		return service.preserview(request,model,session);
 	}
 
-	@RequestMapping("/program/preserveOk")
+	@RequestMapping("/main/preserveOk")
 	public String preserveOk(ProgramReserveDto prdto,HttpServletRequest request, Model model,HttpSession session) {
 		return service.preserveOk(prdto,request,model,session);
 	}
