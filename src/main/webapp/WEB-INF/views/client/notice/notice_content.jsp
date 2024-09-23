@@ -7,39 +7,33 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    /* 전체 페이지 스타일 */
-    body 
-  	{
-    	font-family: 'goorm-sans-bold', sans-serif;
-    	background-color: #f2f4f9;
-    	margin: 0;
-    	padding: 0;
-  	}	
-    
     section 
   	{
- 	    width: 80%;
- 	    max-width: 550px;
+ 		width: 80%;
+ 	    max-width: 800px;
     	margin: 50px auto;
     	padding: 60px;
     	background-color: #ffffff;
-    	border-radius: 40px;
-    	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    	border-radius: 5px;
+    	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   	}
 
     /* 제목 스타일 */
     h3 {
-        text-align: center;
-        color: #B5B2FF;
+        text-align: left;
+        color: #004fa8;
         margin-bottom: 20px;
-        font-size:22px;
+        margin-left:10px;
+        font-size:30px;
     }
     
     /* 필드 제목 스타일 */
     div.field-label {
         font-weight: bold;
         margin-top: 10px;
-        font-size: 16px;
+        font-size: 20px;
+        display:flex;
+        justify-content: space-between;
     }
     
     /* 필드 내용 스타일 */
@@ -48,9 +42,10 @@
         margin-bottom: 18px;
         padding: 10px;
         border: 1px solid #ccc;
-        border-radius: 10px;
+        border-radius: 5px;
         background-color: #f9f9f9;
-        font-size: 14px;
+        font-size: 16px;
+        
     }
     
     div.field-value-content {
@@ -60,18 +55,19 @@
         margin-bottom: 15px;
         padding: 10px;
         border: 1px solid #ccc;
-        border-radius: 10px;
+        border-radius: 5px;
         background-color: #f9f9f9;
-        font-size: 14px;
+        font-size: 16px;
+        line-height: 27px;
     }
     
     
     /* 이미지 스타일 */
     .img-container img {
         margin-top: 10px;
-        max-width: 100px;
-        max-height: 100px;
-        border-radius: 10px;
+
+		width:100%;
+        border-radius: 5px;
         border: 1px solid #ddd;
         cursor: pointer;
     }
@@ -81,7 +77,7 @@
         display: inline-block;
         padding: 10px 20px;
         margin: 10px 0;
-        background-color: #B5B2FF;
+        background-color: #004fa8;
         color: white;
         border-radius: 10px;
         text-decoration: none;
@@ -91,7 +87,7 @@
     }
 
     .buttons a:hover {
-        background-color: #7D78FF;
+        background-color: #033D7F;
     }
 
     .buttons a.delete {
@@ -146,19 +142,18 @@
       <input type="hidden" name="notice_id" value="${ndto.notice_id}">
       
       <caption> <h3> 공지사항 내용 </h3></caption>
-      
-      <div class="field-label">제 목</div>
+      <br>
+      <div class="field-label">
+      	<div>제 목 </div>
+      	<div><span style="font-size: 13px;"><조회수> ${ndto.readnum}</span></div>
+      </div>
       <div class="field-value">${ndto.title}</div>
-      
-      <div class="field-label">작성자</div>
-      <div class="field-value">${ndto.user_id}</div>
-      <hr>
-      <div align="center"><조회수> ${ndto.readnum}</span></div>
+
       <hr>
       <div class="field-label">내용</div>
       <div class="field-value-content">${ndto.content}</div>
-
-      <div class="field-label">첨부된 이미지</div>
+		<br>
+      <div class="field-label"></div>
       <div class="img-container">
          <c:forEach items="${ndto.imgs}" var="img">
           <c:if test="${img!=''}">

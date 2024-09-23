@@ -21,6 +21,10 @@
 		margin-bottom: 20px;
 	}
 	
+	#aa {
+		margin-top:30px;
+	}
+	
 	th {
 		text-align: left;
 		background: #ccc;
@@ -200,7 +204,7 @@
 		</table>
 		
 		<c:if test="${!empty sessionScope.user_id}">
-		<h2>지난 예약</h2>
+		<h2 id="aa">지난 예약</h2>
 		<form method="get" action="reserveView" id="pastSearch">
 		<div>
 			<a href="?month=1" ${param.month==1?'style="color:red;"':''}>1달이내</a>

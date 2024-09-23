@@ -6,52 +6,49 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    /* 전체 페이지 스타일 */
-    body 
-  	{
-    	font-family: 'GongGothicMedium';
-    	background-color: #f2f4f9;
-    	margin: 0;
-    	padding: 0;
-  	}	
+
     
     section 
   	{
- 	    width: 80%;
- 	    max-width: 550px;
-    	margin: 50px auto;
-    	padding: 60px;
+
+		width:800px;
+
+		padding: 60px;
     	background-color: #ffffff;
-    	border-radius: 40px;
-    	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    	border-radius: 5px;
+    	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   	}
 
     /* 제목 스타일 */
     h3 {
-        text-align: center;
-        color: #B5B2FF;
+        text-align: left;
+        color: #004fa8;
         margin-bottom: 20px;
-        font-size:22px;
+        margin-left:10px;
+        font-size:30px;
+        font-weight: normal;
     }
     
     h4 {
-    	text-align: center;
-        color: #B5B2FF;
-        font-size:20px;
+    	text-align: left;
+        color: #004fa8;
+        font-size:30px;
         margin-top: 10px;
         margin-bottom: 20px;
+        margin-left:10px;
+        font-weight: normal;
     }
     
     /* 입력 필드 스타일 */
     input[type="text"]
     {
-    	font-family: 'goorm-sans-bold', sans-serif;
+    	font-family: 'GongGothicMedium';
         width: 99%;
         padding: 10px;
         margin-bottom: 20px;
         border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 14px;
+        border-radius: 5px;
+        font-size: 16px;
         outline: none;
     }
     
@@ -63,13 +60,13 @@
     
     textarea
     {
-    	font-family: 'goorm-sans-bold', sans-serif;
+    	font-family: 'GongGothicMedium';
     	width: 99%;
     	height:200px;
     	margin-bottom: 20px;
         border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 14px;
+        border-radius: 5px;
+        font-size: 16px;
         outline: none;
     }
 
@@ -77,29 +74,32 @@
     input[type="button"] 
     {
     	font-family: 'GongGothicMedium';
-        width: 49%;
-        padding: 10px;
+        width: 20px;
+        height: 20px;
         margin-top: 10px;
         margin-bottom: 15px;
-        background-color: #B5B2FF;
+        margin-left: 7px;
+        background-color: #004fa8;
         border: none;
-        border-radius: 10px;
+        border-radius: 5px;
         color: white;
         font-size: 14px;
         cursor: pointer;
         transition: all 0.3s ease;
     }
     
-    input[type="submit"]
+    input[type="submit"],
+    #btn
     {
     	font-family: 'GongGothicMedium';
-    	width: 99%;
+    	width: 100px;
+    	height:40px;
         padding: 10px;
         margin-top: 30px;
         margin-bottom: 10px;
-        background-color: #B5B2FF;
+        background-color: #004fa8;
         border: none;
-        border-radius: 10px;
+        border-radius: 5px;
         color: white;
         font-size: 14px;
         cursor: pointer;
@@ -107,16 +107,17 @@
     }
 
     input[type="button"]:hover,
-    input[type="submit"]:hover {
-        background-color: #7D78FF;
+    input[type="submit"]:hover,
+    #btn:hover {
+        background-color: #033D7F;
     }
 
     /* 이미지 미리보기 스타일 */
     .img img {
         margin-top: 10px;
-        max-width: 100px;
-        max-height: 100px;
-        border-radius: 10px;
+        max-width: 130px;
+        max-height: 130px;
+        border-radius: 5px;
         border: 1px solid #ddd;
     }
 
@@ -185,7 +186,7 @@
 </script>
 </head>
 <body>
- <section>
+ <section id="">
    <form method="post" action="admin_notice_writeOk" enctype="multipart/form-data">
      <caption> <h3> 공지 글쓰기 </h3> </caption>
      <div> 
@@ -195,18 +196,23 @@
      	<textarea name="content" placeholder="내 용"></textarea>
      </div>
      <div id="outer"> 
-       <h4> 사진 등록 </h4>
-       <div> 
-     		<input type="button" value="추가" onclick="add()"> 
-     		<input type="button" value="삭제" onclick="del()"> 
-    	</div>
+       <h4> 사진 등록 
+       		<span>
+       			<input type="button" value="+" onclick="add()"> 
+     			<input type="button" value="-" onclick="del()">
+     		</span>
+		</h4>
      	<div id="one" class="one">
            <label for="fileUp0" class="label"> </label>
            <input type="file" id="fileUp0" name="fname0" class="file" onchange="previewImage(event)"> 
            <span class="img"></span>
        </div>
      </div>
-     <div> <input type="submit" value="후기 등록"> </div>
+     <div style="text-align: center;"> 
+     <input type="submit" value="공지 등록"> 
+     <input id="btn" type="button" onclick="location='admin_notice_list'" value="등록 취소"> 
+     </div>
+     
    </form>
  </section>
 

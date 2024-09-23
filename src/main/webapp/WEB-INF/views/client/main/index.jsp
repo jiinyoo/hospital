@@ -272,7 +272,7 @@ section #community .comm .more-btn a:hover {
 		<div class="comm">
 		
 			<div class="title">
-				공지사항
+				공지 사항
 				<div class="more-btn"><a href="/main/notice_list">더보기</a></div>
 			</div>
 		
@@ -296,7 +296,7 @@ section #community .comm .more-btn a:hover {
 		<!-- 학술행사 칸 -->
 		<div class="comm">
 			<div class="title">
-				프로그램
+				학술 행사
 			</div>
 			
 			<ul class="notice-list">
