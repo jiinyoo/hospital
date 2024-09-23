@@ -83,7 +83,7 @@ public class BoardServiceImpl implements BoardService {
 	public String boardreadnum(HttpServletRequest request) {
 		String board_id = request.getParameter("board_id");
 		mapper.boardReadnum(board_id);
-		return "redirect:/boardcontent?board_id=" + board_id;
+		return "redirect:/main/boardcontent?board_id=" + board_id;
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class BoardServiceImpl implements BoardService {
 		String board_id = request.getParameter("board_id");
 		String user_id = request.getParameter("user_id");
 		mapper.boarddelete(board_id, user_id);
-		return "redirect:/boardlist";
+		return "redirect:/main/boardlist";
 	}
 
 	@Override

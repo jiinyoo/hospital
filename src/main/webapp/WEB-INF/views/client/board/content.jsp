@@ -57,8 +57,8 @@ function deletecheck() {
 		<tr>
 			<td colspan="2" align="center">
 			<c:if test="${user_id==bdto.user_id}">
-			<a href="/boardupdate?board_id=${bdto.board_id}&user_id=${bdto.user_id}"><input type="button" value="수정"></a>
-			<a href="/boarddelete?board_id=${bdto.board_id}&user_id=${bdto.user_id}"><input type="button" value="삭제" onclick="return deletecheck()"></a>
+			<a href="/main/boardupdate?board_id=${bdto.board_id}&user_id=${bdto.user_id}"><input type="button" value="수정"></a>
+			<a href="/main/boarddelete?board_id=${bdto.board_id}&user_id=${bdto.user_id}"><input type="button" value="삭제" onclick="return deletecheck()"></a>
 			</c:if>
 			</td>
 		</tr>
