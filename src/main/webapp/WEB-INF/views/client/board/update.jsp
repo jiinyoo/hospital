@@ -99,12 +99,12 @@ $(document).ready(function() {
 	        // 서버로 AJAX 요청을 보냅니다.
 	        $.ajax({
 	            type: "POST",
-	            url: '/boardupdateOk',
+	            url: '/main/boardupdateOk',
 	            data: formData,
 	            processData: false,
 	            contentType: false,
 	           	success: function(response) {
-	            	window.location.href = "/boardcontent?board_id="+board_id;
+	            	window.location.href = "/main/boardcontent?board_id="+board_id;
 	                // 서버 응답에 따라 추가 작업을 수행할 수 있습니다.
 	            },
 	            error: function(error) {

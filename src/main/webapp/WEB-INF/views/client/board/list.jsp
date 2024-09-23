@@ -63,27 +63,27 @@ window.onload=function() {
 	<c:forEach items="${bmapAll}" var="bdto">
 	<tr>
 		<td width="100">${bdto.user_id}</td>
-		<td width="600"><a href="../../boardreadnum?board_id=${bdto.board_id}">${bdto.board_title}</a></td>
+		<td width="600"><a href="../../main/boardreadnum?board_id=${bdto.board_id}">${bdto.board_title}</a></td>
 		<td width="200">${bdto.writeday}</td>
 		<td width="100">${bdto.board_readnum}</td>
 	</tr>
 	</c:forEach>
 	<tr align="right">
-		<td colspan="4"><a href="../../boardwrite"><input type="button" value="글쓰기" ></a></td>
+		<td colspan="4"><a href="../../main/boardwrite"><input type="button" value="글쓰기" ></a></td>
 	</tr>
 	<tr align="center">
 		<td colspan="4">
 		
 		
 		<c:if test="${pstart!=1}">		
-			<a href="/boardlist?page=${pstart-1}&sword=${sword}&stype=${stype}">◀◀</a>
+			<a href="/main/boardlist?page=${pstart-1}&sword=${sword}&stype=${stype}">◀◀</a>
 		</c:if>
 		<c:if test="${pstart==1}">		
 			 ◀◀
 		</c:if>
 		
 		<c:if test="${page!=1}">
-			<a href="/boardlist?page=${page-1}&sword=${sword}&stype=${stype}">◁</a>
+			<a href="/main/boardlist?page=${page-1}&sword=${sword}&stype=${stype}">◁</a>
 		</c:if>
 		<c:if test="${page==1}">
 			◁
@@ -92,22 +92,22 @@ window.onload=function() {
 		
 		<c:forEach begin="${pstart}" end="${pend}" var="i">
 			<c:if test="${page==i}">
-				<a href="/boardlist?page=${i}&sword=${sword}&stype=${stype}" style="color:red;">${i}</a>
+				<a href="/main/boardlist?page=${i}&sword=${sword}&stype=${stype}" style="color:red;">${i}</a>
 			</c:if>
 			<c:if test="${page!=i}">
-				<a href="/boardlist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
+				<a href="/main/boardlist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
 			</c:if>
 		</c:forEach>	
 		
 		<c:if test="${page!=chong }">
-			<a href="/boardlist?page=${page+1}&sword=${sword}&stype=${stype}">▷</a>
+			<a href="/main/boardlist?page=${page+1}&sword=${sword}&stype=${stype}">▷</a>
 		</c:if>
 		<c:if test="${page==chong }">
 			▷
 		</c:if>
 		
 		<c:if test="${pend!=chong }">
-			<a href="/boardlist?page=${pend+1}&sword=${sword}&stype=${stype}">▶▶</a>
+			<a href="/main/boardlist?page=${pend+1}&sword=${sword}&stype=${stype}">▶▶</a>
 		</c:if>
 		<c:if test="${pend==chong}">
 			▶▶
@@ -116,7 +116,7 @@ window.onload=function() {
 	</tr>
 	<tr align="center">
 		<td colspan="4">
-		<form name="pkc" action="/boardlist" method="post">
+		<form name="pkc" action="/main/boardlist" method="post">
 			<select name="stype">
 				<option value="user_id">작성자 아이디</option>			
 				<option value="board_title">제목</option>
