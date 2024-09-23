@@ -19,4 +19,8 @@ public interface ProgramReserveMapper {
 	ProgramCapacityDto getProgramCapacityOne(String reserve_date, int pro_id);
 	void pccminusinwonupdate(int p_inwon,int pro_id, String reserve_date);
 	ArrayList<ProgramDto> righttimeprograms();
+	ArrayList<ProgramReserveDto> memberprogram(String user_id);
+	void changeState(int pres_id);
+	void plusProgramCapacity(String p_inwon, String pro_id, String pres_date);
+	ArrayList<ProgramReserveDto> oldmemberprogram(String user_id, int month, String start, String end);
 }

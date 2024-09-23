@@ -1,6 +1,8 @@
 package kr.co.hospital.client.controller;
 
 
+import java.net.http.HttpResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -43,4 +45,12 @@ public class ProgramReserveController {
 	public String preserveOk(ProgramReserveDto prdto,HttpServletRequest request, Model model,HttpSession session) {
 		return service.preserveOk(prdto,request,model,session);
 	}
+	
+	@RequestMapping("/main/memberpreserve")
+	public String memberpreserve(ProgramReserveDto prdto,HttpServletRequest request, Model model,HttpSession session, HttpServletResponse response) {
+		return service.memberpreserve(prdto,request,model,session,response);
+	}
+
+	
+	
 }

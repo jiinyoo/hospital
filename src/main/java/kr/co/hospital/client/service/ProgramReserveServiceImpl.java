@@ -1,5 +1,6 @@
 package kr.co.hospital.client.service;
 
+import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -128,7 +129,7 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	                
 	                if (programDate.isAfter(startDate.minusDays(1)) &&
 	                    programDate.isBefore(endDate.plusDays(1)) &&
-	                    programDate.isAfter(today) &&
+	                    //programDate.isAfter(today) &&
 	                    availableCapacity > 0 && 
 	                    parseDayOfWeek(program.getDay_of_week()).contains(dayOfWeek)) {
 	                	cellContent += "<br><span id='programname'><a href='/main/programreserveview?pro_id=" 
@@ -213,4 +214,56 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 		
 		
 	}
+
+
+	@Override
+	public String memberpreserve(ProgramReserveDto prdto,HttpServletRequest request, Model model,HttpSession session, HttpServletResponse response) {
+		if(session.getAttribute("user_id")!=null) {
+			String user_id=session.getAttribute("user_id").toString();
+			
+			String p_inwon=(request.getParameter("p_inwon")!=null)?request.getParameter("p_inwon"):null;
+			String pres_date=(request.getParameter("pres_date")!=null)?request.getParameter("pres_date"):null;
+			String pro_id=(request.getParameter("pro_id")!=null)?request.getParameter("pro_id"):null;
+			
+			if(request.getParameter("pres_id")!=null) {
+				int pres_id=Integer.parseInt(request.getParameter("pres_id"));
+				mapper.changeState(pres_id);
+				mapper.plusProgramCapacity(p_inwon,pro_id,pres_date);
+				
+			}
+			
+			int month=12;
+			if(request.getParameter("month")!=null) {
+				month=Integer.parseInt(request.getParameter("month"));
+				
+			}
+			
+			String start=null;
+			if(request.getParameter("start")!=null) {
+				start=request.getParameter("start");
+			}
+			
+			String end=null;
+			if(request.getParameter("end")!=null) {
+				end=request.getParameter("end");
+			}
+			
+			ArrayList<ProgramReserveDto> prlist=mapper.memberprogram(user_id);
+			ArrayList<ProgramReserveDto> prlist2=mapper.oldmemberprogram(user_id, month, start ,end);
+			model.addAttribute("user_id",user_id);
+			model.addAttribute("prlist",prlist);
+			model.addAttribute("prlist2",prlist2);
+			return "/client/program/memberpreserve";
+		} else {
+			Cookie cookie=new Cookie("url","/main/memberpreserve");
+			cookie.setMaxAge(60*60*24);
+			cookie.setPath("/");
+			response.addCookie(cookie);
+			return "redirect:/main/index";
+		}
+		
+	}
+
+
+
 }

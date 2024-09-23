@@ -47,7 +47,7 @@ function check() {
 //오늘 이전의 일자는 두 달력에서 모두 활성화 되면 안됨
 //end_date가 start_date보다 뒤의 날짜여야 함
 
-function validCalendar(my) {
+/* function validCalendar(my) {
 	var today=new Date();
 	var currentYear=today.getFullYear();
 	var currentMonth=("0"+(today.getMonth()+1)).slice(-2);
@@ -67,9 +67,7 @@ function validCalendar(my) {
 	}
 }
 
-
-
-
+ */
 
 
 

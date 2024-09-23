@@ -1,5 +1,7 @@
 package kr.co.hospital.client.service;
 
+
+
 import org.springframework.ui.Model;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,5 +18,9 @@ public interface ProgramReserveSevice {
 	String preserview(HttpServletRequest request, Model model, HttpSession session);
 
 	String preserveOk(ProgramReserveDto prdto, HttpServletRequest request, Model model, HttpSession session);
+
+	String memberpreserve(ProgramReserveDto prdto,HttpServletRequest request, Model model,HttpSession session, HttpServletResponse response);
+
+	
 
 }

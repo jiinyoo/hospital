@@ -31,10 +31,6 @@ $(function() {
 
 
 
-
-
-
-
 </script>
 <style>
 section {

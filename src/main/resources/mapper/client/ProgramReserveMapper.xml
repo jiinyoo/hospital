@@ -111,4 +111,39 @@
 		ORDER BY p.pro_id DESC;
    		 ]]>
 	</select>
+	<select id="memberprogram">
+		select prs.*, p.start_date, p.pro_name,p.teach_name,p.end_date from preserve as prs
+		inner join program as p on prs.pro_id=p.pro_id
+		where prs.user_id=#{user_id}
+		and prs.pres_date >= curdate()
+	</select>
+	<select id="oldmemberprogram" resultType="kr.co.hospital.client.dto.ProgramReserveDto">
+		select prs.*, p.start_date, p.pro_name,p.teach_name,p.end_date from preserve as prs
+		inner join program as p on prs.pro_id=p.pro_id
+		<if test="month!=0 and month!=12"> <!-- num>0 으로 하면 더 간단-->
+		where prs.user_id=#{user_id} and prs.pres_date >= date_sub(now(),interval ${month} month) 
+		</if>
+		<if test="month==0">
+		where prs.user_id=#{user_id} and <![CDATA[prs.pres_date >=#{start} and prs.pres_date <= #{end}]]>
+		</if>
+		<if test="month==12">
+		where prs.user_id=#{user_id}
+		</if>
+		<![CDATA[and prs.pres_date < curdate()]]>
+		
+		
+	</select>
+	<update id="changeState">
+		update preserve
+		set state=3
+		where pres_id=#{pred_id}
+	</update>
+	<update id="plusProgramCapacity">
+	<!-- <if test="p_inwon!=null and pro_id!=null and pres_date!=null"> -->
+		update program_capacity
+		set minus_inwon=minus_inwon-#{p_inwon}
+		where pro_id=#{pro_id}
+		and date=#{pres_date}
+	<!-- </if> -->
+	</update>
 </mapper>
