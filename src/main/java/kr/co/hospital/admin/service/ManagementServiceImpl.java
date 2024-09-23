@@ -57,12 +57,19 @@ public class ManagementServiceImpl implements ManagementService {
 
 	    @Override
 	    public String updateState(ManagementDto mdto,
-	    		HttpSession session) 
+	    		HttpSession session, HttpServletRequest request) 
 	    {
 	    	 Integer state=(Integer)session.getAttribute("state");
 	    	 String user_id=(String)session.getAttribute("user_id");
+	    	 String id=request.getParameter("user_id");
+	    	 
 	         if ("admin".equals(user_id)) 
 	         {
+	        	if(mapper.isDoctor(id)) {
+	        		mapper.delWorkday(mapper.getDocId(id));
+	        		mapper.delDoctor(mapper.getDocId(id));
+	        	}
+	        	 
 	             mapper.updateState(mdto); 
 	             return "redirect:/admin/user/list";
 	         } 
