@@ -70,9 +70,6 @@ function validCalendar() {
 	</c:forEach>
 	</table>
 	
-	
-	
-	
 	<table width="900">
 	<caption style="height:40px"><h2>지난 프로그램 예약</h2></caption>
 	<form method="post" action="/main/memberpreserve">
