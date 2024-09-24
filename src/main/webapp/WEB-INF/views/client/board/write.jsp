@@ -25,7 +25,7 @@ $(document).ready(function() {
     $('#summernote').summernote({
         // 에디터 크기 설정
         height: 500,
-        width: 1000,
+        width: 675,
         // 에디터 한글 설정
         lang: 'ko-KR',
         toolbar: [
@@ -122,62 +122,138 @@ function imageUploader(file, el) {
 
 <style>
 
-      /* 페이지 전체에서 가운데 정렬 */
-    section {
-        display: flex;
-        margin:auto;
-        width: 1300px;
-        height: 100vh; /* 뷰포트 전체 높이 사용 */
+    * {
+		font-family: 'goorm-sans-bold', sans-serif;
+	}   
+    section 
+  	{
+ 	    width: 80%;
+ 	    max-width: 800px;
+    	margin: 50px auto;
+    	padding: 60px;
+    	background-color: #ffffff;
+    	border-radius: 5px;
+    	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  	}
+
+    /* 제목 스타일 */
+    h3 {
+        text-align: left;
+        color: #004fa8;
+        margin-bottom: 20px;
+        margin-left:10px;
+        font-size:30px;
     }
-    /* 테이블의 최대 너비 설정 및 가운데 정렬 */
-    table {
-        width:1000px;
-    	margin:0 auto;
-    	margin-top:5px;
-    	border-collapse: collapse;
+    
+    h4 {
+    	text-align: left;
+        color: #004fa8;
+        font-size:30px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        margin-left:10px;
+    }
+    
+    div 
+  	{
+    	margin: auto;
+ 	}
+
+    /* 입력 필드 스타일 */
+    input[type="text"]
+    {
+    	font-family: 'goorm-sans-bold', sans-serif;
+        width: 99%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+    }
+    
+    input[type="file"]
+    {
+    	font-family: 'goorm-sans-bold', sans-serif;
+        
+    }
+    
+    textarea
+    {
+    	font-family: 'goorm-sans-bold', sans-serif;
+    	width: 99%;
+    	height:200px;
+    	margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+        
     }
 
-    /* 테이블 내부 요소 스타일링 */
-    td {
-	    border-top: 1px solid black;
-	    padding: 10px; /* 셀 내부 여백 조정 */
-	    height: 30px;  /* 셀 높이 명확히 설정 */
-	}
-    /* 제출 버튼 가운데 정렬 */
-    #submit {
-        display: block;
-        margin: 20px auto; /* 자동으로 좌우 가운데 정렬 */
+    /* 버튼 스타일 */
+    input[type="button"] 
+    {
+    	font-family: 'goorm-sans-bold', sans-serif;
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        margin-left: 7px;
+        background-color: #004fa8;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
-	#board_title{
-		 outline: none;
-		 width:900px;
-		 height:30px;
-	}
-	
-	#user_id{
-		outline: none;
-		width:100px;
-		height:30px;
-		border:none;
-	
-	}
-	
-	#submit {
-		width:100px;
-		height:30px;
-	}
-	
-	hr {
-	 margin-bottom:0px;
-	 margin-top:0px;
-     border:0.1px solid #ccc;
-	}
+    
+    input[type="submit"]
+    {
+    	font-family: 'goorm-sans-bold', sans-serif;
+    	width: 100px;
+        padding: 10px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        background-color: #004fa8;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
-	ul {margin:0;}
-	#summernote {
-    display: block; /* 블록 요소로 설정 */
-    margin: 0 auto; /* 블록 요소의 가로 중앙 정렬 */
-	}
+    input[type="button"]:hover,
+    input[type="submit"]:hover {
+        background-color: #033D7F;
+    }
+
+    /* 이미지 미리보기 스타일 */
+    .img img {
+        margin-top: 10px;
+        max-width: 130px;
+        max-height: 130px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+
+    /* 사진 등록 부분 스타일 */
+    .one {
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .one label {
+        margin-right: 10px;
+    }
+    
+    textarea {
+    	resize:none;
+    	padding:9px;
+    }
+
 </style>
 <script>
 
@@ -209,32 +285,23 @@ function check()
 
 </head>
 <body>
-<section >
-	<table>
-		<caption style="text-align: center;"><h2>진료후기 게시판 글쓰기</h2></caption>
-		<tr>
-			<td width="100">제목</td>
-			<td><input type="text" name="board_title"  id="board_title" ></td>
-		</tr>
-		<tr>
-			<td>작성자</td>
-			<td><input type="text" name="user_id" id="user_id" value="${user_id}" readonly></td>
-		</tr>
-		<tr>
-			<td colspan="2">작성내용</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-			<textarea name="postContent" id="summernote" width="600" height="600" ></textarea>		
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="submit" value="작성" id="submit">
-			</td>
-		</tr>
-		
-	</table>
-</section>
+
+<section>
+     <caption> <h3> 진료 후기 글쓰기 </h3> </caption>
+     <div> 
+     	<input type="text" name="board_title"  id="board_title" placeholder="제 목">
+     	<input type="text" name="user_id" id="user_id"  value="${user_id }" readonly> 
+     </div>
+     <div> 
+     	<textarea name="postContent" id="summernote" placeholder="내 용"></textarea>
+     </div>
+     <div style="text-align: center;"> 
+     	<input type="submit" value="작성" id="submit"> 
+     	<input type="button" value="취소"  id="btn" onclick="location='/main/boardlist'">
+     	</div>
+ </section>
+
+
+
 </body>
 </html>
