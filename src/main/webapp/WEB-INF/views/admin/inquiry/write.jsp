@@ -173,6 +173,7 @@
 
 			<caption><h2>진료 답변 등록</h2></caption>
 			<input type="hidden" name="state" value="2">
+			<input type="hidden" name="inq_id" value="${inq_id}">
 			<input type="hidden" name="bimil" value="${bimil}" id="bimil">
 			<input type="hidden" name="group_order"" value="${group_order}">
 			<input type="hidden" name="origin_user_id" value="${origin_user_id}">
