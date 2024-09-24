@@ -6,10 +6,7 @@
 <meta charset="UTF-8">
 <title>5대 건강 정보</title>
  <style>
-    body {
-        font-family: 'goorm-sans-bold', Arial, sans-serif;
-        background-color: #f0f4f8; /* 부드러운 배경색 추가 */
-    }
+
 
     h1 {
         font-size: 36px;
@@ -21,6 +18,7 @@
     .health-info-container {
         width: 80%;
         margin: 0 auto;
+        margin-top:30px;
         background-color: white;
         padding: 40px; 
         border-radius: 15px;

@@ -137,14 +137,14 @@
     <caption> <h2> 공지 사항 </h2></caption>
     <tr id="table-header" align="center">
     <tr align="center">
-      <th id="nuser"> 병원장 </th>
+      <th id="nuser"> 작성자 </th>
       <th id="ntitle"> 제 목 </th>
       <th> 조회수 </th>
       <th> 작성일 </th>
     </tr>
     <c:forEach items="${nmapAll}" var="ndto">
     <tr align="center">
-      <td> 관리자 </td>
+      <td> 병원장 </td>
       <td id="nntitle"> 
        <a href="admin_notice_readnum?notice_id=${ndto.notice_id}">${ndto.title}</a>
       </td>

@@ -11,7 +11,6 @@
         width: 100%;
         max-width: 1100px;
         margin: 50px auto;
-        padding: 30px 50px;
         background-color: #ffffff;
         border-radius: 10px;
 
@@ -36,7 +35,7 @@
     }
     
     #ntitle {
-    	width:700px;
+    	width:500px;
     	text-align: left;
     	padding-left: 50px;
     	color:black;
@@ -90,7 +89,6 @@
         text-decoration: none;
         margin-top: 20px;
         text-align: right;
-        border:none;
     }
 
     .write-button:hover {
@@ -100,8 +98,6 @@
     .page {
         text-align: center;
         margin-top: 20px;
-        border:none;
-       
     }
 
     .page a {
@@ -110,13 +106,21 @@
         background-color: #004fa8;
         color: white;
         margin: 0 2px;
-        border-radius: 5px;
+        border-radius: 4px;
         text-decoration: none;
+        font-size: 16px;
     }
 
     .page a:hover {
         background-color: #033D7F;
     }
+    
+    .page .current-page {
+    background-color: #033D7F;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
     
 	#sform input,#sform select {
 		font-family: 'goorm-sans-bold';
@@ -145,6 +149,66 @@
         line-height: 18px;
         border:none;
 	}
+	
+	/* 전체 레이아웃 설정 */
+.page-layout {
+    display: flex;
+    justify-content: center; /* 공지사항 섹션을 중앙 정렬 */
+    width: 1500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* 왼쪽 사이드바 스타일 */
+.sidebar {
+    position: absolute;
+    left: 0;
+    width: 170px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    top: 50px; /* 페이지의 상단과 사이드바 간격 */
+    text-align: center;
+}
+
+.sidebar h3 {
+	text-align: center;
+    font-size: 28px;
+    color: #004fa8;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #004fa8;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+    color: #033D7F;
+}
+
+/* 가운데 공지사항 섹션 스타일 */
+.content {
+    flex: 1;
+    max-width: 1100px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-left: 200px; /* 사이드바와 공지사항 섹션 간의 간격 */
+}
 </style>
 <script>
 window.onload=function() {
@@ -162,13 +226,26 @@ window.onload=function() {
 </script>
 </head>
 <body>
-<section>
+
+<div class="page-layout">
+   <!-- 왼쪽 사이드바 -->
+   <div class="sidebar">
+      <h3>커뮤니티</h3>
+      <ul>
+         <li><a href="/main/notice_list">공지사항</a></li>
+         <li><a href="/main/inquirylist">진료과별 질문</a></li>
+         <li><a href="/main/boardlist">진료 후기</a></li>
+         <li><a href="/main/healthInfo">건강 정보</a></li>
+      </ul>
+   </div>
+
+<section class="content">
 <table>
 	<caption><h2>진료 후기 게시판</h2></caption>
 	<br>
 	<tr>
 		<th>작성자</th>
-		<th id="ntitle">제목</th>
+		<th id="ntitle">제 목</th>
 		<th>작성일</th>
 		<th>조회수</th>
 	</tr>
@@ -201,7 +278,7 @@ window.onload=function() {
 	
 	<c:forEach begin="${pstart}" end="${pend}" var="i">
 		<c:if test="${page==i}">
-			<a href="/main/boardlist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
+			<a class="current-page" href="/main/boardlist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
 		</c:if>
 		<c:if test="${page!=i}">
 			<a href="/main/boardlist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
@@ -238,5 +315,6 @@ window.onload=function() {
 	<input type="button" class="write-button" onclick="location='../../main/boardwrite'" value="글쓰기">
 </div>
 </section>
+</div>
 </body>
 </html>

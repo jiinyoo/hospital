@@ -13,7 +13,6 @@
         width: 100%;
         max-width: 1100px;
         margin: 50px auto;
-        padding: 30px 50px;
         background-color: #ffffff;
         border-radius: 10px;
 
@@ -24,6 +23,7 @@
         text-align: left;
         color: #004fa8;
         margin-bottom: 20px;
+        padding-top:19px;
         font-size: 30px;
         margin-left: 10px;
         
@@ -38,16 +38,16 @@
     }
     
  	#ntitle {
-    	width:700px;
+    	width:500px;
     	text-align: left;
-    	padding-left: 20px;
+    	padding-left: 50px;
     	color:black;
     	
     }
     
     #nntitle {
     	text-align: left;
-    	padding-left: 20px;
+    	padding-left: 50px;
     }
 	
 
@@ -143,6 +143,67 @@
         text-decoration: none;
         line-height: 30px;
 	}
+	
+	/* 전체 레이아웃 설정 */
+.page-layout {
+    display: flex;
+    justify-content: center; /* 공지사항 섹션을 중앙 정렬 */
+    width: 1500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* 왼쪽 사이드바 스타일 */
+.sidebar {
+    position: absolute;
+    left: 0;
+    width: 170px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    top: 50px; /* 페이지의 상단과 사이드바 간격 */
+    text-align: center;
+}
+
+.sidebar h3 {
+	text-align: center;
+    font-size: 28px;
+    color: #004fa8;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #004fa8;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+    color: #033D7F;
+}
+
+/* 가운데 공지사항 섹션 스타일 */
+.content {
+    flex: 1;
+    max-width: 1100px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-left: 200px; /* 사이드바와 공지사항 섹션 간의 간격 */
+}
+	
 </style>
 <script>
 function check(user_id, bimil, inq_id, origin_user_id) {
@@ -192,12 +253,27 @@ window.onload=function() {
 </script>
 </head>
 <body><!--(inquiry)list -->
-<section>
+
+<div class="page-layout">
+   <!-- 왼쪽 사이드바 -->
+   <div class="sidebar">
+      <h3>커뮤니티</h3>
+      <ul>
+         <li><a href="/main/notice_list">공지사항</a></li>
+         <li><a href="/main/inquirylist">진료과별 질문</a></li>
+         <li><a href="/main/boardlist">진료 후기</a></li>
+         <li><a href="/main/healthInfo">건강 정보</a></li>
+      </ul>
+   </div>
+
+   <!-- 가운데 공지사항 섹션 -->
+
+<section class="content">
 	<table>
 	<caption><h2 >진료과별 질문 게시판</h2></caption>
 	<tr>
-		<th>작성자</th>
-		<th id="ntitle">제목</th>
+		<th >작성자</th>
+		<th id="ntitle">제 목</th>
 		<th>작성일</th>
 		<th>조회수</th>
 	</tr>
@@ -206,7 +282,7 @@ window.onload=function() {
 		<td width="100">${imap.user_id}</td>
 		<td width="600" id="nntitle">
 		<c:if test="${imap.bimil==1}">
-			<span id="bimil"><img src="../../static/client/inquiry/lock.png" width="20px"></span>
+			<span id="bimil"><img src="../../static/client/inquiry/lock.png" width="15px"></span>
 		</c:if>
 		<c:if test="${imap.state==1}">
 			<span id="part">${imap.part}</span>
@@ -226,8 +302,8 @@ window.onload=function() {
     		</c:if>>
 	
 			<a href="#">${imap.title}</a></span>
-		</a></td>
-		<td width="200">${imap.writeday}</a></td>
+	</td>
+		<td width="200">${imap.writeday}</td>
 		<td width="100">${imap.readnum}</td>
 	</tr>
 	</c:forEach>
@@ -288,5 +364,6 @@ window.onload=function() {
 		<input type="button" value="글쓰기" onclick="logincheck()" class="write-button">
 	</div>
 </section>
+</div>
 </body>
 </html>

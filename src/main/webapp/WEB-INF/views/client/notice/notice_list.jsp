@@ -13,7 +13,6 @@
         width: 100%;
         max-width: 1100px;
         margin: 50px auto;
-        padding: 30px 50px;
         background-color: #ffffff;
         border-radius: 10px;
 
@@ -24,6 +23,7 @@
         text-align: left;
         color: #004fa8;
         margin-bottom: 20px;
+        padding-top:19px;
         font-size: 30px;
         margin-left: 10px;
         
@@ -103,6 +103,7 @@
     .page {
         text-align: center;
         margin-top: 20px;
+        
     }
 
     .page a {
@@ -140,16 +141,18 @@
 .sidebar {
     position: absolute;
     left: 0;
-    width: 160px;
+    width: 170px;
     padding: 30px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     top: 50px; /* 페이지의 상단과 사이드바 간격 */
+    text-align: center;
 }
 
 .sidebar h3 {
-    font-size: 24px;
+	
+    font-size: 28px;
     color: #004fa8;
     margin-bottom: 20px;
 }
@@ -160,13 +163,14 @@
 }
 
 .sidebar ul li {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .sidebar ul li a {
     text-decoration: none;
     color: #004fa8;
     font-weight: bold;
+    font-size: 18px;
 }
 
 .sidebar ul li a:hover {
@@ -207,13 +211,13 @@
 
    <!-- 가운데 공지사항 섹션 -->
    <section class="content">
-      <table width="900" align="center">
+      <table>
          <caption><h2>공지 사항</h2></caption>
          <tr id="table-header" align="center">
-            <th id="nuser">작성자</th>
+            <th>작성자</th>
             <th id="ntitle">제 목</th>
-            <th>조회수</th>
             <th>작성일</th>
+            <th>조회수</th>
          </tr>
          <c:forEach items="${nmapAll}" var="ndto">
             <tr align="center">
@@ -221,8 +225,8 @@
                <td id="nntitle">
                   <a href="notice_readnum?notice_id=${ndto.notice_id}">${ndto.title}</a>
                </td>
-               <td>${ndto.readnum}</td>
                <td>${ndto.writeday}</td>
+               <td>${ndto.readnum}</td>
             </tr>
          </c:forEach>
       </table>
