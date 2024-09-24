@@ -127,7 +127,7 @@
         <ul>
             <li><span class="maincate">병원 소개</span>
                 <ul>
-                    <li><a href="#">조직도</a></li>
+                    <li><a href="/admin/main/hospital">조직도</a></li>
                 </ul>
             </li>
             <li><span class="maincate">의사 전용탭</span>

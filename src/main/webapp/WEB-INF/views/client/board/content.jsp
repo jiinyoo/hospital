@@ -9,84 +9,91 @@
 <style>
 
 	section {
-        margin:auto;
-        width:800px;
-        margin:50px auto;
-        padding: 60x;
-        background: #fff;
-        border-radius: 5px;
-        min-height: 600px;
-    }
-    
-    h3 {
-        text-align: left;
-        color: #004fa8;
-        margin: 30px;
-        font-size:30px;
-    }
-    /* 테이블의 최대 너비 설정 및 가운데 정렬 */
-    table {
-    	
-		width: 100%;
-		padding: 20px;
-    }
-    
-    th,td {
-    	border-radius: 3px;
-    	padding: 5px 10px;
-    }
-    
-    th {
-    	width: 10%;
-    	text-align: left;
-    	background: #ccc;
-    	font-size: 18px;
-    }
+    margin: 50px auto;
+    width: 900px;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
 
-    /* 테이블 내부 요소 스타일링 */
-    td {
-		border:2px solid gray;
-		border-radius: 3px;
-	}
-	
-	#borcont {
-		border:2px solid gray;
-		border-radius: 3px;
-	}
-	
-	    /* 버튼 스타일 */
-    .buttons a {
-        display: inline-block;
-        padding: 10px 15px;
-        margin: 20px 0 50px 0;
-        background-color: #004fa8;
-        color: white;
-        border-radius: 5px;
-        text-decoration: none;
-        text-align: center;
-        transition: all 0.3s ease;
-        font-size: 14px;
-    }
-    
-    #del {
-    	background-color:#FF5252;
-    }
-    
-    #del:hover {
-    	background-color:red;
-    }
+h3 {
+    text-align: center;
+    color: #004fa8;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
 
-    .buttons a:hover {
-        background-color: #033D7F;
-    }
+table {
+    width: 100%;
+    margin-bottom: 40px;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
 
-    .buttons a.delete {
-        background-color: #FF7A7A;
-    }
+th, td {
+    padding: 10px;
+    font-size: 18px;
+    line-height: 1.6;
+}
 
-    .buttons a.delete:hover {
-        background-color: #FF5252;
-    }
+th {
+    width: 15%;
+    text-align: center;
+    background: #e9ecef;
+    color: #495057;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #dee2e6;
+    font-weight: bold;
+}
+
+td {
+    background: #f8f9fa;
+    color: #343a40;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #dee2e6;
+}
+
+#borcont {
+    background: #f8f9fa;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    line-height: 1.8;
+    color: #495057;
+}
+
+.buttons {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.buttons a {
+    display: inline-block;
+    padding: 12px 30px;
+    margin: 10px;
+    background-color: #2d6a4f;
+    color: #ffffff;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.buttons a:hover {
+    background-color: #1b4332;
+}
+
+#del {
+    background-color: #e63946;
+}
+
+#del:hover {
+    background-color: #d62828;
+}
+
 </style>
 <script>
 function deletecheck(boardid, userid) {

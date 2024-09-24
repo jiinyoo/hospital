@@ -125,6 +125,9 @@ function imageUploader(file, el) {
     * {
 		font-family: 'goorm-sans-bold', sans-serif;
 	}   
+	body{
+		background: #f2f4f9;
+	}
     section 
   	{
  	    width: 80%;
@@ -135,7 +138,7 @@ function imageUploader(file, el) {
     	border-radius: 5px;
     	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   	}
-
+	
     /* 제목 스타일 */
     h3 {
         text-align: left;
@@ -195,8 +198,8 @@ function imageUploader(file, el) {
     input[type="button"] 
     {
     	font-family: 'goorm-sans-bold', sans-serif;
-        width: 20px;
-        height: 20px;
+        width: 100px;
+        height: 40px;
         margin-top: 10px;
         margin-bottom: 15px;
         margin-left: 7px;
@@ -297,7 +300,7 @@ function check()
      </div>
      <div style="text-align: center;"> 
      	<input type="submit" value="작성" id="submit"> 
-     	<input type="button" value="취소"  id="btn" onclick="location='/main/boardlist'">
+     	<input type="button" value="취소"  id="button" onclick="location='/main/boardlist'">
      	</div>
  </section>
 

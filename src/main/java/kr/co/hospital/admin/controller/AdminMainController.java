@@ -28,6 +28,12 @@ public class AdminMainController {
 	public String index(HttpSession session) {
 		return service.adminmain(session);
 	}
+	
+	@RequestMapping("/admin/main/hospital")
+	public String hospital()
+	{
+		return "/admin/main/hospital";
+	}
 
 	
 }

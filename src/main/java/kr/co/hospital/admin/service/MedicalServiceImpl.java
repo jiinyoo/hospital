@@ -147,7 +147,7 @@ public class MedicalServiceImpl implements MedicalService {
 	//	System.out.println(res_id);
 		if(session.getAttribute("user_id")!=null) {
 			String userid=session.getAttribute("user_id").toString();
-			if(mapper.getState(userid)!=0 && mapper.getDocid(userid).equals(mapper.getDocidtoRes(res_id))) {
+			if(mapper.getState(userid)==2 || mapper.getDocid(userid).equals(mapper.getDocidtoRes(res_id))) {
 				String username=mapper.getName(rdto.getUser_id());
 				if(username==null) {
 					rdto.setUser_name(rdto.getUser_id());

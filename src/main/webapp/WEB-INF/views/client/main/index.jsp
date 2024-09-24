@@ -11,6 +11,11 @@
 
 * {margin:0; padding:0; box-sizing: border-box;}
 
+	body
+	{
+		background: url('/static/client/main/패턴.avif') no-repeat center center; /* 이미지 경로 설정 */
+    background-size: cover;
+	}
  section {
       font-family: 'goorm-sans-bold';
       width:70%;
@@ -199,16 +204,17 @@ section #community .comm .more-btn a:hover {
   }
   
   #pro-container {
+  	background: url('/static/client/main/pattern4.jpg') no-repeat center center; /* 이미지 경로 설정 */
+    background-size: cover; /* 섹션 크기에 맞춰 이미지가 자동 조정됨 */
   	width:100%;
   	padding-bottom:20px;
-  	border: 1px solid white;
-  	background: white;
   	margin:60px 0;
   	box-shadow: 0 0px 20px rgba(0, 0, 0.1, 0.2);
   }
 
 #protitle {
 	margin:auto;
+	padding:30px;
 }
   
 
@@ -217,6 +223,7 @@ section #community .comm .more-btn a:hover {
 	transition: all 0.3s ease;
 	display:inline-block;
 	margin-bottom:20px;
+	background: white;
 
 }
 

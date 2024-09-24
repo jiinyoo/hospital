@@ -165,6 +165,7 @@ window.onload=function() {
 <section>
 <table>
 	<caption><h2>진료 후기 게시판</h2></caption>
+	<br>
 	<tr>
 		<th>작성자</th>
 		<th id="ntitle">제목</th>
@@ -181,6 +182,7 @@ window.onload=function() {
 	</c:forEach>
 
 </table>
+<br>
 <div align="center" class="page">
 	<c:if test="${pstart!=1}">		
 		<a href="/main/boardlist?page=${pstart-1}&sword=${sword}&stype=${stype}">◀◀</a>
@@ -220,6 +222,7 @@ window.onload=function() {
 		▶▶
 	</c:if>
 </div>
+<br>
 <div>
 	<form name="pkc" id="sform" action="/main/boardlist" method="post">
 		<select name="stype">
