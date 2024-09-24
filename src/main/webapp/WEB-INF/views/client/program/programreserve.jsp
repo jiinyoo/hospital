@@ -17,6 +17,7 @@ section {
 
 #programtable tr:first-child{
 	background-color: #007BC9;
+	color:white;
 }
 
 #programtable {
@@ -39,7 +40,7 @@ section {
 }
 
 #programtable th {
-    background-color: #B5B2FF; /* 테이블 헤더 색상 */
+    background-color: #007BC9; /* 테이블 헤더 색상 */
     font-weight: bold; /* 제목 글씨 굵게 */
 }
 
@@ -55,24 +56,74 @@ section {
 
 
 #calendar-outer table {
-	border-spacing:0px;
-	margin:auto;
-
+	border-spacing: 0;
 }
 
-
-#calendar-outer table thead {
-	background-color: #B5B2FF;
+#calendar-outer table th, #calendar-outer table td {
+    padding: 15px; /* 셀 내부 여백 추가 */
+    border: 1px solid #dddddd; /* 셀 테두리 */
 }
 
+#calendar-outer table thead th {
+    background-color: #007BC9; /* 요일 헤더 색상 */
+    color: white;
+    font-weight: bold;
+}
 
 #calendar-outer table td {
-	text-align:left;
-	vertical-align: top;
-	padding: 5px;
-	width:200px;
-	height:150px;
-	border-spacing:none;
+    background-color: #f9f9f9;
+    height: 250px; /* 셀 높이 */
+    width:200px;
+    vertical-align: top;
+    position: relative;
+}
+
+#calendar-outer table td span {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+
+#calendar-outer table td a {
+    display: block;
+    background-color: #D9E5FF;
+    color: black;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+#calendar-outer table td a:hover {
+    background-color: #005999; /* 링크 마우스 오버 시 색상 변경 */
+}
+
+#calendar-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#calendar-navigation button {
+    background-color: #007BC9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.2em;
+    border-radius: 5px;
+}
+
+#calendar-navigation button:hover {
+    background-color: #005999;
+}
+
+#calendar-navigation span {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0 20px;
 }
 
 .program {
@@ -183,7 +234,7 @@ function loadCalendar(year, month) {
 		        <td width="150px">종료일</td>
 		        <td width="100px">해당요일</td>
 		        <td width="150px">일일 수용 인원</td>
-		        <td width="120px">진행/진행 예정</td>
+		        <td width="120px">진행 상황</td>
 		        
 		    </tr>
 		    <c:forEach items="${plist}" var="pdto">
