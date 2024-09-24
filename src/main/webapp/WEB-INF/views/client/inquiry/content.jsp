@@ -36,6 +36,42 @@
 		padding:20px;
 		border-radius:10px;
 	}
+	
+	.modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1; 
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        background-color: rgba(0, 0, 0, 0.8); /* 배경을 어둡게 */
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .modal-content {
+        max-width: 80%;
+        max-height: 80%;
+        border-radius: 10px;
+        
+    }
+    
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        color: white;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+	
+	.clickable-img {
+    	cursor:pointer;
+    }
+	
 </style>
 <script>
 function deletecheck() {
@@ -65,7 +101,7 @@ function deletecheck() {
 			<c:forEach items="${idto.imgs}" var="img">
 				<c:if test="${img!=''}">
 		
-					<img src="../../static/client/inquiryfile/${img}">
+					<img src="../../static/client/inquiryfile/${img}" class="clickable-img">
 		
 				</c:if>
 			</c:forEach>
@@ -83,5 +119,33 @@ function deletecheck() {
 		</tr>
 	</table>
 	</section>
+	<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+  </div>
+  
+  <script>
+    // 클릭한 이미지를 모달에 보여주는 로직
+    var modal=document.getElementById("myModal");
+    var modalImg=document.getElementById("img01");
+    var images=document.getElementsByClassName("clickable-img");
+
+    for (let img of images) 
+    {
+        img.onclick=function()
+        {
+            modal.style.display="flex";
+            modalImg.src=this.src;
+        }
+    }
+
+    // 모달 닫기 버튼 기능
+    var span=document.getElementsByClassName("close")[0];
+    span.onclick=function() 
+    {
+        modal.style.display="none";
+    }
+  </script>
+	
 </body>
 </html>

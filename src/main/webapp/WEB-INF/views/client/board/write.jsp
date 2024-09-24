@@ -287,7 +287,7 @@ function check()
 <body>
 
 <section>
-     <caption> <h3> 공지 글쓰기 </h3> </caption>
+     <caption> <h3> 진료 후기 글쓰기 </h3> </caption>
      <div> 
      	<input type="text" name="board_title"  id="board_title" placeholder="제 목">
      	<input type="text" name="user_id" id="user_id"  value="${user_id }" readonly> 
@@ -295,7 +295,10 @@ function check()
      <div> 
      	<textarea name="postContent" id="summernote" placeholder="내 용"></textarea>
      </div>
-     <div style="text-align: center;"> <input type="submit" value="작성" id="submit"> </div>
+     <div style="text-align: center;"> 
+     	<input type="submit" value="작성" id="submit"> 
+     	<input type="button" value="취소"  id="btn" onclick="location='/main/boardlist'">
+     	</div>
  </section>
 
 

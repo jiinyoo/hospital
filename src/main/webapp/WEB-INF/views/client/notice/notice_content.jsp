@@ -131,6 +131,10 @@
         font-weight: bold;
         cursor: pointer;
     }
+    
+    .clickable-img {
+    	cursor:pointer;
+    }
 
 </style>
 

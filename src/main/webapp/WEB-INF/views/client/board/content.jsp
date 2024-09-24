@@ -15,6 +15,7 @@
         padding: 60x;
         background: #fff;
         border-radius: 5px;
+        min-height: 600px;
     }
     
     h3 {
@@ -25,11 +26,13 @@
     }
     /* 테이블의 최대 너비 설정 및 가운데 정렬 */
     table {
+    	
 		width: 100%;
 		padding: 20px;
     }
     
     th,td {
+    	border-radius: 3px;
     	padding: 5px 10px;
     }
     
@@ -42,21 +45,35 @@
 
     /* 테이블 내부 요소 스타일링 */
     td {
-
+		border:2px solid gray;
+		border-radius: 3px;
+	}
+	
+	#borcont {
+		border:2px solid gray;
+		border-radius: 3px;
 	}
 	
 	    /* 버튼 스타일 */
     .buttons a {
         display: inline-block;
-        padding: 10px 20px;
-        margin: 10px 0;
+        padding: 10px 15px;
+        margin: 20px 0 50px 0;
         background-color: #004fa8;
         color: white;
-        border-radius: 10px;
+        border-radius: 5px;
         text-decoration: none;
         text-align: center;
         transition: all 0.3s ease;
         font-size: 14px;
+    }
+    
+    #del {
+    	background-color:#FF5252;
+    }
+    
+    #del:hover {
+    	background-color:red;
     }
 
     .buttons a:hover {
@@ -94,22 +111,20 @@ function deletecheck(boardid, userid) {
 			<td>${bdto.user_id}</td>
 		</tr>
 		<tr>
-			<th colspan="2">내용</th>
+			<th >내용</th>
+
+			<td id="borcont" >${bdto.board_content}</td>
 		</tr>
-		<tr>
-			<td colspan="2">${bdto.board_content}</td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center">
-			<div class="buttons">
-			<c:if test="${user_id==bdto.user_id}">
-			<a href="/main/boardupdate?board_id=${bdto.board_id}&user_id=${bdto.user_id}">수정</a>
-			<a href="javascript:deletecheck('${bdto.board_id}','${bdto.user_id }')">삭제</a>
-			</c:if>
+	</table>	
+			<div class="buttons" align="center">
+				<c:if test="${user_id==bdto.user_id}">
+					<a href="/main/boardlist"> 목록 </a>
+					<a href="/main/boardupdate?board_id=${bdto.board_id}&user_id=${bdto.user_id}">수정</a>
+					<a id="del" href="javascript:deletecheck('${bdto.board_id}','${bdto.user_id }')">삭제</a>
+				</c:if>
 			</div>
-			</td>
-		</tr>
-	</table>
+
+
 </section>
 </body>
 </html>
