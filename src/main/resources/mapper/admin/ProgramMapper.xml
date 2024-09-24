@@ -70,7 +70,7 @@
 		inner join user as u on prs.user_id=u.user_id 
 		inner join program as p on prs.pro_id=p.pro_id
 		where ${stype} like concat('%',#{sword},'%')
-		order by prs.pres_id desc limit #{index},10
+		order by prs.pres_date desc limit #{index},10
 	</select>
 	<select id="getpreserveChong">
 		select ceil(count(*)/10) 

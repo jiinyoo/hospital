@@ -7,69 +7,67 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <style>
-    /* 전체 페이지 스타일 */
-    body 
-  	{
-    	font-family: 'GongGothicMedium';
-    	background-color: #f2f4f9;
-    	margin: 0;
-    	padding: 0;
-  	}	
+   
     
     section 
   	{
- 	    width: 80%;
- 	    max-width: 550px;
+ 	    width: 100%;
+ 	    max-width: 800px;
     	margin: 50px auto;
-    	padding: 60px;
+        padding: 30px 50px;
     	background-color: #ffffff;
-    	border-radius: 40px;
-    	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    	border-radius: 5px;
+    	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   	}
 
     /* 제목 스타일 */
     h3 {
-        text-align: center;
-        color: #B5B2FF;
+        text-align: left;
+        color: #004fa8;
         margin-bottom: 20px;
-        font-size:22px;
+        margin-left:10px;
+        font-size:30px;
+        font-weight: normal;
     }
     
     h4 {
-    	text-align: center;
-        color: #B5B2FF;
-        font-size:20px;
+    	text-align: left;
+        color: #004fa8;
+        font-size:30px;
         margin-top: 10px;
         margin-bottom: 20px;
+        margin-left:10px;
+        font-weight: normal;
     }
-
+    
+    /* 입력 필드 스타일 */
     input[type="text"]
     {
-    	font-family: 'goorm-sans-bold', sans-serif;
+    	font-family: 'GongGothicMedium';
         width: 99%;
         padding: 10px;
         margin-bottom: 20px;
         border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 14px;
+        border-radius: 5px;
+        font-size: 16px;
         outline: none;
     }
     
     input[type="file"]
     {
-    	font-family: 'goorm-sans-bold', sans-serif;
+    	font-family: 'GongGothicMedium';
         
     }
     
     textarea
     {
-    	font-family: 'goorm-sans-bold', sans-serif;
+    	font-family: 'GongGothicMedium';
     	width: 99%;
     	height:200px;
     	margin-bottom: 20px;
         border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 14px;
+        border-radius: 5px;
+        font-size: 16px;
         outline: none;
     }
 
@@ -77,29 +75,32 @@
     input[type="button"] 
     {
     	font-family: 'GongGothicMedium';
-        width: 49%;
-        padding: 10px;
+        width: 20px;
+        height: 20px;
         margin-top: 10px;
         margin-bottom: 15px;
-        background-color: #B5B2FF;
+        margin-left: 7px;
+        background-color: #004fa8;
         border: none;
-        border-radius: 10px;
+        border-radius: 5px;
         color: white;
         font-size: 14px;
         cursor: pointer;
         transition: all 0.3s ease;
     }
     
-    input[type="submit"]
+    input[type="submit"],
+    #btn
     {
     	font-family: 'GongGothicMedium';
-    	width: 99%;
+    	width: 100px;
+    	height:40px;
         padding: 10px;
         margin-top: 30px;
         margin-bottom: 10px;
-        background-color: #B5B2FF;
+        background-color: #004fa8;
         border: none;
-        border-radius: 10px;
+        border-radius: 5px;
         color: white;
         font-size: 14px;
         cursor: pointer;
@@ -107,16 +108,17 @@
     }
 
     input[type="button"]:hover,
-    input[type="submit"]:hover {
-        background-color: #7D78FF;
+    input[type="submit"]:hover,
+    #btn:hover {
+        background-color: #033D7F;
     }
 
     /* 이미지 미리보기 스타일 */
     .img img {
         margin-top: 10px;
-        max-width: 100px;
-        max-height: 100px;
-        border-radius: 10px;
+        max-width: 130px;
+        max-height: 130px;
+        border-radius: 5px;
         border: 1px solid #ddd;
     }
 
@@ -133,7 +135,6 @@
     textarea {
     	resize:none;
     	padding:9px;
-    	
     }
 
 </style>
@@ -230,8 +231,14 @@
      </div>
      
      <div> 
-       <h4> 사진 수정 </h4>
+       <h4> 사진 등록 
+       		<span>
+       			<input type="button" value="+" onclick="add()"> 
+     			<input type="button" value="-" onclick="del()">
+     		</span>
+		</h4>
        <hr>
+       <br>
        <div>
       	 <c:forEach items="${imgs}" var="img">
       	 <c:if test="${img!=''}">
@@ -240,11 +247,9 @@
          </c:if>
     	 </c:forEach>
        </div>
+       <br>
        <hr>
-       <div> 
-     		<input type="button" value="추가" onclick="add()"> 
-     		<input type="button" value="삭제" onclick="del()"> 
-    	</div>
+       <br>
     	<div  id="outer">
      	<div id="one" class="one">
            <label for="fileUp0" class="label"> </label>
@@ -255,7 +260,10 @@
        </div>
        </div>
      </div>
-     <div> <input type="submit" value="공지사항 수정"> </div>
+     <div style="text-align: center;"> 
+     	<input type="submit" value="공지사항 수정">
+     	<input id="btn" type="button" onclick="location='admin_notice_content'" value="수정 취소"> 
+     </div>
    </form>
  </section>
 

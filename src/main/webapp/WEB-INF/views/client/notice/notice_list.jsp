@@ -38,16 +38,16 @@
     }
     
     #ntitle {
-    	width:700px;
+    	width:500px;
     	text-align: left;
-    	padding-left: 20px;
+    	padding-left: 50px;
     	color:black;
     	
     }
     
     #nntitle {
     	text-align: left;
-    	padding-left: 20px;
+    	padding-left: 50px;
     }
 	
 	td {
@@ -111,20 +111,26 @@
         background-color: #004fa8;
         color: white;
         margin: 0 2px;
-        
+        border-radius: 4px;
         text-decoration: none;
+        font-size: 16px;
     }
 
     .page a:hover {
         background-color: #033D7F;
     }
     
-
+    .page .current-page {
+    background-color: #033D7F;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
     
-    #nuser {
-    	
-    }
+
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
 </head>
 <body>
 <%-- <p>pstart: ${pstart}, pend: ${pend}, chong: ${chong}, page: ${page}</p> --%>
@@ -140,7 +146,7 @@
     </tr>
     <c:forEach items="${nmapAll}" var="ndto">
     <tr align="center">
-      <td> 관리자 </td>
+      <td> 병원장 </td>
       <td id="nntitle"> 
        <a href="notice_readnum?notice_id=${ndto.notice_id}">${ndto.title}</a>
       </td>
@@ -153,14 +159,16 @@
    <div class="page">
    
        <c:if test="${page > 1}">
-    	<a href="notice_list?page=${page - 1}">◀◀</a>
+    	<a href="notice_list?page=${page - 1}">
+    		<i class="fas fa-angle-double-left"></i>
+    	</a>
 	   </c:if>
 
        
        <c:forEach var="i" begin="${pstart}" end="${pend}">
        
            <c:if test="${page==i}">
-               <a style="background-color: #033D7F;">${i}</a>
+               <a class="current-page">${i}</a>
            </c:if>
            
            <c:if test="${page!=i}">
@@ -170,7 +178,9 @@
        </c:forEach>
        
        <c:if test="${page < chong}">
-    	<a href="notice_list?page=${page + 1}">▶▶</a>
+    	<a href="notice_list?page=${page + 1}">
+    		<i class="fas fa-angle-double-right"></i>
+    	</a>
 	   </c:if>
 
        

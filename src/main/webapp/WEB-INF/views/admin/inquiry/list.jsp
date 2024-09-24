@@ -37,6 +37,12 @@
 		background-color:orange;
 	}
 
+	a {
+		text-decoration:none;
+	}
+	a hover {
+		color:black;
+	}
 </style>
 
 <script>

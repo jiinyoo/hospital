@@ -16,9 +16,8 @@
       width:70%;
       height:180px;
       margin:auto;
-      
       margin-bottom: 10px;
-      border-radius: 30px;
+      
       /*box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);*/
    }
 
@@ -58,7 +57,7 @@ section #community {
     padding: 20px;
     background-color:#FDFFFF;
     border-radius: 10px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3); /* 테두리 없이 그림자만 추가 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 테두리 없이 그림자만 추가 */
     text-align: left;
 }
 
@@ -123,9 +122,8 @@ section #community .comm .more-btn a:hover {
     margin-top:270px;
     width: 75%;
     background-color: #ffffff; /* 배경을 깔끔한 흰색으로 설정 */
-    
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 부드러운 그림자로 더 깔끔한 느낌 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자로 더 깔끔한 느낌 */
     
 }
 
@@ -157,7 +155,7 @@ section #community .comm .more-btn a:hover {
 /* 배너를 화면 오른쪽에 고정 */
 #floating-banner {
     position: absolute;
-    top: 200px; /* 화면 상단에서의 위치 */
+    top: 223px; /* 화면 상단에서의 위치 */
     right: 50px; /* 화면 오른쪽에서의 위치 */
     width: 200px; /* 배너 너비 */
     z-index: 10; /* 다른 요소 위에 표시 */
@@ -174,7 +172,7 @@ section #community .comm .more-btn a:hover {
     width: 285px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     margin: 20px;
   }
@@ -200,21 +198,45 @@ section #community .comm .more-btn a:hover {
     color: #555;
   }
   
+  #pro-container {
+  	width:100%;
+  	padding-bottom:20px;
+  	border: 1px solid white;
+  	background: white;
+  	margin:60px 0;
+  	box-shadow: 0 0px 20px rgba(0, 0, 0.1, 0.2);
+  }
 
 #protitle {
 	margin:auto;
 }
   
 
-#programs .card {
 
+#programs .card {
+	transition: all 0.3s ease;
+	display:inline-block;
+	margin-bottom:20px;
+
+}
+
+#programs .card:hover {
+	transform: scale(1.04);
 	display:inline-block;
 
 }
 
+#programs .card a {
+	
+	text-decoration: none;
+	color:black;
 
+}
 
-#0073e6
+#hosnotice {
+	text-decoration: none;
+	color: #333;
+}
   
 </style>
 <script>
@@ -240,7 +262,7 @@ section #community .comm .more-btn a:hover {
 	window.addEventListener('scroll', function() 
 	{
 	    var banner=document.getElementById('floating-banner');
-	    var targetY=window.scrollY+200;  // 스크롤 위치에서 100px 아래로 배너가 이동
+	    var targetY=window.scrollY+223;  // 스크롤 위치에서 100px 아래로 배너가 이동
 	    banner.style.top=targetY+ 'px';   // 배너 위치 설정
 	});
 
@@ -264,7 +286,7 @@ section #community .comm .more-btn a:hover {
     <img src="/static/client/main/병원 배너.png" alt="치과 배너">
 </div>
 
-
+<br>
 <section>
 <!-- 공지사항 및 학술행사 -->
 	<div id="community">
@@ -334,19 +356,23 @@ section #community .comm .more-btn a:hover {
 
 
 </section>
-
+<br>
 <div class="icon-section">
     <div class="icon-box">
+      <a id="hosnotice" href="/main/reserveView">
         <img src="/static/client/main/진료조회.jpg" alt="진료조회">
         <p>진료조회</p>
+      </a>
     </div>
     <div class="icon-box">
         <img src="/static/client/main/조회.jpg" alt="검사이력 및 결과조회">
         <p>검사이력 및 결과조회</p>
     </div>
     <div class="icon-box">
+      <a id="hosnotice" href="/main/hospital#menu4">
         <img src="/static/client/main/오셔.jpg" alt="오시는 길">
         <p>오시는 길</p>
+      </a>
     </div>
     <div class="icon-box">
         <img src="/static/client/main/주차.jpg" alt="주차안내">
@@ -357,8 +383,10 @@ section #community .comm .more-btn a:hover {
         <p>원내위치안내</p>
     </div>
     <div class="icon-box">
+      <a id="hosnotice" href="/main/notice_content?notice_id=2">
         <img src="/static/client/main/생활.jpg" alt="병원생활안내">
         <p>병원생활안내</p>
+      </a>
     </div>
     <div class="icon-box">
         <img src="/static/client/main/등록.jpg" alt="외부영상 CD등록">
@@ -366,32 +394,34 @@ section #community .comm .more-btn a:hover {
     </div>
 </div>
 
-<br><br>
-<div id="protitle" style="color:#0073e6;">우리 센터 프로그램</div>
-<section>
 
-<br>
-<div id="programs">
+
+
+<div align="center">
+
+ <div id="pro-container">
+ <div id="protitle" style="color:#0073e6; font-size:30px; margin-top:40px;">프로그램 현황</div>
+  <div id="programs" style="margin-top:20px;">
 	<c:forEach items="${programmap}" var="pdto" begin="0" end="3">
+	
 	<div class="card">
-    	<img src="../../static/admin/programfile/${pdto.pro_img}" alt="Card Image">
+	<a href="/main/programreserve">
+    	<img src="/static/admin/programfile/${pdto.pro_img}" alt="Card Image">
    		 <div class="card-body">
      	 <div class="card-title">${pdto.pro_name}</div>
-      	<div class="card-text">${pdto.teach_name}</div>
+      	 <div class="card-text">강사 : ${pdto.teach_name}</div>
       	</div>
+     </a> 	
     </div>
-</c:forEach>
+	
+    
+	</c:forEach>
+
+  </div>
+  
+ </div>
+
 </div>
-지웬장~
-<hr>
-dd
-<hr>
-dd
-</section>
-<section>
-	<div class="program-box">
-		
-	</div>
-</section>
+<br>
 </body>
 </html>

@@ -159,7 +159,7 @@
           </c:if>
          </c:forEach>
       </div>
-
+	<br>
       <div class="buttons" align="center">
         <a href="admin_notice_list">목록</a>
         <c:if test="${user_id=='admin'}">

@@ -6,18 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <title>회원 관리</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            font-family: 'goorm-sans-bold';
-            margin: 0;
-            padding: 0;
-            background-color: #f4f6f9;
+		body, h2, table, input, button, select {
+            font-family: 'Noto Sans', sans-serif; /* Google Fonts에서 가져온 폰트 적용 */
         }
 
         h2 {
         	width:100%;
             text-align: center;
-            color: #007bff;
+            color: #004fa8;
             margin-top: 40px;
             font-size: 28px;
         }
@@ -26,59 +25,75 @@
             width: 100%;
             margin: 0 auto;
             background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-collapse: collapse;
         }
 
         table {
-            width: 100%;
-            margin:20px;
-            border-collapse: collapse;
-            margin-top:30px;
-            margin-bottom: 50px;
-        }
+        width: 100%;
+		border-collapse: collapse;
+        margin: 0 auto;
+        
+    }
+    
+    #name {
+    	width:60px;
+    }
+    
+    #email {
+    	width:200px;
+    }
+    
+	#status {
+		width: 60px;
+	}
+	
+	td {
+		border-bottom: 1px solid #ccc;
 
-        table, th, td {
-            border: 1px solid #ddd;
-        }
+	}
 
-        th, td {
-            padding: 10px;
-            text-align: center;
-            font-size: 14px;
-        }
+    th, td {
+        padding: 6px;
+        text-align: center;
+    }
 
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
+    th {
+    	background: #f9f9f9 url(/static/client/notice/divide_line.png) no-repeat 0 center;
+    	width:150px;
+    	border-top:1px solid black;
+    	border-bottom: 1px solid #ccc;
+    }
 
         .status-select {
+        	font-family: 'GongGothicMedium';
             width: 100%;
             padding: 5px;
             font-size: 14px;
         }
 
         .button {
-            padding: 6px 12px;
-            background-color: #007bff;
+        	width:30%;
+        	font-family: 'GongGothicMedium';
+            padding: 7px ;
+            background-color: #004fa8;
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
             border-radius: 4px;
             transition: background-color 0.3s;
         }
 
         .button:hover {
-            background-color: #0056b3;
+            background-color: #033D7F;
+        }
+        
+        #search {
+        	font-family: 'GongGothicMedium';
         }
         
         .search-form {
+        	
         	text-align:center;
         }
         
@@ -91,8 +106,9 @@
         }
 
         .search-form button {
+        	font-family: 'GongGothicMedium';
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #004fa8;
             color: white;
             border: none;
             font-size: 14px;
@@ -109,7 +125,7 @@
         .page a {
             display: inline-block;
             padding: 8px 16px;
-            background-color: #007bff;
+            background-color: #004fa8;
             color: white;
             margin: 0 2px;
             border-radius: 4px;
@@ -117,13 +133,14 @@
         }
 
         .page a:hover {
-            background-color: #0056b3;
+            background-color: #033D7F;
         }
 
         .page .current-page {
-            background-color: #0056b3;
+            background-color: #033D7F;
             color: white;
             font-weight: bold;
+            cursor: pointer;
         }
         
     </style>
@@ -133,14 +150,14 @@
 <div class="contain">
 
     <h2>회원 관리</h2>
-		
+	<br>
     <table align="center">
         <thead>
             <tr>
                 <th>아이디</th>
-                <th>이름</th>
-                <th>이메일</th>
-                <th>상태</th>
+                <th id="name">이름</th>
+                <th id="email">이메일</th>
+                <th id="status">상태</th>
                 <th>변경</th>
             </tr>
         </thead>
@@ -180,9 +197,10 @@
             </c:forEach>
         </tbody>
     </table>
+    <br>
    <div class="search-form">
     <form method="get" action="list">
-        <input type="text" name="search" value="${search}" placeholder="아이디, 이름 검색">
+        <input id="search" type="text" name="search" value="${search}" placeholder="아이디, 이름 검색">
         <button type="submit">검색</button>
     </form>
    </div> 

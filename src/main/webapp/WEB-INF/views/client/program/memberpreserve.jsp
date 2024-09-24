@@ -24,6 +24,21 @@ function check() {
 	return confirm("정말로 취소하시겠습니까?")	
 }
 
+
+
+function validCalendar() {
+	
+	if(document.getElementById("start").value!="") {
+		var startdate=new Date(document.getElementById("start").value);
+		startdate.setDate(startdate.getDate()+1) //반환값이랑 실체 객체에 반영되는 것은 상이할 수 있다.
+		var endstartYear=startdate.getFullYear();
+		var endstartMonth=("0"+(startdate.getMonth()+1)).slice(-2);
+		var endstartDate=("0"+startdate.getDate()).slice(-2);
+		var formatdate=endstartYear+"-"+endstartMonth+"-"+endstartDate
+		document.getElementById("end").setAttribute("min", formatdate);
+	}
+}
+
 </script>
 </head>
 <body>
@@ -71,7 +86,7 @@ function check() {
 		</td>
 		<td colspan="3">
 			<input type="date" name="start" id="start">
-			<input type="date" name="end" id="end">
+			<input type="date" name="end" id="end" onclick=validCalendar()>
 			<input type="submit" value="기간 검색">
 		</td>
 	<tr>	

@@ -129,7 +129,7 @@ public class ProgramReserveServiceImpl implements ProgramReserveSevice {
 	                
 	                if (programDate.isAfter(startDate.minusDays(1)) &&
 	                    programDate.isBefore(endDate.plusDays(1)) &&
-	                    //programDate.isAfter(today) &&
+	                    programDate.isAfter(today) &&
 	                    availableCapacity > 0 && 
 	                    parseDayOfWeek(program.getDay_of_week()).contains(dayOfWeek)) {
 	                	cellContent += "<br><span id='programname'><a href='/main/programreserveview?pro_id=" 
