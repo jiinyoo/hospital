@@ -9,43 +9,120 @@
 <title>Program List</title>
 <style>
 section {
-	margin:20px auto;
+    margin: 50px auto;
+    width: 90%; /* 전체 폭을 90%로 설정하여 중앙에 배치 */
+    max-width: 1300px; /* 최대 너비를 설정 */
 }
 
+input[type=button] {
+    width: 100px;
+    height: 40px;
+    margin-bottom:10px;
+    background-color: #8BBCFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-
-
-input[type=button]
-{
-    width:100px;
-    height:50px;
-    background-color:#8BBCFF;;
-    color:white;
-    border:1px solid white;
-    border-radius:5px;
+input[type=button]:hover {
+    background-color: #007BC9; /* 마우스 오버 시 색상 변경 */
 }
 
 #space {
-	height:30px;
-	
-
+    height: 30px;
 }
 
 table {
-	border-spacing:0px;
-	align:center;
-	text-align:center;
+    width: 100%; /* 테이블의 너비를 100%로 설정 */
+    border-collapse: collapse; /* 셀 간의 경계를 없앰 */
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: white; /* 테이블 배경을 흰색으로 설정 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    border-radius: 10px; /* 모서리를 둥글게 처리 */
+    overflow: hidden;
 }
 
 table tr:first-child {
-	background-color:#B5B2FF;
-
+    background-color: #007BC9; /* 첫 번째 행에 배경색 적용 */
 }
 
-table td{
-    border-spacing:0px;
-    border:1px solid black;
+table td, table th {
+    padding: 15px; /* 셀 내부 여백 */
+    border: 1px solid #dddddd; /* 셀 경계선 */
+    font-size: 16px;
 }
+
+table th {
+    background-color: #f2f2f2; /* 테이블 헤더 배경색 */
+    font-weight: bold;
+}
+
+table img {
+    max-width: 100%;
+    height: auto;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* 짝수 행에 회색 배경 적용 */
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* 마우스 오버 시 배경색 */
+}
+
+
+.page {
+        text-align: center;
+        margin-top: 20px;
+        border:none;
+ }
+ 
+ 
+.arrow {
+ 		display: inline-block;
+        padding: 8px 16px;
+        background-color: #004fa8;
+        color: white;
+        margin: 0 2px;
+        border-radius: 5px;
+        text-decoration: none;
+}
+
+ .arrow:hover {
+      background-color: #033D7F;
+  }
+  
+  
+  #sform input,#sform select {
+		font-family: 'goorm-sans-bold';
+		margin-left:8px;
+		height:30px;
+	}
+	
+	#sform {
+		margin-top: 20px;
+		text-align: center;
+	}
+	
+	
+	#sform input[type="submit"] {
+		font-family: 'goorm-sans-bold';
+        display: inline-block;
+        width: 70px;
+        height:30px;
+        background-color: #004fa8;
+        color: white;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        line-height: 18px;
+        border:none;
+	}
 </style>
 <script>
 window.onload=function() {
@@ -119,52 +196,53 @@ window.onload=function() {
         </tr>
         </c:forEach>
         
+		<div align="center" class="page">		
         <tr align="center">
 		<td colspan="10">
 		
-		
 		<c:if test="${pstart!=1}">		
-			<a href="/admin/program/program?page=${pstart-1}&sword=${sword}&stype=${stype}">◀◀</a>
+			<a href="/admin/program/program?page=${pstart-1}&sword=${sword}&stype=${stype}"><span class="arrow">◀◀</span></a>
 		</c:if>
 		<c:if test="${pstart==1}">		
-			 ◀◀
+			<span class="arrow"> ◀◀</span>
 		</c:if>
 		
 		<c:if test="${page!=1}">
-			<a href="/admin/program/program?page=${page-1}&sword=${sword}&stype=${stype}">◁</a>
+			<a href="/admin/program/program?page=${page-1}&sword=${sword}&stype=${stype}"><span class="arrow">◁</span></a>
 		</c:if>
 		<c:if test="${page==1}">
-			◁
+			<span class="arrow">◁</span>
 		</c:if>
 		
 		
 		<c:forEach begin="${pstart}" end="${pend}" var="i">
 			<c:if test="${page==i}">
-				<a href="/admin/program/program?page=${i}&sword=${sword}&stype=${stype}" style="color:red;">${i}</a>
+				<a href="/admin/program/program?page=${i}&sword=${sword}&stype=${stype}"><span class="arrow"  style="background-color:#033D7F;">${i}</span></a>
 			</c:if>
 			<c:if test="${page!=i}">
-				<a href="/admin/program/program?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
+				<a href="/admin/program/program?page=${i}&sword=${sword}&stype=${stype}"><span class="arrow" >${i}</span></a>
 			</c:if>
 		</c:forEach>	
 		
 		<c:if test="${page!=chong }">
-			<a href="/admin/program/program?page=${page+1}&sword=${sword}&stype=${stype}">▷</a>
+			<a href="/admin/program/program?page=${page+1}&sword=${sword}&stype=${stype}"><span class="arrow" >▷</span></a>
 		</c:if>
 		<c:if test="${page==chong }">
-			▷
+			<span class="arrow" >▷</span>
 		</c:if>
 		
 		<c:if test="${pend!=chong }">
-			<a href="/admin/program/program?page=${pend+1}&sword=${sword}&stype=${stype}">▶▶</a>
+			<a href="/admin/program/program?page=${pend+1}&sword=${sword}&stype=${stype}"><span class="arrow"> ▶▶</span></a>
 		</c:if>
 		<c:if test="${pend==chong}">
-			▶▶
+			<span class="arrow" >▶▶</span>
 		</c:if>
 		</td>
 	</tr>
+	</div>
 	<tr align="center">
 		<td colspan="10">
-		<form name="pkc" action="/admin/program/program" method="post">
+		<form name="pkc"  id="sform"  action="/admin/program/program" method="post">
 			<select name="stype">
 				<option value="p.pro_name">프로그램 제목</option>			
 				<option value="p.pro_part">파트</option>

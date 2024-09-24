@@ -16,12 +16,14 @@ $(function(){
 		max:50
 		
 	});
+	
+	 $("#pro_inwon").css({
+	        'width': '70px',
+	        'height': '20px'
+	    });
 });
 
-
-
 function check() {
-	
 	var chk=0;
 	var len=document.getElementsByClassName("yoil").length
 	for(var i=0; i<len; i++) {
@@ -39,7 +41,6 @@ function check() {
 	} else {
 		return true;
 	}
-	
 }
 
 
@@ -67,53 +68,94 @@ function validCalendar() {
 	}
 } 
 
-
-
-
-
-
 </script>
 <style>
 	section {
 		margin:auto;
-	}
-	
-	#pro_info {
-		width:300px;
-		height:200px;
-	
+		width: 700px;
 	}
 
+	/* 테이블을 감싼 div에 스타일 적용 */
+	.table-wrapper {
+		margin-top:50px;
+		margin-bottom:50px;
+		padding: 20px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+		border-radius: 10px;
+		background-color: white;
+	}
+
+	table {
+		width: 670px;
+		border-collapse: collapse;
+		margin: 20px 0;
+		background-color: white;
+	}
+
+	table td {
+		border:1px solid white;
+		padding: 10px;
+	}
+
+	#file {
+		background-color: white;
+		padding: 10px;
+		border: 1px solid #ddd;
+	}
+
+	.yoil {
+		margin-right: 10px;
+	}
+
+	#pro_info {
+		width: 350px;
+		height: 100px;
+	}
+	
+#register {
+	width:100px;
+	background-color:#004fa8;
+	height:30px;
+	border: 1px solid #004fa8;
+	border-radius:3px;
+	color:white;
+
+}
+	
 </style>
 </head>
 <body>
 <section>
 <form method="post" action="programwriteOk" enctype="multipart/form-data" onsubmit="return check()" name="pkc">
+<div class="table-wrapper">
 <table align="center" width="500px" height="500px";>
-	<caption><h2>프로그램 입력</h2></caption>
-	<tr>
-		<td width="200px">프로그램 명  </td>
-		<td><input type="text" name="pro_name"></td>
+	<tr  align="center">
+	<td colspan="3">
+	<h2 >프로그램 입력</h2>
 	</tr>
 	<tr>
-		<td>프로그램 소개</td>
+		<td width="300px"  style="background-color:#D5D5D5;">프로그램 명  </td>
+		<td><input type="text" name="pro_name" style="width:350px;"></td>
+	</tr>
+	<tr>
+		<td style="background-color:#D5D5D5;">프로그램 소개</td>
 		<td><textarea name="pro_info" id="pro_info"></textarea></td>
 	</tr>
 	<tr>
-		<td>강사명</td>
-		<td><input type="text" name="teach_name"></td>
+		<td style="background-color:#D5D5D5;">강사명</td>
+		<td><input type="text" name="teach_name" style="width:110px;"></td>
 	</tr>
 	<tr>
-		<td>시간</td>
+		<td style="background-color:#D5D5D5;">시간</td>
 		<td><input type="time" name="pro_time" required></td>
 	</tr>
 	<tr>
-		<td>총 인원 </td>
+		<td style="background-color:#D5D5D5;">총 인원 </td>
 		<td><input type="text" id="pro_inwon" name="pro_inwon" value="10" readonly></td>
 	</tr>
 	<tr>
-		<td>관련과 </td>
-		<td><select name="pro_part">
+		<td style="background-color:#D5D5D5;">관련과 </td>
+		<td><select name="pro_part"  style='width:110px;'>
 			<option value="정신과">정신과</option>
 			<option value="내분비과">내분비과</option>
 			<option value="치과">치과</option>
@@ -121,15 +163,15 @@ function validCalendar() {
         </select></td>
 	</tr>
 	<tr>
-		<td>시작일</td>
+		<td style="background-color:#D5D5D5;">시작일</td>
     	<td><input type="date" id="start_date" name="start_date" required onclick=validCalendar()></td>
     </tr>
     <tr>
-    	<td>종료일</td>
+    	<td style="background-color:#D5D5D5;">종료일</td>
     	<td><input type="date" id="end_date" name="end_date" required onclick=validCalendar()></td>
     </tr>
     <tr>
-    	<td>프로그램 요일 선택:</td>
+    	<td style="background-color:#D5D5D5;">프로그램 요일 선택:</td>
     	<td>   
     	<input type="checkbox" name="day_of_week" value="0" class="yoil"> 일요일<br>
         <input type="checkbox" name="day_of_week" value="1" class="yoil"> 월요일<br>
@@ -141,16 +183,15 @@ function validCalendar() {
         </td>
     </tr>
 	<tr>
-		<td>대표 이미지</td>
+		<td style="background-color:#D5D5D5;">대표 이미지</td>
 		<td><input type="file" name="file" id="file"></td>
 	</tr>
-	<tr>
-		<td></td>
-		<td><input type="submit" value="등록하기"></td>
+	<tr align="center">
+		<td colspan="2"><input type="submit" value="등록하기"  id="register"></td>
 	</tr>
 
 </table>
-
+</div>
 </form>
 
 </section>
