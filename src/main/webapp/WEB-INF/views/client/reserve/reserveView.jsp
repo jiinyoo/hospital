@@ -64,20 +64,29 @@
 		color: black;
 	}
 	
+	#pastSearch a:hover {
+		color: #0073e6;
+	}
+	
 	#pastSearch input[type="date"] {
 		height: 30px;
 		width: 150px;
-		font-weight: bold;
+		font-family: 'goorm-sans-bold';
 	}
 	
 	#pastSearch input[type="submit"] {
 		border: none;
-		background: #8BBCFF;
-		font-weight: bolder;
+		background: #0073e6;
+		color:white;
+		font-family: 'goorm-sans-bold';
 		font-size: 15px;
 		padding:3px 20px;
 		line-height: 20px;
 		margin-left: 5px;
+	}
+	
+	#pastSearch input[type="submit"]:hover {
+		background:#8BBCFF;
 	}
 </style>
 <script>

@@ -7,10 +7,6 @@
 <meta charset="UTF-8">
 <title>Calendar</title>
 <style>
-    body {
-        background-color: #f4f4f4;
-        color: #333;
-    }
     
     section {
         width: 1200px;

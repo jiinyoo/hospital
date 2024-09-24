@@ -29,22 +29,22 @@
         }
 
         table {
-        width: 100%;
+        width: 80%;
 		border-collapse: collapse;
         margin: 0 auto;
         
     }
     
     #name {
-    	width:60px;
+    	width:80px;
     }
     
     #email {
-    	width:200px;
+    	width:220px;
     }
     
 	#status {
-		width: 60px;
+		width: 70px;
 	}
 	
 	td {
@@ -197,13 +197,14 @@
             </c:forEach>
         </tbody>
     </table>
-    <br>
+    <br><br>
    <div class="search-form">
     <form method="get" action="list">
         <input id="search" type="text" name="search" value="${search}" placeholder="아이디, 이름 검색">
         <button type="submit">검색</button>
     </form>
    </div> 
+   <br>
     <div class="page">
         <c:if test="${page>1}">
             <a href="list?page=${page-1}&search=${search}">이전</a>

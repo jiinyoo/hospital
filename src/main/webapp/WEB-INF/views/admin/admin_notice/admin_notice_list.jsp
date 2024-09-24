@@ -103,6 +103,7 @@
     }
     
     .page {
+    	font-family: 'Noto Sans', sans-serif;
         text-align: center;
         margin-top: 20px;
     }
