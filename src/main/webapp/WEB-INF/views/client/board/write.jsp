@@ -125,6 +125,9 @@ function imageUploader(file, el) {
     * {
 		font-family: 'goorm-sans-bold', sans-serif;
 	}   
+	body{
+		background: #f2f4f9;
+	}
     section 
   	{
  	    width: 80%;
@@ -135,7 +138,7 @@ function imageUploader(file, el) {
     	border-radius: 5px;
     	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   	}
-
+	
     /* 제목 스타일 */
     h3 {
         text-align: left;

@@ -138,16 +138,33 @@
 		}
 	}
 	
-	function chkDate(n) {
-		var start=document.getElementById("start").value;
-		start=new Date(start);
-		var end=new Date(n.value);
-		
-		if((end-start)<0) {
-			alert("기간을 확인해주세요.");
-			n.value="";
-		}
+	function chkDate(date) {
+	    var start = document.getElementById("start").value;
+	    var end = document.getElementById("end").value;
+
+	    // 날짜 유효성 확인
+	    if (start === "" || end === "") {
+	        alert("날짜를 선택해주세요.");
+	        return;
+	    }
+
+	    // 날짜 객체로 변환
+	    var startDate = new Date(start);
+	    var endDate = new Date(end);
+
+	    // 날짜 객체 유효성 확인
+	    if (isNaN(startDate) || isNaN(endDate)) {
+	        alert("유효한 날짜를 입력해주세요.");
+	        return;
+	    }
+
+	    // 날짜 비교 후 기간 확인
+	    if ((endDate - startDate) < 0) {
+	        alert("종료일이 시작일보다 빠릅니다. 기간을 확인해주세요.");
+	        date.value = "";
+	    }
 	}
+
 	
 	function chk() {
 		var phone1=document.getElementById("phone1").value;
@@ -214,7 +231,7 @@
 			<a href="?month=0" ${param.month==0?'style="color:red;"':''}>전체보기</a>
 		</div>
 		<div>
-			<input type="date" name="start" id="start">~
+			<input type="date" name="start" id="start" onchange="chkDate(this)">~
 			<input type="date" name="end" id="end" onchange="chkDate(this)">
 			<input type="submit" value="조회하기">
 		</div>
