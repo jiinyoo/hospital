@@ -6,30 +6,52 @@
 <html>
 <head>
 <style>
-	section {
-        margin:auto;
-        width: 1300px;
-      
-    }
+section {
+       margin:auto;
+       width: 1300px;
+       margin-bottom:30px;
+     
+   }
     /* 테이블의 최대 너비 설정 및 가운데 정렬 */
-
-#programtable {
-	margin-top:30px;
-	align:center;
-	text-align:center;
-	border-spacing:0px;
-	border:1px solid black;
-}
-
-#programtable td {
-	border:1px solid black;
-}
 
 
 #programtable tr:first-child{
-	background-color: #B5B2FF;
+	background-color: #007BC9;
 }
 
+#programtable {
+    margin-top: 30px;
+    width: 100%; /* 테이블 가로 길이를 화면에 맞게 */
+    border-collapse: collapse; /* 테두리 겹침을 제거 */
+    background-color: white; /* 테이블 배경을 흰색으로 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 테두리에 그림자 추가 */
+    text-align: center;
+}
+
+#programtable caption {
+    font-size: 1.5em; /* 제목 크기 키우기 */
+    margin-bottom: 15px;
+}
+
+#programtable th, #programtable td {
+    padding: 12px; /* 셀 내부 여백 추가 */
+    border: 1px solid #dddddd; /* 셀 테두리 색 설정 */
+}
+
+#programtable th {
+    background-color: #B5B2FF; /* 테이블 헤더 색상 */
+    font-weight: bold; /* 제목 글씨 굵게 */
+}
+
+#programtable td {
+    text-align: center; /* 셀 내용 가운데 정렬 */
+    vertical-align: middle; /* 세로 가운데 정렬 */
+}
+
+#programtable img {
+    max-width: 100%; /* 이미지가 셀 크기를 넘지 않도록 조정 */
+    height: auto;
+}
 
 
 #calendar-outer table {
@@ -48,8 +70,8 @@
 	text-align:left;
 	vertical-align: top;
 	padding: 5px;
-	width:150px;
-	height:100px;
+	width:200px;
+	height:150px;
 	border-spacing:none;
 }
 

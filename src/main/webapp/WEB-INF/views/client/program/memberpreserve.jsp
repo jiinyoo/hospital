@@ -45,7 +45,6 @@ function validCalendar() {
 <section>
 	<table width="900">
 	<caption style="height:40px"><h2>예정 프로그램</h2></caption>
-
 	<tr>
 		<td>예약 번호</td>
 		<td>프로그램 명</td>
@@ -70,9 +69,6 @@ function validCalendar() {
 	</tr>
 	</c:forEach>
 	</table>
-	
-	
-	
 	
 	<table width="900">
 	<caption style="height:40px"><h2>지난 프로그램 예약</h2></caption>
@@ -113,13 +109,6 @@ function validCalendar() {
 	</tr>
 	</c:forEach>
 	</table>
-	
-	
-	
-
-
-
-
 
 </section>
 </body>
