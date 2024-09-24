@@ -42,12 +42,9 @@ public class BoardServiceImpl implements BoardService {
 		if (session.getAttribute("user_id") != null) {
 			user_id = session.getAttribute("user_id").toString();
 		}
-
-	
 		int page=request.getParameter("page")!=null?Integer.parseInt(request.getParameter("page")):1;
 		String stype=request.getParameter("stype")!=null?request.getParameter("stype"):"user_id";
 		String sword=request.getParameter("sword")!=null?request.getParameter("sword"):"";
-		
 		int index=(page-1)*10;
 		int pstart=page/10;
 		if(page%10==0) {
