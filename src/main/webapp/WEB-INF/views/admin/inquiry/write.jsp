@@ -31,15 +31,15 @@
     #submit {
         margin: auto; /* 자동으로 좌우 가운데 정렬 */
     }
-    .buttons {
-        width: 80px; /* 버튼 너비 설정 */
-        height: 40px; /* 버튼 높이 설정 */
-        border-radius: 3px; /* 모서리 둥글게 */
-        border: 1px solid #004fa8; /* 테두리 색상 */
-        background-color: #004fa8; /* 배경색 */
-        color: white; /* 글자색 */
-        cursor: pointer; /* 마우스 포인터 변경 */
-        transition: background-color 0.3s; /* 호버 효과 추가 */
+ 	  .buttons {
+    	width:50px;
+    	height:40px;
+    	border-radius:3px;
+    	border : 1px solid #004fa8;
+    	background-color:#004fa8;
+    	color:white;
+    	
+    
     }
     .buttons:hover {
         background-color: #003366; /* 호버 시 색상 변경 */
@@ -163,6 +163,11 @@
     	height:200px;
     
     }
+    
+    #tdlast {
+    
+    	text-align:center;
+    }
 
 </style>
 </head>
@@ -179,7 +184,7 @@
 			<input type="hidden" name="origin_user_id" value="${origin_user_id}">
 			<tr>
 				<td width="100">제목</td>
-				<td><input type="text" name="title"></td>
+				<td><input type="text" name="title" style="width:500px"></td>
 			</tr>
 			<c:if test="${bimil==0}">
 				<tr>
@@ -206,8 +211,8 @@
 			<tr>
 				<td>사진 업로드</td>
 				<td>
-					<input type="button" value="추가" onclick="add()">
-					<input type="button" value="삭제" onclick="del()">
+					<input type="button" value="추가" onclick="add()" class="buttons">
+					<input type="button" value="삭제" onclick="del()" class="buttons">
 				</td>
 			</tr>
 			<tr>
@@ -220,9 +225,9 @@
 					</p>
 				</td>
 			</tr>
-			<tr align="center">
-				<td colspan="2">
-					<input type="submit" value="진료 답변 등록" >
+			<tr align="center" >
+				<td colspan="2" id="tdlast">
+					<input type="submit" value="등록" class="buttons">
 				</td>
 			</tr>
 		</table>
