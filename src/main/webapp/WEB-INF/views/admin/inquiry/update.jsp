@@ -131,6 +131,18 @@
     td.center {
     text-align: center; /* 가운데 정렬 */
 	}
+	
+	  .buttons {
+    	width:50px;
+    	height:40px;
+    	border-radius:3px;
+    	border : 1px solid #004fa8;
+    	background-color:#004fa8;
+    	color:white;
+    	
+    
+    }
+	
 </style>
 </head>
 <body>
@@ -148,7 +160,7 @@
 			</tr>
 			<tr>
 				<td width="100">제목</td>
-				<td><input type="text" name="title" value="${aidto.title}"></td>
+				<td><input type="text" name="title" value="${aidto.title}" style="width:500px;"></td>
 			</tr>
 			<tr>
 				<td width="100">작성자</td>
@@ -196,8 +208,8 @@
 			<tr>
 				<td>사진 업로드</td>
 				<td>
-					<input type="button" value="추가" onclick="add()">
-					<input type="button" value="삭제" onclick="del()">
+					<input type="button" value="추가" onclick="add()" class="buttons">
+					<input type="button" value="삭제" onclick="del()" class="buttons">
 				</td>
 			</tr>
 			<tr>
@@ -212,7 +224,7 @@
 			</tr>
 			<tr>
     		<td colspan="2" class="center">
-        		<input type="submit" value="문의 글 수정">
+        		<input type="submit" value="수정" class="buttons">
     		</td>
 			</tr>
 			</table> 

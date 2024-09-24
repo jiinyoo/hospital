@@ -16,7 +16,7 @@ public interface AdminInquiryMapper {
 	ArrayList<HashMap> inquirylist(int index, String stype, String sword);
 	void readnum(String inq_id);
 	void writeOk(AdminInquiryDto aidto);
-	void updateanswer(String inq_id);
+	void updateanswer(int inq_id);
 	AdminInquiryDto content(String inq_id);
 	void delete(String inq_id);
 	void updateOk(InquiryDto idto);

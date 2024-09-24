@@ -129,8 +129,10 @@ public class InquiryServiceImpl implements InquiryService {
 		if(session.getAttribute("user_id")!=null) {
 			session_user_id=session.getAttribute("user_id").toString();
 		}
+		
 		String inq_id=request.getParameter("inq_id");
 		InquiryDto idto=mapper.content(inq_id);
+		idto.setContent(idto.getContent().replace("\r\n","<br>"));
 		if(idto.getImg()!=null) {
 			String[] imgs=idto.getImg().split("/");
 			idto.setImgs(imgs);

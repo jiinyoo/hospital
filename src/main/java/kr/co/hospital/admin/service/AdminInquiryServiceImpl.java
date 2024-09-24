@@ -116,8 +116,9 @@ public class AdminInquiryServiceImpl implements AdminInquiryService {
 				String group_order=request.getParameter("group_order");
 				String part=request.getParameter("part");
 				String inq_id=request.getParameter("inq_id");
-				mapper.updateanswer(inq_id);
+				
 				String origin_user_id=request.getParameter("origin_user_id");
+				model.addAttribute("inq_id",inq_id);
 				model.addAttribute("bimil",bimil);
 				model.addAttribute("group_order",group_order);
 				model.addAttribute("part",part);
@@ -141,7 +142,7 @@ public class AdminInquiryServiceImpl implements AdminInquiryService {
 			if(state==1 || state==2) {
 				aidto.setUser_id(session_user_id);
 				Iterator<String> imsi=multi.getFileNames();
-				
+				mapper.updateanswer(aidto.getInq_id());
 				String fname=""; //서버에 저장된 파일명
 				
 				while(imsi.hasNext()) {
@@ -179,6 +180,7 @@ public class AdminInquiryServiceImpl implements AdminInquiryService {
 			if(state==1 || state==2) {
 				String inq_id=request.getParameter("inq_id");
 				AdminInquiryDto aidto=mapper.content(inq_id);
+				aidto.setContent(aidto.getContent().replace("\r\n", "<br>"));
 				String[] imgs=aidto.getImg().split("/");
 				aidto.setImgs(imgs);
 				model.addAttribute("aidto",aidto);
