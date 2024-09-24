@@ -34,6 +34,23 @@ main {
 
 * {margin:0; padding:0; box-sizing: border-box;}
 
+#top-back {
+	position:relative;
+}
+
+#back
+{
+	background: white;
+	top:0px;
+	width:100%;
+	height:220px;
+	position: absolute;
+	z-index: -1000;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/*
 #ads
 {
 	position:relative;
@@ -42,11 +59,28 @@ main {
 	background:#8BBCFF;
 	margin:auto;
 }
+*/
 
+#ads {
+	width: 100%;
+	background: #8BBCFF;
+	height: 50px;
+}
+
+/*
 #ad{
 	margin:auto;
 	width:100%;
 
+}
+*/
+
+#ad {
+	width:1300px;
+	display: flex;
+	justify-content: space-between;
+	line-height: 50px;
+	margin:auto;
 }
 
 #container
@@ -65,6 +99,7 @@ main {
     color: black;
 }
 
+/*
 #xx 
 {
     position:absolute;
@@ -75,6 +110,7 @@ main {
     cursor:pointer;
 
 }
+*/
 
 #loginbar
 {	
@@ -94,17 +130,6 @@ main {
 	color: #626262;
 	cursor: pointer;
 	
-}
-
-#back
-{
-	background: white;
-	top:52px;
-	width:100%;
-	height:170px;
-	position: absolute;
-	z-index: -1000;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 	
 nav
@@ -438,7 +463,7 @@ hr
 		function move(){
 			if(h<=50) {
 				document.getElementById("ads").style.marginTop=-h+"px";
-			
+				document.getElementById("back").style.top=-h+"px";
 		}
 		h++;
 		
@@ -496,14 +521,15 @@ hr
 <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">
 	<i class="fas fa-angle-double-up"></i>
 </button>
+<div id="top-back">
+	<div id="back"></div>
+</div>
 
 <div id="ads">
-<div id="back"></div>
 	<div id="ad">
-		<div id="container"> 
-			<div id="event"> 환자분들의 편의를 위해 "10월 1일(화) 임시공휴일 정산 진료" 합니다. </div>
+		<div></div>
+		<div> 환자분들의 편의를 위해 "10월 1일(화) 임시공휴일 정산 진료" 합니다. </div>
 		<div id="xx" onclick="adx()">닫기</div>
-		</div>
 	</div>
 </div>
 
