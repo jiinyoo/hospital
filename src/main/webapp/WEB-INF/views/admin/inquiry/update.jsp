@@ -84,40 +84,68 @@
 	}
 </script>
 <style>
-
-      /* 페이지 전체에서 가운데 정렬 */
-    section {
-        margin:auto;
+      section {
+        margin: 30px auto;
         width: 1300px;
         height: 100vh; /* 뷰포트 전체 높이 사용 */
+        display: flex; /* Flexbox 사용 */
+        justify-content: center; /* 가로 가운데 정렬 */
     }
- 
+    /* 테이블 스타일 */
     table {
-        width:1000px;
-    	margin:auto;
-    	margin-top:50px;
-    	border-collapse: collapse;
+        width: 700px;
+        margin-top: 30px;
+        border-collapse: collapse;
+        background-color: #fff; /* 테이블 배경색 흰색 설정 */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+        border-radius: 5px; /* 모서리 둥글게 */
     }
     td {
-	    border-top: 1px solid black;
-	    padding: 10px; /* 셀 내부 여백 조정 */
-	    height: 30px;  /* 셀 높이 명확히 설정 */
-	}
-
+        border-top: 1px solid #d3d3d3; /* 연한 회색 */
+        padding: 10px; /* 셀 내부 여백 조정 */
+        height: 30px; /* 셀 높이 명확히 설정 */
+        text-align: left; /* 왼쪽 정렬 */
+    }
     #submit {
         margin: auto; /* 자동으로 좌우 가운데 정렬 */
     }
+    .buttons {
+        width: 80px; /* 버튼 너비 설정 */
+        height: 40px; /* 버튼 높이 설정 */
+        border-radius: 3px; /* 모서리 둥글게 */
+        border: 1px solid #004fa8; /* 테두리 색상 */
+        background-color: #004fa8; /* 배경색 */
+        color: white; /* 글자색 */
+        cursor: pointer; /* 마우스 포인터 변경 */
+        transition: background-color 0.3s; /* 호버 효과 추가 */
+    }
+    .buttons:hover {
+        background-color: #003366; /* 호버 시 색상 변경 */
+    }
+    
+    #contentbox {
+    	width:500px;
+    	height:200px;
+    
+    }
+    td.center {
+    text-align: center; /* 가운데 정렬 */
+	}
 </style>
 </head>
 <body>
 <section>
 	<form name="inquiry" method="post" action="updateOk" enctype="multipart/form-data" onsubmit="return check()">
+		
+		<div id="table-wrapper">
 		<table>
 			<input type="hidden" name="delimg" >
 			<input type="hidden" name="safeimg" >
 			<input type="hidden" name="inq_id" value="${aidto.inq_id}">
 			<input type="hidden" name="bimil" id="bimil">
-			<caption>진료 문의 등록</caption>
+			<tr align="center">
+				<td colspan="2">진료 문의 수정</td>
+			</tr>
 			<tr>
 				<td width="100">제목</td>
 				<td><input type="text" name="title" value="${aidto.title}"></td>
@@ -146,7 +174,7 @@
 			
 			<tr>
 				<td>내용</td>
-				<td><textarea name="content">${aidto.content}</textarea></td>
+				<td><textarea name="content" id="contentbox">${aidto.content}</textarea></td>
 			</tr>
 		
 			<tr>
@@ -182,11 +210,12 @@
 					</p>
 				</td>
 			</tr>
-			<tr align="center">
-				<td colspan="2">
-					<input type="submit" value="문의 글 수정" >
-				</td>
+			<tr>
+    		<td colspan="2" class="center">
+        		<input type="submit" value="문의 글 수정">
+    		</td>
 			</tr>
+			</table> 
 	</form>
 </section>	
 </body>
