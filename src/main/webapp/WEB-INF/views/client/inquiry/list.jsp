@@ -264,15 +264,13 @@ window.onload=function() {
 				<option value="user_id">작성자</option>			
 				<option value="title">제목</option>
 				<option value="part">진료과</option>
-				<input type="text" name="sword" id="sword">
-				<input type="submit" value="검색">
 			</select>
+			<input type="text" name="sword" id="sword">
+			<input type="submit" value="검색">
 		</form>
 	</div>
-		<div align="right">
-		<td colspan="4">
+	<div align="right">
 		<input type="button" value="글쓰기" onclick="logincheck()" class="write-button">
-		</td>
 	</div>
 </section>
 </body>

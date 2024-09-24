@@ -11,6 +11,7 @@
 	section {
 		width:800px;
 		margin: 30px auto;
+		min-height: 600px;
 	}
 	
 	section table {
