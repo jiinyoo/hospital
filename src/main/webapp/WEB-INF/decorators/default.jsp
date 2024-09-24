@@ -230,7 +230,7 @@ nav #mainmenu
 	border-right:0.5px solid #2a83c7;
 	border-bottom:5px solid #2a83c7;
 	opacity: 0;  
-	
+	z-index:8000;
 }
 
 #submenus .submenu:nth-child(n) 
@@ -575,7 +575,7 @@ hr
 			</li>
 			<li class="hov"><a href="/main/hospital">병원 소개</a></li>
 			<li class="hov"><a href="/main/info/part?part=">의료진 안내</a></li>
-			<li class="hov">상담/예약</li>
+			<li class="hov">진료/예약</li>
 			<li class="hov"><a href="/main/programreserve">프로그램 예약</a></li>
 			<li class="hov">커뮤니티</li>
 			
