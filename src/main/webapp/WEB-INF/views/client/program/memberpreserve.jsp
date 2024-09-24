@@ -30,7 +30,6 @@ function check() {
 <section>
 	<table width="900">
 	<caption style="height:40px"><h2>예정 프로그램</h2></caption>
-
 	<tr>
 		<td>예약 번호</td>
 		<td>프로그램 명</td>
