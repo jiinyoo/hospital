@@ -59,6 +59,7 @@ table th {
     font-weight: bold;
 }
 
+
 table img {
     max-width: 100%;
     height: auto;
@@ -235,10 +236,10 @@ function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
 		<tr>
 			<td width="100">예약 번호</td>
 			<td width="200">프로그램 명</td>
-			<td width="150">프로그램 시행일</td>
+			<td width="200">프로그램 시행일</td>
 			<td width="100">이름</td>	
-			<td width="300">전화번호</td>		
-			<td width="150">신청일</td>
+			<td width="200">전화번호</td>		
+			<td width="200">신청일</td>
 			<td width="300">상태</td>
 			<td width="100">신청인원</td>
 		</tr>

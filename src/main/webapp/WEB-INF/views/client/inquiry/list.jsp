@@ -194,7 +194,7 @@ window.onload=function() {
 <body><!--(inquiry)list -->
 <section>
 	<table>
-	<caption><h2>진료과별 질문 게시판</h2></caption>
+	<caption><h2 >진료과별 질문 게시판</h2></caption>
 	<tr>
 		<th>작성자</th>
 		<th id="ntitle">제목</th>

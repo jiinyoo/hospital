@@ -5,6 +5,54 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+      section {
+        margin: 30px auto;
+        width: 1300px;
+        height: 100vh; /* 뷰포트 전체 높이 사용 */
+        display: flex; /* Flexbox 사용 */
+        justify-content: center; /* 가로 가운데 정렬 */
+    }
+    /* 테이블 스타일 */
+    table {
+        width: 700px;
+        margin-top: 30px;
+        border-collapse: collapse;
+        background-color: #fff; /* 테이블 배경색 흰색 설정 */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+        border-radius: 5px; /* 모서리 둥글게 */
+    }
+    td {
+        border-top: 1px solid #d3d3d3; /* 연한 회색 */
+        padding: 10px; /* 셀 내부 여백 조정 */
+        height: 30px; /* 셀 높이 명확히 설정 */
+        text-align: left; /* 왼쪽 정렬 */
+    }
+    #submit {
+        margin: auto; /* 자동으로 좌우 가운데 정렬 */
+    }
+    .buttons {
+        width: 80px; /* 버튼 너비 설정 */
+        height: 40px; /* 버튼 높이 설정 */
+        border-radius: 3px; /* 모서리 둥글게 */
+        border: 1px solid #004fa8; /* 테두리 색상 */
+        background-color: #004fa8; /* 배경색 */
+        color: white; /* 글자색 */
+        cursor: pointer; /* 마우스 포인터 변경 */
+        transition: background-color 0.3s; /* 호버 효과 추가 */
+    }
+    .buttons:hover {
+        background-color: #003366; /* 호버 시 색상 변경 */
+    }
+    
+    #contentbox {
+    	width:500px;
+    	height:200px;
+    
+    }
+
+
+</style>
 <title>Insert title here</title>
 <script>
 	function add() {
@@ -71,32 +119,50 @@
 
 </script>
 <style>
-section {
-        margin:auto;
+      section {
+        margin: 30px auto;
         width: 1300px;
         height: 100vh; /* 뷰포트 전체 높이 사용 */
+        display: flex; /* Flexbox 사용 */
+        justify-content: center; /* 가로 가운데 정렬 */
     }
-    /* 테이블의 최대 너비 설정 및 가운데 정렬 */
+    /* 테이블 스타일 */
     table {
-    
-        width:1000px;
-    	margin:auto;
-    	margin-top: 30px;
-    	border-collapse: collapse;
+        width: 700px;
+        margin-top: 30px;
+        border-collapse: collapse;
+        background-color: #fff; /* 테이블 배경색 흰색 설정 */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+        border-radius: 5px; /* 모서리 둥글게 */
     }
-
-    /* 테이블 내부 요소 스타일링 */
     td {
-	    border-top: 1px solid black;
-	    padding: 10px; /* 셀 내부 여백 조정 */
-	    height: 30px;  /* 셀 높이 명확히 설정 */
-	}
-
-
+        border-top: 1px solid #d3d3d3; /* 연한 회색 */
+        padding: 10px; /* 셀 내부 여백 조정 */
+        height: 30px; /* 셀 높이 명확히 설정 */
+        text-align: left; /* 왼쪽 정렬 */
+    }
     #submit {
         margin: auto; /* 자동으로 좌우 가운데 정렬 */
     }
-
+    .buttons {
+        width: 80px; /* 버튼 너비 설정 */
+        height: 40px; /* 버튼 높이 설정 */
+        border-radius: 3px; /* 모서리 둥글게 */
+        border: 1px solid #004fa8; /* 테두리 색상 */
+        background-color: #004fa8; /* 배경색 */
+        color: white; /* 글자색 */
+        cursor: pointer; /* 마우스 포인터 변경 */
+        transition: background-color 0.3s; /* 호버 효과 추가 */
+    }
+    .buttons:hover {
+        background-color: #003366; /* 호버 시 색상 변경 */
+    }
+    
+    #contentbox {
+    	width:500px;
+    	height:200px;
+    
+    }
 
 </style>
 </head>
@@ -105,7 +171,7 @@ section {
 	<form name="inquiry" method="post" action="writeOk" enctype="multipart/form-data" onsubmit="return check()">
 		<table>
 
-			<caption>진료 답변 등록</caption>
+			<caption><h2>진료 답변 등록</h2></caption>
 			<input type="hidden" name="state" value="2">
 			<input type="hidden" name="bimil" value="${bimil}" id="bimil">
 			<input type="hidden" name="group_order"" value="${group_order}">
@@ -134,7 +200,7 @@ section {
 			
 			<tr>
 				<td>내용</td>
-				<td><textarea name="content"></textarea></td>
+				<td><textarea name="content" id="contentbox"></textarea></td>
 			</tr>
 			<tr>
 				<td>사진 업로드</td>

@@ -85,27 +85,68 @@
 </script>
 <style>
 
-      /* 페이지 전체에서 가운데 정렬 */
-    section {
-        margin:auto;
-        width: 1300px;
+        section {
+         margin: 50px auto;
+	    width: 900px;
+	    padding: 40px;
+	    background: #ffffff;
+	    border-radius: 8px;
+	    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
  
     table {
-        width:1000px;
-    	margin:auto;
-    	margin-top:50px;
-    	border-collapse: collapse;
-    }
-    td {
-	    border-top: 1px solid black;
-	    padding: 10px; /* 셀 내부 여백 조정 */
-	    height: 30px;  /* 셀 높이 명확히 설정 */
+	    width: 100%;
+	    margin-bottom: 40px;
+	    border-collapse: separate;
+	    border-spacing: 0 15px;
 	}
-
-    #submit {
-        margin: auto; /* 자동으로 좌우 가운데 정렬 */
+    	
+	th, td {
+	    padding: 10px;
+	    font-size: 18px;
+	    line-height: 1.6;
+	}
+	
+	td {
+    
+    color: #343a40;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #dee2e6;
+    text-align:center;
+	}
+    table img {
+    	width:150px;
     }
+	
+	submit {
+		padding:20px;
+		border-radius:10px;
+	}
+	
+	.buttons {
+		width:50px;
+		height:30px;
+		background-color:#004fa8;
+		border-radius:5px;
+		border:1px solid #004fa8;
+		color:white;
+	}
+	
+	#textbox {
+		width:600px;
+		height:200px;
+	
+	}
+	
+	#buttons {
+		width:50px;
+		height:30px;
+		background-color:#004fa8;
+		border-radius:5px;
+		border:1px solid #004fa8;
+		color:white;
+	
+	}
 </style>
 </head>
 <body>
@@ -119,18 +160,18 @@
 			
 		<table>
 			
-			<caption>진료 문의 등록</caption>
+			<caption><h2>진료 문의 등록</h2></caption>
 			
 			<tr>
-				<td width="100">제목</td>
-				<td><input type="text" name="title" value="${idto.title}"></td>
+				<td width="150" style="background-color:#ECEBEF;border-left:5px solid #004fa8;">제목</td>
+				<td><input type="text" style="width:500px;"name="title" value="${idto.title}"></td>
 			</tr>
 			<tr>
-				<td width="100">작성자</td>
+				<td width="100" style="background-color:#ECEBEF;border-left:5px solid #004fa8;">작성자</td>
 				<td><input type="text" name="user_id" value="${idto.user_id}"></td>
 			</tr>
 			<tr>
-				<td>비밀글 체크</td>
+				<td style="background-color:#ECEBEF;border-left:5px solid #004fa8;">비밀글 체크</td>
 				<c:set var="chk" value=""/>
 				<c:if test="${idto.bimil==1}">
 					<c:set var="chk" value="checked"/>
@@ -138,7 +179,7 @@
 				<td><input type="checkbox" name="bimilcheck" id="bimilcheck" ${chk}>&nbsp; 비밀글로 설정하려면 체크하세요.</td>
 			</tr>
 			<tr>
-				<td>부서</td>
+				<td style="background-color:#ECEBEF;border-left:5px solid #004fa8;">부서</td>
 				<td>
 					<select name="part">
 						<option value="정신과">정신과</option>
@@ -150,12 +191,12 @@
 			</tr>
 			
 			<tr>
-				<td>내용</td>
-				<td><textarea name="content">${idto.content}</textarea></td>
+				<td style="background-color:#ECEBEF;border-left:5px solid #004fa8;">내용</td>
+				<td><textarea name="content" id="textbox">${idto.content}</textarea></td>
 			</tr>
 		
 			<tr>
-				<td rowspan="2">기존 이미지</td>
+				<td rowspan="2" style="background-color:#ECEBEF;border-left:5px solid #004fa8;">기존 이미지</td>
 				<td rowspan="2">
 					<div>
 						<c:forEach items="${imgs}" var="simg">
@@ -171,15 +212,15 @@
 				</td>
 			<tr>
 			<tr>
-				<td>사진 업로드</td>
+				<td style="background-color:#ECEBEF;border-left:5px solid #004fa8;">사진 업로드</td>
 				<td>
-					<input type="button" value="추가" onclick="add()">
-					<input type="button" value="삭제" onclick="del()">
+					<input type="button" value="추가" onclick="add()" class="buttons">
+					<input type="button" value="삭제" onclick="del()" class="buttons">
 				</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td id="outer" width="500">
+				
+				<td id="outer" width="500" colspan="2">
 					<p class="one" id="one">
 						<label for="fileup0" class="label">클릭</label>
 						<input id="fileup0" style="width:0px" type="file" name="fname0" class="file" onchange="miniView(this)">
@@ -189,7 +230,7 @@
 			</tr>
 			<tr align="center">
 				<td colspan="2">
-					<input type="submit" value="문의 글 수정" >
+					<input type="submit" value="글 수정" class="buttons">
 				</td>
 			</tr>
 		</table>

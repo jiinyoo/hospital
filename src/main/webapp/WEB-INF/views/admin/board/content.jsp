@@ -23,31 +23,22 @@
         margin: 30px;
         font-size:30px;
     }
-    /* 테이블의 최대 너비 설정 및 가운데 정렬 */
+    
     table {
-    	
-		width: 100%;
-		padding: 20px;
-    }
-    
-    th,td {
-    	border-radius: 3px;
-    	padding: 5px 10px;
-    }
-    
-    th {
-    	width: 10%;
-    	text-align: left;
-    	background: #ccc;
-    	font-size: 18px;
+        width: 100%; /* 테이블 너비를 100%로 설정 */
+        border-collapse: collapse; /* 테이블 경계 중복 제거 */
+        background-color: #fff; /* 테이블 배경색 흰색 */
     }
 
-    /* 테이블 내부 요소 스타일링 */
-    td {
-		border:2px solid gray;
-		border-radius: 3px;
-	}
-	
+    th, td {
+        text-align: center; /* 내용을 가운데 정렬 */
+        padding: 15px; /* 셀 안쪽 여백 추가 */
+        border: 1px solid #ccc; /* 셀 경계 추가 */
+    }
+    
+    
+    
+
 	#borcont {
 		border:2px solid gray;
 		border-radius: 3px;
@@ -99,11 +90,11 @@ function deletecheck(boardid) {
 <section>
 	<table>
 		<tr>
-			<td>제목</td>
+			<td style="background-color:#ECEBEF;border-left:5px solid #004fa8;" >제목</td>
 			<td>${bdto.board_title}</td>
 		</tr>
 		<tr>
-			<td>작성자</td>
+			<td style="background-color:#ECEBEF;border-left:5px solid #004fa8;">작성자</td>
 			<td>${bdto.user_id}</td>
 		</tr>
 		<tr>
