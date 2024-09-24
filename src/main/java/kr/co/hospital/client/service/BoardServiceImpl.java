@@ -29,7 +29,7 @@ public class BoardServiceImpl implements BoardService {
 			model.addAttribute("user_id", user_id);
 			return "/client/board/write";
 		} else {
-			return "redirect:main/login";
+			return "redirect:/main/login";
 		}
 
 	}

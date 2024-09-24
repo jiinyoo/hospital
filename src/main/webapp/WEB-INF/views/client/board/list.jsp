@@ -63,13 +63,13 @@ window.onload=function() {
 	<c:forEach items="${bmapAll}" var="bdto">
 	<tr>
 		<td width="100">${bdto.user_id}</td>
-		<td width="600"><a href="../../main/boardreadnum?board_id=${bdto.board_id}">${bdto.board_title}</a></td>
+		<td width="600"><a href="/main/boardreadnum?board_id=${bdto.board_id}">${bdto.board_title}</a></td>
 		<td width="200">${bdto.writeday}</td>
 		<td width="100">${bdto.board_readnum}</td>
 	</tr>
 	</c:forEach>
 	<tr align="right">
-		<td colspan="4"><a href="../../main/boardwrite"><input type="button" value="글쓰기" ></a></td>
+		<td colspan="4"><a href="/main/boardwrite"><input type="button" value="글쓰기" ></a></td>
 	</tr>
 	<tr align="center">
 		<td colspan="4">

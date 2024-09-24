@@ -37,7 +37,7 @@
         
     }
     
-    #ntitle {
+ 	#ntitle {
     	width:700px;
     	text-align: left;
     	padding-left: 20px;
@@ -49,6 +49,8 @@
     	text-align: left;
     	padding-left: 20px;
     }
+	
+
 	
 	td {
 		border-bottom: 1px solid #ccc;
@@ -103,17 +105,16 @@
         margin-top: 20px;
     }
 
-    .page a {
+    .page .arrow {
         display: inline-block;
         padding: 8px 16px;
         background-color: #004fa8;
         color: white;
         margin: 0 2px;
-        
         text-decoration: none;
     }
 
-    .page a:hover {
+    .page .arrow:hover {
         background-color: #033D7F;
     }
     
@@ -210,7 +211,21 @@ window.onload=function() {
 		<c:if test="${imap.state==1}">
 			<span id="part">${imap.part}</span>
 		</c:if>
-			<span id="title" onclick="check('${imap.user_id}','${imap.bimil}','${imap.inq_id}','${imap.origin_user_id != null ? imap.origin_user_id : ''}')"><a href="#">${imap.title}</a></span>
+		
+		
+		<!-- 빨간 줄 뜨지만 보이는 코드 -->
+		
+			<span id="title" onclick="check('${imap.user_id}','${imap.bimil}','${imap.inq_id}','${imap.origin_user_id != null ? imap.origin_user_id : ''}')"
+			<c:if test="${imap.answer==0 && imap.state==2}">
+				<c:if test="${imap.bimil==1}">
+					style="position: relative; left: 26px;"
+				</c:if>
+				<c:if test="${imap.bimil!=1}">
+        			 style="position: relative; left: 50px;"
+				</c:if>
+    		</c:if>>
+	
+			<a href="#">${imap.title}</a></span>
 		</a></td>
 		<td width="200">${imap.writeday}</a></td>
 		<td width="100">${imap.readnum}</td>
@@ -219,42 +234,42 @@ window.onload=function() {
 	</table>
 
 	<div align="center" class="page">		
-		<c:if test="${pstart!=1}">		
-			<a href="/main/inquirylist?page=${pstart-1}&sword=${sword}&stype=${stype}">◀◀</a>
+		<c:if test="${pstart!=1}" >		
+			<a href="/main/inquirylist?page=${pstart-1}&sword=${sword}&stype=${stype}"><span class="arrow">◀◀</span></a>
 		</c:if>
 		<c:if test="${pstart==1}">		
-			 ◀◀
+			 <span class="arrow">◀◀</span>
 		</c:if>
 		
 		<c:if test="${page!=1}">
-			<a href="/main/inquirylist?page=${page-1}&sword=${sword}&stype=${stype}">◁</a>
+			<a href="/main/inquirylist?page=${page-1}&sword=${sword}&stype=${stype}"><span class="arrow">◁</span></a>
 		</c:if>
 		<c:if test="${page==1}">
-			◁
+			<span class="arrow">◁</span>
 		</c:if>
 		
 		
 		<c:forEach begin="${pstart}" end="${pend}" var="i">
 			<c:if test="${page==i}">
-				<a href="/main/inquirylist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
+				<a href="/main/inquirylist?page=${i}&sword=${sword}&stype=${stype}"><span class="arrow" style="background-color:#033D7F;">${i}</span></a>
 			</c:if>
 			<c:if test="${page!=i}">
-				<a href="/main/inquirylist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
+				<a href="/main/inquirylist?page=${i}&sword=${sword}&stype=${stype}"><span class="arrow">${i}</span></a>
 			</c:if>
 		</c:forEach>	
 		
 		<c:if test="${page!=chong }">
-			<a href="/main/inquirylist?page=${page+1}&sword=${sword}&stype=${stype}">▷</a>
+			<a href="/main/inquirylist?page=${page+1}&sword=${sword}&stype=${stype}"><span class="arrow">▷</span></a>
 		</c:if>
 		<c:if test="${page==chong }">
-			▷
+			<span class="arrow">▷</span>
 		</c:if>
 		
 		<c:if test="${pend!=chong }">
-			<a href="/main/inquirylist?page=${pend+1}&sword=${sword}&stype=${stype}">▶▶</a>
+			<a href="/main/inquirylist?page=${pend+1}&sword=${sword}&stype=${stype}"><span class="arrow">▶▶</span></a>
 		</c:if>
 		<c:if test="${pend==chong}">
-			▶▶
+			<span class="arrow">▶▶</span>
 		</c:if>
 	</div>
 	<div align="center">

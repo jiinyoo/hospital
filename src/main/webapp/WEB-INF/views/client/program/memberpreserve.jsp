@@ -109,13 +109,6 @@ function validCalendar() {
 	</tr>
 	</c:forEach>
 	</table>
-	
-	
-	
-
-
-
-
 
 </section>
 </body>
