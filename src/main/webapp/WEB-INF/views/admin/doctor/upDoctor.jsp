@@ -293,7 +293,7 @@
 	<tr>
 		<td rowspan="4" width="20%">
 			<div class="img">
-			    <img id="docImg" src="/static/admin/doctor/${ddto.doc_img}" height="120">
+			    <img id="docImg" src="../../static/admin/doctor/${ddto.doc_img}" height="120">
 			    <div class="img-change" onclick="chgimg()">사진을 변경하려면 클릭하세요</div>
 			</div>
 		</td>

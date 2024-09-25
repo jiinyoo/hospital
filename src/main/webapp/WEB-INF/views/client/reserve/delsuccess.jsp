@@ -8,7 +8,8 @@
 <style>
 	section {
 		width:400px;
-		margin:100px auto;
+		margin:250px auto;
+		min-height: 500px;
 	}
 </style>
 <script>

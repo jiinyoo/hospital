@@ -87,7 +87,7 @@ public class DoctorServiceImpl implements DoctorService {
 			String fname=file.getOriginalFilename();
 			String str=ResourceUtils.getFile("classpath:static/admin/doctor").toPath().toString()+"/"+fname;
 			
-			str=FileUtils.getFileName(fname, str);
+			str=FileUtils.getFileName1(fname, str);
 			String saveFname=str.substring(str.lastIndexOf("/")+1);
 			
 			Path path=Paths.get(str);
@@ -149,7 +149,7 @@ public class DoctorServiceImpl implements DoctorService {
 		if(!file.isEmpty()) {
 			String fname=file.getOriginalFilename();
 			String str=ResourceUtils.getFile("classpath:static/admin/doctor").toPath().toString()+"/"+fname;
-			str=FileUtils.getFileName(fname, str);
+			str=FileUtils.getFileName1(fname, str);
 			String saveFname=str.substring(str.lastIndexOf("/")+1);
 			
 			Path path=Paths.get(str);
