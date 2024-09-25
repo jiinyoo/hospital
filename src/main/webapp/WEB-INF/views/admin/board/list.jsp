@@ -104,15 +104,19 @@
     .page {
         text-align: center;
         margin-top: 20px;
+        border:none;
     }
 
     .arrow {
+    	font-family: 'Noto Sans', sans-serif;
         display: inline-block;
         padding: 8px 16px;
         background-color: #004fa8;
         color: white;
         margin: 0 2px;
+        border-radius: 5px;
         text-decoration: none;
+        cursor: pointer;
     }
 
     .arrow:hover {
@@ -143,6 +147,7 @@
         transition: all 0.3s ease;
         text-decoration: none;
         line-height: 30px;
+        border:none;
 	}
 	
 	#deletebutton {
@@ -202,17 +207,17 @@ function check() {
 	<tr align="center">
 		<td colspan="5">
 		<c:if test="${pstart!=1}">		
-			<a href="/admin/board/list?page=${pstart-1}&sword=${sword}&stype=${stype}"><span class="arrow">◀◀</span></a>
+			<a href="/admin/board/list?page=${pstart-1}&sword=${sword}&stype=${stype}"><span class="arrow"><i class="fas fa-angle-double-left"></i></span></a>
 		</c:if>
 		<c:if test="${pstart==1}">		
-			 <span class="arrow">◀◀</span>
+			 <span class="arrow"><i class="fas fa-angle-double-left"></i></span>
 		</c:if>
 		
 		<c:if test="${page!=1}">
-			<a href="/admin/board/list?page=${page-1}&sword=${sword}&stype=${stype}"><span class="arrow">◁</span></a>
+			<a href="/admin/board/list?page=${page-1}&sword=${sword}&stype=${stype}"><span class="arrow"><i class="fas fa-angle-left"></i></span></a>
 		</c:if>
 		<c:if test="${page==1}">
-			<span class="arrow">◁</span>
+			<span class="arrow"><i class="fas fa-angle-left"></i></span>
 		</c:if>
 		
 		
@@ -226,17 +231,17 @@ function check() {
 		</c:forEach>	
 		
 		<c:if test="${page!=chong }">
-			<a href="/admin/board/list?page=${page+1}&sword=${sword}&stype=${stype}"><span class="arrow">▷</span></a>
+			<a href="/admin/board/list?page=${page+1}&sword=${sword}&stype=${stype}"><span class="arrow"><i class="fas fa-angle-right"></i></span></a>
 		</c:if>
 		<c:if test="${page==chong }">
-			<span class="arrow">▷</span>
+			<span class="arrow"><i class="fas fa-angle-right"></i></span>
 		</c:if>
 		
 		<c:if test="${pend!=chong }">
-			<a href="/admin/board/list?page=${pend+1}&sword=${sword}&stype=${stype}"><span class="arrow">▶▶</span></a>
+			<a href="/admin/board/list?page=${pend+1}&sword=${sword}&stype=${stype}"><span class="arrow"><i class="fas fa-angle-double-right"></i></span></a>
 		</c:if>
 		<c:if test="${pend==chong}">
-			<span class="arrow">▶▶</span>
+			<span class="arrow"><i class="fas fa-angle-double-right"></i></span>
 		</c:if>
 		</td>
 	</tr>

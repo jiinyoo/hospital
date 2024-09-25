@@ -94,6 +94,7 @@
         text-decoration: none;
         margin-top: 20px;
         text-align: right;
+        border:none;
     }
 
     .write-button:hover {
@@ -103,6 +104,7 @@
     .page {
         text-align: center;
         margin-top: 20px;
+        cursor: pointer;
     }
 
     .page .arrow {
@@ -111,7 +113,9 @@
         background-color: #004fa8;
         color: white;
         margin: 0 2px;
+        border-radius: 4px;
         text-decoration: none;
+        font-size: 16px;
     }
 
     .page .arrow:hover {
@@ -126,6 +130,7 @@
 	
 	#sform {
 		margin-top: 20px;
+		text-align: center;
 	}
 	
 	
@@ -141,7 +146,8 @@
         cursor: pointer;
         transition: all 0.3s ease;
         text-decoration: none;
-        line-height: 30px;
+        line-height: 18px;
+        border:none;
 	}
 	
 	/* 전체 레이아웃 설정 */
@@ -311,17 +317,17 @@ window.onload=function() {
 
 	<div align="center" class="page">		
 		<c:if test="${pstart!=1}" >		
-			<a href="/main/inquirylist?page=${pstart-1}&sword=${sword}&stype=${stype}"><span class="arrow">◀◀</span></a>
+			<a href="/main/inquirylist?page=${pstart-1}&sword=${sword}&stype=${stype}"><span class="arrow"><i class="fas fa-angle-double-left"></i></span></a>
 		</c:if>
 		<c:if test="${pstart==1}">		
-			 <span class="arrow">◀◀</span>
+			 <span class="arrow"><i class="fas fa-angle-double-left"></i></span>
 		</c:if>
 		
 		<c:if test="${page!=1}">
-			<a href="/main/inquirylist?page=${page-1}&sword=${sword}&stype=${stype}"><span class="arrow">◁</span></a>
+			<a href="/main/inquirylist?page=${page-1}&sword=${sword}&stype=${stype}"><span class="arrow"><i class="fas fa-angle-left"></i></span></a>
 		</c:if>
 		<c:if test="${page==1}">
-			<span class="arrow">◁</span>
+			<span class="arrow"><i class="fas fa-angle-left"></i></span>
 		</c:if>
 		
 		
@@ -335,17 +341,17 @@ window.onload=function() {
 		</c:forEach>	
 		
 		<c:if test="${page!=chong }">
-			<a href="/main/inquirylist?page=${page+1}&sword=${sword}&stype=${stype}"><span class="arrow">▷</span></a>
+			<a href="/main/inquirylist?page=${page+1}&sword=${sword}&stype=${stype}"><span class="arrow"><i class="fas fa-angle-right"></i></span></a>
 		</c:if>
 		<c:if test="${page==chong }">
-			<span class="arrow">▷</span>
+			<span class="arrow"><i class="fas fa-angle-right"></i></span>
 		</c:if>
 		
 		<c:if test="${pend!=chong }">
-			<a href="/main/inquirylist?page=${pend+1}&sword=${sword}&stype=${stype}"><span class="arrow">▶▶</span></a>
+			<a href="/main/inquirylist?page=${pend+1}&sword=${sword}&stype=${stype}"><span class="arrow"><i class="fas fa-angle-double-right"></i></span></a>
 		</c:if>
 		<c:if test="${pend==chong}">
-			<span class="arrow">▶▶</span>
+			<span class="arrow"><i class="fas fa-angle-double-right"></i></span>
 		</c:if>
 	</div>
 	<div align="center">
