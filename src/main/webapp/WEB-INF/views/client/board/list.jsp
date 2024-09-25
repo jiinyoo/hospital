@@ -89,6 +89,7 @@
         text-decoration: none;
         margin-top: 20px;
         text-align: right;
+        border:none;
     }
 
     .write-button:hover {
@@ -98,6 +99,7 @@
     .page {
         text-align: center;
         margin-top: 20px;
+        cursor: pointer;
     }
 
     .arrow {
@@ -210,7 +212,11 @@
     margin-left: 200px; /* 사이드바와 공지사항 섹션 간의 간격 */
 }
 </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 <script>
+
+
 window.onload=function() {
 	
 	var sword = "${param.sword}";
@@ -262,17 +268,17 @@ window.onload=function() {
 <br>
 <div align="center" class="page">
 	<c:if test="${pstart!=1}">		
-		<a href="/main/boardlist?page=${pstart-1}&sword=${sword}&stype=${stype}"><span class="arrow">◀◀</span></a>
+		<a href="/main/boardlist?page=${pstart-1}&sword=${sword}&stype=${stype}"><span class="arrow"><i class="fas fa-angle-double-left"></i></span></a>
 	</c:if>
 	<c:if test="${pstart==1}">		
-		 <span class="arrow">◀◀</span>
+		 <span class="arrow"><i class="fas fa-angle-double-left"></i></span>
 	</c:if>
 	
 	<c:if test="${page!=1}">
-		<a href="/main/boardlist?page=${page-1}&sword=${sword}&stype=${stype}"><span class="arrow">◁</span></a>
+		<a href="/main/boardlist?page=${page-1}&sword=${sword}&stype=${stype}"><span class="arrow"><i class="fas fa-angle-left"></i></span></a>
 	</c:if>
 	<c:if test="${page==1}">
-		<span class="arrow">◁</span>
+		<span class="arrow"><i class="fas fa-angle-left"></i></span>
 	</c:if>
 	
 	
@@ -286,17 +292,17 @@ window.onload=function() {
 	</c:forEach>	
 	
 	<c:if test="${page!=chong }">
-		<a href="/main/boardlist?page=${page+1}&sword=${sword}&stype=${stype}"><span class="arrow" >▷</span></a>
+		<a href="/main/boardlist?page=${page+1}&sword=${sword}&stype=${stype}"><span class="arrow" ><i class="fas fa-angle-right"></i></span></a>
 	</c:if>
 	<c:if test="${page==chong }">
-		<span class="arrow" >▷</span>
+		<span class="arrow" ><i class="fas fa-angle-right"></i></span>
 	</c:if>
 	
 	<c:if test="${pend!=chong }">
-		<a href="/main/boardlist?page=${pend+1}&sword=${sword}&stype=${stype}"><span class="arrow" >▶▶</span></a>
+		<a href="/main/boardlist?page=${pend+1}&sword=${sword}&stype=${stype}"><span class="arrow" ><i class="fas fa-angle-double-right"></i></span></a>
 	</c:if>
 	<c:if test="${pend==chong}">
-		<span class="arrow" >▶▶</span>
+		<span class="arrow" ><i class="fas fa-angle-double-right"></i></span>
 	</c:if>
 </div>
 <br>
