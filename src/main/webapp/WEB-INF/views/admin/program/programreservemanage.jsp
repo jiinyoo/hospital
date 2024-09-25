@@ -46,6 +46,7 @@ table {
 
 table tr:first-child {
     background-color: #007BC9; /* 첫 번째 행에 배경색 적용 */
+    color:white;
 }
 
 table td, table th {
@@ -69,9 +70,6 @@ table tr:nth-child(even) {
     background-color: #f9f9f9; /* 짝수 행에 회색 배경 적용 */
 }
 
-table tr:hover {
-    background-color: #f1f1f1; /* 마우스 오버 시 배경색 */
-}
 
 
 .page {
@@ -236,12 +234,12 @@ function suyong(chgstate, pres_id, pro_id, pres_date, p_inwon) {
 		<tr>
 			<td width="100">예약 번호</td>
 			<td width="200">프로그램 명</td>
-			<td width="200">프로그램 시행일</td>
+			<td width="180">프로그램 시행일</td>
 			<td width="100">이름</td>	
-			<td width="200">전화번호</td>		
+			<td width="220">전화번호</td>		
 			<td width="200">신청일</td>
 			<td width="300">상태</td>
-			<td width="100">신청인원</td>
+			<td width="150">신청인원</td>
 		</tr>
 	<c:forEach items="${prlist}" var="prdto">
 		<tr>

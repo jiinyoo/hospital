@@ -47,6 +47,7 @@ table {
 
 table tr:first-child {
     background-color: #007BC9; /* 첫 번째 행에 배경색 적용 */
+    color:white;
 }
 
 table td, table th {
@@ -58,6 +59,7 @@ table td, table th {
 table th {
     background-color: #f2f2f2; /* 테이블 헤더 배경색 */
     font-weight: bold;
+    color:white;
 }
 
 table img {
@@ -69,9 +71,7 @@ table tr:nth-child(even) {
     background-color: #f9f9f9; /* 짝수 행에 회색 배경 적용 */
 }
 
-table tr:hover {
-    background-color: #f1f1f1; /* 마우스 오버 시 배경색 */
-}
+
 
 
 .page {
@@ -146,16 +146,16 @@ window.onload=function() {
 <h2>프로그램 목록</h2>
 <table>
     <tr>
-        <td width="100px">프로그램 이름</td>
+        <td width="200px">프로그램 이름</td>
         <td width="100px">강사</td>
         <td width="100px">파트</td>
-        <td width="300px">프로그램 이미지</td>
-        <td width="150px">시작일</td>
-        <td width="150px">종료일</td>
+        <td width="200px">프로그램 이미지</td>
+        <td width="170px">시작일</td>
+        <td width="170px">종료일</td>
         <td width="100px">해당요일</td>
         <td width="110px">일일 수용 인원</td>
         <td width="100px">삭제 및 수정</td>
-        <td width="150px">진행/종료 여부</td>
+        <td width="180px">진행/종료 여부</td>
     </tr>
     <c:forEach items="${plist}" var="pdto">
         <c:set var="end_date" value="${pdto.end_date}"/>
