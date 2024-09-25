@@ -100,7 +100,7 @@
         margin-top: 20px;
     }
 
-    .page a {
+    .arrow {
         display: inline-block;
         padding: 8px 16px;
         background-color: #004fa8;
@@ -111,7 +111,7 @@
         font-size: 16px;
     }
 
-    .page a:hover {
+    .arrow:hover {
         background-color: #033D7F;
     }
     
@@ -262,41 +262,41 @@ window.onload=function() {
 <br>
 <div align="center" class="page">
 	<c:if test="${pstart!=1}">		
-		<a href="/main/boardlist?page=${pstart-1}&sword=${sword}&stype=${stype}">◀◀</a>
+		<a href="/main/boardlist?page=${pstart-1}&sword=${sword}&stype=${stype}"><span class="arrow">◀◀</span></a>
 	</c:if>
 	<c:if test="${pstart==1}">		
-		 ◀◀
+		 <span class="arrow">◀◀</span>
 	</c:if>
 	
 	<c:if test="${page!=1}">
-		<a href="/main/boardlist?page=${page-1}&sword=${sword}&stype=${stype}">◁</a>
+		<a href="/main/boardlist?page=${page-1}&sword=${sword}&stype=${stype}"><span class="arrow">◁</span></a>
 	</c:if>
 	<c:if test="${page==1}">
-		◁
+		<span class="arrow">◁</span>
 	</c:if>
 	
 	
 	<c:forEach begin="${pstart}" end="${pend}" var="i">
 		<c:if test="${page==i}">
-			<a class="current-page" href="/main/boardlist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
+			<a  href="/main/boardlist?page=${i}&sword=${sword}&stype=${stype}"><span class="arrow" style="background-color:#033D7F;">${i}</span></a>
 		</c:if>
 		<c:if test="${page!=i}">
-			<a href="/main/boardlist?page=${i}&sword=${sword}&stype=${stype}">${i}</a>
+			<a href="/main/boardlist?page=${i}&sword=${sword}&stype=${stype}"><span class="arrow" >${i}</span></a>
 		</c:if>
 	</c:forEach>	
 	
 	<c:if test="${page!=chong }">
-		<a href="/main/boardlist?page=${page+1}&sword=${sword}&stype=${stype}">▷</a>
+		<a href="/main/boardlist?page=${page+1}&sword=${sword}&stype=${stype}"><span class="arrow" >▷</span></a>
 	</c:if>
 	<c:if test="${page==chong }">
-		▷
+		<span class="arrow" >▷</span>
 	</c:if>
 	
 	<c:if test="${pend!=chong }">
-		<a href="/main/boardlist?page=${pend+1}&sword=${sword}&stype=${stype}">▶▶</a>
+		<a href="/main/boardlist?page=${pend+1}&sword=${sword}&stype=${stype}"><span class="arrow" >▶▶</span></a>
 	</c:if>
 	<c:if test="${pend==chong}">
-		▶▶
+		<span class="arrow" >▶▶</span>
 	</c:if>
 </div>
 <br>
