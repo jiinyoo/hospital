@@ -83,6 +83,18 @@
 	select#medi_type {
 		margin-left: 10px;
 	}
+	
+	input[type="submit"] {
+		border:none;
+		width:130px;
+		height: 30px;
+		border-radius: 5px;
+	}
+	
+	input[type="submit"]:hover {
+		background:#5d62a5;
+		color: white;
+	}
 </style>
 </head>
 <body>

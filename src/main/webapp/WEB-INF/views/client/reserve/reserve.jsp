@@ -305,45 +305,58 @@
 	}
 
 	// 날짜 선택하면 예약 가능한 시간 업데이트
-	function selectDate(year,month,day) {
+	function selectDate(year, month, day) {
+    if (isChkPart == 1 && isChkDoc == 1) {
+        var doc = document.getElementById("doc_id").value;
+        var chk = new XMLHttpRequest();
+        chk.onload = function () {
+            var datas = JSON.parse(chk.responseText);
+            var reserve = document.getElementById("reserveList");
+            reserve.innerHTML = "";
+            var reservelists = datas.reservelist;
+            var reservedtimes = datas.reservedTime;
 
-		if(isChkPart==1 && isChkDoc==1) {
-			var doc=document.getElementById("doc_id").value;
-			var chk=new XMLHttpRequest();
-			chk.onload=function() {
-				var datas=JSON.parse(chk.responseText);
-				var reserve=document.getElementById("reserveList");
-				reserve.innerHTML="";
-				var reservelists=datas.reservelist;
-				var reservedtimes=datas.reservedTime;
-				
-				var formatDate=year+"-"+(month<10?'0'+month:month)+"-"+(day<10?'0'+day:day);
-				document.getElementById("res_date").value=formatDate;
-				
-				for(i=0;i<reservelists.length;i++) {
-					var reservetime1=reservelists[i];
-					
-					var reservetime=reservetime1.substring(0,5);
-					
-					var addInput=document.createElement("input");
-					addInput.type="button";
-					addInput.value=reservetime;
-					addInput.setAttribute("onclick","chkin('"+reservetime1+"')");
-					addInput.className="time-btn";
-					if(reservedtimes.includes(reservetime1)) {
-						addInput.disabled=true;
-						addInput.className+=" disabled";
-					}
-					
-					reserve.appendChild(addInput);
-				}
-			}
-			chk.open("get","chkDate?year="+year+"&month="+month+"&day="+day+"&doc_id="+doc);
-			chk.send();
-		} else {
-			alert("담당선생님을 선택해주세요.");
-		}
-	}
+            var formatDate = year + "-" + (month < 10 ? '0' + month : month) + "-" + (day < 10 ? '0' + day : day);
+            document.getElementById("res_date").value = formatDate;
+
+            var today = new Date();
+            var isToday = today.getFullYear() === year && (today.getMonth() + 1) === month && today.getDate() === day;
+
+            for (i = 0; i < reservelists.length; i++) {
+                var reservetime1 = reservelists[i];
+                var reservetime = reservetime1.substring(0, 5);
+                var timeParts = reservetime.split(":");
+                var hour = parseInt(timeParts[0], 10);
+                var minute = parseInt(timeParts[1], 10);
+
+                var addInput = document.createElement("input");
+                addInput.type = "button";
+                addInput.value = reservetime;
+                addInput.className = "time-btn";
+
+                // 시간이 이미 예약된 경우 비활성화
+                if (reservedtimes.includes(reservetime1)) {
+                    addInput.disabled = true;
+                    addInput.className += " disabled";
+                }
+
+                // 오늘 날짜이고, 현재 시간 이전의 시간도 비활성화
+                if (isToday && (hour < today.getHours() || (hour === today.getHours() && minute < today.getMinutes()))) {
+                    addInput.disabled = true;
+                    addInput.className += " disabled";
+                }
+
+                addInput.setAttribute("onclick", "chkin('" + reservetime1 + "')");
+                reserve.appendChild(addInput);
+            }
+        }
+        chk.open("get", "chkDate?year=" + year + "&month=" + month + "&day=" + day + "&doc_id=" + doc);
+        chk.send();
+    } else {
+        alert("담당선생님을 선택해주세요.");
+    }
+}
+
 	
 	function chkin(time) {
 		var chk1=document.getElementById("doc_id").value;

@@ -33,9 +33,14 @@
 #reserve-container button:focus {
     outline: none;
 }
+
+.none {
+	min-height: 600px; 
+}
 </style>
 </head>
 <body>
+<div class="none"></div>
 <c:if test="${!empty rdto }">
 <div id="reserve-container">
 	<h2>${rdto.user_id}님 예약완료</h2>
