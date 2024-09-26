@@ -211,7 +211,7 @@
   {
     var user_pwd=document.mform.user_pwd.value;
     var pwd2=document.mform.pwd2.value;
-    var pwdPattern=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+    var pwdPattern=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,20}$/;
 
     if (!pwdPattern.test(user_pwd)) 
     {
