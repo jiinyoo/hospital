@@ -63,14 +63,17 @@
 	</select>
 	<select id="pastReserve" resultType="kr.co.hospital.client.dto.ReserveDto">
 		select * from reserve
-		where user_id=#{user_id}
+		where (user_id=#{user_id}
 		<if test="month==0">
 		and <![CDATA[now() > concat(res_date,' ', res_time)]]>
 		</if>
 		<if test="month!=0">
-		and res_date between #{start} and #{end}
+		and concat(res_date,' ',res_time) >= #{start} and #{end} >= concat(res_date,' ',res_time)
 		</if>
-		and isMember='0'
+		and isMember='0')
+		<if test="month==0">
+		or (user_id=#{user_id} and state='1')
+		</if>
 		order by res_date asc,
 		res_time asc
 	</select>

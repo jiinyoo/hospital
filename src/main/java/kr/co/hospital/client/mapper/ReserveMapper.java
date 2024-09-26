@@ -1,6 +1,7 @@
 package kr.co.hospital.client.mapper;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,7 @@ public interface ReserveMapper {
 	public UserDto getUserinfo(String userid);
 	public ReserveDto reserveConfirm(String res_code);
 	public ArrayList<ReserveDto> reserveView(String user_id, String user_info);
-	public ArrayList<ReserveDto> pastReserve(String user_id, int month, LocalDate start, LocalDate end);
+	public ArrayList<ReserveDto> pastReserve(String user_id, int month, LocalDateTime start, LocalDateTime end);
 	public String getDoctor(int doc_id);
 	public void delRes(String res_id, String userid, String user_info);
 }

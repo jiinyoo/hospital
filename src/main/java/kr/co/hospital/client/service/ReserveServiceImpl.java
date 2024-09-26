@@ -209,76 +209,88 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public String reserveView(HttpSession session, Model model, HttpServletRequest request,HttpServletResponse response) {
-		ArrayList<ReserveDto> rdto=new ArrayList<>();
-		ArrayList<ReserveDto> past=new ArrayList<>();
-		int month=request.getParameter("month")==null?1:Integer.parseInt(request.getParameter("month"));
-		LocalDate start=null; 
-		LocalDate end=null;
-		if(request.getParameter("start")==null || request.getParameter("start")=="") {
-			start=LocalDate.now().minusMonths(month);
-		} else {
-			start=LocalDate.parse(request.getParameter("start"));
-		}
-		
-		if(request.getParameter("end")==null || request.getParameter("end")=="") {
-			end=LocalDate.now();
-		} else {
-			end=LocalDate.parse(request.getParameter("end"));
-		}
-		
-		System.out.println(start+"부터 "+end+"까지");
+	public String reserveView(HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response) {
+	    ArrayList<ReserveDto> rdto = new ArrayList<>();
+	    ArrayList<ReserveDto> past = new ArrayList<>();
+	    int month = (request.getParameter("month") == null) ? 1 : Integer.parseInt(request.getParameter("month"));
+	    
+	    // LocalDate로 날짜만 처리
+	    LocalDate startDate;
+	    LocalDate endDate;
 
-		if(session.getAttribute("user_id")==null) {
-			String chk=request.getParameter("chk");
-			if("0".equals(chk))	{ // 핸드폰 번호로 조회
-				String userid=request.getParameter("user_id");
-				String phone=request.getParameter("user_phone");
-				phone="and user_phone='"+phone+"' and isMember='1'";
-				rdto=mapper.reserveView(userid, phone);
-			//	past=mapper.pastReserve(userid, phone,month);
-				
-			} else if("1".equals(chk)) {  // 주민번호로 조회 
-				String userid=request.getParameter("user_id");
-				String jumin=request.getParameter("user_jumin");
-				jumin="and user_phone='"+jumin+"' and isMember='1'";
-				rdto=mapper.reserveView(userid, jumin);
-			//	past=mapper.pastReserve(userid, jumin,month);
-				
-			} else {
-				Cookie url=new Cookie("url", "/main/reserveView");
-				url.setMaxAge(60*3);
-				url.setPath("/");
-				response.addCookie(url);
-				return "redirect:/main/reserveSearch";
-			}
-		} else {
-			String userid=session.getAttribute("user_id").toString();
-			rdto=mapper.reserveView(userid, null);
-			past=mapper.pastReserve(userid, month, start, end);
-		}
-		
-		Cookie url=new Cookie("url", "");
-		url.setMaxAge(0);
-		url.setPath("/");
-		response.addCookie(url);
-		
-		ArrayList<String> doc=new ArrayList<>();
-		for(ReserveDto reserve:rdto) {
-			doc.add(mapper.getDoctor(reserve.getDoc_id()));  
-		}
-		ArrayList<String> doc1=new ArrayList<>();
-		for(ReserveDto reserve:past) {
-			doc1.add(mapper.getDoctor(reserve.getDoc_id()));
-		}
-		
-		model.addAttribute("doc",doc);
-		model.addAttribute("pastDoc",doc1);
-		model.addAttribute("past",past);
-		model.addAttribute("rdto",rdto);
-		
-		return "/client/reserve/reserveView";
+	    if (request.getParameter("start") == null || request.getParameter("start").isEmpty()) {
+	        startDate = LocalDate.now().minusMonths(month); // month에 따른 지난 날짜로 설정
+	    } else {
+	        startDate = LocalDate.parse(request.getParameter("start")); // 날짜만 파싱
+	    }
+
+	    if (request.getParameter("end") == null || request.getParameter("end").isEmpty()) {
+	        endDate = LocalDate.now(); // 현재 날짜로 설정
+	    } else {
+	        endDate = LocalDate.parse(request.getParameter("end"));
+	    }
+
+	    // LocalDateTime으로 변환 (시작은 자정, 종료는 하루의 마지막 시간)
+	    LocalDateTime start = startDate.atStartOfDay(); // 시작일의 자정
+	    LocalDateTime end = endDate.atTime(23, 59, 59); // 종료일의 마지막 시간
+
+	    System.out.println(start + "부터 " + end + "까지");
+	    System.out.println(month);
+
+	    if (session.getAttribute("user_id") == null) {
+	        String chk = request.getParameter("chk");
+	        if ("0".equals(chk)) { // 핸드폰 번호로 조회
+	            String userid = request.getParameter("user_id");
+	            String phone = request.getParameter("user_phone");
+	            phone = "and user_phone='" + phone + "' and isMember='1'";
+	            rdto = mapper.reserveView(userid, phone);
+	        // past = mapper.pastReserve(userid, phone, month);
+	        } else if ("1".equals(chk)) { // 주민번호로 조회
+	            String userid = request.getParameter("user_id");
+	            String jumin = request.getParameter("user_jumin");
+	            jumin = "and user_phone='" + jumin + "' and isMember='1'";
+	            rdto = mapper.reserveView(userid, jumin);
+	        // past = mapper.pastReserve(userid, jumin, month);
+	        } else {
+	            Cookie url = new Cookie("url", "/main/reserveView");
+	            url.setMaxAge(60 * 3);
+	            url.setPath("/");
+	            response.addCookie(url);
+	            return "redirect:/main/reserveSearch";
+	        }
+	    } else {
+	        String userid = session.getAttribute("user_id").toString();
+	        rdto = mapper.reserveView(userid, null);
+	        System.out.println(month + " " + start + " " + end);
+	        past = mapper.pastReserve(userid, month, start, end);
+	    }
+
+	    // 쿠키 처리: URL 초기화
+	    Cookie url = new Cookie("url", "");
+	    url.setMaxAge(0);
+	    url.setPath("/");
+	    response.addCookie(url);
+
+	    // 의사 정보 조회
+	    ArrayList<String> doc = new ArrayList<>();
+	    for (ReserveDto reserve : rdto) {
+	        doc.add(mapper.getDoctor(reserve.getDoc_id()));
+	    }
+
+	    ArrayList<String> doc1 = new ArrayList<>();
+	    for (ReserveDto reserve : past) {
+	        doc1.add(mapper.getDoctor(reserve.getDoc_id()));
+	    }
+
+	    // 모델에 데이터 추가
+	    model.addAttribute("doc", doc);
+	    model.addAttribute("pastDoc", doc1);
+	    model.addAttribute("past", past);
+	    model.addAttribute("rdto", rdto);
+
+	    return "/client/reserve/reserveView";
 	}
+
 
 	@Override
 	public String cancelRes(HttpServletRequest request, HttpSession session) {
