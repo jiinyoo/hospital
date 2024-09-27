@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <style>
 	section {
-	    width: 800px;
+	    width: 1000px;
 	    display: flex;
 	    justify-content: space-around;
 	    align-items: center; /* 수평 중앙 정렬 */
@@ -91,6 +91,10 @@
 	}
 	
 	#err {text-align: center;}
+	
+	.yammy {
+		min-height: 500px;
+	}
 </style>
 <script>
 	function non() {
@@ -138,9 +142,10 @@
 </script>
 </head>
 <body>
-
+<div class="yammy">
 	<section>
 		<div id="non-container">
+		
 		<h2>비회원 예약</h2>
 			<form method="post" action="reserve" onsubmit="return non()">
 				<input type="hidden" name="user_phone">
@@ -170,6 +175,7 @@
 			</form>
 		</div>
 	</section>
+</div>
 	<c:if test="${param.err==1 }">
 	<div id="err">세션이 만료되었습니다.</div>
 	</c:if>

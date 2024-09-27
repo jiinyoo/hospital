@@ -158,6 +158,15 @@
 		border-radius:3px;
 	}
 	
+	.style1 {
+		position: relative;
+		left: 26px;
+	}
+	
+	.style2 {
+		position: relative;
+		left: 50px;
+	}
 </style>
 
 
@@ -201,15 +210,7 @@ window.onload=function() {
 			<span id="part">${imap.part}</span>
 		</c:if>
 		<!-- 빨간 줄 뜨지만 동작하는 코드 -->
-			<span id="title"
-			<c:if test="${imap.answer==0 && imap.state==2}">
-				<c:if test="${imap.bimil==1}">
-					style="position: relative; left: 26px;"
-				</c:if>
-				<c:if test="${imap.bimil!=1}">
-        			 style="position: relative; left: 50px;"
-				</c:if>
-    		</c:if>>
+			<span id="title" ${imap.answer==0 && imap.state==2 ? imap.bimil==1 ? "class='style1'":"class='style2'" : ''}>
     		<a href="/admin/inquiry/readnum?inq_id=${imap.inq_id}">${imap.title}</a></span>
 		</a>
 		</td>

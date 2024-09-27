@@ -209,6 +209,16 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     margin-left: 200px; /* 사이드바와 공지사항 섹션 간의 간격 */
 }
+
+.style1 {
+		position: relative;
+		left: 26px;
+	}
+	
+	.style2 {
+		position: relative;
+		left: 50px;
+	}
 	
 </style>
 <script>
@@ -297,16 +307,8 @@ window.onload=function() {
 		
 		<!-- 빨간 줄 뜨지만 보이는 코드 -->
 		
-			<span id="title" onclick="check('${imap.user_id}','${imap.bimil}','${imap.inq_id}','${imap.origin_user_id != null ? imap.origin_user_id : ''}')"
-			<c:if test="${imap.answer==0 && imap.state==2}">
-				<c:if test="${imap.bimil==1}">
-					style="position: relative; left: 26px;"
-				</c:if>
-				<c:if test="${imap.bimil!=1}">
-        			 style="position: relative; left: 50px;"
-				</c:if>
-    		</c:if>>
-	
+			<span id="title" onclick="check('${imap.user_id}','${imap.bimil}','${imap.inq_id}','${imap.origin_user_id != null ? imap.origin_user_id : ''}')" ${imap.answer==0 && imap.state==2 ? imap.bimil==1 ? "class='style1'":"class='style2'" : ''}> 
+			
 			<a href="#">${imap.title}</a></span>
 	</td>
 		<td width="200">${imap.writeday}</td>

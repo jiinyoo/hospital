@@ -98,11 +98,6 @@
         background-color: #FF5252;
     }
     
-    hr {
-    	margin-top: 4px;
-    	margin-bottom: 4px;
-    }
-    
     .modal {
         display: none; 
         position: fixed; 

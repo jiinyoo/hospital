@@ -95,6 +95,10 @@
 	#jumin-container span {
 		vertical-align: middle; /* '-' 수직 중앙 정렬 */
 	}
+	
+	.yammy {
+		min-height: 500px;
+	}
 </style>
 <script>
 	window.onload=function() {
@@ -168,6 +172,7 @@
 </script>
 </head>
 <body>
+<div class="yammy">
 	<section>
 		<div id="non-container">
 		<h2>비회원 조회</h2>
@@ -204,5 +209,6 @@
 			</form>
 		</div>
 	</section>
+</div>
 </body>
 </html>

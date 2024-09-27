@@ -112,6 +112,10 @@ main {
 }
 */
 
+#xx {
+	cursor: pointer;
+}
+
 #loginbar
 {	
 	margin:auto;
@@ -218,6 +222,21 @@ nav #mainmenu
 	
 }
 
+
+#submenus .logounder {
+	padding-left:0px;
+	width:215px;
+	left:0px;
+	top:90px;
+	background:white;
+	border-left:0.5px solid #2a83c7;
+	border-right:0.5px solid #2a83c7;
+	border-bottom:5px solid #2a83c7;
+	opacity: 0;  
+	z-index:8000;
+
+}
+
 #submenus .submenu
 {
 	display:none;
@@ -254,14 +273,18 @@ nav #mainmenu
 
 }
 
+
+
+
+
 #submenus .submenu > li
 {
 	list-style-type:none;
 	justify-content: center;
 	display:flex;
 	width:215px;
-	height:30px;
-	line-height: 30px; /* 중앙 정렬 */
+	height:40px;
+	line-height: 40px; /* 중앙 정렬 */
     margin: 0; /* 기본 마진 제거 */
     padding: 0; /* 기본 패딩 제거 */
 	font-size: 15px;
@@ -563,8 +586,8 @@ hr
 	<nav>
 	
 	<span id="total" onmouseout="hideSub()">
-	<span id="mainsub">
-	<div id="mainmenu" onmouseover="viewSub()">
+	<span id="mainsub" onmouseover="viewSub()">
+	<div id="mainmenu">
 		<ul id="maincate">
 			<li class="logo">
 			 <a href="/main/index">
@@ -580,13 +603,13 @@ hr
 			<li class="hov">커뮤니티</li>
 			
 		</ul>
-	</div>
 	
-	<div id="submenus"  onmouseover="viewSub()">
-		<ul class="submenu">
+	<div id="submenus">
+
+		<ul class="logounder">
 			
 		</ul>
-		
+
 		<ul class="submenu">
 			<li><a href="/main/hospital#menu1">병원 인삿말</a></li>
 			<li><a href="/main/hospital#menu2">미션과 비전</a></li>
@@ -617,12 +640,13 @@ hr
 				<li><a href="/main/healthInfo">건강정보</a></li>
 		</ul>
 	</div>
+	
+	</div>
 	</span>
 	</span>
 	</nav>
 
 
-	</div>
 
 
 <sitemesh:write property="body"/>

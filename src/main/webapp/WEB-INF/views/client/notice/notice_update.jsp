@@ -37,11 +37,6 @@
         margin-bottom: 20px;
         margin-left:10px;
     }
-    
-    div 
-  	{
-    	margin: auto;
- 	}
 
     /* 입력 필드 스타일 */
     input[type="text"]
@@ -203,7 +198,7 @@
 			  }	  
 		  }
 	  
-		   alert(delimg+"\n"+safeimg);
+		   //alert(delimg+"\n"+safeimg);
 		  
 		  // delimg, safeimg를 서버에 전송
 		  document.uform.delimg.value=delimg;

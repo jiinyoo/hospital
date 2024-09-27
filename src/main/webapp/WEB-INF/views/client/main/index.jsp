@@ -326,6 +326,7 @@ section #community .comm .more-btn a:hover {
 		<div class="comm">
 			<div class="title">
 				학술 행사
+				<div class="more-btn"><a href="#">더보기</a></div>
 			</div>
 			
 			<ul class="notice-list">

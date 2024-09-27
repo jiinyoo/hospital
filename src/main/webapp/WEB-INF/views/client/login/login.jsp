@@ -7,19 +7,16 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <style>
-
-  body {
-    font-family: 'goorm-sans-bold';
-    background-color: #f2f4f9;
-    margin: 0;
-    padding: 0;
-  }
+	.yammy
+	{
+		min-height: 600px;
+	}
 
   .login-container 
   {
-    width: 80%;
+    width: 100%;
     max-width: 900px;
-    margin: 80px auto;
+    margin: 100px auto;
     padding: 40px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -27,6 +24,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
   }
 
   .login-left 
@@ -161,6 +159,7 @@
  
 </head>
 <body>
+<div class="yammy">
   <div class="login-container">
     <div class="login-left">
       <i class="fas fa-lock icon"></i>
@@ -186,7 +185,7 @@
       </form>
     </div>
   </div>
-
+</div>
  
 </body>
 </html>
