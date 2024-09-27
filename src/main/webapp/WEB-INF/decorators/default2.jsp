@@ -138,28 +138,23 @@ main {
 	
 nav
 {
- 	position: relative;
-    z-index: 999;
-    height: 130px;
-    border-bottom: 1px solid #b9b9b9;
-    box-sizing: border-box;
+ 	position :relative;
+ 	width:1300px;
+ 	height:130px;
+ 	margin:auto;
+ 	font-size:22px;
 }
 
 nav #mainmenu
 {
-	width: 1300px;
-    margin: 0 auto;
-    padding: 0;
-    overflow: hidden;
-    list-style: none;
-    box-sizing: border-box;
+	width:1300px;
+	height:130px;
 	
 }
 
 
 #mainmenu #maincate > li 
 {
-	font-size: 24px;
 	display:inline-block;
 	list-style-type:none;
 	width:210px;
@@ -221,57 +216,62 @@ nav #mainmenu
 
 #submenus 
 {
-	width: 1300px;
-    margin: 0 auto;
-    padding: 0;
-    overflow: hidden;
-    list-style: none;
+	display:flex;
+	flex-wrap:wrap;
+	text-align:center;
 	
 }
 
 
 #submenus .logounder {
-	width: 210px;
-    height: 280px;
-    float: left;
-    background-color: #fff;
-    border-right: 1px solid #b9b9b9;
-    box-sizing: border-box;
+	padding-left:0px;
+	width:215px;
+	left:0px;
+	top:90px;
+	background:white;
+	border-left:0.5px solid #2a83c7;
+	border-right:0.5px solid #2a83c7;
+	border-bottom:5px solid #2a83c7;
+	opacity: 0;  
+	z-index:8000;
 
 }
 
 #submenus .submenu
 {
-	width: 214px;
-    height: 280px;
-    float: left;
-    border-right: 1px solid #b9b9b9;
-    box-sizing: border-box;
-    border-top:5px solid #2a83c7;
-/*     background-color: #fff; */
+	display:none;
+	padding-left:0px;
+	width:215px;
+	left:0px;
+	top:90px;
+	background:white;
+	border-left:0.5px solid #2a83c7;
+	border-right:0.5px solid #2a83c7;
+	border-bottom:5px solid #2a83c7;
+	opacity: 0;  
+	z-index:8000;
 }
 
-#snb {
-    position: absolute;
-    width: 100%;
-    min-width: 1300px;
-    background-color: #ffffff;
-    overflow: hidden;
-    z-index: 998;
-    left:0;
-    display:none;
-    }
-
-
-
-#snb
+#submenus .submenu:nth-child(n) 
 {
-    animation: slideDown 0.4s ease forwards;
+    animation: slideDown 0.3s ease forwards;
     animation-delay: 0s;
 }
 
 
 
+#submenus .submenu:first-child
+{
+	border-top:5px solid #2a83c7;
+	
+}
+
+#submenus .submenu:last-child
+{
+	
+	width:200px;
+
+}
 
 
 
@@ -311,13 +311,16 @@ nav #mainmenu
 	
 }
 
+#submenus .submenu > li:first-child
+{
+	border-top:5px solid #2a83c7;
+	
+}
 
-
-#submenu ul
+#submenus .submenu:last-child > li
 {
 	
 	width:200px;
-/* 	border-bottom:5px solid #2a83c7; */
 	
 }
 
@@ -462,9 +465,6 @@ hr
 		for(submenu of submenus)
 			{
 				submenu.style.display="block";
-				document.getElementById("snb").style.display="block";
-				document.getElementById("snb").style.borderBottom="5px solid #2a83c7";
-				
 			}
 		
 	}
@@ -476,8 +476,6 @@ hr
 		for(submenu of submenus)
 			{
 				submenu.style.display="none";
-				document.getElementById("snb").style.display="none";
-				document.getElementById("snb").style.borderBottom="";
 			}
 		
 	}
@@ -605,7 +603,7 @@ hr
 			<li class="hov">커뮤니티</li>
 			
 		</ul>
-	<div id="snb">
+	
 	<div id="submenus">
 
 		<ul class="logounder">
@@ -642,7 +640,7 @@ hr
 				<li><a href="/main/healthInfo">건강정보</a></li>
 		</ul>
 	</div>
-	</div>
+	
 	</div>
 	</span>
 	</span>
