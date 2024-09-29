@@ -156,7 +156,6 @@
                     <li><a href="/admin/admin_notice/admin_notice_list">공지사항 관리</a></li>
                     <li><a href="/admin/inquiry/list">진료과별 게시판 관리</a></li>
                     <li><a href="/admin/board/list">진료 후기 게시판 관리</a></li>
-                    <li><a href="#">고객의 소리 관리</a></li>
                 </ul>
             </li>
             <li>

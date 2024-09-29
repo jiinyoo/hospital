@@ -22,27 +22,27 @@ public class LoginController {
 	@Autowired
 	@Qualifier("log")
 	private LoginService service;
-	
+
 	@RequestMapping("/main/login")
 	public String login(HttpServletRequest request,
 			Model model)
 	{
 		return service.login(request,model);
 	}
-	
+
 	@RequestMapping("/main/loginOk")
 	public String loginOk(UserDto udto,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response)
 	{
 		return service.loginOk(udto,session,request,response);
 	}
-	
+
 	@RequestMapping("/main/logout")
 	public String logout(HttpSession session)
 	{
 		return service.logout(session);
 	}
-	
+
 	 @GetMapping("/main/idSearch")
 	 public String idSearchPage() {
 	    return "client/login/idSearch";

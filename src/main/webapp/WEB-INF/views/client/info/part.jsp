@@ -9,43 +9,51 @@
 <style>
 	section {
 		width: 800px;
-		margin: 20px auto;
+		margin: 40px auto;
 		background-color: #f9f9f9;
 		padding: 20px;
-		border-radius: 10px;
+		border-radius: 8px;
 		
 	}
 	
 	.info-header {
-		margin-top: 30px;
-		display: flex;
-		justify-content: space-around;
-		font-size: 20px;
-		background-color: #eef2f5;
-		padding: 10px 0;
-		border-radius: 8px;
-	}
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column; /* 세로 배열로 변경 */
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 20px;
+    background-color: #f9f9f9;
+    padding: 10px 20px; /* 왼쪽에 고정되도록 여백 추가 */
+    border-radius: 8px;
+    position: fixed; /* 왼쪽에 고정 */
+    top: 23%; /* 원하는 위치에 고정 (탑에서 20% 아래) */
+    left: 320px; /* 왼쪽에서 10px 떨어지게 */
+    width: 200px; /* 고정된 너비 */
+}
 	
 	.info-header a {
-		text-decoration: none;
-		color: #333;
-		font-weight: bold;
-		transition: color 0.3s ease;
-	}
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    padding-left: 10px; /* 텍스트가 왼쪽에서 떨어지도록 */
+}
 	
 	.info-header a:hover {
 		color: #007BFF;
 	}
 	
 	.info-header > div {
-		width: 200px;
-		height: 50px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		border-radius: 10px;
-		transition: transform 0.3s ease, background-color 0.3s ease;
-	}
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    margin-bottom: 10px; /* 각 항목 사이의 간격 */
+}
 
 	
 
@@ -115,6 +123,14 @@
 		background-color: #eef2f5;
 		border-radius: 8px;
 	}
+	
+	.info-doc
+	{
+		font-size:28px;
+		margin:15px;
+		margin-bottom:20px;
+		color:#555;
+	}
 
 </style>
 </head>
@@ -127,6 +143,11 @@
 			<div><a href="part?part=치과" ${param.part=='치과'?"style='color:#007BFF'":'' }>치과</a></div>
 			<div><a href="part?part=이비인후과" ${param.part=='이비인후과'?"style='color:#007BFF'":'' }>이비인후과</a></div>
 		</div>
+		
+		<div>
+			<div class="info-doc"> 의료진 안내 </div>
+		</div>
+		
 		<hr>
 		
 		<div class="part-intro">

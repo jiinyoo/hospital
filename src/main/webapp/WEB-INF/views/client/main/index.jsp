@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
 
 * {margin:0; padding:0; box-sizing: border-box;}
@@ -301,7 +302,8 @@ section #community .comm .more-btn a:hover {
 		<div class="comm">
 		
 			<div class="title">
-				공지 사항
+				<i class="fas fa-bullhorn" style="color: #0073e6; margin-right: 8px;"></i>
+					공지 사항
 				<div class="more-btn"><a href="/main/notice_list">더보기</a></div>
 			</div>
 		
@@ -325,7 +327,8 @@ section #community .comm .more-btn a:hover {
 		<!-- 학술행사 칸 -->
 		<div class="comm">
 			<div class="title">
-				학술 행사
+				<i class="fas fa-chalkboard-teacher" style="color: #0073e6; margin-right: 8px;"></i>
+					학술 행사
 				<div class="more-btn"><a href="#">더보기</a></div>
 			</div>
 			
@@ -349,12 +352,13 @@ section #community .comm .more-btn a:hover {
 		<!-- 추가적인 빈 섹션 -->
 		<div class="comm">
 			<div class="title">
-				병원 이용 시간
+				<i class="fas fa-clock" style="color: #0073e6; margin-right: 8px;"></i>
+					병원 이용 시간
 			</div>
 			<!-- 원하는 내용을 여기에 추가 -->
 			<br>
 			<div class="section-info">
-				<p><strong>평일:</strong> 9:00 AM - 6:00 PM</p>
+				<p><strong>평일:</strong> 8:30 AM - 6:00 PM</p>
 				<br>
 				<p><strong>공휴일/주말:</strong> 9:00 AM - 3:00 PM</p>
 			</div>
@@ -377,14 +381,16 @@ section #community .comm .more-btn a:hover {
         <p>검사이력 및 결과조회</p>
     </div>
     <div class="icon-box">
-      <a id="hosnotice" href="/main/hospital#menu4">
+      <a id="hosnotice" href="/main/hospital#menu5">
         <img src="/static/client/main/오셔.jpg" alt="오시는 길">
         <p>오시는 길</p>
       </a>
     </div>
     <div class="icon-box">
+      <a id="hosnotice" href="/main/hospital#menu4">
         <img src="/static/client/main/주차.jpg" alt="주차안내">
         <p>주차안내</p>
+      </a>
     </div>
     <div class="icon-box">
         <img src="/static/client/main/위치.jpg" alt="원내위치안내">
@@ -408,16 +414,16 @@ section #community .comm .more-btn a:hover {
 <div align="center">
 
  <div id="pro-container">
- <div id="protitle" style="color:#0073e6; font-size:30px; margin-top:40px;">프로그램 현황</div>
-  <div id="programs" style="margin-top:20px;">
+ <div id="protitle" style="color:#626262; font-size:30px;">프로그램 현황</div>
+  <div id="programs">
 	<c:forEach items="${programmap}" var="pdto" begin="0" end="3">
 	
 	<div class="card">
 	<a href="/main/programreserve">
     	<img src="/static/admin/programfile/${pdto.pro_img}" alt="Card Image">
    		 <div class="card-body">
-     	 <div class="card-title">${pdto.pro_name}</div>
-      	 <div class="card-text">강사 : ${pdto.teach_name}</div>
+     	 <div class="card-title" style="color:#0073e6;">${pdto.pro_name}</div>
+      	 <div class="card-text" style="color:#999;">강사 : ${pdto.teach_name}</div>
       	</div>
      </a> 	
     </div>

@@ -139,7 +139,7 @@ main {
 nav
 {
  	position: relative;
-    z-index: 999;
+    z-index: 30;
     height: 130px;
     border-bottom: 1px solid #b9b9b9;
     box-sizing: border-box;
@@ -257,7 +257,7 @@ nav #mainmenu
     min-width: 1300px;
     background-color: #ffffff;
     overflow: hidden;
-    z-index: 998;
+    z-index: 20;
     left:0;
     display:none;
     }
@@ -282,7 +282,7 @@ nav #mainmenu
 	list-style-type:none;
 	justify-content: center;
 	display:flex;
-	width:215px;
+	width:213px;
 	height:40px;
 	line-height: 40px; /* 중앙 정렬 */
     margin: 0; /* 기본 마진 제거 */
@@ -354,7 +354,7 @@ nav #mainmenu
     border-radius: 5px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     width: 150px;
-    z-index: 11;
+    z-index: 40;
 }
 
 #userMenu a {
@@ -575,8 +575,8 @@ hr
                 <div id="userMenu">
                     <a href="/main/userInfo">회원 정보</a>
                     <a href="/main/reserveView">예약 정보</a>
-                    <a href="#">나의 문의</a>
-                    <a href="#">진료 내역</a>
+                    <a href="/main/inquirylist">나의 문의</a>
+                    <a href="/main/reserveView">진료 내역</a>
                 </div>
             </div> | 
            <a href="/main/logout"> 로그아웃 </a> | <a href="#">문의하기</a>
@@ -616,7 +616,8 @@ hr
 			<li><a href="/main/hospital#menu1">병원 인삿말</a></li>
 			<li><a href="/main/hospital#menu2">미션과 비전</a></li>
 			<li><a href="/main/hospital#menu3">조직도</a></li>
-			<li><a href="/main/hospital#menu4">오시는 길</a></li>
+			<li><a href="/main/hospital#menu4">주차 안내</a></li>
+			<li><a href="/main/hospital#menu5">오시는 길</a></li>
 		</ul>
 		
 		<ul class="submenu">
@@ -666,10 +667,10 @@ hr
         <div style="width: 20%;">
             <h4 style="margin-bottom: 20px; font-size: 24px; margin-left:60px;">빠른 링크</h4>
             <ul style="list-style-type: none; padding: 0; line-height: 2; margin-left:60px;">
-                <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">병원 소개</a></li>
+                <li><a href="/main/hospital" style="color: white; text-decoration: none; font-size: 15px;">병원 소개</a></li>
                 <li><a href="/main/beforeReserve" style="color: white; text-decoration: none; font-size: 15px;">진료 예약</a></li>
                 <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">연락처 : 010-1234-5678</a></li>
-                <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">자주 묻는 질문</a></li>
+                <li><a href="/main/inquirylist" style="color: white; text-decoration: none; font-size: 15px;">자주 묻는 질문</a></li>
             </ul>
         </div>
 
