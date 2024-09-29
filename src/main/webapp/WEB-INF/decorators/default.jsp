@@ -63,8 +63,10 @@ main {
 
 #ads {
 	width: 100%;
-	background: #8BBCFF;
+	background: linear-gradient(90deg, #8BBCFF, #79D3F2); /* 그라데이션 적용 */
 	height: 50px;
+	border-radius: 5px;
+	color: white;
 }
 
 /*
@@ -260,21 +262,9 @@ nav #mainmenu
     z-index: 20;
     left:0;
     display:none;
-    }
-
-
-
-#snb
-{
     animation: slideDown 0.4s ease forwards;
     animation-delay: 0s;
-}
-
-
-
-
-
-
+    }
 
 
 #submenus .submenu > li
@@ -449,6 +439,7 @@ hr
 #scrollToTopBtn:hover {
     background-color: black; /* 마우스 오버 시 버튼 배경색 변경 */
 }
+
 
 
 </style>
@@ -635,6 +626,7 @@ hr
 		<ul class="submenu">
 			<li><a href="/main/programreserve">프로그램 예약</a></li>
 			<li><a href="/main/memberpreserve">프로그램 예약 조회</a></li>
+			<li><a href="/main/event">학술 행사</a></li>
 		</ul>
 		<ul class="submenu">
 				<li><a href="/main/notice_list">공지사항</a></li>

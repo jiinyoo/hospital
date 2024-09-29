@@ -41,4 +41,10 @@ public class ClientMainController {
 	{
 		return "/client/info/hospital";
 	}
+	
+	@GetMapping("/main/event")
+	public String event()
+	{
+		return "/client/info/event";
+	}
 }

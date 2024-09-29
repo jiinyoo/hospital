@@ -329,20 +329,20 @@ section #community .comm .more-btn a:hover {
 			<div class="title">
 				<i class="fas fa-chalkboard-teacher" style="color: #0073e6; margin-right: 8px;"></i>
 					학술 행사
-				<div class="more-btn"><a href="#">더보기</a></div>
+				<div class="more-btn"><a href="/main/event">더보기</a></div>
 			</div>
 			
 			<ul class="notice-list">
 				<li>
-					<a href="#">SPC Webinar: BUN/Cr 수치 상승 고려 사항</a>
+					<a href="/main/event">SPC Webinar: BUN/Cr 수치 상승 고려 사항</a>
 					<span class="notice-date">2024.08.26</span>
 				</li>
 				<li>
-					<a href="#">의료인을 위한 온라인 강의</a>
+					<a href="/main/event">의료인을 위한 온라인 강의</a>
 					<span class="notice-date">2024.08.20</span>
 				</li>
 				<li>
-					<a href="#">건강한 생각을 하기위한 준비자세</a>
+					<a href="/main/event">건강한 생각을 하기위한 준비자세</a>
 					<span class="notice-date">2024.08.15</span>
 				</li>
 			</ul>
