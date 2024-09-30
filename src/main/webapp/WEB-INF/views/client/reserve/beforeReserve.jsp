@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 <style>
 	section {
-	    width: 1000px;
+	    
+	    width: 800px;
 	    display: flex;
 	    justify-content: space-around;
 	    align-items: center; /* 수평 중앙 정렬 */
@@ -56,7 +57,6 @@
 		flex-direction: column;
 		align-items: center;
 	}
-
 	#phone-container {
 		display: flex;
 		justify-content: space-between;
@@ -68,7 +68,6 @@
 		width:30%;
 		vertical-align: middle; /* 입력 필드 수직 중앙 정렬 */
 	}
-
 	#phone-container span {
 		vertical-align: middle; /* '-' 수직 중앙 정렬 */
 	}
@@ -84,7 +83,6 @@
 		width:48%;
 		vertical-align: middle;
 	}
-
 	
 	#jumin-container span {
 		vertical-align: middle; /* '-' 수직 중앙 정렬 */
