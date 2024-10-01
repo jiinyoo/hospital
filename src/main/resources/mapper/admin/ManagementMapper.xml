@@ -59,4 +59,9 @@
     <delete id="delDoctor">
     	delete from doctor where doc_id=#{doc_id}
     </delete>
+    
+    <delete id="deleteUser" parameterType="String">
+    delete from user where user_id=#{user_id}
+</delete>
+    
 </mapper>

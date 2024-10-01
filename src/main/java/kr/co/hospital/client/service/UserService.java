@@ -14,5 +14,8 @@ public interface UserService {
 	public String updateUser(HttpSession session, Model model);
     public String updateOkUser(UserDto udto, HttpSession session);
 	public String uchangePwd(HttpServletRequest request, Model model);
+	public String requestWithdrawal(HttpSession session);
+	public String cancelWithdrawal(HttpSession session);
+
 
 }

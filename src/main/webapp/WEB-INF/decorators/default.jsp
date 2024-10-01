@@ -63,10 +63,10 @@ main {
 
 #ads {
 	width: 100%;
-	background: linear-gradient(90deg, #8BBCFF, #79D3F2); /* 그라데이션 적용 */
+	background: #8BBCFF; /* 그라데이션 적용 */
 	height: 50px;
 	border-radius: 5px;
-	color: white;
+	color: black;
 }
 
 /*
@@ -660,7 +660,7 @@ hr
             <h4 style="margin-bottom: 20px; font-size: 24px; margin-left:60px;">빠른 링크</h4>
             <ul style="list-style-type: none; padding: 0; line-height: 2; margin-left:60px;">
                 <li><a href="/main/hospital" style="color: white; text-decoration: none; font-size: 15px;">병원 소개</a></li>
-                <li><a href="/main/beforeReserve" style="color: white; text-decoration: none; font-size: 15px;">진료 예약</a></li>
+                <li><a href="/main/reserve" style="color: white; text-decoration: none; font-size: 15px;">진료 예약</a></li>
                 <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">연락처 : 010-1234-5678</a></li>
                 <li><a href="/main/inquirylist" style="color: white; text-decoration: none; font-size: 15px;">자주 묻는 질문</a></li>
             </ul>

@@ -65,12 +65,28 @@ public class ManagementServiceImpl implements ManagementService {
 	    	 
 	         if ("admin".equals(user_id)) 
 	         {
-	        	if(mapper.isDoctor(id)) {
-	        		mapper.delWorkday(mapper.getDocId(id));
-	        		mapper.delDoctor(mapper.getDocId(id));
-	        	}
-	        	 
-	             mapper.updateState(mdto); 
+	        	// 상태가 4로 변경되는 경우 해당 회원을 삭제
+	             if (mdto.getState() == 4) 
+	             {
+	                 if (mapper.isDoctor(id)) 
+	                 {
+	                     mapper.delWorkday(mapper.getDocId(id));  // 의사와 관련된 정보 삭제
+	                     mapper.delDoctor(mapper.getDocId(id));   // 의사 정보 삭제
+	                 }
+	                 // 회원 정보 삭제
+	                 mapper.deleteUser(id);
+	             } 
+	             else 
+	             {
+	                 // 의사일 경우 의사 정보 삭제
+	                 if (mapper.isDoctor(id)) 
+	                 {
+	                     mapper.delWorkday(mapper.getDocId(id));
+	                     mapper.delDoctor(mapper.getDocId(id));
+	                 }
+	                 // 상태 업데이트
+	                 mapper.updateState(mdto);
+	             }
 	             return "redirect:/admin/user/list";
 	         } 
 	         else 

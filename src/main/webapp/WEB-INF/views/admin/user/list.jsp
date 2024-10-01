@@ -29,7 +29,7 @@
         }
 
         table {
-        width: 80%;
+        width: 90%;
 		border-collapse: collapse;
         margin: 0 auto;
         
@@ -40,11 +40,19 @@
     }
     
     #email {
-    	width:220px;
+    	width:240px;
     }
     
 	#status {
 		width: 70px;
+	}
+	
+	#chg {
+		width:70px;
+	}
+	
+	#del {
+		width:50px;
 	}
 	
 	td {
@@ -72,7 +80,7 @@
         }
 
         .button {
-        	width:30%;
+        	width:50%;
         	font-family: 'GongGothicMedium';
             padding: 7px ;
             background-color: #004fa8;
@@ -143,6 +151,14 @@
             cursor: pointer;
         }
         
+        #hohoho {
+        	background-color: white;
+        	margin-left:40px;
+        	align-items:center;
+        	color: #FF4848;
+        	font-size: 16px;
+        }
+
     </style>
 </head>
 <body>
@@ -158,7 +174,8 @@
                 <th id="name">이름</th>
                 <th id="email">이메일</th>
                 <th id="status">상태</th>
-                <th>변경</th>
+                <th id="chg">변경</th>
+                <th id="del">회원 탈퇴</th>
             </tr>
         </thead>
         <tbody>
@@ -185,13 +202,20 @@
                                 <option value="1" ${mdto.state==1 ? 'selected' : ''}>의사</option>  
                                 <option value="2" ${mdto.state==2 ? 'selected' : ''}>관리자</option>
                                 <option value="3" ${mdto.state==3 ? 'selected' : ''}>휴면계정</option>
-                                <option value="4" ${mdto.state==4 ? 'selected' : ''}>정지계정</option>
+                                <option value="4" ${mdto.state==4 ? 'selected' : ''}>탈퇴</option>
                             </select>
                     </td>
                     
                     <td>
                             <button type="submit" class="button">변경</button>
                         </form>
+                    
+                    </td>
+                    <td>
+							<!-- 탈퇴 신청된 회원은 탈퇴 버튼을 비활성화 -->
+                <c:if test="${mdto.state == 5 }">
+                    <div id="hohoho" class="button">탈퇴 신청</div>
+                </c:if>
                     </td>
                 </tr>
             </c:forEach>

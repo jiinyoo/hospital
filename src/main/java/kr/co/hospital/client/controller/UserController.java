@@ -59,5 +59,15 @@ public class UserController {
     {
     	return service.uchangePwd(request,model);
     }
+    
+    @RequestMapping("/main/requestWithdrawal")
+    public String requestWithdrawal(HttpSession session) {
+        return service.requestWithdrawal(session);
+    }
+
+    @RequestMapping("/main/cancelWithdrawal")
+    public String cancelWithdrawal(HttpSession session) {
+        return service.cancelWithdrawal(session);
+    }
 
 }

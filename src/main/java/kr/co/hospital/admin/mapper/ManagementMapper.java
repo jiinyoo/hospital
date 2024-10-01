@@ -18,4 +18,5 @@ public interface ManagementMapper {
 	public int getDocId(String id);
 	public void delWorkday(int doc_id);
 	public void delDoctor(int doc_id);
+	public void deleteUser(String id);
 }

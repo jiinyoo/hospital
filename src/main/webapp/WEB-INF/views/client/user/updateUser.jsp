@@ -220,7 +220,17 @@
 
                 <div class="form-group submit-group">
                     <input class="submit" type="submit" value="정보 수정">
-                    <button type="button" onclick="location.href='/main/userInfo'"  style="font-family:'goorm-sans-bold'; margin-left: 20px; font-size: 16px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">수정 취소</button>
+                    <button type="button" onclick="location.href='/main/userInfo'"  style="font-family:'goorm-sans-bold'; margin-left: 20px; font-size: 16px; padding: 8px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">수정 취소</button>
+                   <c:choose>
+        				<c:when test="${user.state == 5}">
+            				<!-- 탈퇴 신청 상태일 경우 -->
+            				<button type="button" onclick="location.href='/main/cancelWithdrawal'" style="font-family:'goorm-sans-bold'; margin-left: 20px; font-size: 16px; padding: 8px; background-color: #F15F5F; color: white; border: none; border-radius: 5px; cursor: pointer;">탈퇴 신청 취소</button>
+        				</c:when>
+        				<c:otherwise>
+           				 <!-- 탈퇴 신청 상태가 아닐 경우 -->
+            				<button type="button" onclick="location.href='/main/requestWithdrawal'" style="font-family:'goorm-sans-bold'; margin-left: 20px; font-size: 16px; padding: 8px; background-color: #F15F5F; color: white; border: none; border-radius: 5px; cursor: pointer;">탈퇴 신청</button>
+        				</c:otherwise>
+    				</c:choose>
                 </div>
                 
             </form>

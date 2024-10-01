@@ -135,5 +135,38 @@ public class UserServicelmpl implements UserService {
 
 	    
 	}
+    
+    @Override
+    public String requestWithdrawal(HttpSession session) 
+    {
+        String userId = (String) session.getAttribute("user_id");
+        if (userId != null) 
+        {
+            // 사용자의 state를 4로 변경 (탈퇴 신청 상태)
+            UserDto user = mapper.getUserInfo(userId);
+            user.setState(5);  // 탈퇴 신청 상태로 변경
+            mapper.updateOkUser(user);  // 사용자 정보 업데이트
+            return "redirect:/main/updateUser";  // 사용자 정보 페이지로 리다이렉트
+        }
+        return "redirect:/main/login";  // 세션 정보가 없으면 로그인 페이지로 리다이렉트
+    }
+    
+    @Override
+    public String cancelWithdrawal(HttpSession session) 
+    {
+        String userId=(String) session.getAttribute("user_id");
+        if (userId != null) 
+        {
+            // 사용자의 state를 0으로 변경 (일반 회원으로 변경)
+            UserDto user = mapper.getUserInfo(userId);
+            user.setState(0);  // 일반 회원 상태로 변경
+            mapper.updateOkUser(user);  // 사용자 정보 업데이트
+            return "redirect:/main/updateUser";  // 사용자 정보 페이지로 리다이렉트
+        }
+        return "redirect:/main/login";  // 세션 정보가 없으면 로그인 페이지로 리다이렉트
+    }
+
+
+
 
 }

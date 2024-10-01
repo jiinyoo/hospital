@@ -22,7 +22,8 @@
     user_phone=#{user_phone},
     user_email=#{user_email},
     user_jumin=#{user_jumin},
-    user_addr=#{user_addr}
+    user_addr=#{user_addr},
+    state = #{state}
     where user_id=#{user_id}
   </update>
   
