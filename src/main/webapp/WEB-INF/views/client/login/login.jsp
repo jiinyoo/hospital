@@ -117,7 +117,22 @@
 
 </style>
 
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
+	function kakaoLogin() {
+		$.ajax({
+			url:'/memberLoginForm/getKakaoAuthUrl',
+			type:'post',
+			async: false,
+			dataType: 'text',
+			success: function(res) {
+				location.href=res;
+			}
+		})
+
+	}
+	
+
     function check(my)
     {
         if(my.userid.value.trim().length == 0)
@@ -182,6 +197,9 @@
           <a href="/main/idSearch">아이디 찾기</a> | 
           <a href="/main/pwdSearch">비밀번호 찾기</a>
         </div>
+        <div class="kakao-btn" onclick="kakaoLogin()">
+    <a>카카오톡으로 간편로그인</a>
+</div>
       </form>
     </div>
   </div>
