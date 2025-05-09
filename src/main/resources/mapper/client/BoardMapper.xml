@@ -8,7 +8,8 @@
 	
 	<select id="boardlist" resultType="HashMap">
 		select * from board
-		order by board_id desc 
+		where ${stype} like concat('%',#{sword},'%')
+		order by board_id desc limit ${index},10
 	</select>
 	<update id="boardReadnum">
 		update board
@@ -28,4 +29,8 @@
 		set board_title=#{board_title}, board_content=#{board_content}
 		where board_id=#{board_id}
 	</update>
+	<select id="getChong" resultType="Integer">
+		select ceil(count(*)/10) from board
+		where ${stype} like concat('%',#{sword},'%')
+	</select>
 </mapper>

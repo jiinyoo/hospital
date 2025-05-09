@@ -14,6 +14,10 @@
 	th {background: #ccc;}
 	.inner-table {width:100%;}
 	.inner-table th {width:30%;}
+	#doc-li {
+		list-style-type: none;
+		padding:10px;
+	}
 </style>
 </head>
 <body>
@@ -23,7 +27,7 @@
 				<th colspan="2">의사정보</th>
 			</tr>
 			<tr>
-				<td class="doc-img"> <img src="/static/admin/programfile/${doctor.doc_img }" width="100" alt="사진"> </td>
+				<td class="doc-img"> <img src="/static/admin/doctor/${doctor.doc_img }" width="100" alt="사진"> </td>
 				<td>
 					<table class="inner-table">
 						<tr>
@@ -48,7 +52,7 @@
 				<td colspan="2">
 					<ul>
 						<c:forEach var="his" items="${history}">
-						<li>${his}</li>
+						<li id="doc-li">${his}</li>
 						</c:forEach>
 					</ul>
 				</td>

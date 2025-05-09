@@ -11,7 +11,7 @@ import kr.co.hospital.client.dto.InquiryDto;
 public interface InquiryService {
 
 	public String writeOk(InquiryDto idto, MultipartHttpServletRequest multi,HttpSession session) throws Exception;
-	public String list(HttpSession session,Model model,HttpServletResponse response);
+	public String list(HttpSession session,Model model,HttpServletResponse response, HttpServletRequest request);
 	public String readnum(HttpServletRequest request);
 	public String content(HttpServletRequest request, Model model,HttpSession session);
 	public String delete(HttpServletRequest request, HttpSession session) throws Exception;

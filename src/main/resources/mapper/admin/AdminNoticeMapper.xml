@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hospital.admin.mapper.AdminNoticeMapper">
+  <insert id="admin_notice_writeOk">
+    insert into notice(user_id,title,content,img,writeday)
+    values(#{user_id},#{title},#{content},#{img},now())
+  </insert>
+  <select id="admin_notice_list" resultType="HashMap">
+    select * from notice
+    order by writeday desc
+    limit #{index}, #{pageSize}
+  </select>
+  
+  <select id="getTotalNoticeCount" resultType="int">
+    select count(*) from notice
+  </select>
+  
+  <update id="admin_notice_readnum">
+    update notice set readnum=readnum+1
+    where notice_id=#{notice_id}
+  </update>
+  <select id="admin_notice_content" resultType="kr.co.hospital.admin.dto.AdminNoticeDto">
+    select * from notice
+    where notice_id=#{notice_id}
+  </select>
+  <update id="admin_notice_updateOk">
+    update notice
+    set title=#{title}, content=#{content}, img=#{img}
+    where notice_id=#{notice_id}
+  </update>
+  <delete id="admin_notice_delete">
+    delete from notice
+    where notice_id=#{notice_id}
+  </delete>
+</mapper>

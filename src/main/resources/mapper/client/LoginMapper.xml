@@ -9,5 +9,23 @@
     select state from user
     where user_id=#{user_id}
 </select>
+
+  <select id="findUserId" resultType="String">
+    select user_id from user 
+    where user_email=#{user_email}
+    and user_name=#{user_name}
+  </select>
+
+  <select id="findPassword" resultType="String">
+    select user_pwd from user 
+    where user_email = #{user_email} 
+    and user_id = #{user_id}
+  </select>
+  
+  <update id="updatePwd">
+    update user
+    set user_pwd = #{newPwd}
+    where user_id = #{user_id}
+</update>
   
 </mapper>

@@ -34,18 +34,29 @@
 	function subchk() {
 		var file=document.getElementById("file");
 		
-		if(file.value=="") {
-			alert("사진을 첨부해주세요.");
-			return false;
-		}
+		var phone1=document.getElementById("phone1").value;
+		var phone2=document.getElementById("phone2").value;
+		var phone3=document.getElementById("phone3").value;
+		var phone="";		
+		
 		var his=document.getElementsByClassName("history");
 		var history="";
 		for(i=0;i<his.length-1;i++) {
 			history+=his[i].value+"/";
 		}
 		document.getElementById("doc_history").value=history;
-		return true;
-
+		
+		if(!phone1 || !phone2 || !phone3) {
+			alert("휴대폰 번호를 입력해주세요.");
+			return false;
+		} else if(file.value=="") {
+			alert("사진을 첨부해주세요.");
+			return false;
+		} else {
+			phone=phone1+"-"+phone2+"-"+phone3;
+			document.getElementById("doc_phone").value=phone;
+			return true;
+		}
 	}
 
 	function restchk(my,n) {
@@ -80,7 +91,26 @@
         }
     }
 	
+	function onlyNum(next, length, text) {
+		
+		text.value=text.value.replace(/[^0-9]/g,"");
+		
+		if(text.value.length==length) {
+			document.getElementById(next).focus();
+		}
+	}
 	
+	window.onload=function() {
+		var start=document.getElementsByClassName("Schk_rest");
+		var end=document.getElementsByClassName("Echk_rest");
+		var dayofweek=document.getElementsByClassName("dayofweeks");
+		var rest=document.getElementsByClassName("rest");
+		
+		start[0].disabled=true;
+		end[0].disabled=true;
+		rest[0].checked=true;
+		dayofweek[0].disabled=true;
+	}
 </script>
 <style>
 	body {user-select: none;}
@@ -160,6 +190,10 @@
 	    opacity: 1; /* 텍스트를 보이게 설정 */
 	}
 	
+	#phone-container input {
+		width: 25%;
+	}
+	
 	.workday {
 		margin: auto;
 		margin: 20px;
@@ -235,7 +269,14 @@
 	</tr>
 	<tr>
 		<th>연락처</th>
-		<td><input type="text" name="doc_phone" placeholder="연락처"></td>
+		<td width="200">
+			<div id="phone-container">
+				<input type="hidden" name="doc_phone" id="doc_phone">
+				<input type="text" name="phone1" id="phone1" oninput="onlyNum('phone2',3,this)" maxlength="3" placeholder="앞자리">-
+				<input type="text" name="phone2" id="phone2" oninput="onlyNum('phone3',4,this)" maxlength="4" placeholder="중간">-
+				<input type="text" name="phone3" id="phone3" oninput="onlyNum(null,null,this)" maxlength="4" placeholder="뒷자리">
+			</div>
+		</td>
 		<th>이메일 </th>
 		<td><input type="text" name="user_email" value="${user.user_email }"  readonly style="pointer-events: none;border:none;"></td>
 	</tr>
@@ -259,14 +300,14 @@
 	<c:forEach begin="0" end="6" var="index">
 	<input type="hidden" class="dayofweeks" name="dayofweeks" value="${index }">
 	<tr>
-		<td width="10%">
-			<c:if test="${index==0 }"> 월 </c:if>
-			<c:if test="${index==1 }"> 화 </c:if>
-			<c:if test="${index==2 }"> 수 </c:if>
-			<c:if test="${index==3 }"> 목 </c:if>
-			<c:if test="${index==4 }"> 금 </c:if>
-			<c:if test="${index==5 }"> 토 </c:if>
-			<c:if test="${index==6 }"> 일 </c:if>
+		<td width="10%" ${index==6 || index==0 ? "style='color:red;'":"" }>
+			<c:if test="${index==1 }"> 월 </c:if>
+			<c:if test="${index==2 }"> 화 </c:if>
+			<c:if test="${index==3 }"> 수 </c:if>
+			<c:if test="${index==4 }"> 목 </c:if>
+			<c:if test="${index==5 }"> 금 </c:if>
+			<c:if test="${index==6 }"> 토 </c:if>
+			<c:if test="${index==0 }"> 일 </c:if>
 		</td>
 		<td>
 			<select name="start_times" class="Schk_rest" onchange="uptime(this)">

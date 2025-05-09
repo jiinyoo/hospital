@@ -10,6 +10,19 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script>
+function check() {
+	
+	alert("hi")
+	return false;
+	
+}
+
+
+
+
+
+
+
 $(function(){
 	$("#pro_inwon").spinner({
 		min:10,
@@ -18,14 +31,15 @@ $(function(){
 	});
 });
 </script>
+
 </head>
 <body>
 <section>
-<form method="post" action="programwriteOk" enctype="multipart/form-data">
-<input type="hidden" name="pro_ju" value="${pro_ju}">
-<table align="center" width="500px" height="500px";>
+<form method="post" name="pkc" action="programwriteOk" enctype="multipart/form-data" onsubmit="return check()">
+<input type="hidden" name="pro_ju" value="${pro_ju}" >
+<table align="center" width="500px" height="500px">
 	<tr>
-		<td width="200px";>프로그램 명  </td>
+		<td width="200px">프로그램 명  </td>
 		<td><input type="text" name="pro_name"></td>
 	</tr>
 	<tr>
@@ -42,7 +56,7 @@ $(function(){
 	</tr>
 	<tr>
 		<td>총 인원 </td>
-		<td><input type="text" id="pro_inwon" name="pro_inwon"></td>
+		<td><input type="text" id="pro_inwon" name="pro_inwon" value="10"></td>
 	</tr>
 	<tr>
 		<td>관련과 </td>
@@ -55,11 +69,11 @@ $(function(){
 	</tr>
 	<tr>
 		<td>대표 이미지</td>
-		<td><input type="file" name="file"></td>
+		<td><input type="file" name="file" id="file"></td>
 	</tr>
 	<tr>
 		<td></td>
-		<td><input type="submit" value="업데이트하기"></td>
+		<td><input type="submit" value="업데이트하기" ></td>
 	</tr>
 
 </table>

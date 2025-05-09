@@ -1,52 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <style>
-    /* 전체 페이지 스타일 */
-    body 
-  	{
-    	font-family: 'goorm-sans-bold', sans-serif;
-    	background-color: #f2f4f9;
-    	margin: 0;
-    	padding: 0;
-  	}	
+<style>
+
     
     section 
   	{
  	    width: 80%;
- 	    max-width: 550px;
+ 	    max-width: 800px;
     	margin: 50px auto;
     	padding: 60px;
     	background-color: #ffffff;
-    	border-radius: 40px;
-    	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    	border-radius: 5px;
+    	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   	}
 
     /* 제목 스타일 */
     h3 {
-        text-align: center;
-        color: #B5B2FF;
+        text-align: left;
+        color: #004fa8;
         margin-bottom: 20px;
-        font-size:22px;
+        margin-left:10px;
+        font-size:30px;
     }
     
     h4 {
-    	text-align: center;
-        color: #B5B2FF;
-        font-size:20px;
+    	text-align: left;
+        color: #004fa8;
+        font-size:30px;
         margin-top: 10px;
         margin-bottom: 20px;
+        margin-left:10px;
     }
-    
-    div 
-  	{
-    	margin: auto;
- 	}
 
     /* 입력 필드 스타일 */
     input[type="text"]
@@ -56,8 +46,8 @@
         padding: 10px;
         margin-bottom: 20px;
         border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 14px;
+        border-radius: 5px;
+        font-size: 16px;
         outline: none;
     }
     
@@ -74,8 +64,8 @@
     	height:200px;
     	margin-bottom: 20px;
         border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 14px;
+        border-radius: 5px;
+        font-size: 16px;
         outline: none;
     }
 
@@ -83,13 +73,14 @@
     input[type="button"] 
     {
     	font-family: 'goorm-sans-bold', sans-serif;
-        width: 49%;
-        padding: 10px;
+        width: 20px;
+        height: 20px;
         margin-top: 10px;
         margin-bottom: 15px;
-        background-color: #B5B2FF;
+        margin-left: 7px;
+        background-color: #004fa8;
         border: none;
-        border-radius: 10px;
+        border-radius: 5px;
         color: white;
         font-size: 14px;
         cursor: pointer;
@@ -99,13 +90,13 @@
     input[type="submit"]
     {
     	font-family: 'goorm-sans-bold', sans-serif;
-    	width: 99%;
+    	width: 100px;
         padding: 10px;
         margin-top: 30px;
         margin-bottom: 10px;
-        background-color: #B5B2FF;
+        background-color: #004fa8;
         border: none;
-        border-radius: 10px;
+        border-radius: 5px;
         color: white;
         font-size: 14px;
         cursor: pointer;
@@ -114,15 +105,15 @@
 
     input[type="button"]:hover,
     input[type="submit"]:hover {
-        background-color: #7D78FF;
+        background-color: #033D7F;
     }
 
     /* 이미지 미리보기 스타일 */
     .img img {
         margin-top: 10px;
-        max-width: 100px;
-        max-height: 100px;
-        border-radius: 10px;
+        max-width: 130px;
+        max-height: 130px;
+        border-radius: 5px;
         border: 1px solid #ddd;
     }
 
@@ -139,7 +130,6 @@
     textarea {
     	resize:none;
     	padding:9px;
-    	
     }
 
 </style>
@@ -208,13 +198,12 @@
 			  }	  
 		  }
 	  
-		  // alert(delimg+"\n"+safeimg);
+		   //alert(delimg+"\n"+safeimg);
 		  
 		  // delimg, safeimg를 서버에 전송
 		  document.uform.delimg.value=delimg;
 		  document.uform.safeimg.value=safeimg;
-		  
-		  // 유효성검사를 넣어도 됩니다
+		 
 		  
 		  return true;
 	  }
@@ -222,9 +211,9 @@
 </head>
 <body>
  <section>
-   <form method="post" action="notice_updateOk" enctype="multipart/form-data" onsubmit="return check()">
-   <input type="hidden" id="notice_id" value="${ndto.notice_id}">
-   <input type="hidden" name="delimg" >
+   <form name="uform" method="post" action="notice_updateOk" enctype="multipart/form-data" onsubmit="return check()">
+   <input type="hidden" name="notice_id" value="${ndto.notice_id}">
+   <input type="hidden" name="delimg" >  
    <input type="hidden" name="safeimg" >
      <caption> <h3> 공지사항 글 수정 </h3></caption>
      
@@ -233,25 +222,30 @@
      </div>
      	
      <div> 
-     	<textarea name="content" placeholder="내 용"> ${ndto.content} </textarea>
+     	<textarea name="content" placeholder="내 용">${ndto.content}</textarea>
      </div>
      
-     <div id="outer"> 
-       <h4> 사진 수정 </h4>
+     <div> 
+       <h4> 사진 등록 
+       		<span>
+       			<input type="button" value="+" onclick="add()"> 
+     			<input type="button" value="-" onclick="del()">
+     		</span>
+		</h4>
        <hr>
+       <br>
        <div>
-      	 <c:forEach items="${nimgs}" var="img">
-      	 <c:if test="${nimg!=''}">
-         	<img src="/static/client/notice/${nimg}" style="max-width: 20%; height: auto;">
-         	<input type="checkbox" value="${nimg}">
+      	 <c:forEach items="${imgs}" var="img">
+      	 <c:if test="${img!=''}">
+         	<img src="/static/client/notice/${img}" style="max-width: 20%; height: auto;">
+         	<input type="checkbox" value="${img}" class="imgList">
          </c:if>
     	 </c:forEach>
        </div>
+       <br>
        <hr>
-       <div> 
-     		<input type="button" value="추가" onclick="add()"> 
-     		<input type="button" value="삭제" onclick="del()"> 
-    	</div>
+       <br>
+    	<div  id="outer">
      	<div id="one" class="one">
            <label for="fileUp0" class="label"> </label>
            <input type="file" id="fileUp0" name="fname0" class="file" onchange="previewImage(event)"> 
@@ -259,8 +253,9 @@
            <span class="img"> 
            </span>
        </div>
+       </div>
      </div>
-     <div> <input type="submit" value="공지사항 수정"> </div>
+     <div style="text-align: center;"> <input type="submit" value="공지사항 수정"> </div>
    </form>
  </section>
 

@@ -85,9 +85,9 @@ public class DoctorServiceImpl implements DoctorService {
 		MultipartFile file=request.getFile("file");
 		if(!file.isEmpty()) {
 			String fname=file.getOriginalFilename();
-			String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
+			String str=ResourceUtils.getFile("classpath:static/admin/doctor").toPath().toString()+"/"+fname;
 			
-			str=FileUtils.getFileName(fname, str);
+			str=FileUtils.getFileName1(fname, str);
 			String saveFname=str.substring(str.lastIndexOf("/")+1);
 			
 			Path path=Paths.get(str);
@@ -96,10 +96,12 @@ public class DoctorServiceImpl implements DoctorService {
 			ddto.setDoc_img(saveFname);
 			
 		}
+		
 		mapper.addDoctorOk(ddto);
 		int doc_id=mapper.getDocid(ddto.getDoc_userid());
 		wdto.setDoc_id(doc_id);
 		String[] dayofweeks = wdto.getDayofweeks();
+		System.out.println(dayofweeks);
         int[] startTimes = wdto.getStart_times();
         int[] endTimes = wdto.getEnd_times();
 		
@@ -130,8 +132,9 @@ public class DoctorServiceImpl implements DoctorService {
 				DoctorDto ddto=mapper.upDoctor(userid);
 				ddto.setHistorys(ddto.getDoc_history().split("/"));
 				model.addAttribute("ddto",ddto);
-				
+				String[] phone=ddto.getDoc_phone().split("-");
 				ArrayList<WorkdayDto> wdto=mapper.getWorkday(ddto.getDoc_id());
+				model.addAttribute("phone",phone);
 				model.addAttribute("wdto",wdto);
 				return "/admin/doctor/upDoctor";
 			}
@@ -145,14 +148,14 @@ public class DoctorServiceImpl implements DoctorService {
 
 		if(!file.isEmpty()) {
 			String fname=file.getOriginalFilename();
-			String str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+fname;
-			str=FileUtils.getFileName(fname, str);
+			String str=ResourceUtils.getFile("classpath:static/admin/doctor").toPath().toString()+"/"+fname;
+			str=FileUtils.getFileName1(fname, str);
 			String saveFname=str.substring(str.lastIndexOf("/")+1);
 			
 			Path path=Paths.get(str);
 			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 			
-			str=ResourceUtils.getFile("classpath:static/admin/programfile").toPath().toString()+"/"+mapper.getDocimg(ddto.getDoc_userid());
+			str=ResourceUtils.getFile("classpath:static/admin/doctor").toPath().toString()+"/"+mapper.getDocimg(ddto.getDoc_userid());
 			path=Paths.get(str);
 			if(Files.exists(path)) {
 				Files.delete(path);
@@ -170,15 +173,17 @@ public class DoctorServiceImpl implements DoctorService {
 		int[] end=wdto.getEnd_times();
 		String[] dayofweek=wdto.getDayofweeks();
 		wdto.setDoc_id(doc_id);
-		for(int i=0;i<start.length;i++) {
-			String stime=String.format("%02d", start[i]);
-			String etime=String.format("%02d", end[i]);
-			LocalTime starttime=LocalTime.parse(stime+":00");
-			LocalTime endtime=LocalTime.parse(etime+":00");
-			wdto.setStart_time(starttime);
-			wdto.setEnd_time(endtime);
-			wdto.setDayofweek(dayofweek[i]);
-			mapper.addWorkday(wdto);
+		if(start!=null) {
+			for(int i=0;i<start.length;i++) {
+				String stime=String.format("%02d", start[i]);
+				String etime=String.format("%02d", end[i]);
+				LocalTime starttime=LocalTime.parse(stime+":00");
+				LocalTime endtime=LocalTime.parse(etime+":00");
+				wdto.setStart_time(starttime);
+				wdto.setEnd_time(endtime);
+				wdto.setDayofweek(dayofweek[i]);
+				mapper.addWorkday(wdto);
+			}			
 		}
 		
 	

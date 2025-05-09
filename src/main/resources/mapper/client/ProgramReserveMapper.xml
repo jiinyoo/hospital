@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hospital.client.mapper.ProgramReserveMapper">
+	<select id="getPrograms" resultType="kr.co.hospital.client.dto.ProgramDto">
+		SELECT 
+		    p.pro_id,
+		    p.pro_name,
+		    p.pro_img,
+		    p.pro_info,
+		    p.teach_name,
+		    p.pro_time,
+		    p.pro_inwon,
+		    p.pro_part,
+		    p.start_date,
+		    p.end_date,
+		    p.writeday,
+		    GROUP_CONCAT(pd.day_of_week ORDER BY pd.day_of_week ASC) AS day_of_week
+		FROM 
+		    program AS p
+		INNER JOIN 
+		    programdays AS pd
+		ON 
+		    p.pro_id = pd.pro_id
+		GROUP BY 
+		    p.pro_id
+		ORDER BY 
+		    p.pro_id DESC;
+	</select>
+	<select id="getProgram" resultType="kr.co.hospital.client.dto.ProgramDto">
+		SELECT 
+			    p.pro_id,
+			    p.pro_name,
+			    p.pro_img,
+			    p.pro_info,
+			    p.teach_name,
+			    p.pro_time,
+			    p.pro_inwon,
+			    p.pro_part,
+			    p.start_date,
+			    p.end_date,
+			    p.writeday,
+			    GROUP_CONCAT(
+			        CASE 
+			            WHEN pd.day_of_week = 0 THEN '일'
+			            WHEN pd.day_of_week = 1 THEN '월'
+			            WHEN pd.day_of_week = 2 THEN '화'
+			            WHEN pd.day_of_week = 3 THEN '수'
+			            WHEN pd.day_of_week = 4 THEN '목'
+			            WHEN pd.day_of_week = 5 THEN '금'
+			            WHEN pd.day_of_week = 6 THEN '토'
+			        END
+			        ORDER BY pd.day_of_week ASC
+			    ) AS day_of_week
+			FROM 
+			    program AS p
+			INNER JOIN 
+			    programdays AS pd
+			ON 
+			    p.pro_id = pd.pro_id
+			WHERE 
+			    p.pro_id = #{pro_id}
+			GROUP BY 
+			    p.pro_id
+			ORDER BY 
+			    p.pro_id DESC;
+	</select>
+	<select id="getResNumber" resultType="Integer">
+		select ifnull(max(right(pres_number,3)),0) from preserve
+		where pres_number like concat(#{pres_number},'%')  
+	</select>
+	<insert id="insertPreserve" parameterType="kr.co.hospital.client.dto.ProgramReserveDto">
+		insert into preserve(pro_id,user_id,pres_part,pres_date,pres_time,state,writeday,p_inwon,pres_number)
+		values (#{pro_id},#{user_id},#{pres_part},#{pres_date},#{pres_time},#{state},now(),#{p_inwon},#{pres_number})
+	</insert>
+	<select id="getProCapacity" resultType="Integer">
+	  SELECT IFNULL((pro_inwon - minus_inwon), 0) 
+  	  FROM program_capacity 
+  	  WHERE pro_id = #{pro_id} 
+      AND date = #{date}
+	</select>
+	<select id="getProgramCapacityOne" resultType="kr.co.hospital.client.dto.ProgramCapacityDto">
+		select * from program_capacity
+		where date=#{reserve_date}
+		and pro_id=#{pro_id}
+	</select>
+	<update id="pccminusinwonupdate" >
+		update program_capacity
+		set minus_inwon=minus_inwon+#{p_inwon}
+		where pro_id=#{pro_id}
+		and date=#{reserve_date}
+	</update>
+	<select id="righttimeprograms">
+		<![CDATA[
+		SELECT p.*, 
+		       GROUP_CONCAT(DISTINCT 
+		           CASE pd.day_of_week
+		               WHEN 1 THEN '월'
+		               WHEN 2 THEN '화'
+		               WHEN 3 THEN '수'
+		               WHEN 4 THEN '목'
+		               WHEN 5 THEN '금'
+		               WHEN 6 THEN '토'
+		               WHEN 0 THEN '일'
+		           END
+		       ORDER BY pd.day_of_week SEPARATOR ', ') AS days_of_week
+		FROM program p
+		INNER JOIN programdays pd ON p.pro_id = pd.pro_id
+		WHERE DATE_SUB(p.start_date, INTERVAL 14 DAY) <= CURDATE() 
+		  AND p.end_date >= CURDATE()
+		GROUP BY p.pro_id
+		ORDER BY p.pro_id DESC;
+   		 ]]>
+	</select>
+	<select id="memberprogram">
+		select prs.*, p.start_date, p.pro_name,p.teach_name,p.end_date from preserve as prs
+		inner join program as p on prs.pro_id=p.pro_id
+		where prs.user_id=#{user_id}
+		and prs.pres_date >= curdate()
+	</select>
+	<select id="oldmemberprogram" resultType="kr.co.hospital.client.dto.ProgramReserveDto">
+		select prs.*, p.start_date, p.pro_name,p.teach_name,p.end_date from preserve as prs
+		inner join program as p on prs.pro_id=p.pro_id
+		<if test="month!=0 and month!=12"> <!-- num>0 으로 하면 더 간단-->
+		where prs.user_id=#{user_id} and prs.pres_date >= date_sub(now(),interval ${month} month) 
+		</if>
+		<if test="month==0">
+		where prs.user_id=#{user_id} and <![CDATA[prs.pres_date >=#{start} and prs.pres_date <= #{end}]]>
+		</if>
+		<if test="month==12">
+		where prs.user_id=#{user_id}
+		</if>
+		<![CDATA[and prs.pres_date < curdate()]]>
+		
+		
+	</select>
+	<update id="changeState">
+		update preserve
+		set state=3
+		where pres_id=#{pred_id}
+	</update>
+	<update id="plusProgramCapacity">
+	<!-- <if test="p_inwon!=null and pro_id!=null and pres_date!=null"> -->
+		update program_capacity
+		set minus_inwon=minus_inwon-#{p_inwon}
+		where pro_id=#{pro_id}
+		and date=#{pres_date}
+	<!-- </if> -->
+	</update>
+</mapper>

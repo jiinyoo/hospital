@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hospital.admin.mapper.AdminInquiryMapper">
+	<select id="getState" resultType="Integer">
+		select state from user
+		where user_id=#{session_user_id}
+	</select>	
+	<select id="inquirylist" resultType="HashMap">
+		select * from inquiry
+		where ${stype} like concat('%',#{sword},'%')
+		order by group_order desc,
+		state asc limit #{index}, 10
+	</select>
+	<update id="readnum">
+		update inquiry
+		set readnum=readnum+1
+		where inq_id=#{inq_id}
+	</update>
+	<insert id="writeOk">
+		insert into inquiry
+		(user_id,title,content,part,state,img,bimil,group_order,writeday,origin_user_id)
+		values (#{user_id},#{title},#{content},#{part},#{state},#{img},#{bimil},#{group_order},now(),#{origin_user_id})
+	</insert>
+	<update id="updateanswer">
+		update inquiry
+		set answer=1
+		where inq_id=#{inq_id}
+	</update>
+	<select id="content" resultType="kr.co.hospital.admin.dto.AdminInquiryDto">
+		select i.*, u.state as ustate from inquiry as i
+		inner join user as u on u.user_id=i.user_id
+		where inq_id=#{inq_id}
+	</select>
+	<delete id="delete">
+		delete from inquiry
+		where inq_id=#{inq_id}
+	</delete>
+	<update id="updateOk">
+		update inquiry
+		set title=#{title},content=#{content},
+		part=#{part},bimil=#{bimil},img=#{img}
+		where inq_id=#{inq_id}
+	</update>
+	<update id="updatezero">
+		update inquiry
+		set answer=0
+		where group_order=#{group_order}
+	</update>
+	<delete id="samegroupdelete">
+		delete from inquiry
+		where group_order=#{group_order}
+	</delete>
+	<select id="getChong" resultType="Integer">
+		select ceil(count(*)/10) from inquiry
+		where ${stype} like concat('%',#{sword},'%')
+	</select>	
+</mapper>

@@ -16,29 +16,73 @@
     font-style: normal;
 }
 
+
 body 
 {
+	display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Viewport의 전체 높이 설정 */
 	font-family: 'goorm-sans-bold';
     background-color: #f2f4f9;
     margin: 0;
     padding: 0;
 }
 
+main {
+    flex-grow: 1; /* 메인 콘텐츠가 푸터를 하단으로 밀어내도록 */
+}
+
 * {margin:0; padding:0; box-sizing: border-box;}
 
+#top-back {
+	position:relative;
+}
+
+#back
+{
+	background: white;
+	top:0px;
+	width:100%;
+	height:222px;
+	position: absolute;
+	z-index: -1000;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/*
 #ads
 {
 	position:relative;
 	width:100%;
 	height:50px;
-	background:#8C8C8C;
+	background:#8BBCFF;
 	margin:auto;
 }
+*/
 
+#ads {
+	width: 100%;
+	background: #8BBCFF; /* 그라데이션 적용 */
+	height: 50px;
+	border-radius: 5px;
+	color: black;
+}
+
+/*
 #ad{
 	margin:auto;
 	width:100%;
 
+}
+*/
+
+#ad {
+	width:1300px;
+	display: flex;
+	justify-content: space-between;
+	line-height: 50px;
+	margin:auto;
 }
 
 #container
@@ -53,11 +97,11 @@ body
 {
 	position:absolute;
     text-align:center;
-    right:580px;
     top: 15px;
     color: black;
 }
 
+/*
 #xx 
 {
     position:absolute;
@@ -68,59 +112,68 @@ body
     cursor:pointer;
 
 }
+*/
+
+#xx {
+	cursor: pointer;
+}
 
 #loginbar
 {	
 	margin:auto;
-	margin-top: 15px;
+	
 	width:1300px;
-	height:30px;
+	height:40px;
 	text-align:right;
-	align-items:center;
-	text-decoration: none;
-	color: black;
-
+	align-content:center;
+	
 }
 
 #loginbar > a 
 {
 	text-decoration: none;
-	color: black;
+	height:30px;
+	color: #626262;
+	cursor: pointer;
+	
 }
 	
 nav
 {
- 	position :relative;
- 	width:1300px;
- 	height:100px;
- 	margin:auto;
- 	font-size:20px;
+ 	position: relative;
+    z-index: 30;
+    height: 130px;
+    border-bottom: 1px solid #b9b9b9;
+    box-sizing: border-box;
 }
 
 nav #mainmenu
 {
-	width:1300px;
-}
-
-nav #mainmenu #maincate
-{
-	padding-left:0px;
+	width: 1300px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
+    box-sizing: border-box;
 	
 }
 
+
 #mainmenu #maincate > li 
 {
+	font-size: 24px;
 	display:inline-block;
 	list-style-type:none;
-	width:180px;
+	width:210px;
 	color:#626262;
 	text-align:center;
-	height:100px;
+	height:130px;
 	line-height:100px;
 	margin: 0; /* 기본 마진 제거 */
 	padding: 0; /* 기본 패딩 제거 */
 	position:relative;
 	cursor: pointer;
+	align-content: center;
 
 }
 
@@ -134,18 +187,18 @@ nav #mainmenu #maincate
 
 #mainmenu #maincate > li:hover
 {
-	color:#5C1DB5;
+	color:#0073e6;
 }
 
 #mainmenu #maincate > li > a:hover
 {
-	color:#5C1DB5;
+	color:#0073e6;
 }
 
 #maincate .logo img 
 {
-
-	width:90px;
+	padding-right:30px;
+	width:240px;
 	transition: all 0.3s ease;
 }
 
@@ -170,55 +223,58 @@ nav #mainmenu #maincate
 
 #submenus 
 {
-	display:flex;
-	flex-wrap:wrap;
-	text-align:center;
+	width: 1300px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
 	
+}
+
+
+#submenus .logounder {
+	width: 210px;
+    height: 280px;
+    float: left;
+    background-color: #fff;
+    border-right: 1px solid #b9b9b9;
+    box-sizing: border-box;
+
 }
 
 #submenus .submenu
 {
-	display:none;
-	padding-left:0px;
-	width:183px;
-	left:0px;
-	top:90px;
-	background:white;
-	border-left:0.5px solid #DAD9FF;
-	border-right:0.5px solid #DAD9FF;
-	border-bottom:5px solid #C8C7ED;
-	opacity: 0;  
-	
+	width: 214px;
+    height: 280px;
+    float: left;
+    border-right: 1px solid #b9b9b9;
+    box-sizing: border-box;
+    border-top:5px solid #2a83c7;
+/*     background-color: #fff; */
 }
 
-#submenus .submenu:nth-child(n) 
-{
-    animation: slideDown 0.3s ease forwards;
+#snb {
+    position: absolute;
+    width: 100%;
+    min-width: 1300px;
+    background-color: #ffffff;
+    overflow: hidden;
+    z-index: 20;
+    left:0;
+    display:none;
+    animation: slideDown 0.4s ease forwards;
     animation-delay: 0s;
-}
+    }
 
-
-
-#submenus .submenu:first-child
-{
-	border-top:5px solid #C8C7ED;
-	
-}
-
-#submenus .submenu:last-child
-{
-	width:200px;
-
-}
 
 #submenus .submenu > li
 {
 	list-style-type:none;
 	justify-content: center;
 	display:flex;
-	width:183px;
-	height:30px;
-	line-height: 30px; /* 중앙 정렬 */
+	width:213px;
+	height:40px;
+	line-height: 40px; /* 중앙 정렬 */
     margin: 0; /* 기본 마진 제거 */
     padding: 0; /* 기본 패딩 제거 */
 	font-size: 15px;
@@ -241,24 +297,24 @@ nav #mainmenu #maincate
 
 #submenus .submenu > li:hover 
 {
-	background-color: #B5B2FF;
+	background-color: #90C3FF;
 	
 }
 
-#submenus .submenu > li:first-child
-{
-	border-top:5px solid #C8C7ED;
-	
-}
 
-#submenus .submenu:last-child > li
+
+#submenu ul
 {
+	
 	width:200px;
+/* 	border-bottom:5px solid #2a83c7; */
 	
 }
 
-#submenus .submenu > li > a {
-
+#submenus .submenu > li > a 
+{
+	font-size:16px;
+	padding:2px;
     text-decoration: none;
     width: 100%;
     text-align: center;
@@ -267,10 +323,61 @@ nav #mainmenu #maincate
 
 }
 
-hr
+/* 하위 메뉴 */
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown a {
+    text-decoration: none;
+    color: #626262;
+}
+
+#userMenu {
+	right:0;
+    display: none;
+    top:20px;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 150px;
+    z-index: 40;
+}
+
+#userMenu a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    text-align:center;
+    border-bottom: 1px solid #ddd;
+}
+
+#userMenu a:last-child {
+    border-bottom: none;
+}
+
+#userMenu a:hover {
+	text-decoration: none;
+    background-color: white;
+    color: #007bff;
+}
+
+/* 마우스를 올렸을 때 하위 메뉴 표시 */
+.dropdown:hover #userMenu {
+	text-decoration: none;
+    display: block;
+}
+
+hr 
 {
- border:0.1px solid #ccc;
- 
+	border: 0;
+	border-top: 2px solid #eee;
+	margin-top: 20px 0;
 }
 
 /* 계단형으로 서서히 내려오는 애니메이션 정의 */
@@ -288,7 +395,56 @@ hr
     }
 }
 
+
+}
+
+
+#user {
+	position:relative;
+	
+}
+
+#userdetail {
+	position:absolute;
+	left : 1388px;
+	top:98px;
+	background:white;
+	border:1px solid #8BBCFF;
+	display:none;
+}
+
+#userdetail > li {
+	list-style-type:none;
+	text-align:left;
+}
+
+#scrollToTopBtn {
+	width:3%;
+    display: none; /* 처음에 숨겨져 있음 */
+    position: fixed; /* 화면에 고정 */
+    bottom: 20px; /* 아래에서부터 20px */
+    right: 30px; /* 오른쪽에서부터 30px */
+    z-index: 99; /* 다른 요소 위에 표시 */
+    font-size: 18px; /* 버튼 글자 크기 */
+    border: none; /* 테두리 없음 */
+    outline: none; /* 아웃라인 없음 */
+    background-color: #353535; /* 버튼 배경색 */
+    color: white; /* 버튼 글자색 */
+    cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+    padding: 15px; /* 버튼 패딩 */
+    border-radius: 10px; /* 둥근 테두리 */
+    transition: background-color 0.3s ease;
+}
+
+#scrollToTopBtn:hover {
+    background-color: black; /* 마우스 오버 시 버튼 배경색 변경 */
+}
+
+
+
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
 <script>
 	
 	function viewSub()
@@ -297,6 +453,9 @@ hr
 		for(submenu of submenus)
 			{
 				submenu.style.display="block";
+				document.getElementById("snb").style.display="block";
+				document.getElementById("snb").style.borderBottom="5px solid #2a83c7";
+				
 			}
 		
 	}
@@ -308,6 +467,8 @@ hr
 		for(submenu of submenus)
 			{
 				submenu.style.display="none";
+				document.getElementById("snb").style.display="none";
+				document.getElementById("snb").style.borderBottom="";
 			}
 		
 	}
@@ -316,12 +477,52 @@ hr
 		
 		var h=0;
 		function move(){
-			if(h<=50)
-				document.getElementById("ad").style.marginTop=-h+"px";
-			h++;
+			if(h<=50) {
+				document.getElementById("ads").style.marginTop=-h+"px";
+				document.getElementById("back").style.top=-h+"px";
+		}
+		h++;
+		
+		if(h <= 50){
 			setTimeout(move,15);
+		} else
+		{
+			 document.getElementById("ads").style.display = "none";
+			
+		}
+		
 		}
 		move();
+	}
+	
+	
+	function viewuser() {
+		document.getElementById("userdetail").style.display="block";
+	}
+	
+	
+	function hideuser() {
+		document.getElementById("userdetail").style.display="none";
+	}
+	
+
+	// 스크롤 이벤트가 발생할 때 버튼 표시 및 숨기기
+	window.onscroll = function() {
+	    scrollFunction();
+	};
+
+	function scrollFunction() {
+	    var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+	    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+	        scrollToTopBtn.style.display = "block";  // 스크롤 시 버튼 보이기
+	    } else {
+	        scrollToTopBtn.style.display = "none";  // 스크롤이 상단에 있으면 숨기기
+	    }
+	}
+
+	// 부드럽게 위로 스크롤하는 함수
+	function scrollToTop() {
+	    window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
 	
 </script>
@@ -329,62 +530,85 @@ hr
  <sitemesh:write property="head"/>
 
 </head>
+
+
+
 <body>
+<button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">
+	<i class="fas fa-angle-double-up"></i>
+</button>
+<div id="top-back">
+	<div id="back"></div>
+</div>
+
 <div id="ads">
 	<div id="ad">
-		<div id="container"> 
-			<div id="event"> 한번 입원하면 3박이 무료! </div>
+		<div></div>
+		<div> 환자분들의 편의를 위해 "10월 1일(화) 임시공휴일 정산 진료" 합니다. </div>
 		<div id="xx" onclick="adx()">닫기</div>
-		</div>
 	</div>
 </div>
 
 
 <header>
 		<div id="loginbar"> 
-		 <c:if test="${user_id == null }">
+		 <c:if test="${sessionScope.user_id == null }">
 		  <a href="/main/login"> 로그인 </a>| 
 		  <a href="/main/user"> 회원 가입 </a>
 		 </c:if>
-		 <c:if test="${user_id != null }">
-		   ${user_id}님 | 
-           <a href="/login/logout"> 로그아웃 </a> | 문의하기
+		 <c:if test="${sessionScope.user_id != null }">
+		   <c:if test="${sessionScope.state==1 || sessionScope.state==2}">
+		 	 <a href="/admin/main/index">관리자 페이지</a> |
+		   </c:if>
+		    <div class="dropdown">
+                <a href="#">${sessionScope.user_id}님</a>
+                <!-- 하위 메뉴 -->
+                <div id="userMenu">
+                    <a href="/main/userInfo">회원 정보</a>
+                    <a href="/main/reserveView">예약 정보</a>
+                    <a href="/main/inquirylist">나의 문의</a>
+                    <a href="/main/reserveView">진료 내역</a>
+                </div>
+            </div> | 
+           <a href="/main/logout"> 로그아웃 </a> | <a href="#">문의하기</a>
          </c:if>
 		</div>
 </header>
 <hr>
-
+	
 	<nav>
+	
 	<span id="total" onmouseout="hideSub()">
-	<span id="mainsub">
-	<div id="mainmenu" onmouseover="viewSub()">
+	<span id="mainsub" onmouseover="viewSub()">
+	<div id="mainmenu">
 		<ul id="maincate">
 			<li class="logo">
 			 <a href="/main/index">
 
-			  <img src="/static/client/main/병원 로고.png" width="100" valign="middle">
+			  <img src="/static/client/main/병원 로고7.png" valign="middle">
 
 			 </a>
 			</li>
-			<li class="hov">병원 소개</li>
+			<li class="hov"><a href="/main/hospital">병원 소개</a></li>
 			<li class="hov"><a href="/main/info/part?part=">의료진 안내</a></li>
-			<li class="hov">상담/예약</li>
-			<li class="hov">프로그램 예약</li>
+			<li class="hov">진료/예약</li>
+			<li class="hov"><a href="/main/programreserve">프로그램 예약</a></li>
 			<li class="hov">커뮤니티</li>
-			<li class="hov">건강 정보</li>
-		</ul>
-	</div>
-	
-	<div id="submenus"  onmouseover="viewSub()">
-		<ul class="submenu">
 			
 		</ul>
-		
+	<div id="snb">
+	<div id="submenus">
+
+		<ul class="logounder">
+			
+		</ul>
+
 		<ul class="submenu">
-			<li>병원 인삿말</li>
-			<li>미션과 비전</li>
-			<li>조직도</li>
-			<li>오시는 길</li>
+			<li><a href="/main/hospital#menu1">병원 인삿말</a></li>
+			<li><a href="/main/hospital#menu2">미션과 비전</a></li>
+			<li><a href="/main/hospital#menu3">조직도</a></li>
+			<li><a href="/main/hospital#menu4">주차 안내</a></li>
+			<li><a href="/main/hospital#menu5">오시는 길</a></li>
 		</ul>
 		
 		<ul class="submenu">
@@ -395,38 +619,86 @@ hr
 		</ul>
 		
 		<ul class="submenu">
-			<li>1:1문의</li>
+			
 			<li><a href="/main/reserve">온라인 진료 예약</a></li>
-			<li>예약 조회</li>
+			<li><a href="/main/reserveView">예약 조회</a></li>
 		</ul>
 		<ul class="submenu">
-			<li>프로그램 예약</li>
+			<li><a href="/main/programreserve">프로그램 예약</a></li>
+			<li><a href="/main/memberpreserve">프로그램 예약 조회</a></li>
+			<li><a href="/main/event">학술 행사</a></li>
 		</ul>
 		<ul class="submenu">
-				<li><a href="../../notice_list">공지사항</a></li>
-				<li><a href="../../inquiry/list">진료과별 질문</a></li>
-				<li><a href="../../boardlist">진료 후기</a></li>
-				<li>고객의 소리</li>
+				<li><a href="/main/notice_list">공지사항</a></li>
+				<li><a href="/main/inquirylist">진료과별 질문</a></li>
+				<li><a href="/main/boardlist">진료 후기</a></li>
+				<li><a href="/main/healthInfo">건강정보</a></li>
 		</ul>
-		<ul class="submenu">
-			<li>건강정보</li>
-		</ul>
+	</div>
+	</div>
 	</div>
 	</span>
 	</span>
 	</nav>
-	<hr>
-	<div class="haha">
-	  
-	</div>
+
+
 
 
 <sitemesh:write property="body"/>
 
 
-<footer>
 
+<footer style="background-color: #004fa8; padding: 50px 0; color: white;  font-family: 'goorm-sans-bold';">
+    <div class="footer-container" style="width: 80%; margin: auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+        
+        <div style="width: 30%;">
+            <h4 style="margin-bottom: 20px; font-size: 24px;">병원 소개</h4>
+            <p style="line-height: 1.8; font-size: 15px;">저희 병원은 최상의 의료 서비스를 제공하며 환자분들의 건강을 최우선으로 생각합니다. 믿을 수 있는 의료진과 함께 건강한 삶을 위한 최선을 다하고 있습니다.</p>
+        </div>
+        
+        <div style="width: 20%;">
+            <h4 style="margin-bottom: 20px; font-size: 24px; margin-left:60px;">빠른 링크</h4>
+            <ul style="list-style-type: none; padding: 0; line-height: 2; margin-left:60px;">
+                <li><a href="/main/hospital" style="color: white; text-decoration: none; font-size: 15px;">병원 소개</a></li>
+                <li><a href="/main/reserve" style="color: white; text-decoration: none; font-size: 15px;">진료 예약</a></li>
+                <li><a href="#" style="color: white; text-decoration: none; font-size: 15px;">연락처 : 010-1234-5678</a></li>
+                <li><a href="/main/inquirylist" style="color: white; text-decoration: none; font-size: 15px;">자주 묻는 질문</a></li>
+            </ul>
+        </div>
+
+        <div style="width: 30%;">
+            <h4 style="margin-bottom: 20px; font-size: 24px;">연락처</h4>
+            <p style="line-height: 1.8; font-size: 15px;"><strong>전화:</strong> 031-123-4567</p>
+            <br>
+            <p style="line-height: 1.8; font-size: 15px;"><strong>이메일:</strong> JangINHO@hospital.com</p>
+            <br>
+            <p style="line-height: 1.8; font-size: 15px;"><strong>주소:</strong> 경기 고양시 마두동 병원로 123</p>
+        </div>
+    </div>
+
+    <div style="width: 80%; margin: auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+
+        <div>
+            <a href="#" style="text-decoration: none; color: white; margin-right: 15px;">
+                <i class="fab fa-facebook" style="font-size: 24px;"></i>
+            </a>
+            <a href="#" style="text-decoration: none; color: white; margin-right: 15px;">
+                <i class="fab fa-twitter" style="font-size: 24px;"></i>
+            </a>
+            <a href="#" style="text-decoration: none; color: white; margin-right: 15px;">
+                <i class="fab fa-instagram" style="font-size: 24px;"></i>
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 10px;">
+            <p>&copy; 2024 장인호 병원입니다. 최선을 다하겠습니다.</p>
+        </div>
+    </div>
 </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+
 
 
 </body>

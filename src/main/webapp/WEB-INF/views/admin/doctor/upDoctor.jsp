@@ -32,8 +32,7 @@
 	}
 	
 	function subchk() {
-		
-		
+
 		var his=document.getElementsByClassName("history");
 		var history="";
 		for(i=0;i<his.length;i++) {
@@ -42,7 +41,22 @@
 			}
 		}
 		document.getElementById("doc_history").value=history;
-		return true;
+		
+		var phone1=document.getElementById("phone1").value;
+		var phone2=document.getElementById("phone2").value;
+		var phone3=document.getElementById("phone3").value;
+		var phone="";
+		
+		if(!phone1 || !phone2 || !phone3) {
+			alert("휴대폰 번호를 입력해주세요.");
+		} else {
+			phone=phone1+"-"+phone2+"-"+phone3;
+			document.getElementById("doc_phone").value=phone;
+			
+			return true;
+		}
+		
+		
 	}
 	
 	function chgimg() {
@@ -72,6 +86,16 @@
             endSelect.appendChild(option);
         }
     }
+	
+	function onlyNum(next, length, text) {
+		
+		text.value=text.value.replace(/[^0-9]/g,"");
+		
+		if(text.value.length==length) {
+			document.getElementById(next).focus();
+			document.getElementById(next).select();
+		}
+	}
 	
 	function restchk(my,n) {
 		n=parseInt(n);
@@ -253,6 +277,10 @@
 	#doc_part:hover {
 		border:1px solid #ccc;
 	}
+	
+	#phone-container input {
+		width: 25%;
+	}
 </style>
 </head>
 <body>
@@ -265,13 +293,13 @@
 	<tr>
 		<td rowspan="4" width="20%">
 			<div class="img">
-			    <img id="docImg" src="/static/admin/programfile/${ddto.doc_img}" height="120">
+			    <img id="docImg" src="../../static/admin/doctor/${ddto.doc_img}" height="120">
 			    <div class="img-change" onclick="chgimg()">사진을 변경하려면 클릭하세요</div>
 			</div>
 		</td>
 	</tr>
 	<tr>
-		<th>성함 </th>
+		<th width="100">성함 </th>
 		<td><input type="text" name="doc_name" value="${ddto.doc_name}" readonly style="pointer-events: none;border:none;"></td>
 	</tr>
 	<tr>
@@ -287,7 +315,14 @@
 	</tr>
 	<tr>
 		<th>연락처</th>
-		<td colspan="3"><input type="text" name="doc_phone" value="${ddto.doc_phone }" placeholder="연락처"></td>
+		<td colspan="3">
+			<div id="phone-container">
+				<input type="hidden" name="doc_phone" id="doc_phone">
+				<input type="text" name="phone1" id="phone1" oninput="onlyNum('phone2',3,this)" value="${phone[0]}" maxlength="3" placeholder="앞자리">-
+				<input type="text" name="phone2" id="phone2" oninput="onlyNum('phone3',4,this)" value="${phone[1]}" maxlength="4" placeholder="중간">-
+				<input type="text" name="phone3" id="phone3" oninput="onlyNum(null,null,this)" value="${phone[2]}" maxlength="4" placeholder="뒷자리">
+			</div>
+		</td>
 	</tr>
 	<tr>
 		<th colspan="3" style="text-align:center;">약력</th>
@@ -311,14 +346,14 @@
 	<c:forEach begin="0" end="6" var="index">
 	<input type="hidden" class="dayofweeks"name="dayofweeks" value="${index }">
 	<tr>
-		<td width="10%">
-			<c:if test="${index==0 }"> 월 </c:if>
-			<c:if test="${index==1 }"> 화 </c:if>
-			<c:if test="${index==2 }"> 수 </c:if>
-			<c:if test="${index==3 }"> 목 </c:if>
-			<c:if test="${index==4 }"> 금 </c:if>
-			<c:if test="${index==5 }"> 토 </c:if>
-			<c:if test="${index==6 }"> 일 </c:if>
+		<td width="10%" ${index==6 || index==0 ? "style='color:red;'":"" }>
+			<c:if test="${index==1 }"> 월 </c:if>
+			<c:if test="${index==2 }"> 화 </c:if>
+			<c:if test="${index==3 }"> 수 </c:if>
+			<c:if test="${index==4 }"> 목 </c:if>
+			<c:if test="${index==5 }"> 금 </c:if>
+			<c:if test="${index==6 }"> 토 </c:if>
+			<c:if test="${index==0 }"> 일 </c:if>
 		</td>
 		<td>
 			<select name="start_times" class="Schk_rest" onchange="uptime(this)">
